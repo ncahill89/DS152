@@ -8,13 +8,13 @@ editor: visual
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### What is tidyverse?
+## What is tidyverse?
 
 -   The tidyverse is a collection of R packages designed for data science.
 -   All packages share an underlying design philosophy, grammar, and data structures.
 -   It emphasizes tidy data in data frames, performs operations one step at a time, connects with pipes and makes code human readable.
 
-### Key Packages in tidyverse
+## Key Packages in tidyverse
 
 -   `readr`: Used for importing data.
 -   `tidyr`: Used for tidying and reshaping data.
@@ -22,32 +22,19 @@ knitr::opts_chunk$set(echo = TRUE)
 -   `ggplot2`: Used for data visualization.
 -   `magrittr`: Provides the pipe operator (`%>%`) or (`|>`) which is used to chain together sequences of operations.
 
-### Importing Data with readr
+## Importing Data with readr
 
 -   `readr` provides faster and consistent replacements for data import functions in base R.
 -   It fits into the tidyverse naturally and extends neatly into other data types.
 -   Example: `read_csv(file, show_col_types = FALSE)`.
 
-### Tidying Data with tidyr
+## Tidying Data with tidyr
 
 -   `tidyr` provides a set of functions that help to tidy data.
 -   Tidy data is data where every column is a variable, every row is an observation, and every cell is a single value.
 
-### Transforming Data with dplyr
 
--   `dplyr` is a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.
--   Example: `filter(data, condition)`.
-
-### Visualizing Data with ggplot2
-
--   `ggplot2` is a system for declaratively creating graphics, based on "The Grammar of Graphics".
--   You provide the data, tell `ggplot2` how to map variables to aesthetics, what graphic to use, and it takes care of the details.
-
-<!-- ### Conclusion -->
-
-<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
-
-## tidyr: pivot
+### tidyr: pivot
 
 ```{r}
 # Load the tidyr package
@@ -80,9 +67,9 @@ print(data_wide)
 
 In this example, `pivot_longer` is used to convert the wide format data to long format, where each row is a single observation associated with the variables `ID1`, `ID2`, `Variable` (containing the original column names 'x' and 'y'), and `Value` (containing the values from 'x' and 'y' columns). We can then also convert back to wide format using `pivot_wider`.
 
-\newpage
 
-## tidyr: separate
+
+### tidyr: separate
 
 ```{r}
 # Load the tidyr package
@@ -108,9 +95,25 @@ library(dplyr)
 data_sep %>% mutate_at(vars(hour, min, second), as.numeric)
 ```
 
-\newpage
 
-## Example: dplyr
+
+## Transforming Data with dplyr
+
+-   `dplyr` is a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.
+-   Example: `filter(data, condition)`.
+
+## Visualizing Data with ggplot2
+
+-   `ggplot2` is a system for declaratively creating graphics, based on "The Grammar of Graphics".
+-   You provide the data, tell `ggplot2` how to map variables to aesthetics, what graphic to use, and it takes care of the details.
+
+<!-- ### Conclusion -->
+
+<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
+
+
+
+### Example: dplyr
 
 ```{r}
 # Load the dplyr package
@@ -151,11 +154,11 @@ grouped_data
 
 In these examples, `select` is used to choose specific columns, `filter` is used to select rows based on a condition, `mutate` is used to create a new column, `arrange` is used to sort data, `summarise` is used to calculate summary statistics, and `group_by` is used to perform operations on groups of data.
 
-\newpage
 
-## Example: ggplot
 
-# Basic scatter plot with a regression line
+### Example: ggplot
+
+**Basic scatter plot with a regression line**
 
 ```{r}
 # Load the ggplot2 package
@@ -167,9 +170,9 @@ p1 <- ggplot(mtcars, aes(x = mpg, y = hp)) +
 p1
 ```
 
-\newpage
 
-# Histogram
+
+**Histogram**
 
 ```{r}
 # Load the ggplot2 package
@@ -180,9 +183,9 @@ p2 <- ggplot(mtcars, aes(x = mpg)) +
 p2
 ```
 
-\newpage
 
-# Boxplot
+
+**Boxplot**
 
 ```{r}
 # Load the ggplot2 package
@@ -193,9 +196,9 @@ p3 <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
 p3
 ```
 
-\newpage
 
-# Bar chart
+
+**Bar chart**
 
 ```{r}
 # Load the ggplot2 package
@@ -209,9 +212,9 @@ p4
 
 In these examples, `geom_point` is used to create a scatter plot, `geom_smooth` with `method = "lm"` is used to add a linear regression line, `geom_histogram` is used to create a histogram, `geom_boxplot` is used to create a boxplot, and `geom_bar` is used to create a bar chart.
 
-\newpage
 
-## Question
+
+## Class Exercise
 
 Suppose we have a dataset called `penguins` and suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species in the dataset. Rearrange the following steps in the pipeline into an order that accomplishes this goal.
 

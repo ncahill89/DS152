@@ -119,20 +119,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#what-is-tidyverse" id="toc-what-is-tidyverse" class="nav-link active" data-scroll-target="#what-is-tidyverse">What is tidyverse?</a></li>
   <li><a href="#key-packages-in-tidyverse" id="toc-key-packages-in-tidyverse" class="nav-link" data-scroll-target="#key-packages-in-tidyverse">Key Packages in tidyverse</a></li>
   <li><a href="#importing-data-with-readr" id="toc-importing-data-with-readr" class="nav-link" data-scroll-target="#importing-data-with-readr">Importing Data with readr</a></li>
-  <li><a href="#tidying-data-with-tidyr" id="toc-tidying-data-with-tidyr" class="nav-link" data-scroll-target="#tidying-data-with-tidyr">Tidying Data with tidyr</a></li>
-  <li><a href="#transforming-data-with-dplyr" id="toc-transforming-data-with-dplyr" class="nav-link" data-scroll-target="#transforming-data-with-dplyr">Transforming Data with dplyr</a></li>
-  <li><a href="#visualizing-data-with-ggplot2" id="toc-visualizing-data-with-ggplot2" class="nav-link" data-scroll-target="#visualizing-data-with-ggplot2">Visualizing Data with ggplot2</a></li>
+  <li><a href="#tidying-data-with-tidyr" id="toc-tidying-data-with-tidyr" class="nav-link" data-scroll-target="#tidying-data-with-tidyr">Tidying Data with tidyr</a>
+  <ul class="collapse">
   <li><a href="#tidyr-pivot" id="toc-tidyr-pivot" class="nav-link" data-scroll-target="#tidyr-pivot">tidyr: pivot</a></li>
   <li><a href="#tidyr-separate" id="toc-tidyr-separate" class="nav-link" data-scroll-target="#tidyr-separate">tidyr: separate</a></li>
+  </ul></li>
+  <li><a href="#transforming-data-with-dplyr" id="toc-transforming-data-with-dplyr" class="nav-link" data-scroll-target="#transforming-data-with-dplyr">Transforming Data with dplyr</a></li>
+  <li><a href="#visualizing-data-with-ggplot2" id="toc-visualizing-data-with-ggplot2" class="nav-link" data-scroll-target="#visualizing-data-with-ggplot2">Visualizing Data with ggplot2</a>
+  <ul class="collapse">
   <li><a href="#example-dplyr" id="toc-example-dplyr" class="nav-link" data-scroll-target="#example-dplyr">Example: dplyr</a></li>
   <li><a href="#example-ggplot" id="toc-example-ggplot" class="nav-link" data-scroll-target="#example-ggplot">Example: ggplot</a></li>
-  <li><a href="#basic-scatter-plot-with-a-regression-line" id="toc-basic-scatter-plot-with-a-regression-line" class="nav-link" data-scroll-target="#basic-scatter-plot-with-a-regression-line">Basic scatter plot with a regression line</a></li>
-  <li><a href="#histogram" id="toc-histogram" class="nav-link" data-scroll-target="#histogram">Histogram</a></li>
-  <li><a href="#boxplot" id="toc-boxplot" class="nav-link" data-scroll-target="#boxplot">Boxplot</a></li>
-  <li><a href="#bar-chart" id="toc-bar-chart" class="nav-link" data-scroll-target="#bar-chart">Bar chart</a>
-  <ul class="collapse">
-  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question">Question</a></li>
   </ul></li>
+  <li><a href="#class-exercise" id="toc-class-exercise" class="nav-link" data-scroll-target="#class-exercise">Class Exercise</a></li>
   </ul>
 </nav>
     </div>
@@ -158,16 +156,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="what-is-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-tidyverse">What is tidyverse?</h3>
+<section id="what-is-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-tidyverse">What is tidyverse?</h2>
 <ul>
 <li>The tidyverse is a collection of R packages designed for data science.</li>
 <li>All packages share an underlying design philosophy, grammar, and data structures.</li>
 <li>It emphasizes tidy data in data frames, performs operations one step at a time, connects with pipes and makes code human readable.</li>
 </ul>
 </section>
-<section id="key-packages-in-tidyverse" class="level3">
-<h3 class="anchored" data-anchor-id="key-packages-in-tidyverse">Key Packages in tidyverse</h3>
+<section id="key-packages-in-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="key-packages-in-tidyverse">Key Packages in tidyverse</h2>
 <ul>
 <li><code>readr</code>: Used for importing data.</li>
 <li><code>tidyr</code>: Used for tidying and reshaping data.</li>
@@ -176,39 +174,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>magrittr</code>: Provides the pipe operator (<code>%&gt;%</code>) or (<code>|&gt;</code>) which is used to chain together sequences of operations.</li>
 </ul>
 </section>
-<section id="importing-data-with-readr" class="level3">
-<h3 class="anchored" data-anchor-id="importing-data-with-readr">Importing Data with readr</h3>
+<section id="importing-data-with-readr" class="level2">
+<h2 class="anchored" data-anchor-id="importing-data-with-readr">Importing Data with readr</h2>
 <ul>
 <li><code>readr</code> provides faster and consistent replacements for data import functions in base R.</li>
 <li>It fits into the tidyverse naturally and extends neatly into other data types.</li>
 <li>Example: <code>read_csv(file, show_col_types = FALSE)</code>.</li>
 </ul>
 </section>
-<section id="tidying-data-with-tidyr" class="level3">
-<h3 class="anchored" data-anchor-id="tidying-data-with-tidyr">Tidying Data with tidyr</h3>
+<section id="tidying-data-with-tidyr" class="level2">
+<h2 class="anchored" data-anchor-id="tidying-data-with-tidyr">Tidying Data with tidyr</h2>
 <ul>
 <li><code>tidyr</code> provides a set of functions that help to tidy data.</li>
 <li>Tidy data is data where every column is a variable, every row is an observation, and every cell is a single value.</li>
 </ul>
-</section>
-<section id="transforming-data-with-dplyr" class="level3">
-<h3 class="anchored" data-anchor-id="transforming-data-with-dplyr">Transforming Data with dplyr</h3>
-<ul>
-<li><code>dplyr</code> is a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.</li>
-<li>Example: <code>filter(data, condition)</code>.</li>
-</ul>
-</section>
-<section id="visualizing-data-with-ggplot2" class="level3">
-<h3 class="anchored" data-anchor-id="visualizing-data-with-ggplot2">Visualizing Data with ggplot2</h3>
-<ul>
-<li><code>ggplot2</code> is a system for declaratively creating graphics, based on “The Grammar of Graphics”.</li>
-<li>You provide the data, tell <code>ggplot2</code> how to map variables to aesthetics, what graphic to use, and it takes care of the details.</li>
-</ul>
-<!-- ### Conclusion -->
-<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
-</section>
-<section id="tidyr-pivot" class="level2">
-<h2 class="anchored" data-anchor-id="tidyr-pivot">tidyr: pivot</h2>
+<section id="tidyr-pivot" class="level3">
+<h3 class="anchored" data-anchor-id="tidyr-pivot">tidyr: pivot</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the tidyr package</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
@@ -286,10 +267,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <p>In this example, <code>pivot_longer</code> is used to convert the wide format data to long format, where each row is a single observation associated with the variables <code>ID1</code>, <code>ID2</code>, <code>Variable</code> (containing the original column names ‘x’ and ‘y’), and <code>Value</code> (containing the values from ‘x’ and ‘y’ columns). We can then also convert back to wide format using <code>pivot_wider</code>.</p>
-<div style="page-break-after: always;"></div>
 </section>
-<section id="tidyr-separate" class="level2">
-<h2 class="anchored" data-anchor-id="tidyr-separate">tidyr: separate</h2>
+<section id="tidyr-separate" class="level3">
+<h3 class="anchored" data-anchor-id="tidyr-separate">tidyr: separate</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the tidyr package</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
@@ -342,10 +322,25 @@ Attaching package: 'dplyr'</code></pre>
 3 2016-01-03    13    59      0 l    </code></pre>
 </div>
 </div>
-<div style="page-break-after: always;"></div>
 </section>
-<section id="example-dplyr" class="level2">
-<h2 class="anchored" data-anchor-id="example-dplyr">Example: dplyr</h2>
+</section>
+<section id="transforming-data-with-dplyr" class="level2">
+<h2 class="anchored" data-anchor-id="transforming-data-with-dplyr">Transforming Data with dplyr</h2>
+<ul>
+<li><code>dplyr</code> is a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.</li>
+<li>Example: <code>filter(data, condition)</code>.</li>
+</ul>
+</section>
+<section id="visualizing-data-with-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-data-with-ggplot2">Visualizing Data with ggplot2</h2>
+<ul>
+<li><code>ggplot2</code> is a system for declaratively creating graphics, based on “The Grammar of Graphics”.</li>
+<li>You provide the data, tell <code>ggplot2</code> how to map variables to aesthetics, what graphic to use, and it takes care of the details.</li>
+</ul>
+<!-- ### Conclusion -->
+<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
+<section id="example-dplyr" class="level3">
+<h3 class="anchored" data-anchor-id="example-dplyr">Example: dplyr</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the dplyr package</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -426,13 +421,10 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 <p>In these examples, <code>select</code> is used to choose specific columns, <code>filter</code> is used to select rows based on a condition, <code>mutate</code> is used to create a new column, <code>arrange</code> is used to sort data, <code>summarise</code> is used to calculate summary statistics, and <code>group_by</code> is used to perform operations on groups of data.</p>
-<div style="page-break-after: always;"></div>
 </section>
-<section id="example-ggplot" class="level2">
-<h2 class="anchored" data-anchor-id="example-ggplot">Example: ggplot</h2>
-</section>
-<section id="basic-scatter-plot-with-a-regression-line" class="level1">
-<h1>Basic scatter plot with a regression line</h1>
+<section id="example-ggplot" class="level3">
+<h3 class="anchored" data-anchor-id="example-ggplot">Example: ggplot</h3>
+<p><strong>Basic scatter plot with a regression line</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the ggplot2 package</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -452,10 +444,7 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 </div>
-<div style="page-break-after: always;"></div>
-</section>
-<section id="histogram" class="level1">
-<h1>Histogram</h1>
+<p><strong>Histogram</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the ggplot2 package</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -471,10 +460,7 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 </div>
-<div style="page-break-after: always;"></div>
-</section>
-<section id="boxplot" class="level1">
-<h1>Boxplot</h1>
+<p><strong>Boxplot</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the ggplot2 package</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -490,10 +476,7 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 </div>
-<div style="page-break-after: always;"></div>
-</section>
-<section id="bar-chart" class="level1">
-<h1>Bar chart</h1>
+<p><strong>Bar chart</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load the ggplot2 package</span></span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
@@ -511,9 +494,10 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 </div>
 <p>In these examples, <code>geom_point</code> is used to create a scatter plot, <code>geom_smooth</code> with <code>method = "lm"</code> is used to add a linear regression line, <code>geom_histogram</code> is used to create a histogram, <code>geom_boxplot</code> is used to create a boxplot, and <code>geom_bar</code> is used to create a bar chart.</p>
-<div style="page-break-after: always;"></div>
-<section id="question" class="level2">
-<h2 class="anchored" data-anchor-id="question">Question</h2>
+</section>
+</section>
+<section id="class-exercise" class="level2">
+<h2 class="anchored" data-anchor-id="class-exercise">Class Exercise</h2>
 <p>Suppose we have a dataset called <code>penguins</code> and suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species in the dataset. Rearrange the following steps in the pipeline into an order that accomplishes this goal.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a</span></span>
@@ -537,7 +521,6 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
