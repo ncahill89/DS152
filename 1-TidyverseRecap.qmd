@@ -102,17 +102,6 @@ data_sep %>% mutate_at(vars(hour, min, second), as.numeric)
 -   `dplyr` is a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.
 -   Example: `filter(data, condition)`.
 
-## Visualizing Data with ggplot2
-
--   `ggplot2` is a system for declaratively creating graphics, based on "The Grammar of Graphics".
--   You provide the data, tell `ggplot2` how to map variables to aesthetics, what graphic to use, and it takes care of the details.
-
-<!-- ### Conclusion -->
-
-<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
-
-
-
 ### Example: dplyr
 
 ```{r}
@@ -153,6 +142,17 @@ grouped_data
 ```
 
 In these examples, `select` is used to choose specific columns, `filter` is used to select rows based on a condition, `mutate` is used to create a new column, `arrange` is used to sort data, `summarise` is used to calculate summary statistics, and `group_by` is used to perform operations on groups of data.
+
+
+
+## Visualizing Data with ggplot2
+
+-   `ggplot2` is a system for declaratively creating graphics, based on "The Grammar of Graphics".
+-   You provide the data, tell `ggplot2` how to map variables to aesthetics, what graphic to use, and it takes care of the details.
+
+<!-- ### Conclusion -->
+
+<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
 
 
 

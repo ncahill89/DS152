@@ -124,10 +124,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#tidyr-pivot" id="toc-tidyr-pivot" class="nav-link" data-scroll-target="#tidyr-pivot">tidyr: pivot</a></li>
   <li><a href="#tidyr-separate" id="toc-tidyr-separate" class="nav-link" data-scroll-target="#tidyr-separate">tidyr: separate</a></li>
   </ul></li>
-  <li><a href="#transforming-data-with-dplyr" id="toc-transforming-data-with-dplyr" class="nav-link" data-scroll-target="#transforming-data-with-dplyr">Transforming Data with dplyr</a></li>
-  <li><a href="#visualizing-data-with-ggplot2" id="toc-visualizing-data-with-ggplot2" class="nav-link" data-scroll-target="#visualizing-data-with-ggplot2">Visualizing Data with ggplot2</a>
+  <li><a href="#transforming-data-with-dplyr" id="toc-transforming-data-with-dplyr" class="nav-link" data-scroll-target="#transforming-data-with-dplyr">Transforming Data with dplyr</a>
   <ul class="collapse">
   <li><a href="#example-dplyr" id="toc-example-dplyr" class="nav-link" data-scroll-target="#example-dplyr">Example: dplyr</a></li>
+  </ul></li>
+  <li><a href="#visualizing-data-with-ggplot2" id="toc-visualizing-data-with-ggplot2" class="nav-link" data-scroll-target="#visualizing-data-with-ggplot2">Visualizing Data with ggplot2</a>
+  <ul class="collapse">
   <li><a href="#example-ggplot" id="toc-example-ggplot" class="nav-link" data-scroll-target="#example-ggplot">Example: ggplot</a></li>
   </ul></li>
   <li><a href="#class-exercise" id="toc-class-exercise" class="nav-link" data-scroll-target="#class-exercise">Class Exercise</a></li>
@@ -330,15 +332,6 @@ Attaching package: 'dplyr'</code></pre>
 <li><code>dplyr</code> is a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.</li>
 <li>Example: <code>filter(data, condition)</code>.</li>
 </ul>
-</section>
-<section id="visualizing-data-with-ggplot2" class="level2">
-<h2 class="anchored" data-anchor-id="visualizing-data-with-ggplot2">Visualizing Data with ggplot2</h2>
-<ul>
-<li><code>ggplot2</code> is a system for declaratively creating graphics, based on “The Grammar of Graphics”.</li>
-<li>You provide the data, tell <code>ggplot2</code> how to map variables to aesthetics, what graphic to use, and it takes care of the details.</li>
-</ul>
-<!-- ### Conclusion -->
-<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
 <section id="example-dplyr" class="level3">
 <h3 class="anchored" data-anchor-id="example-dplyr">Example: dplyr</h3>
 <div class="cell">
@@ -422,6 +415,15 @@ Attaching package: 'dplyr'</code></pre>
 </div>
 <p>In these examples, <code>select</code> is used to choose specific columns, <code>filter</code> is used to select rows based on a condition, <code>mutate</code> is used to create a new column, <code>arrange</code> is used to sort data, <code>summarise</code> is used to calculate summary statistics, and <code>group_by</code> is used to perform operations on groups of data.</p>
 </section>
+</section>
+<section id="visualizing-data-with-ggplot2" class="level2">
+<h2 class="anchored" data-anchor-id="visualizing-data-with-ggplot2">Visualizing Data with ggplot2</h2>
+<ul>
+<li><code>ggplot2</code> is a system for declaratively creating graphics, based on “The Grammar of Graphics”.</li>
+<li>You provide the data, tell <code>ggplot2</code> how to map variables to aesthetics, what graphic to use, and it takes care of the details.</li>
+</ul>
+<!-- ### Conclusion -->
+<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
 <section id="example-ggplot" class="level3">
 <h3 class="anchored" data-anchor-id="example-ggplot">Example: ggplot</h3>
 <p><strong>Basic scatter plot with a regression line</strong></p>
