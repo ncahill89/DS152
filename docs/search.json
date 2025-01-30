@@ -44,9 +44,9 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "Welcome to Bayesian Data Analysis!",
+    "title": "Welcome to Introduction to Data Science (2)!",
     "section": "",
-    "text": "Welcome to the course website for ST405 (code share ST645) Bayesian Data Analysis!\nModule information\nLecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.\nContact: Niamh Cahill (niamh.cahill@mu.ie)"
+    "text": "Welcome to the course website for DS152 Introduction to Data Science (2).\nModule information\nLecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.\nContact: Niamh Cahill (niamh.cahill@mu.ie)"
   },
   {
     "objectID": "index.html#lecture-slides",
@@ -68,5 +68,12 @@
     "title": "Welcome to Bayesian Data Analysis!",
     "section": "Assignments",
     "text": "Assignments\nAssignment 1: Bayesian Inference on Particle Emission Energy\nAssignment 2: Comparing Video Game Playing Among Students in 5 Different Countries\nAssignment 3: Football outcomes vs point spread\nAssignment 4: Radon Analysis"
+  },
+  {
+    "objectID": "index.html#lecture-notes",
+    "href": "index.html#lecture-notes",
+    "title": "Welcome to Introduction to Data Science (2)!",
+    "section": "Lecture Notes",
+    "text": "Lecture Notes\n\nWeek 1\n1: Tidyverse Reap"
   }
 ]
