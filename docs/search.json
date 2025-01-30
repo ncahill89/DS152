@@ -1,0 +1,72 @@
+[
+  {
+    "objectID": "1-TidyverseRecap.html",
+    "href": "1-TidyverseRecap.html",
+    "title": "Untitled",
+    "section": "",
+    "text": "The tidyverse is a collection of R packages designed for data science.\nAll packages share an underlying design philosophy, grammar, and data structures.\nIt emphasizes tidy data in data frames, performs operations one step at a time, connects with pipes and makes code human readable."
+  },
+  {
+    "objectID": "1-TidyverseRecap.html#tidyr-pivot",
+    "href": "1-TidyverseRecap.html#tidyr-pivot",
+    "title": "Untitled",
+    "section": "tidyr: pivot",
+    "text": "tidyr: pivot\n\n# Load the tidyr package\nlibrary(tidyr)\n\n\n# Assume we have a dataset 'data' with 'ID1', 'ID2', 'x', and 'y' columns\ndata_ex1 &lt;- tibble(ID1 = rep(LETTERS[1:4],times = 3), \n                   ID2 = rep(letters[1:3], each = 4), \n                   x = 1:12, \n                   y = 21:32)\n\nprint(data_ex1)\n\n# A tibble: 12 × 4\n   ID1   ID2       x     y\n   &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;\n 1 A     a         1    21\n 2 B     a         2    22\n 3 C     a         3    23\n 4 D     a         4    24\n 5 A     b         5    25\n 6 B     b         6    26\n 7 C     b         7    27\n 8 D     b         8    28\n 9 A     c         9    29\n10 B     c        10    30\n11 C     c        11    31\n12 D     c        12    32\n\n# Use pivot_longer() to convert wide data to long format\ndata_long &lt;- data_ex1 %&gt;% pivot_longer(cols = c(\"x\", \"y\"), \n                                       names_to = \"Variable\", \n                                       values_to = \"Value\")\n\n# Print the long format data\nprint(data_long)\n\n# A tibble: 24 × 4\n   ID1   ID2   Variable Value\n   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;    &lt;int&gt;\n 1 A     a     x            1\n 2 A     a     y           21\n 3 B     a     x            2\n 4 B     a     y           22\n 5 C     a     x            3\n 6 C     a     y           23\n 7 D     a     x            4\n 8 D     a     y           24\n 9 A     b     x            5\n10 A     b     y           25\n# ℹ 14 more rows\n\n# Use pivot_wider() to convert long data back to wide format\ndata_wide &lt;- data_long %&gt;% pivot_wider(names_from = Variable,\n                                       values_from = Value)\n\n# Print the wide format data\nprint(data_wide)\n\n# A tibble: 12 × 4\n   ID1   ID2       x     y\n   &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;\n 1 A     a         1    21\n 2 B     a         2    22\n 3 C     a         3    23\n 4 D     a         4    24\n 5 A     b         5    25\n 6 B     b         6    26\n 7 C     b         7    27\n 8 D     b         8    28\n 9 A     c         9    29\n10 B     c        10    30\n11 C     c        11    31\n12 D     c        12    32\n\n\nIn this example, pivot_longer is used to convert the wide format data to long format, where each row is a single observation associated with the variables ID1, ID2, Variable (containing the original column names ‘x’ and ‘y’), and Value (containing the values from ‘x’ and ‘y’ columns). We can then also convert back to wide format using pivot_wider."
+  },
+  {
+    "objectID": "1-TidyverseRecap.html#tidyr-separate",
+    "href": "1-TidyverseRecap.html#tidyr-separate",
+    "title": "Untitled",
+    "section": "tidyr: separate",
+    "text": "tidyr: separate\n\n# Load the tidyr package\nlibrary(tidyr)\n\n# Assume we have a dataset 'dataNew' with a 'datetime' column\ndata_ex2 &lt;- tibble(datetime = \n                    c(\"2016-01-01 07:30:29\", \"2016-01-02 09:43:36\", \"2016-01-03 13:59:00\"), \n                   event = c(\"u\", \"a\", \"l\"))\n\n# Use the separate() function from tidyr to separate the 'datetime' column into \n# 'date' and 'time'\n# Then separate 'time' into 'hour', 'min', 'second'\ndata_sep &lt;- data_ex2 %&gt;% \n              separate(datetime, c('date', 'time'), sep = ' ') %&gt;% \n              separate(time, c('hour', 'min', 'second'), sep = ':')\n\n# Print the new dataset\nprint(data_sep)\n\n# A tibble: 3 × 5\n  date       hour  min   second event\n  &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;\n1 2016-01-01 07    30    29     u    \n2 2016-01-02 09    43    36     a    \n3 2016-01-03 13    59    00     l    \n\n# change hour, min, second to numeric values\nlibrary(dplyr)\n\n\nAttaching package: 'dplyr'\n\n\nThe following objects are masked from 'package:stats':\n\n    filter, lag\n\n\nThe following objects are masked from 'package:base':\n\n    intersect, setdiff, setequal, union\n\ndata_sep %&gt;% mutate_at(vars(hour, min, second), as.numeric)\n\n# A tibble: 3 × 5\n  date        hour   min second event\n  &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;\n1 2016-01-01     7    30     29 u    \n2 2016-01-02     9    43     36 a    \n3 2016-01-03    13    59      0 l"
+  },
+  {
+    "objectID": "1-TidyverseRecap.html#example-dplyr",
+    "href": "1-TidyverseRecap.html#example-dplyr",
+    "title": "Untitled",
+    "section": "Example: dplyr",
+    "text": "Example: dplyr\n\n# Load the dplyr package\nlibrary(dplyr)\n\n# Assume we have a dataset 'data' with 'ID', 'Age', 'Gender', and 'Income' columns\ndata_ex3 &lt;- tibble(ID = 1:4, \n                   Age = c(21, 35, 58, 40), \n                   Gender = c(\"Male\", \"Female\", \"Male\", \"Female\"), \n                   Income = c(50000, 80000, 120000, 75000))\n\n# Use select() to choose the 'ID' and 'Age' columns\nselected_data &lt;- data_ex3 %&gt;% select(ID, Age)\nselected_data\n\n# A tibble: 4 × 2\n     ID   Age\n  &lt;int&gt; &lt;dbl&gt;\n1     1    21\n2     2    35\n3     3    58\n4     4    40\n\n# Use filter() to get rows where 'Age' is greater than 30\nfiltered_data &lt;- data_ex3 %&gt;% filter(Age &gt; 30)\nfiltered_data\n\n# A tibble: 3 × 4\n     ID   Age Gender Income\n  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1     2    35 Female  80000\n2     3    58 Male   120000\n3     4    40 Female  75000\n\n# Use mutate() to create a new column 'IncomeInThousands'\nmutated_data &lt;- data_ex3 %&gt;% mutate(IncomeInThousands = Income / 1000)\nmutated_data\n\n# A tibble: 4 × 5\n     ID   Age Gender Income IncomeInThousands\n  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;             &lt;dbl&gt;\n1     1    21 Male    50000                50\n2     2    35 Female  80000                80\n3     3    58 Male   120000               120\n4     4    40 Female  75000                75\n\n# Use arrange() to sort data by 'Income'\narranged_data &lt;- data_ex3 %&gt;% arrange(Income)\narranged_data\n\n# A tibble: 4 × 4\n     ID   Age Gender Income\n  &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt;\n1     1    21 Male    50000\n2     4    40 Female  75000\n3     2    35 Female  80000\n4     3    58 Male   120000\n\n# Use summarise() to get the mean 'Income'\nsummary_data &lt;- data_ex3 %&gt;% summarise(MeanIncome = mean(Income))\nsummary_data\n\n# A tibble: 1 × 1\n  MeanIncome\n       &lt;dbl&gt;\n1      81250\n\n# Use group_by() and summarise() to get the mean 'Income' for each 'Gender'\ngrouped_data &lt;- data_ex3 %&gt;% \n                  group_by(Gender) %&gt;% \n                  summarise(MeanIncome = mean(Income))\ngrouped_data\n\n# A tibble: 2 × 2\n  Gender MeanIncome\n  &lt;chr&gt;       &lt;dbl&gt;\n1 Female      77500\n2 Male        85000\n\n\nIn these examples, select is used to choose specific columns, filter is used to select rows based on a condition, mutate is used to create a new column, arrange is used to sort data, summarise is used to calculate summary statistics, and group_by is used to perform operations on groups of data."
+  },
+  {
+    "objectID": "1-TidyverseRecap.html#example-ggplot",
+    "href": "1-TidyverseRecap.html#example-ggplot",
+    "title": "Untitled",
+    "section": "Example: ggplot",
+    "text": "Example: ggplot"
+  },
+  {
+    "objectID": "1-TidyverseRecap.html#question",
+    "href": "1-TidyverseRecap.html#question",
+    "title": "Untitled",
+    "section": "Question",
+    "text": "Question\nSuppose we have a dataset called penguins and suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species in the dataset. Rearrange the following steps in the pipeline into an order that accomplishes this goal.\n\n# a\narrange(avg_mass_flipper_ratio)\n\n# b\ngroup_by(species)\n\n# c\npenguins \n  \n# d\nsummarise(\n  avg_mass_flipper_ratioo = median(mass_flipper_ratio)\n)\n  \n# e\nmutate(\n  mass_flipper_ratio = body_mass_g/flipper_length_mm\n)"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to Bayesian Data Analysis!",
+    "section": "",
+    "text": "Welcome to the course website for ST405 (code share ST645) Bayesian Data Analysis!\nModule information\nLecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.\nContact: Niamh Cahill (niamh.cahill@mu.ie)"
+  },
+  {
+    "objectID": "index.html#lecture-slides",
+    "href": "index.html#lecture-slides",
+    "title": "Welcome to Bayesian Data Analysis!",
+    "section": "Lecture Slides",
+    "text": "Lecture Slides\n\nWeek 1\n1a: Bayes Rule\n1b: Inferring a Binomial Probability\n\n\nWeek 2\n2a: Beta Binomial\n2b: Bayesian Inference\n\n\nWeek 3\n3: Single Parameter Normal\n\n\nWeek 4\n4: MCMC Sampling\n\n\nWeek 5\n5a: MCMC Diagnostics\n5b: Just Another Gibbs Sampler\n\n\nWeek 6\n6: Bayesian Linear Regression\n\n\nWeek 7\n7: Model Checking\n\n\nWeek 8\n8: Introducing Bayesian Hierarchical Modelling\n\n\nWeek 9\n9: Bayesian Hierarchical Regression Modelling\n\n\nWeek 10\n10: Bayesian Generalised Linear Models (GLMs)\n\n\nWeek 11\n11: Bayesian Hierarchical Modelling - GLM"
+  },
+  {
+    "objectID": "index.html#tutorials",
+    "href": "index.html#tutorials",
+    "title": "Welcome to Bayesian Data Analysis!",
+    "section": "Tutorials",
+    "text": "Tutorials\nTutorial Sheet 1: Bayesian inference using binomial and Poisson models\n\nTutorial Sheet 2: Bayesian Model for Multiple Proportions - Email Campaign Click-Through Rates\nTutorial Sheet 3: Bayesian Regression Model - Fisherys Data\nTutorial Sheet 4: Bayesian Hierarchical Regression Modelling - Simulation"
+  },
+  {
+    "objectID": "index.html#assignments",
+    "href": "index.html#assignments",
+    "title": "Welcome to Bayesian Data Analysis!",
+    "section": "Assignments",
+    "text": "Assignments\nAssignment 1: Bayesian Inference on Particle Emission Energy\nAssignment 2: Comparing Video Game Playing Among Students in 5 Different Countries\nAssignment 3: Football outcomes vs point spread\nAssignment 4: Radon Analysis"
+  }
+]

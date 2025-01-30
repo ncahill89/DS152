@@ -1,0 +1,22 @@
+---
+title: "Welcome to Introduction to Data Science (2)!"
+format:
+  html:
+    link-external-icon: true
+    link-external-newwindow: true
+---
+
+Welcome to the course website for DS152 Introduction to Data Science (2).
+
+[Module information](https://ncahill89.github.io/DS152/0-Information.html)
+
+Lecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.
+
+Contact: Niamh Cahill (niamh.cahill\@mu.ie)
+
+## Lecture Notes
+
+### Week 1
+
+1: [Tidyverse Reap](https://ncahill89.github.io/DS152/1-TidyverseRecap.html)
+

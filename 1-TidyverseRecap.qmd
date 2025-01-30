@@ -1,0 +1,237 @@
+---
+title: "Untitled"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### What is tidyverse?
+
+-   The tidyverse is a collection of R packages designed for data science.
+-   All packages share an underlying design philosophy, grammar, and data structures.
+-   It emphasizes tidy data in data frames, performs operations one step at a time, connects with pipes and makes code human readable.
+
+### Key Packages in tidyverse
+
+-   `readr`: Used for importing data.
+-   `tidyr`: Used for tidying and reshaping data.
+-   `dplyr`: Used for data transformation.
+-   `ggplot2`: Used for data visualization.
+-   `magrittr`: Provides the pipe operator (`%>%`) or (`|>`) which is used to chain together sequences of operations.
+
+### Importing Data with readr
+
+-   `readr` provides faster and consistent replacements for data import functions in base R.
+-   It fits into the tidyverse naturally and extends neatly into other data types.
+-   Example: `read_csv(file, show_col_types = FALSE)`.
+
+### Tidying Data with tidyr
+
+-   `tidyr` provides a set of functions that help to tidy data.
+-   Tidy data is data where every column is a variable, every row is an observation, and every cell is a single value.
+
+### Transforming Data with dplyr
+
+-   `dplyr` is a grammar of data manipulation, providing a consistent set of verbs that solve the most common data manipulation challenges.
+-   Example: `filter(data, condition)`.
+
+### Visualizing Data with ggplot2
+
+-   `ggplot2` is a system for declaratively creating graphics, based on "The Grammar of Graphics".
+-   You provide the data, tell `ggplot2` how to map variables to aesthetics, what graphic to use, and it takes care of the details.
+
+<!-- ### Conclusion -->
+
+<!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
+
+## tidyr: pivot
+
+```{r}
+# Load the tidyr package
+library(tidyr)
+
+
+# Assume we have a dataset 'data' with 'ID1', 'ID2', 'x', and 'y' columns
+data_ex1 <- tibble(ID1 = rep(LETTERS[1:4],times = 3), 
+                   ID2 = rep(letters[1:3], each = 4), 
+                   x = 1:12, 
+                   y = 21:32)
+
+print(data_ex1)
+
+# Use pivot_longer() to convert wide data to long format
+data_long <- data_ex1 %>% pivot_longer(cols = c("x", "y"), 
+                                       names_to = "Variable", 
+                                       values_to = "Value")
+
+# Print the long format data
+print(data_long)
+
+# Use pivot_wider() to convert long data back to wide format
+data_wide <- data_long %>% pivot_wider(names_from = Variable,
+                                       values_from = Value)
+
+# Print the wide format data
+print(data_wide)
+```
+
+In this example, `pivot_longer` is used to convert the wide format data to long format, where each row is a single observation associated with the variables `ID1`, `ID2`, `Variable` (containing the original column names 'x' and 'y'), and `Value` (containing the values from 'x' and 'y' columns). We can then also convert back to wide format using `pivot_wider`.
+
+\newpage
+
+## tidyr: separate
+
+```{r}
+# Load the tidyr package
+library(tidyr)
+
+# Assume we have a dataset 'dataNew' with a 'datetime' column
+data_ex2 <- tibble(datetime = 
+                    c("2016-01-01 07:30:29", "2016-01-02 09:43:36", "2016-01-03 13:59:00"), 
+                   event = c("u", "a", "l"))
+
+# Use the separate() function from tidyr to separate the 'datetime' column into 
+# 'date' and 'time'
+# Then separate 'time' into 'hour', 'min', 'second'
+data_sep <- data_ex2 %>% 
+              separate(datetime, c('date', 'time'), sep = ' ') %>% 
+              separate(time, c('hour', 'min', 'second'), sep = ':')
+
+# Print the new dataset
+print(data_sep)
+
+# change hour, min, second to numeric values
+library(dplyr)
+data_sep %>% mutate_at(vars(hour, min, second), as.numeric)
+```
+
+\newpage
+
+## Example: dplyr
+
+```{r}
+# Load the dplyr package
+library(dplyr)
+
+# Assume we have a dataset 'data' with 'ID', 'Age', 'Gender', and 'Income' columns
+data_ex3 <- tibble(ID = 1:4, 
+                   Age = c(21, 35, 58, 40), 
+                   Gender = c("Male", "Female", "Male", "Female"), 
+                   Income = c(50000, 80000, 120000, 75000))
+
+# Use select() to choose the 'ID' and 'Age' columns
+selected_data <- data_ex3 %>% select(ID, Age)
+selected_data
+
+# Use filter() to get rows where 'Age' is greater than 30
+filtered_data <- data_ex3 %>% filter(Age > 30)
+filtered_data
+
+# Use mutate() to create a new column 'IncomeInThousands'
+mutated_data <- data_ex3 %>% mutate(IncomeInThousands = Income / 1000)
+mutated_data
+
+# Use arrange() to sort data by 'Income'
+arranged_data <- data_ex3 %>% arrange(Income)
+arranged_data
+
+# Use summarise() to get the mean 'Income'
+summary_data <- data_ex3 %>% summarise(MeanIncome = mean(Income))
+summary_data
+
+# Use group_by() and summarise() to get the mean 'Income' for each 'Gender'
+grouped_data <- data_ex3 %>% 
+                  group_by(Gender) %>% 
+                  summarise(MeanIncome = mean(Income))
+grouped_data
+```
+
+In these examples, `select` is used to choose specific columns, `filter` is used to select rows based on a condition, `mutate` is used to create a new column, `arrange` is used to sort data, `summarise` is used to calculate summary statistics, and `group_by` is used to perform operations on groups of data.
+
+\newpage
+
+## Example: ggplot
+
+# Basic scatter plot with a regression line
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+p1 <- ggplot(mtcars, aes(x = mpg, y = hp)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE, color = "red")
+p1
+```
+
+\newpage
+
+# Histogram
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+p2 <- ggplot(mtcars, aes(x = mpg)) +
+  geom_histogram(binwidth = 2, fill = "blue", color = "white")
+p2
+```
+
+\newpage
+
+# Boxplot
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+p3 <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot(fill = "orange", color = "darkred")
+p3
+```
+
+\newpage
+
+# Bar chart
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+p4 <- ggplot(mtcars, aes(x = factor(cyl))) +
+  geom_bar(fill = "steelblue") +
+  labs(x = "Number of cylinders", y = "Frequency")
+p4
+```
+
+In these examples, `geom_point` is used to create a scatter plot, `geom_smooth` with `method = "lm"` is used to add a linear regression line, `geom_histogram` is used to create a histogram, `geom_boxplot` is used to create a boxplot, and `geom_bar` is used to create a bar chart.
+
+\newpage
+
+## Question
+
+Suppose we have a dataset called `penguins` and suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species in the dataset. Rearrange the following steps in the pipeline into an order that accomplishes this goal.
+
+```{r, eval = FALSE}
+# a
+arrange(avg_mass_flipper_ratio)
+
+# b
+group_by(species)
+
+# c
+penguins 
+  
+# d
+summarise(
+  avg_mass_flipper_ratioo = median(mass_flipper_ratio)
+)
+  
+# e
+mutate(
+  mass_flipper_ratio = body_mass_g/flipper_length_mm
+)
+```
