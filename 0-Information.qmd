@@ -25,24 +25,28 @@ editor: visual
 
 -   By appointment
 
-## Assessment and Materials
+## Materials and Assessments
+
 
 **Notes**
 
 -   Notes will be a combination of links posted on Moodle and notes taken down in class
 
+**Tutorial Questions**
+
+- Practice tutorial questions will be posted to Moodle. 
 
 **Assignments**
 
--   Will be uploaded PDFs. 
+-  Assignment questions will be posted to Moodle and answers should be uploaded as PDFs. 
 
 **Lab quizzes**
 
--   Will be Moodle Quiz format with multiple attempts allowed until the end of the semester. 
+-   Each lab will have an associated quiz that will be a Moodle Quiz format with multiple attempts allowed until the end of the semester. 
 
 **Midterm Exam**
 
-- Will be a Moodle Quiz MCQ.
+- The midterm exam will be a Moodle Quiz MCQ.
 
 
 **Marks**
