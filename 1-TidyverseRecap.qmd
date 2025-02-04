@@ -223,18 +223,18 @@ Suppose we have a dataset called `penguins` and suppose we would like to study h
 arrange(avg_mass_flipper_ratio)
 
 # b
-group_by(species)
+group_by(species) %>% 
 
 # c
-penguins 
+penguins %>% 
   
 # d
 summarise(
   avg_mass_flipper_ratioo = median(mass_flipper_ratio)
-)
+) %>% 
   
 # e
 mutate(
   mass_flipper_ratio = body_mass_g/flipper_length_mm
-)
+) %>% 
 ```
