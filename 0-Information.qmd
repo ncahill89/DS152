@@ -8,17 +8,13 @@ editor: visual
 
 **Lecture and Lab Timetable**
 
--   Tuesday 3pm (Lab, TSI239)
+-   Monday 11am (Lecture, CB8), Wednesday 2pm (Lecture, CH)
 
--   Friday 9am (Lab, TSI239)
+-   Tuesday 3pm (Lab, TSI239), Friday 9am (Lab, TSI239)
 
     -   Labs will start in week 2
 
     -   Please confirm your choice on Moodle.
-
--   Monday 11am (Lecture, CB8)
-
--   Wednesday 2pm (Lecture, CH)
 
 **Tutorials**
 
