@@ -313,5 +313,12 @@
     "title": "Correlation (and Causation)",
     "section": "Example Data (2): What is the relationship between cars’ weights and their mileage?",
     "text": "Example Data (2): What is the relationship between cars’ weights and their mileage?\nThe data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models)."
+  },
+  {
+    "objectID": "0-Information.html#assessment-and-materials",
+    "href": "0-Information.html#assessment-and-materials",
+    "title": "Module Information",
+    "section": "Assessment and Materials",
+    "text": "Assessment and Materials\nMarks\n\n10% – compulsory assignments\n10% – quizzes\n15% – mid-term exam (March 28th, MCQ)\n65% – final exam (date TBC)\n\nNotes\n\nNotes will be a combination of handouts posted on Moodle and notes taken down in class\n\nAssignments\n\nWill be uploaded PDFs\n\nRecommended reading\n\nR for Data Science (https://r4ds.had.co.nz)"
   }
 ]

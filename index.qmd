@@ -16,7 +16,6 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 ## Lecture Notes
 
-
 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/1-TidyverseRecap.html)
 
 2: [Correlation (and Causation)](https://ncahill89.github.io/DS152/2-Correlation.html)
