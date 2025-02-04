@@ -320,5 +320,12 @@
     "title": "Module Information",
     "section": "Assessment and Materials",
     "text": "Assessment and Materials\nNotes\n\nNotes will be a combination of links posted on Moodle and notes taken down in class\n\nAssignments\n\nWill be uploaded PDFs.\n\nLab quizzes\n\nWill be Moodle Quiz format with multiple attempts allowed until the end of the semester.\n\nMidterm Exam\n\nWill be a Moodle Quiz MCQ.\n\nMarks\n\n10% – compulsory assignments\n10% – quizzes\n15% – mid-term exam (March 28th, MCQ)\n65% – final exam (date TBC)\n\nRecommended reading\n\nR for Data Science (https://r4ds.had.co.nz)"
+  },
+  {
+    "objectID": "0-Information.html#topics-covered",
+    "href": "0-Information.html#topics-covered",
+    "title": "Module Information",
+    "section": "Topics Covered",
+    "text": "Topics Covered\n\nTidyverse Recap\nCorrelation (and Causation)\nObservational Studies\nControlled Experiments\nSurveys\nData Privacy and Anonymisation\nSupervised and Unsupervised Learning\nPredictive Analytics\nImage and Text Analysis"
   }
 ]
