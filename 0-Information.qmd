@@ -27,6 +27,24 @@ editor: visual
 
 ## Assessment and Materials
 
+**Notes**
+
+-   Notes will be a combination of links posted on Moodle and notes taken down in class
+
+
+**Assignments**
+
+-   Will be uploaded PDFs. 
+
+**Lab quizzes**
+
+-   Will be Moodle Quiz format with multiple attempts allowed until the end of the semester. 
+
+**Midterm Exam**
+
+- Will be a Moodle Quiz MCQ.
+
+
 **Marks**
 
 -   10% -- compulsory assignments
@@ -37,13 +55,7 @@ editor: visual
 
 -   65% -- final exam (date TBC)
 
-**Notes**
 
--   Notes will be a combination of handouts posted on Moodle and notes taken down in class
-
-**Assignments**
-
--   Will be uploaded PDFs
 
 **Recommended reading**
 
