@@ -40,7 +40,7 @@ editor: visual
 
 -  Assignment questions will be posted to Moodle and answers should be uploaded as PDFs. 
 
-**Lab quizzes**
+**Lab Quizzes**
 
 -   Each lab will have an associated quiz that will be a Moodle Quiz format with multiple attempts allowed until the end of the semester. 
 
