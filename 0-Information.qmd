@@ -18,8 +18,7 @@ editor: visual
 
 **Tutorials**
 
--   Tuesdays \@ 9am, 10am, 2pm, 3pm, 5pm
--   Wednesdays \@ 12pm, 1pm
+-   Tuesdays \@ 9am, 10am, 2pm, 3pm, 5pm,  Wednesdays \@ 12pm, 1pm
 -   Tutorials -- starting week 4 (24/02/2025)
 
 **Office hours**
