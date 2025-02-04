@@ -152,5 +152,166 @@
     "title": "Tidyverse Recap",
     "section": "Class Exercise",
     "text": "Class Exercise\nSuppose we have a dataset called penguins and suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species in the dataset. Rearrange the following steps in the pipeline into an order that accomplishes this goal.\n\n# a\narrange(avg_mass_flipper_ratio)\n\n# b\ngroup_by(species) %&gt;% \n\n# c\npenguins %&gt;% \n  \n# d\nsummarise(\n  avg_mass_flipper_ratioo = median(mass_flipper_ratio)\n) %&gt;% \n  \n# e\nmutate(\n  mass_flipper_ratio = body_mass_g/flipper_length_mm\n) %&gt;%"
+  },
+  {
+    "objectID": "2-Correlation.html",
+    "href": "2-Correlation.html",
+    "title": "Correlation (and Causation)",
+    "section": "",
+    "text": "When we see a pattern, we don’t just say “how extraordinary!” and move on; instead, we try and attribute a cause!\nhttps://www.tylervigen.com/spurious-correlations"
+  },
+  {
+    "objectID": "2-Correlation.html#correlation-vs.-causation",
+    "href": "2-Correlation.html#correlation-vs.-causation",
+    "title": "Causation and Correlation",
+    "section": "",
+    "text": "When we see a pattern, we don’t just say “how extraordinary!” and move on; instead, we try and attribute a cause!\n\nWe all draw conclusions on the basis of what we see\nBut it is important for us to remember that just because there is a correlation between two facts, there isn’t necessarily a cause/effect relationship between them.\n\nlistening to loud music and acne\nice cream consumption and shark attacks\nhand size and reading ability in children\n…\n\nThese variables are correlated, but one does not cause the other!\n\nhttps://www.tylervigen.com/spurious-correlations"
+  },
+  {
+    "objectID": "2-Correlation.html#correlation",
+    "href": "2-Correlation.html#correlation",
+    "title": "Correlation (and Causation)",
+    "section": "Correlation",
+    "text": "Correlation\nCorrelation (r) quantifies the linear association between two quantitative variables.\n\nThe value of \\(r\\) is between -1 and 1.\n\\(r &gt;\\) 0 when \\(x\\) and \\(y\\) have a positive association.\n\\(r &lt;\\) 0 when \\(x\\) and \\(y\\) have a negative association.\n\\(r\\) = 1 means a perfect positive linear association.\n\\(r\\) = -1 means a perfect negative linear association.\n\\(r\\) = 0 indicates no linear association between \\(x\\) and \\(y\\).\nThe value of \\(r\\) is a measure of the extent to which \\(x\\) and \\(y\\) are linearly related."
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here",
+    "title": "Correlation (and Causation)",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?\nTask: Match the plot panel number to the letter with the correct correlation value.\n\n\n\n\n\n\n\n\n\n          A           B           C           D           E           F \n-0.02770462  0.96643642 -0.69813746  0.04969697 -0.96735724  0.11948059 \n          G           H \n-0.39421900  0.67692544"
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here-1",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here-1",
+    "title": "Causation and Correlation",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?"
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here-2",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here-2",
+    "title": "Causation and Correlation",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?"
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here-3",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here-3",
+    "title": "Causation and Correlation",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?"
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here-4",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here-4",
+    "title": "Causation and Correlation",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?"
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here-5",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here-5",
+    "title": "Causation and Correlation",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?"
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here-6",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here-6",
+    "title": "Causation and Correlation",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?"
+  },
+  {
+    "objectID": "2-Correlation.html#what-are-the-correlation-values-here-7",
+    "href": "2-Correlation.html#what-are-the-correlation-values-here-7",
+    "title": "Causation and Correlation",
+    "section": "What are the correlation values here?",
+    "text": "What are the correlation values here?"
+  },
+  {
+    "objectID": "2-Correlation.html#calculating-the-correlation-coefficient",
+    "href": "2-Correlation.html#calculating-the-correlation-coefficient",
+    "title": "Correlation (and Causation)",
+    "section": "Calculating the correlation coefficient",
+    "text": "Calculating the correlation coefficient\nWe denote \\[\\begin{eqnarray*}\nS_{xx} &=& \\sum_{i=1}^{n}(x_i - \\bar{x})^2 = \\sum_{i=1}^{n}x_i^2 - n\\bar{x}^2 \\\\\nS_{yy} &=& \\sum_{i=1}^{n}(y_i - \\bar{y})^2 = \\sum_{i=1}^{n}y_i^2 - n\\bar{y}^2 \\\\\nS_{xy} &=& \\sum_{i=1}^{n}(x_i - \\bar{x})(y_i - \\bar{y}) = \\sum_{i=1}^{n}x_iy_i - n\\bar{x}\\bar{y}\n\\end{eqnarray*}\\]\nThen \\[\\begin{eqnarray*}\nr &=& \\frac{Sxy}{\\sqrt{SxxSyy}}     \n\\end{eqnarray*}\\]\n\nExample: Calculate the correlation between \\(x\\) and \\(y\\)\n\n\n\n\n\nx\n2\n4\n1\n6\n7\n\n\ny\n3\n4\n0\n8\n8\n\n\n\n\n\n\n\\[\\begin{align*}\n&\\sum_{i=1}^{n}x_i^2=106, \\sum_{i=1}^{n}y_i^2=153, \\sum_{i=1}^{n}x_iy_i=126, \\bar{x}=4,\\bar{y}=4.6\\\\\n&S_{xx} = \\sum_{i=1}^{n}x_i^2 - n\\bar{x}^2 = 26, S_{yy} = \\sum_{i=1}^{n}y_i^2 - n\\bar{y}^2 = 47.2\\\\\n&S_{xy} = \\sum_{i=1}^{n}x_iy_i - n\\bar{x}\\bar{y} = 34\\\\\n\\\\\n&r = \\frac{Sxy}{\\sqrt{SxxSyy}} = \\frac{34}{\\sqrt{26 \\times 47.2}} = 0.97        \n\\end{align*}\\]\n\n\nExample: Change of scale and the correlation coefficient\nThe distance of the race and the time it took to complete was recorded for five races in kilometres and seconds respectively. The correlation was calculated between the two variables. The data set was also converted into miles (\\(\\times\\) 0.621371192) and minutes (/60) and the correlation was re-calculated.\n\n\n\n\n\nKilometres\nSeconds\nMiles\nMinutes\n\n\n\n\n0.1\n10\n0.0621371\n0.1666667\n\n\n0.4\n120\n0.2485485\n2.0000000\n\n\n0.8\n300\n0.4970970\n5.0000000\n\n\n1.6\n535\n0.9941939\n8.9166667\n\n\n3.0\n950\n1.8641136\n15.8333333\n\n\n\n\n\n\n\n\n\n\n\nNotes\n\n\n\n\nIf \\(x\\) and \\(y\\) measurement units are changed, correlation does not change.\nIf \\(x\\) and \\(y\\) are reversed, i.e. correlation of \\(y\\) and \\(x\\), the correlation does not change.\nCorrelation is a measure of linear association. It does not establish causation.\nTwo variables, x and y, could be highly correlated because there is another variable, z, having an impact on both x and y."
+  },
+  {
+    "objectID": "2-Correlation.html#example-calculate-the-correlation-between-x-and-y",
+    "href": "2-Correlation.html#example-calculate-the-correlation-between-x-and-y",
+    "title": "Causation and Correlation",
+    "section": "Example: Calculate the correlation between \\(x\\) and \\(y\\)",
+    "text": "Example: Calculate the correlation between \\(x\\) and \\(y\\)\n\n\n\n\n\nx\n2\n4\n1\n6\n7\n\n\ny\n3\n4\n0\n8\n8\n\n\n\n\n\n\n\\[\\begin{align*}\n&\\sum_{i=1}^{n}x_i^2=106, \\sum_{i=1}^{n}y_i^2=153, \\sum_{i=1}^{n}x_iy_i=126, \\bar{x}=4,\\bar{y}=4.6\\\\\n&S_{xx} = \\sum_{i=1}^{n}x_i^2 - n\\bar{x}^2 = 26, S_{yy} = \\sum_{i=1}^{n}y_i^2 - n\\bar{y}^2 = 47.2\\\\\n&S_{xy} = \\sum_{i=1}^{n}x_iy_i - n\\bar{x}\\bar{y} = 34\\\\\n\\\\\n&r = \\frac{Sxy}{\\sqrt{SxxSyy}} = \\frac{34}{\\sqrt{26 \\times 47.2}} = 0.97        \n\\end{align*}\\]"
+  },
+  {
+    "objectID": "2-Correlation.html#notes-on-correlation",
+    "href": "2-Correlation.html#notes-on-correlation",
+    "title": "Causation and Correlation",
+    "section": "Notes on correlation",
+    "text": "Notes on correlation\n\nIf \\(x\\) and \\(y\\) measurement units are changed, correlation does not change.\nIf \\(x\\) and \\(y\\) are reversed, i.e. correlation of \\(y\\) and \\(x\\), the correlation does not change.\nCorrelation is a measure of linear association. It does not establish causation.\nTwo variables, x and y, could be highly correlated because there is another variable, z, having an impact on both x and y.\n\nExample, we have not established that extra height causes bigger feet. In fact genetic factors cause both."
+  },
+  {
+    "objectID": "2-Correlation.html#example-change-of-scale-and-the-correlation-coefficient",
+    "href": "2-Correlation.html#example-change-of-scale-and-the-correlation-coefficient",
+    "title": "Causation and Correlation",
+    "section": "Example: Change of scale and the correlation coefficient",
+    "text": "Example: Change of scale and the correlation coefficient\nThe distance of the race and the time it took to complete was recorded for five races in kilometres and seconds respectively. The correlation was calculated between the two variables. The data set was also converted into miles (\\(\\times\\) 0.621371192) and minutes (/60) and the correlation was re-calculated.\n\n\n\n\n\nKilometres\nSeconds\nMiles\nMinutes\n\n\n\n\n0.1\n10\n0.0621371\n0.1666667\n\n\n0.4\n120\n0.2485485\n2.0000000\n\n\n0.8\n300\n0.4970970\n5.0000000\n\n\n1.6\n535\n0.9941939\n8.9166667\n\n\n3.0\n950\n1.8641136\n15.8333333"
+  },
+  {
+    "objectID": "2-Correlation.html#explore-spurious-correlations",
+    "href": "2-Correlation.html#explore-spurious-correlations",
+    "title": "Causation and Correlation",
+    "section": "Explore Spurious Correlations",
+    "text": "Explore Spurious Correlations\nFind two correlated variables from: https://www.tylervigen.com/spurious-correlations.\nCreate a scatter plot and find the correlation."
+  },
+  {
+    "objectID": "2-Correlation.html#association-between-pga-golfers-accuracy-and-driving-distance",
+    "href": "2-Correlation.html#association-between-pga-golfers-accuracy-and-driving-distance",
+    "title": "Causation and Correlation",
+    "section": "Association between PGA golfer’s accuracy and driving distance",
+    "text": "Association between PGA golfer’s accuracy and driving distance\nDescription:\nThe data set `golf’ was taken from PGA Tour Recordsof 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores."
+  },
+  {
+    "objectID": "2-Correlation.html#spurious-correlations",
+    "href": "2-Correlation.html#spurious-correlations",
+    "title": "Correlation (and Causation)",
+    "section": "Spurious Correlations",
+    "text": "Spurious Correlations\nA spurious correlation is a statistical relationship between two variables that appears to be meaningful but is actually caused by coincidence or the influence of a third (confounding) variable. This misleading association can arise due to random chance, indirect causation, or omitted variables.\nFor example, there may be a strong correlation between ice cream sales and drowning incidents, but this does not mean one causes the other. Instead, a third factor—hot weather—increases both ice cream sales and swimming activity, which in turn raises the risk of drowning.\nSpurious correlations can often be identified through deeper statistical analysis, such as controlling for confounding variables or using causal inference techniques.\nFind two correlated variables from: https://www.tylervigen.com/spurious-correlations.\nCreate a scatter plot and find the correlation."
+  },
+  {
+    "objectID": "2-Correlation.html#what-is-the-capital-of-france",
+    "href": "2-Correlation.html#what-is-the-capital-of-france",
+    "title": "Causation and Correlation",
+    "section": "What is the capital of France?",
+    "text": "What is the capital of France?\n\nLondon\nParis\nBerlin\nMadrid"
+  },
+  {
+    "objectID": "2-Correlation.html#example-data-1-association-between-pga-golfers-accuracy-and-driving-distance",
+    "href": "2-Correlation.html#example-data-1-association-between-pga-golfers-accuracy-and-driving-distance",
+    "title": "Causation and Correlation",
+    "section": "Example Data (1): Association between PGA golfer’s accuracy and driving distance",
+    "text": "Example Data (1): Association between PGA golfer’s accuracy and driving distance\nDescription:\nThe data set `golf’ was taken from PGA Tour Recordsof 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores."
+  },
+  {
+    "objectID": "2-Correlation.html#example-data-2-association-between-pga-golfers-accuracy-and-driving-distance",
+    "href": "2-Correlation.html#example-data-2-association-between-pga-golfers-accuracy-and-driving-distance",
+    "title": "Causation and Correlation",
+    "section": "Example Data (2): Association between PGA golfer’s accuracy and driving distance",
+    "text": "Example Data (2): Association between PGA golfer’s accuracy and driving distance"
+  },
+  {
+    "objectID": "2-Correlation.html#example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance",
+    "href": "2-Correlation.html#example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance",
+    "title": "Correlation (and Causation)",
+    "section": "Example Data (1): What is the association between PGA golfer’s accuracy and driving distance?",
+    "text": "Example Data (1): What is the association between PGA golfer’s accuracy and driving distance?\nThe data set `golf’ was taken from PGA Tour Recordsof 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores."
+  },
+  {
+    "objectID": "2-Correlation.html#example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage",
+    "href": "2-Correlation.html#example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage",
+    "title": "Correlation (and Causation)",
+    "section": "Example Data (2): What is the relationship between cars’ weights and their mileage?",
+    "text": "Example Data (2): What is the relationship between cars’ weights and their mileage?\nThe data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models)."
   }
 ]

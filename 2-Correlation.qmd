@@ -1,0 +1,300 @@
+---
+title: "Correlation (and Causation)"
+format: html
+editor: visual
+revealjs-plugins:
+  - quiz
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(gridExtra)
+
+```
+
+
+When we see a pattern, we don't just say "how extraordinary!" and move on; instead, we try and attribute a cause!
+
+-   We all draw conclusions on the basis of what we see
+
+-   But it is important for us to remember that just because there is a correlation between two facts, there isn't necessarily a cause/effect relationship between them.
+
+    -   listening to loud music and acne
+
+    -   ice cream consumption and shark attacks
+
+    -   hand size and reading ability in children
+
+    -   ...
+
+-   These variables are correlated, but one does not *cause* the other!
+
+<https://www.tylervigen.com/spurious-correlations>
+
+```{=html}
+<!--
+But the situation is not always so clear cut. For example, it was reported recently that mobile phone use can reduce a man's sperm count by almost a third. One plausible theory is that damage caused by electromagnetic radiation makes you infertile. But what about other factors - confounding factors - that could cause both high mobile phone use and low sperm counts?
+How about stress? Busy jobs? Exposure to pollution? Age - were the heavy users older? Were they more likely to be smokers? The researchers can't answer these questions; not unless they carry out a carefully designed experiment that controls for all these other variables.
+And we must not forget the possibility that this was a random finding in one small study - just 221 men — which won't necessarily be replicated by other researchers. If you conduct enough studies, you will inevitably get some interesting findings just by chance.
+-->
+```
+<!-- ## Correlation -->
+
+<!-- \footnotesize -->
+
+<!-- Let's look at the relationship between two quantitative variables. -->
+
+<!-- E.g. Shoe size and height of a class of first year Maynooth students -->
+
+<!-- ![](figures/S6_Scatter1.png){width="50%"} -->
+
+## Correlation
+
+Correlation (r) quantifies the linear association between two quantitative variables.
+
+-   The value of $r$ is between -1 and 1.
+-   $r >$ 0 when $x$ and $y$ have a positive association.
+-   $r <$ 0 when $x$ and $y$ have a negative association.
+-   $r$ = 1 means a perfect positive linear association.
+-   $r$ = -1 means a perfect negative linear association.
+-   $r$ = 0 indicates no linear association between $x$ and $y$.
+-   The value of $r$ is a measure of the extent to which $x$ and $y$ are linearly related.
+
+
+## What are the correlation values here?
+
+Task: Match the plot panel number to the letter with the correct correlation value. 
+
+```{r, echo = FALSE}
+
+# Function to generate datasets with specific correlation structures
+generate_data <- function(type) {
+  set.seed(123)
+  n <- 200
+  
+  if (type == "1") {
+    x <- rnorm(n)
+    y <- 0.8 * x + rnorm(n, sd=0.2)
+  } else if (type == "2") {
+    x <- rnorm(n)
+    y <- -0.8 * x + rnorm(n, sd=0.2)
+  } else if (type == "3") {
+    x <- rnorm(n)
+    y <- 0.5 * x + rnorm(n, sd=0.5)
+  } else if (type == "4") {
+    x <- rnorm(n)
+    y <- -0.5 * x + rnorm(n, sd=0.5)
+  } else if (type == "5") {
+    x <- rnorm(n)
+    y <- rnorm(n)
+  } else if (type == "6") {
+    x <- runif(n, -2, 2)
+    y <- x^2 + rnorm(n, sd=0.2)
+  } else if (type == "7") {
+    x <- seq(-2*pi, 2*pi, length.out=n)
+    y <- sin(x) + rnorm(n, sd=0.1)
+  } else if (type == "8") {
+    x <- sample(rep(seq(-2, 2, length.out=10), each=20))
+    y <- sample(rep(seq(-2, 2, length.out=10), each=20))
+  }
+  
+  data.frame(x, y)
+}
+
+# Create a list of correlation types
+types <- c("1", "2", "3", "4",
+           "5", "6", "7", "8")
+
+# Generate plots and compute correlations
+plots <- list()
+cor_values <- list()
+
+for (type in types) {
+  data <- generate_data(type)
+  cor_value <- cor(data$x, data$y)
+  cor_values[[type]] <- cor_value
+  
+  plots[[type]] <- ggplot(data, aes(x, y)) +
+    geom_point(alpha = 0.6, color = 'blue') +
+    theme_minimal() +
+    labs(title = type)
+}
+
+# Arrange plots in a grid
+grid.arrange(grobs = plots, ncol = 4)
+
+
+# Output correlation values
+vec <- (unlist(sample(cor_values,8, replace = FALSE)))
+names(vec)  <-LETTERS[1:8]
+vec
+
+```
+
+
+<!-- ![](images/S6_Corr_graph1.png) -->
+
+
+<!-- ![](images/S6_Corr_graph2.png) -->
+
+
+<!-- ![](images/S6_Corr_graph3.png) -->
+
+
+<!-- ![](images/S6_Corr_graph4.png) -->
+
+
+<!-- ![](images/S6_Corr_graph5.png) -->
+
+
+<!-- ![](images/S6_Corr_graph6.png) -->
+
+
+<!-- ![](images/S6_Corr_graph7.png) -->
+
+
+<!-- ![](images/S6_Corr_graph8.png) -->
+
+## Calculating the correlation coefficient
+
+We denote \begin{eqnarray*}
+S_{xx} &=& \sum_{i=1}^{n}(x_i - \bar{x})^2 = \sum_{i=1}^{n}x_i^2 - n\bar{x}^2 \\
+S_{yy} &=& \sum_{i=1}^{n}(y_i - \bar{y})^2 = \sum_{i=1}^{n}y_i^2 - n\bar{y}^2 \\
+S_{xy} &=& \sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) = \sum_{i=1}^{n}x_iy_i - n\bar{x}\bar{y}
+\end{eqnarray*}
+
+Then \begin{eqnarray*}
+r &=& \frac{Sxy}{\sqrt{SxxSyy}}     
+\end{eqnarray*}
+
+### Example: Calculate the correlation between $x$ and $y$
+
+```{r, echo = FALSE}
+x <- c(2,4,1,6,7)
+y <- c(3,4,0,8,8)
+
+dat <- tibble(x,y)
+knitr::kable(t(dat))
+```
+
+<!-- ![](figures/S6_correg.png){width="50%"} -->
+
+```{=tex}
+\begin{align*}
+&\sum_{i=1}^{n}x_i^2=106, \sum_{i=1}^{n}y_i^2=153, \sum_{i=1}^{n}x_iy_i=126, \bar{x}=4,\bar{y}=4.6\\
+&S_{xx} = \sum_{i=1}^{n}x_i^2 - n\bar{x}^2 = 26, S_{yy} = \sum_{i=1}^{n}y_i^2 - n\bar{y}^2 = 47.2\\
+&S_{xy} = \sum_{i=1}^{n}x_iy_i - n\bar{x}\bar{y} = 34\\
+\\
+&r = \frac{Sxy}{\sqrt{SxxSyy}} = \frac{34}{\sqrt{26 \times 47.2}} = 0.97        
+\end{align*}
+```
+
+
+### Example: Change of scale and the correlation coefficient
+
+The distance of the race and the time it took to complete was recorded for five races in kilometres and seconds respectively. The correlation was calculated between the two variables. The data set was also converted into miles ($\times$ 0.621371192) and minutes (/60) and the correlation was re-calculated.
+
+```{r, echo = FALSE}
+Kilometres <- c(0.1,0.4,0.8,1.6,3)
+Seconds <- c(10,120,300,535,950)
+Miles <- Kilometres*0.621371192
+Minutes <- Seconds/60
+
+km_dat <- tibble(Kilometres,Seconds, Miles, Minutes)
+knitr::kable(km_dat)
+
+```
+
+::: {.callout-note}
+
+## Notes
+
+-   If $x$ and $y$ measurement units are changed, correlation does not change.
+
+-   If $x$ and $y$ are reversed, i.e. correlation of $y$ and $x$, the correlation does not change.
+
+-   Correlation is a measure of linear association. It does not establish causation.
+
+-   Two variables, x and y, could be highly correlated because there is another variable, z, having an impact on both x and y.
+:::
+
+
+## Spurious Correlations
+
+A **spurious correlation** is a statistical relationship between two variables that appears to be meaningful but is actually caused by coincidence or the influence of a third (confounding) variable. This misleading association can arise due to random chance, indirect causation, or omitted variables.
+
+For example, there may be a strong correlation between ice cream sales and drowning incidents, but this does not mean one causes the other. Instead, a third factor—hot weather—increases both ice cream sales and swimming activity, which in turn raises the risk of drowning.
+
+Spurious correlations can often be identified through deeper statistical analysis, such as controlling for confounding variables or using causal inference techniques.
+
+Find two correlated variables from: <https://www.tylervigen.com/spurious-correlations>.
+
+Create a scatter plot and find the correlation.
+
+## Example Data (1): What is the association between PGA golfer's accuracy and driving distance?
+
+The data set \`golf' was taken from PGA Tour Recordsof 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores.
+
+```{r, echo=FALSE}
+golf <- readRDS("~/Dropbox/LecturingMaynooth/DS152/2_causation_correlation/golf.rds")
+
+# golf <- golf %>% select(score, distance, accur)
+# 
+# ggplot(golf, aes(x=distance, y = accur)) +
+#   geom_point()
+
+base1 <- ggplot(golf, aes(x=distance, y = accur)) +
+  geom_point() + 
+  labs(
+    x = "Distance)",
+    y = "Accuracy",
+    title = ""
+  )
+
+r <- golf |>
+  summarize(cor = round(cor(distance,  accur), 2)) |>
+  pull()
+
+base1 +
+  stat_ellipse(geom = "polygon", color = "#E34A6F", fill = "#E34A6F30") +
+  annotate(
+    geom = "text",
+    x = 250, y = 70, 
+    label = paste("r =", r),
+    color = "#E34A6F", size = 5, hjust = 0.2
+  )
+```
+
+
+## Example Data (2): What is the relationship between cars' weights and their mileage?
+
+The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+
+
+```{r}
+#| echo: false
+
+base2 <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon (MPG)",
+    title = ""
+  )
+
+r <- mtcars |>
+  summarize(cor = round(cor(mpg, wt), 2)) |>
+  pull()
+
+base2 +
+  stat_ellipse(geom = "polygon", color = "#E34A6F", fill = "#E34A6F30") +
+  annotate(
+    geom = "text",
+    x = 3.5, y = 27.5, 
+    label = paste("r =", r),
+    color = "#E34A6F", size = 5, hjust = 0
+  )
+```
+
