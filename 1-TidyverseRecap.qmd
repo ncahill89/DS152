@@ -230,7 +230,7 @@ penguins %>%
   
 # d
 summarise(
-  avg_mass_flipper_ratioo = median(mass_flipper_ratio)
+  avg_mass_flipper_ratio = median(mass_flipper_ratio, na.rm = TRUE)
 ) %>% 
   
 # e
