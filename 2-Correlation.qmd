@@ -33,6 +33,7 @@ When we see a pattern, we don't just say "how extraordinary!" and move on; inste
 
 <https://www.tylervigen.com/spurious-correlations>
 
+
 ```{=html}
 <!--
 But the situation is not always so clear cut. For example, it was reported recently that mobile phone use can reduce a man's sperm count by almost a third. One plausible theory is that damage caused by electromagnetic radiation makes you infertile. But what about other factors - confounding factors - that could cause both high mobile phone use and low sperm counts?
@@ -229,9 +230,9 @@ For example, there may be a strong correlation between ice cream sales and drown
 
 Spurious correlations can often be identified through deeper statistical analysis, such as controlling for confounding variables or using causal inference techniques.
 
-Find two correlated variables from: <https://www.tylervigen.com/spurious-correlations>.
+**Task:** Find two correlated variables from: <https://www.tylervigen.com/spurious-correlations>. Create a scatter plot and find the correlation.
 
-Create a scatter plot and find the correlation.
+
 
 ## Example Data (1): What is the association between PGA golfer's accuracy and driving distance?
 

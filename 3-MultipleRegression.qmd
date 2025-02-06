@@ -1,0 +1,530 @@
+---
+title: "Multiple Regression"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(countdown)
+library(gt)
+```
+
+## Recap: Simple Regression
+
+We have seen last semester, in DS151, how to study the relationship between two variables using linear regression.
+
+We can create a linear regression model that includes a predictor, such that $$\hat{\mbox{y}}=\beta_0+\beta_1\mbox{x}$$
+
+## Example: Modeling cars
+
+```{r}
+#| echo: false
+
+base <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    x = "Weight (1,000 lbs)",
+    y = "Miles per gallon (MPG)",
+    title = "MPG vs. weights of cars"
+  ) +
+  coord_cartesian(xlim = c(1.5, 5.5), ylim = c(10, 35))
+
+base
+```
+
+::: question
+**Describe:** What is the relationship between cars' weights and their mileage?
+:::
+
+```{r}
+#| echo: false
+#| message: false
+
+base +
+  geom_smooth(method = "lm", color = "#E34A6F")
+```
+
+::: question
+**Predict:** What is your best guess for a car's MPG that weighs 3,500 pounds?
+:::
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+base +
+  geom_smooth(method = "lm", se = FALSE, color = "darkgray", linetype = "dashed") +
+  geom_segment(
+    aes(x = 3.5, xend = 3.5, y = -Inf, yend = 18.5),
+    color = "#E34A6F"
+  ) +
+  geom_segment(
+    aes(x = -Inf, xend = 3.5, y = 18.5, yend = 18.5),
+    color = "#E34A6F"
+  )
+```
+
+### Modelling vocabulary
+
+-   Predictor (explanatory variable)
+-   Outcome (response variable)
+-   Regression line
+    -   Slope
+    -   Intercept
+
+#### Predictor (explanatory variable)
+
+```{r}
+#| echo: false
+
+base <- ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  labs(
+    x = "Weight (1000 lbs)",
+    y = "Miles per gallon (MPG)",
+    title = "MPG vs. weights of cars"
+  )
+```
+
+::: columns
+::: {.column width="25%"}
+```{r}
+#| echo: false
+
+mtcars |>
+  select(mpg, wt) |>
+  slice_head(n = 6) |>
+  mutate(across(where(is.numeric), as.character)) |>
+  bind_rows(c(mpg = "...", wt = "...")) |>
+  gt() |>
+  tab_style(
+    style = list(
+      cell_fill(color = "#E34A6F"),
+      cell_text(color = "white")
+      ),
+    locations = cells_body(columns = wt)
+  ) |>
+  tab_options(table.font.size = px(12))
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="70%"}
+```{r}
+#| echo: false
+
+base +
+  theme(
+    axis.title.x = element_text(color = "#E34A6F", face = "bold", size = 16)
+  )
+```
+:::
+:::
+
+#### Outcome (response variable)
+
+::: columns
+::: {.column width="25%"}
+```{r}
+#| echo: false
+
+mtcars |>
+  select(mpg, wt) |>
+  slice_head(n = 6) |>
+  mutate(across(where(is.numeric), as.character)) |>
+  bind_rows(c(mpg = "...", wt = "...")) |>
+  gt() |>
+  tab_style(
+    style = list(
+      cell_fill(color = "#E34A6F"),
+      cell_text(color = "white")
+      ),
+    locations = cells_body(columns = mpg)
+  ) |>
+  tab_options(table.font.size = px(12))
+```
+:::
+
+::: {.column width="5%"}
+:::
+
+::: {.column width="70%"}
+```{r}
+#| echo: false
+
+base +
+  theme(
+    axis.title.y = element_text(color = "#E34A6F", face = "bold", size = 16)
+  )
+```
+:::
+:::
+
+#### Regression line
+
+```{r}
+#| echo: false
+#| message: false
+
+base +
+  geom_smooth(method = "lm", color = "#E34A6F", linewidth = 1.5, se = FALSE)
+```
+
+#### Regression line: slope
+
+```{r}
+#| echo: false
+#| message: false
+
+base +
+  geom_smooth(method = "lm", color = "black", se = FALSE) +
+  annotate(
+    geom = "segment",
+    x = 4, xend = 5, y = 16, yend = 16, 
+    linetype = "dashed", color = "#E34A6F"
+  ) +
+  annotate(
+    geom = "segment",
+    x = 5, xend = 5, y = 16, yend = 10.6, 
+    color = "#E34A6F"
+  ) +
+  annotate(
+    geom = "text",
+    x = 5.2, y = 13, label = "slope", 
+    color = "#E34A6F", size = 5, hjust = 0
+  )
+```
+
+#### Regression line: intercept
+
+```{r}
+#| echo: false
+#| message: false
+
+base +
+  geom_smooth(method = "lm", color = "gray", se = FALSE, fullrange = TRUE, linetype = "dashed") +
+  geom_smooth(method = "lm", color = "black", se = FALSE) +
+  scale_x_continuous(limits = c(0, 5.5)) +
+  annotate(
+    geom = "point",
+    shape = 1, size = 4, stroke = 2,
+    x = 0, y = 37.4, 
+    color = "#E34A6F"
+  ) +
+  annotate(
+    geom = "text",
+    label = "intercept",
+    x = 0.5, y = 37.4, 
+    color = "#E34A6F", size = 5, hjust = 0
+  )
+```
+
+### R Code: Modeling cars
+
+```{r, message=FALSE}
+
+mtcars_mod <- lm(mpg ~ wt, data = mtcars)
+mtcars_mod
+
+ggplot(mtcars, aes(x = wt, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  labs(
+    x = "Weight (1,000 lbs)",
+    y = "Miles per gallon (MPG)",
+    title = "MPG vs. weights of cars"
+  ) 
+
+```
+
+## Multiple Regression
+
+In many research and applied fields, many different variables are measured at the same time, for various reasons. In many cases, we may actually have too many variables and may end up selecting a subset of them (only the most important) to proceed with the analysis. (NB: there are many ways to define variable importance, and we will look at some of them in depth throughout the Data Science programme).
+
+## Example 1: The Crab Dataset
+
+Let's have a look at an example where we have many predictor variables. The `crabs` dataset from package `MASS` has 200 observations on 2 qualitative variables (species colour and sex), and 5 morphological measurements (frontal lobe size, rear width, carapace length and width, and body depth) of crabs of the species *Leptograspus variegatus*.
+
+<!-- \includegraphics[width = .4\textwidth]{figures/orange_crab.jpg} \qquad -->
+
+<!-- \includegraphics[width = .4\textwidth]{figures/blue_crab.jpg} -->
+
+### Exploratory Analysis
+
+```{r, message=FALSE}
+crab_dat <- MASS::crabs
+glimpse(crab_dat)
+
+library(GGally)
+library(ggplot2)
+ggpairs(crab_dat, columns = 4:8, aes(colour=sex)) +
+  theme_bw()
+
+```
+
+::: question
+**Describe:** What are the relationships between the variables?
+:::
+
+### Exploratory Modelling
+
+Imagine we are interested in predicting the carapace length (`CL`) of this species of crab. We can create a linear regression model that includes multiple predictors, such as $$\hat{\mbox{CL}}=\beta_0+\beta_1\mbox{FL}+\beta_2\mbox{RW}+\beta_3\mbox{CW}+\beta_4\mbox{BD}$$
+
+This model can be fit in R by executing:
+
+```{r}
+crab_mod1 <- lm(CL ~ FL + RW + CW + BD, data = crab_dat)
+crab_mod1
+```
+
+We have that $$\hat{\mbox{CL}}=0.32+0.26\mbox{FL}-0.18\mbox{RW}+0.64\mbox{CW}+0.47\mbox{BD}$$.
+
+**Interpretation:**
+
+-   As FL increases by one unit, holding the other predictors constant, then carapace length will increase by 0.26.
+
+-   As RW increases by one unit, holding the other predictors constant, then carapace length will decrease by 0.18.
+
+-   As CW increases by one unit, holding the other predictors constant, then carapace length will increase by 0.64.
+
+-   As BD increases by one unit, holding the other predictors constant, then carapace length will increase by 0.47.
+
+::: question
+**Question:** How well does the model do at predicting carapace length?
+:::
+
+```{r}
+crab_dat <- crab_dat %>% 
+              mutate(CL_pred = predict(crab_mod1))
+
+ggplot(data = crab_dat,
+       mapping = aes(x = CL, y = CL_pred, colour = sex)) +
+  theme_bw() +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) +
+  xlab("Observed CL") + 
+  ylab("Predicted CL")
+```
+
+::: question
+**Question:** How well would we have done if we only used one predictor variable, say `RW`?
+:::
+
+```{r}
+crab_mod2 <- lm(CL ~ RW, data = crab_dat)
+crab_mod2
+
+crab_dat <- crab_dat %>% 
+              mutate(CL_pred2 = predict(crab_mod2))
+
+ggplot(data = crab_dat,
+       mapping = aes(x = CL, y = CL_pred2, colour = sex)) +
+  theme_bw() +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) +
+  xlab("Observed CL") + 
+  ylab("Predicted CL")
+```
+
+::: question
+**Question:** What about including the categorical variables, namely `sex` or `sp` (species colour)?
+:::
+
+We can include categorical variables in our model, such that
+
+$$\hat{\mbox{CL}}=\beta_0+\beta_1\mbox{RW}+\beta_2I(\mbox{sex}=\mbox{M})$$ (NB: $I(\mbox{sex}=\mbox{M})$ is an *indicator function*, which is equal to 1 if `sex` is equal to `M` and zero otherwise. The same type of interpretation can be drawn from $I(\mbox{sp}=\mbox{O})$)
+
+```{r}
+crab_mod3 <- lm(CL ~ RW + sex, data = crab_dat)
+crab_mod3
+
+crab_dat <- crab_dat %>% 
+              mutate(CL_pred3 = predict(crab_mod3))
+
+ggplot(data = crab_dat,
+       mapping = aes(x = CL, y = CL_pred3, colour = sex)) +
+  theme_bw() +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) +
+  xlab("Observed CL") + 
+  ylab("Predicted CL")
+```
+
+::: question
+**Question:** How do we interpret the coefficients related to `sex`?
+:::
+
+For a male crab the expected carapace length increases by 5.67 compared to a female crab.
+
+### Model Comparison
+
+One way of comparing how well our modelling strategies did in terms of predictions is to sum the squared discrepancies (residuals) between predicted and observed values, and see which one is smaller.
+
+```{r}
+discrepancy_mod1 <- sum(residuals(crab_mod1)^2)
+discrepancy_mod2 <- sum(residuals(crab_mod2)^2)
+discrepancy_mod3 <- sum(residuals(crab_mod3)^2)
+```
+
+```{r}
+discrepancy_mod1
+discrepancy_mod2
+discrepancy_mod3
+```
+
+Typically we would split the data into *training* and *test* set, use only the training set to fit the model, and then perform this computation on both sets. We will see more details on how to compare the models in terms of their predictive power in the module Statistical Machine Learning. We will also see more details on this in the modules Linear Models I and II, how to properly test hypotheses, how to assess goodness-of-fit, what the important assumptions are and how to properly check them.
+
+## Logistic Regression
+
+Logistic regression is a generalized regression model where the outcome is a two-level categorical variable. The outcome, takes the value 1 or 0 with probability. Ultimately, it is the probability of the outcome taking the value 1 (i.e., being a “success”) that we model in relation to the predictor variables. For this to work, we transform the expected outcome in such a way that it will be bounded between 0 and 1, and hence our estimates will be sensical. The transformation we use is called the *logit*, and is the natural logarithm of the odds of success: $$\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{x},$$ where $p$ is the probability of success.
+
+## Example: The Iris Dataset
+
+You will have explored the *Iris* dataset initially last semester in DS151.
+
+*Iris* is a genus of about 300 species of flowering plants, taking its name from the Greek word for a rainbow (which is also the name for the Greek goddess of rainbows, Iris). The flowers are very showy, and we would like to know if it is possible to identify some of the species based on measurements of different parts of the flowers.
+
+
+The dataset gives the measurements in centimeters of the variables:
+
+
+- sepal length
+- sepal width
+- petal length
+- petal width
+
+for 50 flowers from each of three species of *Iris*: *Iris setosa*, *Iris versicolor*, and *Iris virginica*.
+
+This dataset is available in base R as `iris`. Let's have a look:
+
+```{r}
+library(tidyverse)
+glimpse(iris)
+```
+
+
+## Exploratory Analysis 
+
+Let's work, initially, only with species *versicolor* and *virginica*. We create a plot that shows in the $x$ axis the petal length, and in the $y$ axis only the values of 0 and 1, representing whether the observation belongs to class *virginica* or not (0 = the observation belongs to class *versicolor*; 1 = it belongs to class *virginica*). We call this a binary (or dummy) variable.
+
+```{r}
+iris2 <- iris %>%
+  filter(Species != "setosa") %>%
+  mutate(Species.binary = as.numeric(Species == "virginica"))
+  
+ggplot(iris2, aes(x = Petal.Length, y = Species.binary)) +
+  geom_point() +
+  theme_bw()
+```
+
+## Exploratory Modelling
+
+A simple logistic regression model can be fit, such that $$\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{Petal.Length}$$
+
+Do this in R by executing:
+
+```{r}
+iris_mod1 <- glm(Species.binary ~ Petal.Length,
+                 family = binomial,
+                 data = iris2)
+iris_mod1 %>% coef() %>% round(digits = 4)
+```
+
+```{r, message=FALSE}
+ggplot(iris2, aes(x = Petal.Length, y = Species.binary)) +
+  geom_point() +
+  geom_smooth(method = glm, method.args = list(family = "binomial"), se = FALSE) +
+  ylab("p") +
+  theme_bw()
+```
+
+We may interpret the y-axis numbers here as the probability $p$ of belonging to class *virginica*. It appears that as the petal length increases, so does the likelihood of belonging to the *virginica* class. 
+
+### Including more predictors
+
+It is frequently of interest to use multiple covariates to improve our predictive power. Let's fit a logistic regression model including all four covariates as predictors in our model: $$\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{Sepal.Length}+\beta_2*\mbox{Sepal.Width}+\beta_3*\mbox{Petal.Length}+\beta_4*\mbox{Petal.Width}$$
+
+```{r}
+iris_mod2 <- glm(Species.binary ~ Sepal.Length + Sepal.Width + Petal.Length + Petal.Width,
+                 family = binomial, 
+                 data = iris2)
+iris_mod2 %>% coef %>% round(digits = 4)
+```
+
+
+### Classification
+
+::: question
+**Question:** How well did we do at classifying the Iris species?
+:::
+
+```{r}
+iris_predict <- iris2 %>% 
+                  mutate(p_hat = predict(iris_mod2, type = "response") %>% round(2),
+                         Species_pred = ifelse(p_hat >= 0.5,"virginica","versicolor"))
+
+n_correct_full <- sum(iris_predict$Species_pred == iris_predict$Species)
+n_correct_full
+
+```
+
+Our model correctly predicts the species class of 98 out of 100 observations.
+
+## Example: The Wine Dataset
+
+The wine dataset contains the results of a chemical analysis of wines grown in a specific area of Italy. Three types of wine are represented in the 178 samples, with the results of 13 chemical analyses recorded for each sample. The Type variable has been transformed into a categoric variable.
+
+The data contains no missing values and consits of only numeric data, with a three class target variable (Type) for classification.
+
+Let's have a glimpse at the dataset:
+
+```{r, echo = TRUE}
+wine <- read_csv("https://www.dropbox.com/s/l5x4ur06gfhpg0h/wine.csv?raw=1") 
+glimpse(wine)
+```
+
+Change the code below and make different plots with other covariate combinations. What sort of patterns begin to emerge?
+
+```{r wine, exercise = TRUE}
+ggplot(wine, aes(x = Ash, y = Malic, colour = Type)) +
+  geom_point() +
+  theme_bw() +
+  labs(colour = "Wine Type")
+```
+
+We will work only with types 1 and 2
+
+```{r wine2, echo = TRUE}
+wine2 <- wine %>%
+  filter(Type != "type3") %>%
+  mutate(Type_binary = as.numeric(Type == "type1")) %>% 
+  as_tibble
+wine2
+```
+
+Change the code below and fit a logistic regression model using the four predictors you believe are the best to classify the two types of wine. Also play around with different thresholds for the classification rule. Compare with your peers. What predictors yielded the best predictive performance?
+
+```{r wine3, exercise = TRUE}
+# include the predictors below
+logistic_reg <- glm(Type_binary ~ Malic + Ash + Alcalinity + Magnesium,
+                           family = binomial, data = wine2)
+
+# set the threshold for the classification rule below
+threshold <- 0.50
+
+# computes the percentage of correct predictions
+wine_predict <- wine2 %>% 
+                  mutate(p_hat = predict(logistic_reg, type = "response") %>% round(2),
+                         Type_pred = ifelse(p_hat >= threshold, "type1","type2")) 
+
+
+n_correct <- sum(wine_predict$Type_pred == wine_predict$Type)
+n_total <- nrow(wine2)
+percentage_correct <- n_correct/n_total * 100
+percentage_correct
+```
