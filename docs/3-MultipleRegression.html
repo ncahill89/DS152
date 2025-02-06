@@ -152,17 +152,17 @@ window.Quarto = {
   <li><a href="#r-code-modeling-cars" id="toc-r-code-modeling-cars" class="nav-link" data-scroll-target="#r-code-modeling-cars">R Code: Modeling cars</a></li>
   </ul></li>
   <li><a href="#multiple-regression" id="toc-multiple-regression" class="nav-link" data-scroll-target="#multiple-regression">Multiple Regression</a></li>
-  <li><a href="#example-1-the-crab-dataset" id="toc-example-1-the-crab-dataset" class="nav-link" data-scroll-target="#example-1-the-crab-dataset">Example 1: The Crab Dataset</a>
+  <li><a href="#example-the-crab-dataset" id="toc-example-the-crab-dataset" class="nav-link" data-scroll-target="#example-the-crab-dataset">Example: The Crab Dataset</a>
   <ul class="collapse">
   <li><a href="#exploratory-analysis" id="toc-exploratory-analysis" class="nav-link" data-scroll-target="#exploratory-analysis">Exploratory Analysis</a></li>
   <li><a href="#exploratory-modelling" id="toc-exploratory-modelling" class="nav-link" data-scroll-target="#exploratory-modelling">Exploratory Modelling</a></li>
   <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
   </ul></li>
   <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
-  <li><a href="#example-the-iris-dataset" id="toc-example-the-iris-dataset" class="nav-link" data-scroll-target="#example-the-iris-dataset">Example: The Iris Dataset</a></li>
-  <li><a href="#exploratory-analysis-1" id="toc-exploratory-analysis-1" class="nav-link" data-scroll-target="#exploratory-analysis-1">Exploratory Analysis</a></li>
-  <li><a href="#exploratory-modelling-1" id="toc-exploratory-modelling-1" class="nav-link" data-scroll-target="#exploratory-modelling-1">Exploratory Modelling</a>
+  <li><a href="#example-the-iris-dataset" id="toc-example-the-iris-dataset" class="nav-link" data-scroll-target="#example-the-iris-dataset">Example: The Iris Dataset</a>
   <ul class="collapse">
+  <li><a href="#exploratory-analysis-1" id="toc-exploratory-analysis-1" class="nav-link" data-scroll-target="#exploratory-analysis-1">Exploratory Analysis</a></li>
+  <li><a href="#exploratory-modelling-1" id="toc-exploratory-modelling-1" class="nav-link" data-scroll-target="#exploratory-modelling-1">Exploratory Modelling</a></li>
   <li><a href="#including-more-predictors" id="toc-including-more-predictors" class="nav-link" data-scroll-target="#including-more-predictors">Including more predictors</a></li>
   <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
   </ul></li>
@@ -249,23 +249,23 @@ window.Quarto = {
 <div class="column" style="width:25%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="kbqrovdxlr" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#kbqrovdxlr table {
+<div id="zevgcwnxqu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zevgcwnxqu table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#kbqrovdxlr thead, #kbqrovdxlr tbody, #kbqrovdxlr tfoot, #kbqrovdxlr tr, #kbqrovdxlr td, #kbqrovdxlr th {
+#zevgcwnxqu thead, #zevgcwnxqu tbody, #zevgcwnxqu tfoot, #zevgcwnxqu tr, #zevgcwnxqu td, #zevgcwnxqu th {
   border-style: none;
 }
 
-#kbqrovdxlr p {
+#zevgcwnxqu p {
   margin: 0;
   padding: 0;
 }
 
-#kbqrovdxlr .gt_table {
+#zevgcwnxqu .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -291,12 +291,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_caption {
+#zevgcwnxqu .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#kbqrovdxlr .gt_title {
+#zevgcwnxqu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -308,7 +308,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#kbqrovdxlr .gt_subtitle {
+#zevgcwnxqu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -320,7 +320,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#kbqrovdxlr .gt_heading {
+#zevgcwnxqu .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -332,13 +332,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_bottom_border {
+#zevgcwnxqu .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_col_headings {
+#zevgcwnxqu .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -353,7 +353,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_col_heading {
+#zevgcwnxqu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -373,7 +373,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kbqrovdxlr .gt_column_spanner_outer {
+#zevgcwnxqu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -385,15 +385,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#kbqrovdxlr .gt_column_spanner_outer:first-child {
+#zevgcwnxqu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#kbqrovdxlr .gt_column_spanner_outer:last-child {
+#zevgcwnxqu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#kbqrovdxlr .gt_column_spanner {
+#zevgcwnxqu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -405,11 +405,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#kbqrovdxlr .gt_spanner_row {
+#zevgcwnxqu .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#kbqrovdxlr .gt_group_heading {
+#zevgcwnxqu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -435,7 +435,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#kbqrovdxlr .gt_empty_group_heading {
+#zevgcwnxqu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -450,15 +450,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#kbqrovdxlr .gt_from_md > :first-child {
+#zevgcwnxqu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#kbqrovdxlr .gt_from_md > :last-child {
+#zevgcwnxqu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#kbqrovdxlr .gt_row {
+#zevgcwnxqu .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -477,7 +477,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#kbqrovdxlr .gt_stub {
+#zevgcwnxqu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -490,7 +490,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kbqrovdxlr .gt_stub_row_group {
+#zevgcwnxqu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -504,15 +504,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#kbqrovdxlr .gt_row_group_first td {
+#zevgcwnxqu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#kbqrovdxlr .gt_row_group_first th {
+#zevgcwnxqu .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#kbqrovdxlr .gt_summary_row {
+#zevgcwnxqu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -522,16 +522,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kbqrovdxlr .gt_first_summary_row {
+#zevgcwnxqu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_first_summary_row.thick {
+#zevgcwnxqu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#kbqrovdxlr .gt_last_summary_row {
+#zevgcwnxqu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -541,7 +541,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_grand_summary_row {
+#zevgcwnxqu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -551,7 +551,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kbqrovdxlr .gt_first_grand_summary_row {
+#zevgcwnxqu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -561,7 +561,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_last_grand_summary_row_top {
+#zevgcwnxqu .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -571,11 +571,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_striped {
+#zevgcwnxqu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#kbqrovdxlr .gt_table_body {
+#zevgcwnxqu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -584,7 +584,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_footnotes {
+#zevgcwnxqu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -598,7 +598,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_footnote {
+#zevgcwnxqu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -607,7 +607,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kbqrovdxlr .gt_sourcenotes {
+#zevgcwnxqu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -621,7 +621,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#kbqrovdxlr .gt_sourcenote {
+#zevgcwnxqu .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -629,72 +629,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#kbqrovdxlr .gt_left {
+#zevgcwnxqu .gt_left {
   text-align: left;
 }
 
-#kbqrovdxlr .gt_center {
+#zevgcwnxqu .gt_center {
   text-align: center;
 }
 
-#kbqrovdxlr .gt_right {
+#zevgcwnxqu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#kbqrovdxlr .gt_font_normal {
+#zevgcwnxqu .gt_font_normal {
   font-weight: normal;
 }
 
-#kbqrovdxlr .gt_font_bold {
+#zevgcwnxqu .gt_font_bold {
   font-weight: bold;
 }
 
-#kbqrovdxlr .gt_font_italic {
+#zevgcwnxqu .gt_font_italic {
   font-style: italic;
 }
 
-#kbqrovdxlr .gt_super {
+#zevgcwnxqu .gt_super {
   font-size: 65%;
 }
 
-#kbqrovdxlr .gt_footnote_marks {
+#zevgcwnxqu .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#kbqrovdxlr .gt_asterisk {
+#zevgcwnxqu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#kbqrovdxlr .gt_indent_1 {
+#zevgcwnxqu .gt_indent_1 {
   text-indent: 5px;
 }
 
-#kbqrovdxlr .gt_indent_2 {
+#zevgcwnxqu .gt_indent_2 {
   text-indent: 10px;
 }
 
-#kbqrovdxlr .gt_indent_3 {
+#zevgcwnxqu .gt_indent_3 {
   text-indent: 15px;
 }
 
-#kbqrovdxlr .gt_indent_4 {
+#zevgcwnxqu .gt_indent_4 {
   text-indent: 20px;
 }
 
-#kbqrovdxlr .gt_indent_5 {
+#zevgcwnxqu .gt_indent_5 {
   text-indent: 25px;
 }
 
-#kbqrovdxlr .katex-display {
+#zevgcwnxqu .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#kbqrovdxlr div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#zevgcwnxqu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -762,23 +762,23 @@ window.Quarto = {
 <div class="column" style="width:25%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="hooxsjiqvm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#hooxsjiqvm table {
+<div id="pfbmbqnsxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pfbmbqnsxh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#hooxsjiqvm thead, #hooxsjiqvm tbody, #hooxsjiqvm tfoot, #hooxsjiqvm tr, #hooxsjiqvm td, #hooxsjiqvm th {
+#pfbmbqnsxh thead, #pfbmbqnsxh tbody, #pfbmbqnsxh tfoot, #pfbmbqnsxh tr, #pfbmbqnsxh td, #pfbmbqnsxh th {
   border-style: none;
 }
 
-#hooxsjiqvm p {
+#pfbmbqnsxh p {
   margin: 0;
   padding: 0;
 }
 
-#hooxsjiqvm .gt_table {
+#pfbmbqnsxh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -804,12 +804,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_caption {
+#pfbmbqnsxh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#hooxsjiqvm .gt_title {
+#pfbmbqnsxh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -821,7 +821,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#hooxsjiqvm .gt_subtitle {
+#pfbmbqnsxh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -833,7 +833,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#hooxsjiqvm .gt_heading {
+#pfbmbqnsxh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -845,13 +845,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_bottom_border {
+#pfbmbqnsxh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_col_headings {
+#pfbmbqnsxh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -866,7 +866,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_col_heading {
+#pfbmbqnsxh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -886,7 +886,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#hooxsjiqvm .gt_column_spanner_outer {
+#pfbmbqnsxh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -898,15 +898,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#hooxsjiqvm .gt_column_spanner_outer:first-child {
+#pfbmbqnsxh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#hooxsjiqvm .gt_column_spanner_outer:last-child {
+#pfbmbqnsxh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#hooxsjiqvm .gt_column_spanner {
+#pfbmbqnsxh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -918,11 +918,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#hooxsjiqvm .gt_spanner_row {
+#pfbmbqnsxh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#hooxsjiqvm .gt_group_heading {
+#pfbmbqnsxh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +948,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#hooxsjiqvm .gt_empty_group_heading {
+#pfbmbqnsxh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -963,15 +963,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#hooxsjiqvm .gt_from_md > :first-child {
+#pfbmbqnsxh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#hooxsjiqvm .gt_from_md > :last-child {
+#pfbmbqnsxh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#hooxsjiqvm .gt_row {
+#pfbmbqnsxh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -990,7 +990,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#hooxsjiqvm .gt_stub {
+#pfbmbqnsxh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1003,7 +1003,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hooxsjiqvm .gt_stub_row_group {
+#pfbmbqnsxh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1017,15 +1017,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#hooxsjiqvm .gt_row_group_first td {
+#pfbmbqnsxh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#hooxsjiqvm .gt_row_group_first th {
+#pfbmbqnsxh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#hooxsjiqvm .gt_summary_row {
+#pfbmbqnsxh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1035,16 +1035,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hooxsjiqvm .gt_first_summary_row {
+#pfbmbqnsxh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_first_summary_row.thick {
+#pfbmbqnsxh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#hooxsjiqvm .gt_last_summary_row {
+#pfbmbqnsxh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1054,7 +1054,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_grand_summary_row {
+#pfbmbqnsxh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1064,7 +1064,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hooxsjiqvm .gt_first_grand_summary_row {
+#pfbmbqnsxh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1074,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_last_grand_summary_row_top {
+#pfbmbqnsxh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1084,11 +1084,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_striped {
+#pfbmbqnsxh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#hooxsjiqvm .gt_table_body {
+#pfbmbqnsxh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1097,7 +1097,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_footnotes {
+#pfbmbqnsxh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1111,7 +1111,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_footnote {
+#pfbmbqnsxh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1120,7 +1120,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hooxsjiqvm .gt_sourcenotes {
+#pfbmbqnsxh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1134,7 +1134,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#hooxsjiqvm .gt_sourcenote {
+#pfbmbqnsxh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1142,72 +1142,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#hooxsjiqvm .gt_left {
+#pfbmbqnsxh .gt_left {
   text-align: left;
 }
 
-#hooxsjiqvm .gt_center {
+#pfbmbqnsxh .gt_center {
   text-align: center;
 }
 
-#hooxsjiqvm .gt_right {
+#pfbmbqnsxh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#hooxsjiqvm .gt_font_normal {
+#pfbmbqnsxh .gt_font_normal {
   font-weight: normal;
 }
 
-#hooxsjiqvm .gt_font_bold {
+#pfbmbqnsxh .gt_font_bold {
   font-weight: bold;
 }
 
-#hooxsjiqvm .gt_font_italic {
+#pfbmbqnsxh .gt_font_italic {
   font-style: italic;
 }
 
-#hooxsjiqvm .gt_super {
+#pfbmbqnsxh .gt_super {
   font-size: 65%;
 }
 
-#hooxsjiqvm .gt_footnote_marks {
+#pfbmbqnsxh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#hooxsjiqvm .gt_asterisk {
+#pfbmbqnsxh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#hooxsjiqvm .gt_indent_1 {
+#pfbmbqnsxh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#hooxsjiqvm .gt_indent_2 {
+#pfbmbqnsxh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#hooxsjiqvm .gt_indent_3 {
+#pfbmbqnsxh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#hooxsjiqvm .gt_indent_4 {
+#pfbmbqnsxh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#hooxsjiqvm .gt_indent_5 {
+#pfbmbqnsxh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#hooxsjiqvm .katex-display {
+#pfbmbqnsxh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#hooxsjiqvm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pfbmbqnsxh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1342,8 +1342,8 @@ Coefficients:
 <h2 class="anchored" data-anchor-id="multiple-regression">Multiple Regression</h2>
 <p>In many research and applied fields, many different variables are measured at the same time, for various reasons. In many cases, we may actually have too many variables and may end up selecting a subset of them (only the most important) to proceed with the analysis. (NB: there are many ways to define variable importance, and we will look at some of them in depth throughout the Data Science programme).</p>
 </section>
-<section id="example-1-the-crab-dataset" class="level2">
-<h2 class="anchored" data-anchor-id="example-1-the-crab-dataset">Example 1: The Crab Dataset</h2>
+<section id="example-the-crab-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="example-the-crab-dataset">Example: The Crab Dataset</h2>
 <p>Let’s have a look at an example where we have many predictor variables. The <code>crabs</code> dataset from package <code>MASS</code> has 200 observations on 2 qualitative variables (species colour and sex), and 5 morphological measurements (frontal lobe size, rear width, carapace length and width, and body depth) of crabs of the species <em>Leptograspus variegatus</em>.</p>
 <!-- \includegraphics[width = .4\textwidth]{figures/orange_crab.jpg} \qquad -->
 <!-- \includegraphics[width = .4\textwidth]{figures/blue_crab.jpg} -->
@@ -1555,9 +1555,8 @@ $ Petal.Width  &lt;dbl&gt; 0.2, 0.2, 0.2, 0.2, 0.2, 0.4, 0.3, 0.2, 0.2, 0.1, 0.2
 $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setosa, s…</code></pre>
 </div>
 </div>
-</section>
-<section id="exploratory-analysis-1" class="level2">
-<h2 class="anchored" data-anchor-id="exploratory-analysis-1">Exploratory Analysis</h2>
+<section id="exploratory-analysis-1" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-analysis-1">Exploratory Analysis</h3>
 <p>Let’s work, initially, only with species <em>versicolor</em> and <em>virginica</em>. We create a plot that shows in the <span class="math inline">\(x\)</span> axis the petal length, and in the <span class="math inline">\(y\)</span> axis only the values of 0 and 1, representing whether the observation belongs to class <em>virginica</em> or not (0 = the observation belongs to class <em>versicolor</em>; 1 = it belongs to class <em>virginica</em>). We call this a binary (or dummy) variable.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>iris2 <span class="ot">&lt;-</span> iris <span class="sc">%&gt;%</span></span>
@@ -1576,8 +1575,8 @@ $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setos
 </div>
 </div>
 </section>
-<section id="exploratory-modelling-1" class="level2">
-<h2 class="anchored" data-anchor-id="exploratory-modelling-1">Exploratory Modelling</h2>
+<section id="exploratory-modelling-1" class="level3">
+<h3 class="anchored" data-anchor-id="exploratory-modelling-1">Exploratory Modelling</h3>
 <p>A simple logistic regression model can be fit, such that <span class="math display">\[\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{Petal.Length}\]</span></p>
 <p>Do this in R by executing:</p>
 <div class="cell">
@@ -1605,6 +1604,7 @@ $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setos
 </div>
 </div>
 <p>We may interpret the y-axis numbers here as the probability <span class="math inline">\(p\)</span> of belonging to class <em>virginica</em>. It appears that as the petal length increases, so does the likelihood of belonging to the <em>virginica</em> class.</p>
+</section>
 <section id="including-more-predictors" class="level3">
 <h3 class="anchored" data-anchor-id="including-more-predictors">Including more predictors</h3>
 <p>It is frequently of interest to use multiple covariates to improve our predictive power. Let’s fit a logistic regression model including all four covariates as predictors in our model: <span class="math display">\[\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{Sepal.Length}+\beta_2*\mbox{Sepal.Width}+\beta_3*\mbox{Petal.Length}+\beta_4*\mbox{Petal.Width}\]</span></p>
