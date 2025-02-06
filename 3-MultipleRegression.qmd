@@ -246,7 +246,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 In many research and applied fields, many different variables are measured at the same time, for various reasons. In many cases, we may actually have too many variables and may end up selecting a subset of them (only the most important) to proceed with the analysis. (NB: there are many ways to define variable importance, and we will look at some of them in depth throughout the Data Science programme).
 
-## Example 1: The Crab Dataset
+## Example: The Crab Dataset
 
 Let's have a look at an example where we have many predictor variables. The `crabs` dataset from package `MASS` has 200 observations on 2 qualitative variables (species colour and sex), and 5 morphological measurements (frontal lobe size, rear width, carapace length and width, and body depth) of crabs of the species *Leptograspus variegatus*.
 
@@ -408,7 +408,7 @@ glimpse(iris)
 ```
 
 
-## Exploratory Analysis 
+### Exploratory Analysis 
 
 Let's work, initially, only with species *versicolor* and *virginica*. We create a plot that shows in the $x$ axis the petal length, and in the $y$ axis only the values of 0 and 1, representing whether the observation belongs to class *virginica* or not (0 = the observation belongs to class *versicolor*; 1 = it belongs to class *virginica*). We call this a binary (or dummy) variable.
 
@@ -422,7 +422,7 @@ ggplot(iris2, aes(x = Petal.Length, y = Species.binary)) +
   theme_bw()
 ```
 
-## Exploratory Modelling
+### Exploratory Modelling
 
 A simple logistic regression model can be fit, such that $$\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{Petal.Length}$$
 
