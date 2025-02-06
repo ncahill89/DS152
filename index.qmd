@@ -20,4 +20,4 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 2: [Correlation (and Causation)](https://ncahill89.github.io/DS152/2-Correlation.html)
 
-3: [Multiple Regression](https://ncahill89.github.io/DS152/3-MultipleRegression.html)
+3: [Multiple Regression Models](https://ncahill89.github.io/DS152/3-MultipleRegression.html)
