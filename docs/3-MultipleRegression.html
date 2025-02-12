@@ -158,12 +158,18 @@ window.Quarto = {
   <li><a href="#exploratory-modelling" id="toc-exploratory-modelling" class="nav-link" data-scroll-target="#exploratory-modelling">Exploratory Modelling</a></li>
   <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
   </ul></li>
-  <li><a href="#logistic-regression" id="toc-logistic-regression" class="nav-link" data-scroll-target="#logistic-regression">Logistic Regression</a></li>
+  <li><a href="#recap-logistic-regression" id="toc-recap-logistic-regression" class="nav-link" data-scroll-target="#recap-logistic-regression">Recap: Logistic Regression</a>
+  <ul class="collapse">
+  <li><a href="#modelling-binary-outcomes" id="toc-modelling-binary-outcomes" class="nav-link" data-scroll-target="#modelling-binary-outcomes">Modelling binary outcomes</a></li>
+  </ul></li>
   <li><a href="#example-the-iris-dataset" id="toc-example-the-iris-dataset" class="nav-link" data-scroll-target="#example-the-iris-dataset">Example: The Iris Dataset</a>
   <ul class="collapse">
   <li><a href="#exploratory-analysis-1" id="toc-exploratory-analysis-1" class="nav-link" data-scroll-target="#exploratory-analysis-1">Exploratory Analysis</a></li>
   <li><a href="#exploratory-modelling-1" id="toc-exploratory-modelling-1" class="nav-link" data-scroll-target="#exploratory-modelling-1">Exploratory Modelling</a></li>
-  <li><a href="#including-more-predictors" id="toc-including-more-predictors" class="nav-link" data-scroll-target="#including-more-predictors">Including more predictors</a></li>
+  </ul></li>
+  <li><a href="#multiple-logistic-regression" id="toc-multiple-logistic-regression" class="nav-link" data-scroll-target="#multiple-logistic-regression">Multiple Logistic Regression</a></li>
+  <li><a href="#example-irish-continued---including-more-predictors" id="toc-example-irish-continued---including-more-predictors" class="nav-link" data-scroll-target="#example-irish-continued---including-more-predictors">Example: Irish continued - including more predictors</a>
+  <ul class="collapse">
   <li><a href="#classification" id="toc-classification" class="nav-link" data-scroll-target="#classification">Classification</a></li>
   </ul></li>
   <li><a href="#example-the-wine-dataset" id="toc-example-the-wine-dataset" class="nav-link" data-scroll-target="#example-the-wine-dataset">Example: The Wine Dataset</a></li>
@@ -249,23 +255,23 @@ window.Quarto = {
 <div class="column" style="width:25%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="bsvmjjrmtg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bsvmjjrmtg table {
+<div id="rztjirryxt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#rztjirryxt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bsvmjjrmtg thead, #bsvmjjrmtg tbody, #bsvmjjrmtg tfoot, #bsvmjjrmtg tr, #bsvmjjrmtg td, #bsvmjjrmtg th {
+#rztjirryxt thead, #rztjirryxt tbody, #rztjirryxt tfoot, #rztjirryxt tr, #rztjirryxt td, #rztjirryxt th {
   border-style: none;
 }
 
-#bsvmjjrmtg p {
+#rztjirryxt p {
   margin: 0;
   padding: 0;
 }
 
-#bsvmjjrmtg .gt_table {
+#rztjirryxt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -291,12 +297,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_caption {
+#rztjirryxt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bsvmjjrmtg .gt_title {
+#rztjirryxt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -308,7 +314,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#bsvmjjrmtg .gt_subtitle {
+#rztjirryxt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -320,7 +326,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#bsvmjjrmtg .gt_heading {
+#rztjirryxt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -332,13 +338,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_bottom_border {
+#rztjirryxt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_col_headings {
+#rztjirryxt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -353,7 +359,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_col_heading {
+#rztjirryxt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -373,7 +379,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bsvmjjrmtg .gt_column_spanner_outer {
+#rztjirryxt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -385,15 +391,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#bsvmjjrmtg .gt_column_spanner_outer:first-child {
+#rztjirryxt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bsvmjjrmtg .gt_column_spanner_outer:last-child {
+#rztjirryxt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bsvmjjrmtg .gt_column_spanner {
+#rztjirryxt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -405,11 +411,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#bsvmjjrmtg .gt_spanner_row {
+#rztjirryxt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bsvmjjrmtg .gt_group_heading {
+#rztjirryxt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -435,7 +441,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#bsvmjjrmtg .gt_empty_group_heading {
+#rztjirryxt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -450,15 +456,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#bsvmjjrmtg .gt_from_md > :first-child {
+#rztjirryxt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bsvmjjrmtg .gt_from_md > :last-child {
+#rztjirryxt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bsvmjjrmtg .gt_row {
+#rztjirryxt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -477,7 +483,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#bsvmjjrmtg .gt_stub {
+#rztjirryxt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -490,7 +496,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bsvmjjrmtg .gt_stub_row_group {
+#rztjirryxt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -504,15 +510,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#bsvmjjrmtg .gt_row_group_first td {
+#rztjirryxt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bsvmjjrmtg .gt_row_group_first th {
+#rztjirryxt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bsvmjjrmtg .gt_summary_row {
+#rztjirryxt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -522,16 +528,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bsvmjjrmtg .gt_first_summary_row {
+#rztjirryxt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_first_summary_row.thick {
+#rztjirryxt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bsvmjjrmtg .gt_last_summary_row {
+#rztjirryxt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -541,7 +547,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_grand_summary_row {
+#rztjirryxt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -551,7 +557,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bsvmjjrmtg .gt_first_grand_summary_row {
+#rztjirryxt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -561,7 +567,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_last_grand_summary_row_top {
+#rztjirryxt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -571,11 +577,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_striped {
+#rztjirryxt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bsvmjjrmtg .gt_table_body {
+#rztjirryxt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -584,7 +590,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_footnotes {
+#rztjirryxt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -598,7 +604,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_footnote {
+#rztjirryxt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -607,7 +613,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bsvmjjrmtg .gt_sourcenotes {
+#rztjirryxt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -621,7 +627,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#bsvmjjrmtg .gt_sourcenote {
+#rztjirryxt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -629,72 +635,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#bsvmjjrmtg .gt_left {
+#rztjirryxt .gt_left {
   text-align: left;
 }
 
-#bsvmjjrmtg .gt_center {
+#rztjirryxt .gt_center {
   text-align: center;
 }
 
-#bsvmjjrmtg .gt_right {
+#rztjirryxt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bsvmjjrmtg .gt_font_normal {
+#rztjirryxt .gt_font_normal {
   font-weight: normal;
 }
 
-#bsvmjjrmtg .gt_font_bold {
+#rztjirryxt .gt_font_bold {
   font-weight: bold;
 }
 
-#bsvmjjrmtg .gt_font_italic {
+#rztjirryxt .gt_font_italic {
   font-style: italic;
 }
 
-#bsvmjjrmtg .gt_super {
+#rztjirryxt .gt_super {
   font-size: 65%;
 }
 
-#bsvmjjrmtg .gt_footnote_marks {
+#rztjirryxt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bsvmjjrmtg .gt_asterisk {
+#rztjirryxt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bsvmjjrmtg .gt_indent_1 {
+#rztjirryxt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bsvmjjrmtg .gt_indent_2 {
+#rztjirryxt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bsvmjjrmtg .gt_indent_3 {
+#rztjirryxt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bsvmjjrmtg .gt_indent_4 {
+#rztjirryxt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bsvmjjrmtg .gt_indent_5 {
+#rztjirryxt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bsvmjjrmtg .katex-display {
+#rztjirryxt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bsvmjjrmtg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#rztjirryxt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -762,23 +768,23 @@ window.Quarto = {
 <div class="column" style="width:25%;">
 <div class="cell">
 <div class="cell-output-display">
-<div id="ywpziwqhyv" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ywpziwqhyv table {
+<div id="vdvzmwsxge" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vdvzmwsxge table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ywpziwqhyv thead, #ywpziwqhyv tbody, #ywpziwqhyv tfoot, #ywpziwqhyv tr, #ywpziwqhyv td, #ywpziwqhyv th {
+#vdvzmwsxge thead, #vdvzmwsxge tbody, #vdvzmwsxge tfoot, #vdvzmwsxge tr, #vdvzmwsxge td, #vdvzmwsxge th {
   border-style: none;
 }
 
-#ywpziwqhyv p {
+#vdvzmwsxge p {
   margin: 0;
   padding: 0;
 }
 
-#ywpziwqhyv .gt_table {
+#vdvzmwsxge .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -804,12 +810,12 @@ window.Quarto = {
   border-left-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_caption {
+#vdvzmwsxge .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ywpziwqhyv .gt_title {
+#vdvzmwsxge .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -821,7 +827,7 @@ window.Quarto = {
   border-bottom-width: 0;
 }
 
-#ywpziwqhyv .gt_subtitle {
+#vdvzmwsxge .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -833,7 +839,7 @@ window.Quarto = {
   border-top-width: 0;
 }
 
-#ywpziwqhyv .gt_heading {
+#vdvzmwsxge .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -845,13 +851,13 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_bottom_border {
+#vdvzmwsxge .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_col_headings {
+#vdvzmwsxge .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -866,7 +872,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_col_heading {
+#vdvzmwsxge .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -886,7 +892,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ywpziwqhyv .gt_column_spanner_outer {
+#vdvzmwsxge .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -898,15 +904,15 @@ window.Quarto = {
   padding-right: 4px;
 }
 
-#ywpziwqhyv .gt_column_spanner_outer:first-child {
+#vdvzmwsxge .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ywpziwqhyv .gt_column_spanner_outer:last-child {
+#vdvzmwsxge .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ywpziwqhyv .gt_column_spanner {
+#vdvzmwsxge .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -918,11 +924,11 @@ window.Quarto = {
   width: 100%;
 }
 
-#ywpziwqhyv .gt_spanner_row {
+#vdvzmwsxge .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ywpziwqhyv .gt_group_heading {
+#vdvzmwsxge .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -948,7 +954,7 @@ window.Quarto = {
   text-align: left;
 }
 
-#ywpziwqhyv .gt_empty_group_heading {
+#vdvzmwsxge .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -963,15 +969,15 @@ window.Quarto = {
   vertical-align: middle;
 }
 
-#ywpziwqhyv .gt_from_md > :first-child {
+#vdvzmwsxge .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ywpziwqhyv .gt_from_md > :last-child {
+#vdvzmwsxge .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ywpziwqhyv .gt_row {
+#vdvzmwsxge .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -990,7 +996,7 @@ window.Quarto = {
   overflow-x: hidden;
 }
 
-#ywpziwqhyv .gt_stub {
+#vdvzmwsxge .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1003,7 +1009,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ywpziwqhyv .gt_stub_row_group {
+#vdvzmwsxge .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1017,15 +1023,15 @@ window.Quarto = {
   vertical-align: top;
 }
 
-#ywpziwqhyv .gt_row_group_first td {
+#vdvzmwsxge .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ywpziwqhyv .gt_row_group_first th {
+#vdvzmwsxge .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ywpziwqhyv .gt_summary_row {
+#vdvzmwsxge .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1035,16 +1041,16 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ywpziwqhyv .gt_first_summary_row {
+#vdvzmwsxge .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_first_summary_row.thick {
+#vdvzmwsxge .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ywpziwqhyv .gt_last_summary_row {
+#vdvzmwsxge .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1054,7 +1060,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_grand_summary_row {
+#vdvzmwsxge .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1064,7 +1070,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ywpziwqhyv .gt_first_grand_summary_row {
+#vdvzmwsxge .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1074,7 +1080,7 @@ window.Quarto = {
   border-top-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_last_grand_summary_row_top {
+#vdvzmwsxge .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1084,11 +1090,11 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_striped {
+#vdvzmwsxge .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ywpziwqhyv .gt_table_body {
+#vdvzmwsxge .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1097,7 +1103,7 @@ window.Quarto = {
   border-bottom-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_footnotes {
+#vdvzmwsxge .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1111,7 +1117,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_footnote {
+#vdvzmwsxge .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1120,7 +1126,7 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ywpziwqhyv .gt_sourcenotes {
+#vdvzmwsxge .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1134,7 +1140,7 @@ window.Quarto = {
   border-right-color: #D3D3D3;
 }
 
-#ywpziwqhyv .gt_sourcenote {
+#vdvzmwsxge .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1142,72 +1148,72 @@ window.Quarto = {
   padding-right: 5px;
 }
 
-#ywpziwqhyv .gt_left {
+#vdvzmwsxge .gt_left {
   text-align: left;
 }
 
-#ywpziwqhyv .gt_center {
+#vdvzmwsxge .gt_center {
   text-align: center;
 }
 
-#ywpziwqhyv .gt_right {
+#vdvzmwsxge .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ywpziwqhyv .gt_font_normal {
+#vdvzmwsxge .gt_font_normal {
   font-weight: normal;
 }
 
-#ywpziwqhyv .gt_font_bold {
+#vdvzmwsxge .gt_font_bold {
   font-weight: bold;
 }
 
-#ywpziwqhyv .gt_font_italic {
+#vdvzmwsxge .gt_font_italic {
   font-style: italic;
 }
 
-#ywpziwqhyv .gt_super {
+#vdvzmwsxge .gt_super {
   font-size: 65%;
 }
 
-#ywpziwqhyv .gt_footnote_marks {
+#vdvzmwsxge .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ywpziwqhyv .gt_asterisk {
+#vdvzmwsxge .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ywpziwqhyv .gt_indent_1 {
+#vdvzmwsxge .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ywpziwqhyv .gt_indent_2 {
+#vdvzmwsxge .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ywpziwqhyv .gt_indent_3 {
+#vdvzmwsxge .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ywpziwqhyv .gt_indent_4 {
+#vdvzmwsxge .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ywpziwqhyv .gt_indent_5 {
+#vdvzmwsxge .gt_indent_5 {
   text-indent: 25px;
 }
 
-#ywpziwqhyv .katex-display {
+#vdvzmwsxge .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#ywpziwqhyv div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#vdvzmwsxge div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1340,7 +1346,7 @@ Coefficients:
 </section>
 <section id="multiple-regression" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-regression">Multiple Regression</h2>
-<p>In many research and applied fields, many different variables are measured at the same time, for various reasons. In many cases, we may actually have too many variables and may end up selecting a subset of them (only the most important) to proceed with the analysis. (NB: there are many ways to define variable importance, and we will look at some of them in depth throughout the Data Science programme).</p>
+<p>Multiple linear regression is used to model the relationship between a continuous outcome variable and two or more predictor variables. It extends simple linear regression by incorporating multiple predictors to explain variations in the outcome variable. The model estimates coefficients for each predictor, allowing researchers to assess their individual contributions while controlling for others, making it useful for predicting outcomes and identifying key influencing factors.</p>
 </section>
 <section id="example-the-crab-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="example-the-crab-dataset">Example: The Crab Dataset</h2>
@@ -1550,9 +1556,54 @@ Coefficients:
 <p>Typically we would split the data into <em>training</em> and <em>test</em> set, use only the training set to fit the model, and then perform this computation on both sets. We will see more details on how to compare the models in terms of their predictive power in the module Statistical Machine Learning. We will also see more details on this in the modules Linear Models I and II, how to properly test hypotheses, how to assess goodness-of-fit, what the important assumptions are and how to properly check them.</p>
 </section>
 </section>
-<section id="logistic-regression" class="level2">
-<h2 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h2>
-<p>Logistic regression is a generalized regression model where the outcome is a two-level categorical variable. The outcome, takes the value 1 or 0 with probability. Ultimately, it is the probability of the outcome taking the value 1 (i.e., being a “success”) that we model in relation to the predictor variables. For this to work, we transform the expected outcome in such a way that it will be bounded between 0 and 1, and hence our estimates will be sensical. The transformation we use is called the <em>logit</em>, and is the natural logarithm of the odds of success: <span class="math display">\[\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{x},\]</span> where <span class="math inline">\(p\)</span> is the probability of success.</p>
+<section id="recap-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="recap-logistic-regression">Recap: Logistic Regression</h2>
+<p>Logistic regression is a generalized regression model where the outcome is a two-level categorical variable. The outcome, takes the value 1 or 0 with probability. Ultimately, it is the probability of the outcome taking the value 1 (i.e., being a “success”) that we model in relation to the predictor variables. For this to work, we transform the expected outcome in such a way that it will be bounded between 0 and 1, and hence our estimates will be sensical. The transformation we use is called the <em>logit</em>, and is the natural logarithm of the odds of success.</p>
+<section id="modelling-binary-outcomes" class="level3">
+<h3 class="anchored" data-anchor-id="modelling-binary-outcomes">Modelling binary outcomes</h3>
+<ul>
+<li><p><span class="math inline">\(y\)</span> takes on values 0 (failure) or 1 (success)</p></li>
+<li><p><span class="math inline">\(p\)</span>: probability of success</p></li>
+<li><p><span class="math inline">\(1-p\)</span>: probability of failure</p></li>
+<li><p>We can’t model <span class="math inline">\(y\)</span> directly, so instead we model <span class="math inline">\(p\)</span></p></li>
+</ul>
+<p><strong>Linear model</strong></p>
+<p><span class="math display">\[
+\hat{p}_i = \beta_o + \beta_1 \times x
+\]</span></p>
+<ul>
+<li><p>But remember that <span class="math inline">\(p\)</span> must be between 0 and 1</p></li>
+<li><p>We need a <strong>link function</strong> that transforms the linear model to have an appropriate range</p></li>
+</ul>
+<p><strong>Logit link function</strong></p>
+<p>The <strong>logit</strong> function takes values between 0 and 1 (probabilities) and maps them to values in the range negative infinity to positive infinity:</p>
+<p><span class="math display">\[
+logit(p) = log \bigg( \frac{p}{1 - p} \bigg)
+\]</span></p>
+<p><strong>Generalized linear model</strong></p>
+<ul>
+<li>We model the logit (log-odds) of <span class="math inline">\(p\)</span> :</li>
+</ul>
+<p><span class="math display">\[
+logit(\hat{p}) = log \bigg( \frac{\hat{p}}{1 - \hat{p}} \bigg) = \beta_o + \beta_1 \times x
+\]</span></p>
+<ul>
+<li>Then take the inverse to obtain the predicted <span class="math inline">\(p\)</span>:</li>
+</ul>
+<p><span class="math display">\[
+\hat{p} = \frac{e^{\beta_o + \beta_1 \times x }}{1 + e^{\beta_o + \beta_1 \times x }}
+\]</span></p>
+<p><strong>A logistic model visualized</strong></p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="3-MultipleRegression_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="example-the-iris-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="example-the-iris-dataset">Example: The Iris Dataset</h2>
@@ -1594,7 +1645,7 @@ $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setos
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="3-MultipleRegression_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="3-MultipleRegression_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -1623,15 +1674,20 @@ $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setos
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="3-MultipleRegression_files/figure-html/unnamed-chunk-23-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="3-MultipleRegression_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>We may interpret the y-axis numbers here as the probability <span class="math inline">\(p\)</span> of belonging to class <em>virginica</em>. It appears that as the petal length increases, so does the likelihood of belonging to the <em>virginica</em> class.</p>
 </section>
-<section id="including-more-predictors" class="level3">
-<h3 class="anchored" data-anchor-id="including-more-predictors">Including more predictors</h3>
+</section>
+<section id="multiple-logistic-regression" class="level2">
+<h2 class="anchored" data-anchor-id="multiple-logistic-regression">Multiple Logistic Regression</h2>
+<p>Multiple logistic regression is used to model the relationship between a binary outcome variable and two or more predictor variables. It extends simple logistic regression by including multiple independent variables, which can be continuous or categorical, to assess their combined effect on the probability of an event occurring. The model estimates odds ratios for each predictor while controlling for the effects of others, making it useful for understanding complex associations.</p>
+</section>
+<section id="example-irish-continued---including-more-predictors" class="level2">
+<h2 class="anchored" data-anchor-id="example-irish-continued---including-more-predictors">Example: Irish continued - including more predictors</h2>
 <p>It is frequently of interest to use multiple covariates to improve our predictive power. Let’s fit a logistic regression model including all four covariates as predictors in our model: <span class="math display">\[\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{Sepal.Length}+\beta_2*\mbox{Sepal.Width}+\beta_3*\mbox{Petal.Length}+\beta_4*\mbox{Petal.Width}\]</span></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>iris_mod2 <span class="ot">&lt;-</span> <span class="fu">glm</span>(Species.binary <span class="sc">~</span> Sepal.Length <span class="sc">+</span> Sepal.Width <span class="sc">+</span> Petal.Length <span class="sc">+</span> Petal.Width,</span>
@@ -1643,7 +1699,6 @@ $ Species      &lt;fct&gt; setosa, setosa, setosa, setosa, setosa, setosa, setos
     -42.6378      -2.4652      -6.6809       9.4294      18.2861 </code></pre>
 </div>
 </div>
-</section>
 <section id="classification" class="level3">
 <h3 class="anchored" data-anchor-id="classification">Classification</h3>
 <div class="question">

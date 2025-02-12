@@ -244,7 +244,7 @@ ggplot(mtcars, aes(x = wt, y = mpg)) +
 
 ## Multiple Regression
 
-In many research and applied fields, many different variables are measured at the same time, for various reasons. In many cases, we may actually have too many variables and may end up selecting a subset of them (only the most important) to proceed with the analysis. (NB: there are many ways to define variable importance, and we will look at some of them in depth throughout the Data Science programme).
+Multiple linear regression is used to model the relationship between a continuous outcome variable and two or more predictor variables. It extends simple linear regression by incorporating multiple predictors to explain variations in the outcome variable. The model estimates coefficients for each predictor, allowing researchers to assess their individual contributions while controlling for others, making it useful for predicting outcomes and identifying key influencing factors.
 
 ## Example: The Crab Dataset
 
@@ -393,9 +393,85 @@ discrepancy_mod3
 
 Typically we would split the data into *training* and *test* set, use only the training set to fit the model, and then perform this computation on both sets. We will see more details on how to compare the models in terms of their predictive power in the module Statistical Machine Learning. We will also see more details on this in the modules Linear Models I and II, how to properly test hypotheses, how to assess goodness-of-fit, what the important assumptions are and how to properly check them.
 
-## Logistic Regression
+## Recap: Logistic Regression
 
-Logistic regression is a generalized regression model where the outcome is a two-level categorical variable. The outcome, takes the value 1 or 0 with probability. Ultimately, it is the probability of the outcome taking the value 1 (i.e., being a “success”) that we model in relation to the predictor variables. For this to work, we transform the expected outcome in such a way that it will be bounded between 0 and 1, and hence our estimates will be sensical. The transformation we use is called the *logit*, and is the natural logarithm of the odds of success: $$\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{x},$$ where $p$ is the probability of success.
+Logistic regression is a generalized regression model where the outcome is a two-level categorical variable. The outcome, takes the value 1 or 0 with probability. Ultimately, it is the probability of the outcome taking the value 1 (i.e., being a “success”) that we model in relation to the predictor variables. For this to work, we transform the expected outcome in such a way that it will be bounded between 0 and 1, and hence our estimates will be sensical. The transformation we use is called the *logit*, and is the natural logarithm of the odds of success.
+
+
+
+### Modelling binary outcomes
+
+  - $y$ takes on values 0 (failure) or 1 (success)
+
+  - $p$: probability of success
+
+  - $1-p$: probability of failure
+
+  - We can't model $y$ directly, so instead we model $p$
+
+**Linear model**
+
+$$
+\hat{p}_i = \beta_o + \beta_1 \times x 
+$$
+
+-   But remember that $p$ must be between 0 and 1
+
+-   We need a **link function** that transforms the linear model to have an appropriate range
+
+**Logit link function**
+
+The **logit** function takes values between 0 and 1 (probabilities) and maps them to values in the range negative infinity to positive infinity:
+
+$$
+logit(p) = log \bigg( \frac{p}{1 - p} \bigg)
+$$
+
+```{r}
+#| include: false
+
+library(tidyverse)
+
+tibble(
+  x = seq(0.001, 0.999, 0.001),
+  y = log(x / (1-x))
+) |>
+  ggplot(aes(x = x, y = y)) +
+  geom_smooth() +
+  scale_x_continuous(limits = c(0,1), breaks = c(0, 0.25, 0.5, 0.75, 1)) +
+  labs(x = "p", y = "logit(p)", title = "logit(p) vs. p")
+```
+
+
+**Generalized linear model**
+
+-   We model the logit (log-odds) of $p$ :
+
+$$
+logit(\hat{p}) = log \bigg( \frac{\hat{p}}{1 - \hat{p}} \bigg) = \beta_o + \beta_1 \times x
+$$
+
+-   Then take the inverse to obtain the predicted $p$:
+
+$$
+\hat{p} = \frac{e^{\beta_o + \beta_1 \times x }}{1 + e^{\beta_o + \beta_1 \times x }}
+$$
+
+**A logistic model visualized**
+
+```{r}
+#| echo: false
+
+sigmoid = function(x) 1 / (1 + exp(-x + 10))
+plot.function(sigmoid, from = 0, to = 20, n = 101, 
+              ylab="P(Y = 1)", 
+              xlab = "X (predictor)", 
+              main = "Predicted probability Y = 1", 
+              lwd = 3)
+```
+
+
+
 
 ## Example: The Iris Dataset
 
@@ -459,7 +535,12 @@ ggplot(iris2, aes(x = Petal.Length, y = Species.binary)) +
 
 We may interpret the y-axis numbers here as the probability $p$ of belonging to class *virginica*. It appears that as the petal length increases, so does the likelihood of belonging to the *virginica* class. 
 
-### Including more predictors
+
+## Multiple Logistic Regression
+
+Multiple logistic regression is used to model the relationship between a binary outcome variable and two or more predictor variables. It extends simple logistic regression by including multiple independent variables, which can be continuous or categorical, to assess their combined effect on the probability of an event occurring. The model estimates odds ratios for each predictor while controlling for the effects of others, making it useful for understanding complex associations.
+
+## Example: Irish continued - including more predictors
 
 It is frequently of interest to use multiple covariates to improve our predictive power. Let's fit a logistic regression model including all four covariates as predictors in our model: $$\displaystyle\log\left(\frac{p}{1-p}\right)=\beta_0+\beta_1*\mbox{Sepal.Length}+\beta_2*\mbox{Sepal.Width}+\beta_3*\mbox{Petal.Length}+\beta_4*\mbox{Petal.Width}$$
 
