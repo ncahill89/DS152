@@ -312,7 +312,7 @@
     "href": "2-Correlation.html#example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage",
     "title": "Correlation (and Causation)",
     "section": "Example Data (2): What is the relationship between cars’ weights and their mileage?",
-    "text": "Example Data (2): What is the relationship between cars’ weights and their mileage?\nThe data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models)."
+    "text": "Example Data (2): What is the relationship between cars’ weights and their mileage?\nThe data mtcars was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models)."
   },
   {
     "objectID": "0-Information.html#assessment-and-materials",
@@ -529,6 +529,153 @@
     "href": "3-MultipleRegression.html#example-the-crab-dataset",
     "title": "Multiple Regression",
     "section": "Example: The Crab Dataset",
-    "text": "Example: The Crab Dataset\nLet’s have a look at an example where we have many predictor variables. The crabs dataset from package MASS has 200 observations on 2 qualitative variables (species colour and sex), and 5 morphological measurements (frontal lobe size, rear width, carapace length and width, and body depth) of crabs of the species Leptograspus variegatus.\n\n\n\nExploratory Analysis\n\ncrab_dat &lt;- MASS::crabs\nglimpse(crab_dat)\n\nRows: 200\nColumns: 8\n$ sp    &lt;fct&gt; B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B…\n$ sex   &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M…\n$ index &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1…\n$ FL    &lt;dbl&gt; 8.1, 8.8, 9.2, 9.6, 9.8, 10.8, 11.1, 11.6, 11.8, 11.8, 12.2, 12.…\n$ RW    &lt;dbl&gt; 6.7, 7.7, 7.8, 7.9, 8.0, 9.0, 9.9, 9.1, 9.6, 10.5, 10.8, 11.0, 1…\n$ CL    &lt;dbl&gt; 16.1, 18.1, 19.0, 20.1, 20.3, 23.0, 23.8, 24.5, 24.2, 25.2, 27.3…\n$ CW    &lt;dbl&gt; 19.0, 20.8, 22.4, 23.1, 23.0, 26.5, 27.1, 28.4, 27.8, 29.3, 31.6…\n$ BD    &lt;dbl&gt; 7.0, 7.4, 7.7, 8.2, 8.2, 9.8, 9.8, 10.4, 9.7, 10.3, 10.9, 11.4, …\n\nlibrary(GGally)\nlibrary(ggplot2)\nggpairs(crab_dat, columns = 4:8, aes(colour=sex)) +\n  theme_bw()\n\n\n\n\n\n\n\n\n\nDescribe: What are the relationships between the variables?\n\n\n\nExploratory Modelling\nImagine we are interested in predicting the carapace length (CL) of this species of crab. We can create a linear regression model that includes multiple predictors, such as \\[\\hat{\\mbox{CL}}=\\beta_0+\\beta_1\\mbox{FL}+\\beta_2\\mbox{RW}+\\beta_3\\mbox{CW}+\\beta_4\\mbox{BD}\\]\nThis model can be fit in R by executing:\n\ncrab_mod1 &lt;- lm(CL ~ FL + RW + CW + BD, data = crab_dat)\ncrab_mod1\n\n\nCall:\nlm(formula = CL ~ FL + RW + CW + BD, data = crab_dat)\n\nCoefficients:\n(Intercept)           FL           RW           CW           BD  \n     0.3163       0.2649      -0.1779       0.6402       0.4714  \n\n\nWe have that \\[\\hat{\\mbox{CL}}=0.32+0.26\\mbox{FL}-0.18\\mbox{RW}+0.64\\mbox{CW}+0.47\\mbox{BD}\\].\nInterpretation:\n\nAs FL increases by one unit, holding the other predictors constant, then carapace length will increase by 0.26.\nAs RW increases by one unit, holding the other predictors constant, then carapace length will decrease by 0.18.\nAs CW increases by one unit, holding the other predictors constant, then carapace length will increase by 0.64.\nAs BD increases by one unit, holding the other predictors constant, then carapace length will increase by 0.47.\n\n\nQuestion: How well does the model do at predicting carapace length?\n\n\ncrab_dat &lt;- crab_dat %&gt;% \n              mutate(CL_pred = predict(crab_mod1))\n\nggplot(data = crab_dat,\n       mapping = aes(x = CL, y = CL_pred, colour = sex)) +\n  theme_bw() +\n  geom_point() +\n  geom_abline(intercept = 0, slope = 1) +\n  xlab(\"Observed CL\") + \n  ylab(\"Predicted CL\")\n\n\n\n\n\n\n\n\n\nQuestion: How well would we have done if we only used one predictor variable, say RW?\n\n\ncrab_mod2 &lt;- lm(CL ~ RW, data = crab_dat)\ncrab_mod2\n\n\nCall:\nlm(formula = CL ~ RW, data = crab_dat)\n\nCoefficients:\n(Intercept)           RW  \n      0.645        2.470  \n\ncrab_dat &lt;- crab_dat %&gt;% \n              mutate(CL_pred2 = predict(crab_mod2))\n\nggplot(data = crab_dat,\n       mapping = aes(x = CL, y = CL_pred2, colour = sex)) +\n  theme_bw() +\n  geom_point() +\n  geom_abline(intercept = 0, slope = 1) +\n  xlab(\"Observed CL\") + \n  ylab(\"Predicted CL\")\n\n\n\n\n\n\n\n\n\nQuestion: What about including the categorical variables, namely sex or sp (species colour)?\n\nWe can include categorical variables in our model, such that\n\\[\\hat{\\mbox{CL}}=\\beta_0+\\beta_1\\mbox{RW}+\\beta_2I(\\mbox{sex}=\\mbox{M})\\] (NB: \\(I(\\mbox{sex}=\\mbox{M})\\) is an indicator function, which is equal to 1 if sex is equal to M and zero otherwise. The same type of interpretation can be drawn from \\(I(\\mbox{sp}=\\mbox{O})\\))\n\ncrab_mod3 &lt;- lm(CL ~ RW + sex, data = crab_dat)\ncrab_mod3\n\n\nCall:\nlm(formula = CL ~ RW + sex, data = crab_dat)\n\nCoefficients:\n(Intercept)           RW         sexM  \n     -6.293        2.792        5.670  \n\ncrab_dat &lt;- crab_dat %&gt;% \n              mutate(CL_pred3 = predict(crab_mod3))\n\nggplot(data = crab_dat,\n       mapping = aes(x = CL, y = CL_pred3, colour = sex)) +\n  theme_bw() +\n  geom_point() +\n  geom_abline(intercept = 0, slope = 1) +\n  xlab(\"Observed CL\") + \n  ylab(\"Predicted CL\")\n\n\n\n\n\n\n\n\n\nQuestion: How do we interpret the coefficients related to sex?\n\nFor a male crab the expected carapace length increases by 5.67 compared to a female crab.\n\n\nModel Comparison\nOne way of comparing how well our modelling strategies did in terms of predictions is to sum the squared discrepancies (residuals) between predicted and observed values, and see which one is smaller.\n\ndiscrepancy_mod1 &lt;- sum(residuals(crab_mod1)^2)\ndiscrepancy_mod2 &lt;- sum(residuals(crab_mod2)^2)\ndiscrepancy_mod3 &lt;- sum(residuals(crab_mod3)^2)\n\n\ndiscrepancy_mod1\n\n[1] 27.35058\n\ndiscrepancy_mod2\n\n[1] 2047.417\n\ndiscrepancy_mod3\n\n[1] 576.4921\n\n\nTypically we would split the data into training and test set, use only the training set to fit the model, and then perform this computation on both sets. We will see more details on how to compare the models in terms of their predictive power in the module Statistical Machine Learning. We will also see more details on this in the modules Linear Models I and II, how to properly test hypotheses, how to assess goodness-of-fit, what the important assumptions are and how to properly check them."
+    "text": "Example: The Crab Dataset\nLet’s have a look at an example where we have many predictor variables. The crabs dataset from package MASS has 200 observations on 2 qualitative variables (species colour and sex), and 5 morphological measurements (frontal lobe size, rear width, carapace length and width, and body depth) of crabs of the species Leptograspus variegatus.\n\n\n\nExploratory Analysis\n\ncrab_dat &lt;- MASS::crabs\nglimpse(crab_dat)\n\nRows: 200\nColumns: 8\n$ sp    &lt;fct&gt; B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B, B…\n$ sex   &lt;fct&gt; M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M, M…\n$ index &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1…\n$ FL    &lt;dbl&gt; 8.1, 8.8, 9.2, 9.6, 9.8, 10.8, 11.1, 11.6, 11.8, 11.8, 12.2, 12.…\n$ RW    &lt;dbl&gt; 6.7, 7.7, 7.8, 7.9, 8.0, 9.0, 9.9, 9.1, 9.6, 10.5, 10.8, 11.0, 1…\n$ CL    &lt;dbl&gt; 16.1, 18.1, 19.0, 20.1, 20.3, 23.0, 23.8, 24.5, 24.2, 25.2, 27.3…\n$ CW    &lt;dbl&gt; 19.0, 20.8, 22.4, 23.1, 23.0, 26.5, 27.1, 28.4, 27.8, 29.3, 31.6…\n$ BD    &lt;dbl&gt; 7.0, 7.4, 7.7, 8.2, 8.2, 9.8, 9.8, 10.4, 9.7, 10.3, 10.9, 11.4, …\n\nlibrary(GGally)\nlibrary(ggplot2)\nggpairs(crab_dat, columns = 4:8, aes(colour=sex)) +\n  theme_bw()\n\n\n\n\n\n\n\n\n\nDescribe: What are the relationships between the variables?\n\n\n\nExploratory Modelling\nImagine we are interested in predicting the carapace length (CL) of this species of crab. We can create a linear regression model that includes multiple predictors, such as \\[\\hat{\\mbox{CL}}=\\beta_0+\\beta_1\\mbox{FL}+\\beta_2\\mbox{RW}+\\beta_3\\mbox{CW}+\\beta_4\\mbox{BD}\\]\nThis model can be fit in R by executing:\n\ncrab_mod1 &lt;- lm(CL ~ FL + RW + CW + BD, data = crab_dat)\ncrab_mod1\n\n\nCall:\nlm(formula = CL ~ FL + RW + CW + BD, data = crab_dat)\n\nCoefficients:\n(Intercept)           FL           RW           CW           BD  \n     0.3163       0.2649      -0.1779       0.6402       0.4714  \n\n\nWe have that \\[\\hat{\\mbox{CL}}=0.32+0.26\\mbox{FL}-0.18\\mbox{RW}+0.64\\mbox{CW}+0.47\\mbox{BD}\\].\nInterpretation:\n\nAs FL increases by one unit, holding the other predictors constant, then carapace length will increase by 0.26.\nAs RW increases by one unit, holding the other predictors constant, then carapace length will decrease by 0.18.\nAs CW increases by one unit, holding the other predictors constant, then carapace length will increase by 0.64.\nAs BD increases by one unit, holding the other predictors constant, then carapace length will increase by 0.47.\n\n\nQuestion: How well does the model do at predicting carapace length?\n\n\ncrab_dat &lt;- crab_dat %&gt;% \n              mutate(CL_pred = predict(crab_mod1))\n\nggplot(data = crab_dat,\n       mapping = aes(x = CL, y = CL_pred, colour = sex)) +\n  theme_bw() +\n  geom_point() +\n  geom_abline(intercept = 0, slope = 1) +\n  xlab(\"Observed CL\") + \n  ylab(\"Predicted CL\")\n\n\n\n\n\n\n\n\n\nQuestion: How well would we have done if we only used one predictor variable, say RW?\n\n\ncrab_mod2 &lt;- lm(CL ~ RW, data = crab_dat)\ncrab_mod2\n\n\nCall:\nlm(formula = CL ~ RW, data = crab_dat)\n\nCoefficients:\n(Intercept)           RW  \n      0.645        2.470  \n\ncrab_dat &lt;- crab_dat %&gt;% \n              mutate(CL_pred2 = predict(crab_mod2))\n\n\nggplot(data = crab_dat,\n      aes(x = RW, y = CL)) +\n  theme_bw() +\n  geom_point() +\n  geom_line(aes(x = RW, y = CL_pred2)) \n\n\n\n\n\n\n\nggplot(data = crab_dat,\n       aes(x = CL, y = CL_pred2)) +\n  theme_bw() +\n  geom_point() +\n  geom_abline(intercept = 0, slope = 1) +\n  xlab(\"Observed CL\") + \n  ylab(\"Predicted CL\")\n\n\n\n\n\n\n\n\n\nQuestion: What about including the categorical variables, namely sex or sp (species colour)?\n\nWe can include categorical variables in our model, such that\n\\[\\hat{\\mbox{CL}}=\\beta_0+\\beta_1\\mbox{RW}+\\beta_2I(\\mbox{sex}=\\mbox{M})\\] (NB: \\(I(\\mbox{sex}=\\mbox{M})\\) is an indicator function, which is equal to 1 if sex is equal to M and zero otherwise. The same type of interpretation can be drawn from \\(I(\\mbox{sp}=\\mbox{O})\\))\n\ncrab_mod3 &lt;- lm(CL ~ RW + sex, data = crab_dat)\ncrab_mod3\n\n\nCall:\nlm(formula = CL ~ RW + sex, data = crab_dat)\n\nCoefficients:\n(Intercept)           RW         sexM  \n     -6.293        2.792        5.670  \n\ncrab_dat &lt;- crab_dat %&gt;% \n              mutate(CL_pred3 = predict(crab_mod3))\n\nggplot(data = crab_dat,\n      aes(x = RW, y = CL, colour = sex)) +\n  theme_bw() +\n  geom_point() +\n  geom_line(aes(x = RW, y = CL_pred3, colour = sex)) \n\n\n\n\n\n\n\nggplot(data = crab_dat,\n       aes(x = CL, y = CL_pred3, colour = sex)) +\n  theme_bw() +\n  geom_point() +\n  geom_abline(intercept = 0, slope = 1) +\n  xlab(\"Observed CL\") + \n  ylab(\"Predicted CL\")\n\n\n\n\n\n\n\n\n\nQuestion: How do we interpret the coefficients related to sex?\n\nFor a male crab the expected carapace length increases by 5.67 compared to a female crab.\n\n\nModel Comparison\nOne way of comparing how well our modelling strategies did in terms of predictions is to sum the squared discrepancies (residuals) between predicted and observed values, and see which one is smaller.\n\ndiscrepancy_mod1 &lt;- sum(residuals(crab_mod1)^2)\ndiscrepancy_mod2 &lt;- sum(residuals(crab_mod2)^2)\ndiscrepancy_mod3 &lt;- sum(residuals(crab_mod3)^2)\n\n\ndiscrepancy_mod1\n\n[1] 27.35058\n\ndiscrepancy_mod2\n\n[1] 2047.417\n\ndiscrepancy_mod3\n\n[1] 576.4921\n\n\nTypically we would split the data into training and test set, use only the training set to fit the model, and then perform this computation on both sets. We will see more details on how to compare the models in terms of their predictive power in the module Statistical Machine Learning. We will also see more details on this in the modules Linear Models I and II, how to properly test hypotheses, how to assess goodness-of-fit, what the important assumptions are and how to properly check them."
+  },
+  {
+    "objectID": "ObservationalStudies.html",
+    "href": "ObservationalStudies.html",
+    "title": "Observational Studies",
+    "section": "",
+    "text": "Observational\n\nCollect data in a way that does not directly interfere with how the data arise, i.e. merely “observe”;\nBased on an observational study, we can only establish an association, in other words correlation, between the explanatory and response variables;\nWith an observational study you are just observing the data and collecting it after or as it occurs.\n\nExperimental\n\nRandomly assign subjects to treatments\nEstablish causal connections"
+  },
+  {
+    "objectID": "ObservationalStudies.html#scientific-studies",
+    "href": "ObservationalStudies.html#scientific-studies",
+    "title": "Observational Studies",
+    "section": "",
+    "text": "Observational\n\nCollect data in a way that does not directly interfere with how the data arise, i.e. merely “observe”;\nBased on an observational study, we can only establish an association, in other words correlation, between the explanatory and response variables;\nWith an observational study you are just observing the data and collecting it after or as it occurs.\n\nExperimental\n\nRandomly assign subjects to treatments\nEstablish causal connections"
+  },
+  {
+    "objectID": "ObservationalStudies.html#studies-and-conclusions",
+    "href": "ObservationalStudies.html#studies-and-conclusions",
+    "title": "Observational Studies",
+    "section": "Studies and Conclusions",
+    "text": "Studies and Conclusions"
+  },
+  {
+    "objectID": "ObservationalStudies.html#why-use-observational-studies",
+    "href": "ObservationalStudies.html#why-use-observational-studies",
+    "title": "Observational Studies",
+    "section": "Why use observational studies?",
+    "text": "Why use observational studies?\nReasons why we must sometimes use an observational study instead of an experiment …\n\nIt is unethical or impossible to assign people to receive a specific treatment.\n\nFor example, if you want to know the impact of smoking on cancer you cannot design a study and assign some people to be smokers and other to be non-smokers. That is not ethical.\n\nCertain exposure variables are inherent traits and cannot be randomly assigned."
+  },
+  {
+    "objectID": "ObservationalStudies.html#observational-studies",
+    "href": "ObservationalStudies.html#observational-studies",
+    "title": "Observational Studies",
+    "section": "Observational studies",
+    "text": "Observational studies\n\nObservational studies are very useful when it is not possible to design a study\nObervational studies often have large sample sizes\nThey are cheaper than designing a study (for example, clinical trials in medicine are very expensive)\nYou have to get to know the data a lot better with observational studies. You haven’t set up to study or controlled for influences other than the thing you are studying."
+  },
+  {
+    "objectID": "ObservationalStudies.html#retrospective-vs-prospective-studies",
+    "href": "ObservationalStudies.html#retrospective-vs-prospective-studies",
+    "title": "Observational Studies",
+    "section": "Retrospective Vs Prospective Studies",
+    "text": "Retrospective Vs Prospective Studies\nIf an observational study uses data from the past, it is called retrospective study, whereas if data are collected throughout the study, it is called prospective;"
+  },
+  {
+    "objectID": "ObservationalStudies.html#example-does-working-out-increase-energy-levels",
+    "href": "ObservationalStudies.html#example-does-working-out-increase-energy-levels",
+    "title": "Observational Studies",
+    "section": "Example: Does working out increase energy levels?",
+    "text": "Example: Does working out increase energy levels?\nWe want to evaluate if regularly working out has any impact on energy levels.\n\nIn an observational study, we sample two types of people from the population, those who choose to work out regularly and those who don’t.\nWe ask the people in each group to rate their enery levels from 1-10.\nThen, we find the average “energy level” for the two groups of people and compare."
+  },
+  {
+    "objectID": "ObservationalStudies.html#example-does-working-out-increase-energy-levels-1",
+    "href": "ObservationalStudies.html#example-does-working-out-increase-energy-levels-1",
+    "title": "Observational Studies",
+    "section": "Example: Does working out increase energy levels?",
+    "text": "Example: Does working out increase energy levels?\n\nCan we conclude from this that working out is the cause of increased energy levels?"
+  },
+  {
+    "objectID": "ObservationalStudies.html#example-does-working-out-increase-energy-levels-2",
+    "href": "ObservationalStudies.html#example-does-working-out-increase-energy-levels-2",
+    "title": "Observational Studies",
+    "section": "Example: Does working out increase energy levels?",
+    "text": "Example: Does working out increase energy levels?\n\nThere may be other variables that we didn’t control for in this study that contribute to the observed difference.\nFor example, people who have young children might have less time to work out and also have lower energy levels.\nThis is known as confounding.\nThis study allows us to make correlation statements. But, we cannot make a causal statement attributing increased energy levels to working out!"
+  },
+  {
+    "objectID": "ObservationalStudies.html#confounding-variables",
+    "href": "ObservationalStudies.html#confounding-variables",
+    "title": "Observational Studies",
+    "section": "Confounding variables",
+    "text": "Confounding variables\nConfounding variables: Extraneous variables that affect both the exposure (e.g., working out) and the outcome variables (e.g., increased energy), and that make it seem like there is a relationship between them are called confounding variables."
+  },
+  {
+    "objectID": "ObservationalStudies.html#example",
+    "href": "ObservationalStudies.html#example",
+    "title": "Observational Studies",
+    "section": "Example",
+    "text": "Example\nMany years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3)."
+  },
+  {
+    "objectID": "ObservationalStudies.html#example-1",
+    "href": "ObservationalStudies.html#example-1",
+    "title": "Observational Studies",
+    "section": "Example",
+    "text": "Example\nIf we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.\n\nOnce the confounding variable, smoking is taken into account the correlation between coffee and pancreatic cancer disappears."
+  },
+  {
+    "objectID": "ObservationalStudies.html#reducing-confounding-matching",
+    "href": "ObservationalStudies.html#reducing-confounding-matching",
+    "title": "Observational Studies",
+    "section": "Reducing confounding: Matching",
+    "text": "Reducing confounding: Matching\nMatching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.\n\nRather than using random assignment to equalize the experimental groups, the experimenters do it by matching observable characteristics.\nFor every participant in the exposed group, the researchers find a participant with comparable traits to include in the control group.\nMatching subjects facilitates valid comparisons between those groups.\nThe researchers use subject-area knowledge to identify characteristics that are critical to match."
+  },
+  {
+    "objectID": "ObservationalStudies.html#reducing-confounding-multiple-regression",
+    "href": "ObservationalStudies.html#reducing-confounding-multiple-regression",
+    "title": "Observational Studies",
+    "section": "Reducing confounding: Multiple Regression",
+    "text": "Reducing confounding: Multiple Regression\nMultiple regression models specify the way in which different characteristics/variables (exposure and confounders) affects the outcome, thereby isolating the effect of each variable.\nchance of cancer = a x (coffee) + b x (smoking) + c x (gender) + d x (age)\n\nthis allows us to make a statement about what would happen if one variable (i.e., the exposure) were to change while all the others (i.e., the confounders) remained the same.\nObtaining isolated exposure effects conditional on the other variables remaining constant is said to adjust for (or control for) the effect of these confounders"
+  },
+  {
+    "objectID": "ObservationalStudies.html#conditional-probability",
+    "href": "ObservationalStudies.html#conditional-probability",
+    "title": "Observational Studies",
+    "section": "Conditional Probability",
+    "text": "Conditional Probability\nYou and your friend are trying to find the perfect restaurant for dinner. You can’t decide so you want to instead rely on some observational data (i.e., restaurant reviews).\nYou find two worthy restaurants, Carla’s and Sophia’s each with 400 reviews and an indicator of whether the restaurant is recommended or not recommended.\nYou find that\n\nrecommended for Sophia’s = 250/400\nrecommended for Carla’s = 216/400\n\nSo what we have is a conditional probability:\np(recommended|Sophia’s) = 62.5%\np(recommended|Carla’s) = 54%"
+  },
+  {
+    "objectID": "ObservationalStudies.html#conditional-probability-1",
+    "href": "ObservationalStudies.html#conditional-probability-1",
+    "title": "Observational Studies",
+    "section": "Conditional Probability",
+    "text": "Conditional Probability\nWhat if we consider age as a factor here?\n\nrecommended for 18-35 yr old diners at Sophia’s = 50/150\nrecommended for 35+ diners at Sophia’s = 200/250\nrecommended for 18-35 yr old diners at Carla’s = 180/360\nrecommended for 35+ diners at Carla’s = 36/40\n\nSo what we have is:\np(recommended|Sophia’s, younger) = 30%\np(recommended|Sophia’s, older) = 80%\np(recommended|Carla’s, younger) = 50%\np(recommended|Carla’s, older) = 90%"
+  },
+  {
+    "objectID": "ObservationalStudies.html#whats-going-on",
+    "href": "ObservationalStudies.html#whats-going-on",
+    "title": "Observational Studies",
+    "section": "What’s going on?",
+    "text": "What’s going on?\nYou have unknowingly entered the world of Simpson’s Paradox, where a restaurant can be both better and worse than its competitor, exercise can lower and increase the risk of disease, and the same dataset can be used to prove two opposing arguments. Instead of going out to dinner, perhaps you and your friend should spend the evening discussing this fascinating statistical phenomenon.\nSimpson’s Paradox occurs when trends that appear when a dataset is separated into groups reverse when the data are aggregated."
+  },
+  {
+    "objectID": "ObservationalStudies.html#simpsons-paradox-correlation-reversal",
+    "href": "ObservationalStudies.html#simpsons-paradox-correlation-reversal",
+    "title": "Observational Studies",
+    "section": "Simpsons’ Paradox: Correlation Reversal",
+    "text": "Simpsons’ Paradox: Correlation Reversal\nSay we have data on the number of hours of exercise per week versus the risk of developing a disease for two sets of patients, those below the age of 50 and those over the age of 50. Here are individual plots showing the relationship between exercise and risk of disease."
+  },
+  {
+    "objectID": "ObservationalStudies.html#example-continued",
+    "href": "ObservationalStudies.html#example-continued",
+    "title": "Observational Studies",
+    "section": "Example Continued",
+    "text": "Example Continued\nWe clearly saw a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let’s combine the data together on a single plot:"
+  },
+  {
+    "objectID": "ObservationalStudies.html#resolving-the-paradox",
+    "href": "ObservationalStudies.html#resolving-the-paradox",
+    "title": "Observational Studies",
+    "section": "Resolving the Paradox",
+    "text": "Resolving the Paradox\nTo avoid Simpson’s Paradox leading us to two opposite conclusions, we need to choose to segregate the data in groups or aggregate it together. That seems simple enough, but how do we decide which to do?\nThe answer is to think causally: how was the data generated and based on this, what factors influence the results that we are not shown?\nIn the exercise vs disease example, we intuitively know that exercise is not the only factor affecting the risk of developing a disease. In the data, there are two different causes of disease yet by aggregating the data and looking at only risk vs exercise, we ignore the second cause - age - completely."
+  },
+  {
+    "objectID": "ObservationalStudies.html#resolving-the-paradox-1",
+    "href": "ObservationalStudies.html#resolving-the-paradox-1",
+    "title": "Observational Studies",
+    "section": "Resolving the Paradox",
+    "text": "Resolving the Paradox\nIf we go ahead and plot risk vs age, we can see that the age of the patient is strongly positively correlated with disease risk.\n\n\n\n\n\n\n\n\n\nAs the patient increases in age, their risk of the disease increases which means older patients are more likely to develop the disease than younger patients even with the same amount of exercise. Therefore, to assess the effect of just exercise on disease, we would want to hold the age constant and change the amount of weekly exercise."
   }
 ]

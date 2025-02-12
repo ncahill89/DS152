@@ -322,8 +322,15 @@ crab_mod2
 crab_dat <- crab_dat %>% 
               mutate(CL_pred2 = predict(crab_mod2))
 
+
 ggplot(data = crab_dat,
-       mapping = aes(x = CL, y = CL_pred2, colour = sex)) +
+      aes(x = RW, y = CL)) +
+  theme_bw() +
+  geom_point() +
+  geom_line(aes(x = RW, y = CL_pred2)) 
+
+ggplot(data = crab_dat,
+       aes(x = CL, y = CL_pred2)) +
   theme_bw() +
   geom_point() +
   geom_abline(intercept = 0, slope = 1) +
@@ -347,7 +354,14 @@ crab_dat <- crab_dat %>%
               mutate(CL_pred3 = predict(crab_mod3))
 
 ggplot(data = crab_dat,
-       mapping = aes(x = CL, y = CL_pred3, colour = sex)) +
+      aes(x = RW, y = CL, colour = sex)) +
+  theme_bw() +
+  geom_point() +
+  geom_line(aes(x = RW, y = CL_pred3, colour = sex)) 
+
+
+ggplot(data = crab_dat,
+       aes(x = CL, y = CL_pred3, colour = sex)) +
   theme_bw() +
   geom_point() +
   geom_abline(intercept = 0, slope = 1) +

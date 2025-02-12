@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Correlation (and Causation) – Introduction to Data Science (2)</title>
+<title>Observational Studies – Introduction to Data Science (2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,35 +66,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -111,16 +82,28 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#correlation" id="toc-correlation" class="nav-link active" data-scroll-target="#correlation">Correlation</a></li>
-  <li><a href="#what-are-the-correlation-values-here" id="toc-what-are-the-correlation-values-here" class="nav-link" data-scroll-target="#what-are-the-correlation-values-here">What are the correlation values here?</a></li>
-  <li><a href="#calculating-the-correlation-coefficient" id="toc-calculating-the-correlation-coefficient" class="nav-link" data-scroll-target="#calculating-the-correlation-coefficient">Calculating the correlation coefficient</a>
-  <ul class="collapse">
-  <li><a href="#example-calculate-the-correlation-between-x-and-y" id="toc-example-calculate-the-correlation-between-x-and-y" class="nav-link" data-scroll-target="#example-calculate-the-correlation-between-x-and-y">Example: Calculate the correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span></a></li>
-  <li><a href="#example-change-of-scale-and-the-correlation-coefficient" id="toc-example-change-of-scale-and-the-correlation-coefficient" class="nav-link" data-scroll-target="#example-change-of-scale-and-the-correlation-coefficient">Example: Change of scale and the correlation coefficient</a></li>
-  </ul></li>
-  <li><a href="#spurious-correlations" id="toc-spurious-correlations" class="nav-link" data-scroll-target="#spurious-correlations">Spurious Correlations</a></li>
-  <li><a href="#example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance" id="toc-example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance" class="nav-link" data-scroll-target="#example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance">Example Data (1): What is the association between PGA golfer’s accuracy and driving distance?</a></li>
-  <li><a href="#example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage" id="toc-example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage" class="nav-link" data-scroll-target="#example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage">Example Data (2): What is the relationship between cars’ weights and their mileage?</a></li>
+  <li><a href="#scientific-studies" id="toc-scientific-studies" class="nav-link active" data-scroll-target="#scientific-studies">Scientific Studies</a></li>
+  <li><a href="#studies-and-conclusions" id="toc-studies-and-conclusions" class="nav-link" data-scroll-target="#studies-and-conclusions">Studies and Conclusions</a></li>
+  <li><a href="#why-use-observational-studies" id="toc-why-use-observational-studies" class="nav-link" data-scroll-target="#why-use-observational-studies">Why use observational studies?</a></li>
+  <li><a href="#observational-studies" id="toc-observational-studies" class="nav-link" data-scroll-target="#observational-studies">Observational studies</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#retrospective-vs-prospective-studies" id="toc-retrospective-vs-prospective-studies" class="nav-link" data-scroll-target="#retrospective-vs-prospective-studies">Retrospective Vs Prospective Studies</a></li>
+  <li><a href="#example-does-working-out-increase-energy-levels" id="toc-example-does-working-out-increase-energy-levels" class="nav-link" data-scroll-target="#example-does-working-out-increase-energy-levels">Example: Does working out increase energy levels?</a></li>
+  <li><a href="#example-does-working-out-increase-energy-levels-1" id="toc-example-does-working-out-increase-energy-levels-1" class="nav-link" data-scroll-target="#example-does-working-out-increase-energy-levels-1">Example: Does working out increase energy levels?</a></li>
+  <li><a href="#example-does-working-out-increase-energy-levels-2" id="toc-example-does-working-out-increase-energy-levels-2" class="nav-link" data-scroll-target="#example-does-working-out-increase-energy-levels-2">Example: Does working out increase energy levels?</a></li>
+  <li><a href="#confounding-variables" id="toc-confounding-variables" class="nav-link" data-scroll-target="#confounding-variables">Confounding variables</a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#example-1" id="toc-example-1" class="nav-link" data-scroll-target="#example-1">Example</a></li>
+  <li><a href="#reducing-confounding-matching" id="toc-reducing-confounding-matching" class="nav-link" data-scroll-target="#reducing-confounding-matching">Reducing confounding: Matching</a></li>
+  <li><a href="#reducing-confounding-multiple-regression" id="toc-reducing-confounding-multiple-regression" class="nav-link" data-scroll-target="#reducing-confounding-multiple-regression">Reducing confounding: Multiple Regression</a></li>
+  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability">Conditional Probability</a></li>
+  <li><a href="#conditional-probability-1" id="toc-conditional-probability-1" class="nav-link" data-scroll-target="#conditional-probability-1">Conditional Probability</a></li>
+  <li><a href="#whats-going-on" id="toc-whats-going-on" class="nav-link" data-scroll-target="#whats-going-on">What’s going on?</a></li>
+  <li><a href="#simpsons-paradox-correlation-reversal" id="toc-simpsons-paradox-correlation-reversal" class="nav-link" data-scroll-target="#simpsons-paradox-correlation-reversal">Simpsons’ Paradox: Correlation Reversal</a></li>
+  <li><a href="#example-continued" id="toc-example-continued" class="nav-link" data-scroll-target="#example-continued">Example Continued</a></li>
+  <li><a href="#resolving-the-paradox" id="toc-resolving-the-paradox" class="nav-link" data-scroll-target="#resolving-the-paradox">Resolving the Paradox</a></li>
+  <li><a href="#resolving-the-paradox-1" id="toc-resolving-the-paradox-1" class="nav-link" data-scroll-target="#resolving-the-paradox-1">Resolving the Paradox</a></li>
   </ul>
 </nav>
     </div>
@@ -129,7 +112,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Correlation (and Causation)</h1>
+<h1 class="title">Observational Studies</h1>
 </div>
 
 
@@ -146,215 +129,193 @@ window.Quarto = {
 </header>
 
 
-<p>When we see a pattern, we don’t just say “how extraordinary!” and move on; instead, we try and attribute a cause!</p>
+<section id="scientific-studies" class="level2">
+<h2 class="anchored" data-anchor-id="scientific-studies">Scientific Studies</h2>
+<p><strong>Observational</strong></p>
 <ul>
-<li><p>We all draw conclusions on the basis of what we see</p></li>
-<li><p>But it is important for us to remember that just because there is a correlation between two facts, there isn’t necessarily a cause/effect relationship between them.</p>
+<li><p>Collect data in a way that does not directly interfere with how the data arise, i.e.&nbsp;merely “observe”;</p></li>
+<li><p>Based on an observational study, we can only establish an association, in other words correlation, between the explanatory and response variables;</p></li>
+<li><p>With an observational study you are just observing the data and collecting it after or as it occurs.</p></li>
+</ul>
+<p><strong>Experimental</strong></p>
 <ul>
-<li><p>listening to loud music and acne</p></li>
-<li><p>ice cream consumption and shark attacks</p></li>
-<li><p>hand size and reading ability in children</p></li>
-<li><p>…</p></li>
+<li><p>Randomly assign subjects to treatments</p></li>
+<li><p>Establish causal connections</p></li>
+</ul>
+</section>
+<section id="studies-and-conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="studies-and-conclusions">Studies and Conclusions</h2>
+<p><img src="images/studies_conclusions.png" class="img-fluid"></p>
+</section>
+<section id="why-use-observational-studies" class="level2">
+<h2 class="anchored" data-anchor-id="why-use-observational-studies">Why use observational studies?</h2>
+<p>Reasons why we must sometimes use an observational study instead of an experiment …</p>
+<ol type="1">
+<li><p>It is unethical or impossible to assign people to receive a specific treatment.</p>
+<ul>
+<li>For example, if you want to know the impact of smoking on cancer you cannot design a study and assign some people to be smokers and other to be non-smokers. That is not ethical.</li>
 </ul></li>
-<li><p>These variables are correlated, but one does not <em>cause</em> the other!</p></li>
-</ul>
-<p><a href="https://www.tylervigen.com/spurious-correlations" class="uri">https://www.tylervigen.com/spurious-correlations</a></p>
-<!--
-But the situation is not always so clear cut. For example, it was reported recently that mobile phone use can reduce a man's sperm count by almost a third. One plausible theory is that damage caused by electromagnetic radiation makes you infertile. But what about other factors - confounding factors - that could cause both high mobile phone use and low sperm counts?
-How about stress? Busy jobs? Exposure to pollution? Age - were the heavy users older? Were they more likely to be smokers? The researchers can't answer these questions; not unless they carry out a carefully designed experiment that controls for all these other variables.
-And we must not forget the possibility that this was a random finding in one small study - just 221 men — which won't necessarily be replicated by other researchers. If you conduct enough studies, you will inevitably get some interesting findings just by chance.
--->
-<!-- ## Correlation -->
-<!-- \footnotesize -->
-<!-- Let's look at the relationship between two quantitative variables. -->
-<!-- E.g. Shoe size and height of a class of first year Maynooth students -->
-<!-- ![](figures/S6_Scatter1.png){width="50%"} -->
-<section id="correlation" class="level2">
-<h2 class="anchored" data-anchor-id="correlation">Correlation</h2>
-<p>Correlation (r) quantifies the linear association between two quantitative variables.</p>
+<li><p>Certain exposure variables are inherent traits and cannot be randomly assigned.</p></li>
+</ol>
+</section>
+<section id="observational-studies" class="level2">
+<h2 class="anchored" data-anchor-id="observational-studies">Observational studies</h2>
 <ul>
-<li>The value of <span class="math inline">\(r\)</span> is between -1 and 1.</li>
-<li><span class="math inline">\(r &gt;\)</span> 0 when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> have a positive association.</li>
-<li><span class="math inline">\(r &lt;\)</span> 0 when <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> have a negative association.</li>
-<li><span class="math inline">\(r\)</span> = 1 means a perfect positive linear association.</li>
-<li><span class="math inline">\(r\)</span> = -1 means a perfect negative linear association.</li>
-<li><span class="math inline">\(r\)</span> = 0 indicates no linear association between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>.</li>
-<li>The value of <span class="math inline">\(r\)</span> is a measure of the extent to which <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are linearly related.</li>
+<li><p>Observational studies are very useful when it is not possible to design a study</p></li>
+<li><p>Obervational studies often have large sample sizes</p></li>
+<li><p>They are cheaper than designing a study (for example, clinical trials in medicine are very expensive)</p></li>
+<li><p>You have to get to know the data a lot better with observational studies. You haven’t set up to study or controlled for influences other than the thing you are studying.</p></li>
 </ul>
 </section>
-<section id="what-are-the-correlation-values-here" class="level2">
-<h2 class="anchored" data-anchor-id="what-are-the-correlation-values-here">What are the correlation values here?</h2>
-<p>Task: Match the plot panel number to the letter with the correct correlation value.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="2-Correlation_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>          A           B           C           D           E           F 
--0.02770462  0.96643642 -0.69813746  0.04969697 -0.96735724  0.11948059 
-          G           H 
--0.39421900  0.67692544 </code></pre>
-</div>
-</div>
-<!-- ![](images/S6_Corr_graph1.png) -->
-<!-- ![](images/S6_Corr_graph2.png) -->
-<!-- ![](images/S6_Corr_graph3.png) -->
-<!-- ![](images/S6_Corr_graph4.png) -->
-<!-- ![](images/S6_Corr_graph5.png) -->
-<!-- ![](images/S6_Corr_graph6.png) -->
-<!-- ![](images/S6_Corr_graph7.png) -->
-<!-- ![](images/S6_Corr_graph8.png) -->
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<p><img src="images/popsamp.png" class="img-fluid"></p>
 </section>
-<section id="calculating-the-correlation-coefficient" class="level2">
-<h2 class="anchored" data-anchor-id="calculating-the-correlation-coefficient">Calculating the correlation coefficient</h2>
-<p>We denote <span class="math display">\[\begin{eqnarray*}
-S_{xx} &amp;=&amp; \sum_{i=1}^{n}(x_i - \bar{x})^2 = \sum_{i=1}^{n}x_i^2 - n\bar{x}^2 \\
-S_{yy} &amp;=&amp; \sum_{i=1}^{n}(y_i - \bar{y})^2 = \sum_{i=1}^{n}y_i^2 - n\bar{y}^2 \\
-S_{xy} &amp;=&amp; \sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y}) = \sum_{i=1}^{n}x_iy_i - n\bar{x}\bar{y}
-\end{eqnarray*}\]</span></p>
-<p>Then <span class="math display">\[\begin{eqnarray*}
-r &amp;=&amp; \frac{Sxy}{\sqrt{SxxSyy}}     
-\end{eqnarray*}\]</span></p>
-<section id="example-calculate-the-correlation-between-x-and-y" class="level3">
-<h3 class="anchored" data-anchor-id="example-calculate-the-correlation-between-x-and-y">Example: Calculate the correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span></h3>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">x</td>
-<td style="text-align: right;">2</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">1</td>
-<td style="text-align: right;">6</td>
-<td style="text-align: right;">7</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">y</td>
-<td style="text-align: right;">3</td>
-<td style="text-align: right;">4</td>
-<td style="text-align: right;">0</td>
-<td style="text-align: right;">8</td>
-<td style="text-align: right;">8</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<!-- ![](figures/S6_correg.png){width="50%"} -->
-<span class="math display">\[\begin{align*}
-&amp;\sum_{i=1}^{n}x_i^2=106, \sum_{i=1}^{n}y_i^2=153, \sum_{i=1}^{n}x_iy_i=126, \bar{x}=4,\bar{y}=4.6\\
-&amp;S_{xx} = \sum_{i=1}^{n}x_i^2 - n\bar{x}^2 = 26, S_{yy} = \sum_{i=1}^{n}y_i^2 - n\bar{y}^2 = 47.2\\
-&amp;S_{xy} = \sum_{i=1}^{n}x_iy_i - n\bar{x}\bar{y} = 34\\
-\\
-&amp;r = \frac{Sxy}{\sqrt{SxxSyy}} = \frac{34}{\sqrt{26 \times 47.2}} = 0.97        
-\end{align*}\]</span>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p><img src="images/precbias.png" class="img-fluid"></p>
 </section>
-<section id="example-change-of-scale-and-the-correlation-coefficient" class="level3">
-<h3 class="anchored" data-anchor-id="example-change-of-scale-and-the-correlation-coefficient">Example: Change of scale and the correlation coefficient</h3>
-<p>The distance of the race and the time it took to complete was recorded for five races in kilometres and seconds respectively. The correlation was calculated between the two variables. The data set was also converted into miles (<span class="math inline">\(\times\)</span> 0.621371192) and minutes (/60) and the correlation was re-calculated.</p>
-<div class="cell">
-<div class="cell-output-display">
-<table class="caption-top table table-sm table-striped small">
-<thead>
-<tr class="header">
-<th style="text-align: right;">Kilometres</th>
-<th style="text-align: right;">Seconds</th>
-<th style="text-align: right;">Miles</th>
-<th style="text-align: right;">Minutes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: right;">0.1</td>
-<td style="text-align: right;">10</td>
-<td style="text-align: right;">0.0621371</td>
-<td style="text-align: right;">0.1666667</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">0.4</td>
-<td style="text-align: right;">120</td>
-<td style="text-align: right;">0.2485485</td>
-<td style="text-align: right;">2.0000000</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">0.8</td>
-<td style="text-align: right;">300</td>
-<td style="text-align: right;">0.4970970</td>
-<td style="text-align: right;">5.0000000</td>
-</tr>
-<tr class="even">
-<td style="text-align: right;">1.6</td>
-<td style="text-align: right;">535</td>
-<td style="text-align: right;">0.9941939</td>
-<td style="text-align: right;">8.9166667</td>
-</tr>
-<tr class="odd">
-<td style="text-align: right;">3.0</td>
-<td style="text-align: right;">950</td>
-<td style="text-align: right;">1.8641136</td>
-<td style="text-align: right;">15.8333333</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Notes
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<section id="retrospective-vs-prospective-studies" class="level2">
+<h2 class="anchored" data-anchor-id="retrospective-vs-prospective-studies">Retrospective Vs Prospective Studies</h2>
+<p>If an observational study uses data from the past, it is called retrospective study, whereas if data are collected throughout the study, it is called prospective;</p>
+<p><img src="images/retroprosp.png" class="img-fluid"></p>
+</section>
+<section id="example-does-working-out-increase-energy-levels" class="level2">
+<h2 class="anchored" data-anchor-id="example-does-working-out-increase-energy-levels">Example: Does working out increase energy levels?</h2>
+<p>We want to evaluate if regularly working out has any impact on energy levels.</p>
 <ul>
-<li><p>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> measurement units are changed, correlation does not change.</p></li>
-<li><p>If <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are reversed, i.e.&nbsp;correlation of <span class="math inline">\(y\)</span> and <span class="math inline">\(x\)</span>, the correlation does not change.</p></li>
-<li><p>Correlation is a measure of linear association. It does not establish causation.</p></li>
-<li><p>Two variables, x and y, could be highly correlated because there is another variable, z, having an impact on both x and y.</p></li>
+<li><p>In an observational study, we sample two types of people from the population, those who choose to work out regularly and those who don’t.</p></li>
+<li><p>We ask the people in each group to rate their enery levels from 1-10.</p></li>
+<li><p>Then, we find the average “energy level” for the two groups of people and compare.</p></li>
 </ul>
-</div>
-</div>
 </section>
+<section id="example-does-working-out-increase-energy-levels-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-does-working-out-increase-energy-levels-1">Example: Does working out increase energy levels?</h2>
+<p><img src="images/EnergyLevels.jpg" class="img-fluid"></p>
+<p>Can we conclude from this that working out is the cause of increased energy levels?</p>
 </section>
-<section id="spurious-correlations" class="level2">
-<h2 class="anchored" data-anchor-id="spurious-correlations">Spurious Correlations</h2>
-<p>A <strong>spurious correlation</strong> is a statistical relationship between two variables that appears to be meaningful but is actually caused by coincidence or the influence of a third (confounding) variable. This misleading association can arise due to random chance, indirect causation, or omitted variables.</p>
-<p>For example, there may be a strong correlation between ice cream sales and drowning incidents, but this does not mean one causes the other. Instead, a third factor—hot weather—increases both ice cream sales and swimming activity, which in turn raises the risk of drowning.</p>
-<p>Spurious correlations can often be identified through deeper statistical analysis, such as controlling for confounding variables or using causal inference techniques.</p>
-<p><strong>Task:</strong> Find two correlated variables from: <a href="https://www.tylervigen.com/spurious-correlations" class="uri">https://www.tylervigen.com/spurious-correlations</a>. Create a scatter plot and find the correlation.</p>
+<section id="example-does-working-out-increase-energy-levels-2" class="level2">
+<h2 class="anchored" data-anchor-id="example-does-working-out-increase-energy-levels-2">Example: Does working out increase energy levels?</h2>
+<ul>
+<li><p>There may be other variables that we didn’t control for in this study that contribute to the observed difference.</p></li>
+<li><p>For example, people who have young children might have less time to work out and also have lower energy levels.</p></li>
+<li><p>This is known as <strong>confounding</strong>.</p></li>
+<li><p>This study allows us to make correlation statements. But, we cannot make a causal statement attributing increased energy levels to working out!</p></li>
+</ul>
 </section>
-<section id="example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance" class="level2">
-<h2 class="anchored" data-anchor-id="example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance">Example Data (1): What is the association between PGA golfer’s accuracy and driving distance?</h2>
-<p>The data set `golf’ was taken from PGA Tour Recordsof 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores.</p>
+<section id="confounding-variables" class="level2">
+<h2 class="anchored" data-anchor-id="confounding-variables">Confounding variables</h2>
+<p><strong>Confounding variables:</strong> Extraneous variables that affect both the exposure (e.g., working out) and the outcome variables (e.g., increased energy), and that make it seem like there is a relationship between them are called confounding variables.</p>
+<p><img src="images/Confounding.jpg" class="img-fluid"></p>
+</section>
+<section id="example" class="level2">
+<h2 class="anchored" data-anchor-id="example">Example</h2>
+<p>Many years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (<em>MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3</em>).</p>
+<p><img src="images/Confounding3.png" class="img-fluid"></p>
+</section>
+<section id="example-1" class="level2">
+<h2 class="anchored" data-anchor-id="example-1">Example</h2>
+<p>If we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.</p>
+<p><img src="images/Confounding2.png" class="img-fluid"></p>
+<p>Once the confounding variable, smoking is taken into account the correlation between coffee and pancreatic cancer disappears.</p>
+</section>
+<section id="reducing-confounding-matching" class="level2">
+<h2 class="anchored" data-anchor-id="reducing-confounding-matching">Reducing confounding: Matching</h2>
+<p>Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.</p>
+<ul>
+<li><p>Rather than using random assignment to equalize the experimental groups, the experimenters do it by matching observable characteristics.</p></li>
+<li><p>For every participant in the exposed group, the researchers find a participant with comparable traits to include in the control group.</p></li>
+<li><p>Matching subjects facilitates valid comparisons between those groups.</p></li>
+<li><p>The researchers use subject-area knowledge to identify characteristics that are critical to match.</p></li>
+</ul>
+</section>
+<section id="reducing-confounding-multiple-regression" class="level2">
+<h2 class="anchored" data-anchor-id="reducing-confounding-multiple-regression">Reducing confounding: Multiple Regression</h2>
+<p>Multiple regression models specify the way in which different characteristics/variables (exposure and confounders) affects the outcome, thereby isolating the effect of each variable.</p>
+<p>chance of cancer = a x (coffee) + b x (smoking) + c x (gender) + d x (age)</p>
+<ul>
+<li><p>this allows us to make a statement about what would happen if one variable (i.e., the exposure) were to change while all the others (i.e., the confounders) remained the same.</p></li>
+<li><p>Obtaining isolated exposure effects conditional on the other variables remaining constant is said to adjust for (or control for) the effect of these confounders</p></li>
+</ul>
+</section>
+<section id="conditional-probability" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-probability">Conditional Probability</h2>
+<p>You and your friend are trying to find the perfect restaurant for dinner. You can’t decide so you want to instead rely on some observational data (i.e., restaurant reviews).</p>
+<p>You find two worthy restaurants, Carla’s and Sophia’s each with 400 reviews and an indicator of whether the restaurant is recommended or not recommended.</p>
+<p>You find that</p>
+<ul>
+<li><p>recommended for Sophia’s = 250/400</p></li>
+<li><p>recommended for Carla’s = 216/400</p></li>
+</ul>
+<p>So what we have is a conditional probability:</p>
+<p>p(recommended|Sophia’s) = 62.5%</p>
+<p>p(recommended|Carla’s) = 54%</p>
+</section>
+<section id="conditional-probability-1" class="level2">
+<h2 class="anchored" data-anchor-id="conditional-probability-1">Conditional Probability</h2>
+<p>What if we consider age as a factor here?</p>
+<ul>
+<li><p>recommended for 18-35 yr old diners at Sophia’s = 50/150</p></li>
+<li><p>recommended for 35+ diners at Sophia’s = 200/250</p></li>
+<li><p>recommended for 18-35 yr old diners at Carla’s = 180/360</p></li>
+<li><p>recommended for 35+ diners at Carla’s = 36/40</p></li>
+</ul>
+<p>So what we have is:</p>
+<p>p(recommended|Sophia’s, younger) = 30%</p>
+<p>p(recommended|Sophia’s, older) = 80%</p>
+<p>p(recommended|Carla’s, younger) = 50%</p>
+<p>p(recommended|Carla’s, older) = 90%</p>
+</section>
+<section id="whats-going-on" class="level2">
+<h2 class="anchored" data-anchor-id="whats-going-on">What’s going on?</h2>
+<p>You have unknowingly entered the world of Simpson’s Paradox, where a restaurant can be both better and worse than its competitor, exercise can lower and increase the risk of disease, and the same dataset can be used to prove two opposing arguments. Instead of going out to dinner, perhaps you and your friend should spend the evening discussing this fascinating statistical phenomenon.</p>
+<p><strong>Simpson’s Paradox occurs when trends that appear when a dataset is separated into groups reverse when the data are aggregated.</strong></p>
+</section>
+<section id="simpsons-paradox-correlation-reversal" class="level2">
+<h2 class="anchored" data-anchor-id="simpsons-paradox-correlation-reversal">Simpsons’ Paradox: Correlation Reversal</h2>
+<p>Say we have data on the number of hours of exercise per week versus the risk of developing a disease for two sets of patients, those below the age of 50 and those over the age of 50. Here are individual plots showing the relationship between exercise and risk of disease.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2-Correlation_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage" class="level2">
-<h2 class="anchored" data-anchor-id="example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage">Example Data (2): What is the relationship between cars’ weights and their mileage?</h2>
-<p>The data <code>mtcars</code> was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).</p>
+<section id="example-continued" class="level2">
+<h2 class="anchored" data-anchor-id="example-continued">Example Continued</h2>
+<p>We clearly saw a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let’s combine the data together on a single plot:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="2-Correlation_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
+</section>
+<section id="resolving-the-paradox" class="level2">
+<h2 class="anchored" data-anchor-id="resolving-the-paradox">Resolving the Paradox</h2>
+<p>To avoid Simpson’s Paradox leading us to two opposite conclusions, we need to choose to segregate the data in groups or aggregate it together. That seems simple enough, but how do we decide which to do?</p>
+<p>The answer is to think causally: how was the data generated and based on this, what factors influence the results that we are not shown?</p>
+<p>In the exercise vs disease example, we intuitively know that exercise is not the only factor affecting the risk of developing a disease. In the data, there are two different causes of disease yet by aggregating the data and looking at only risk vs exercise, we ignore the second cause - age - completely.</p>
+</section>
+<section id="resolving-the-paradox-1" class="level2">
+<h2 class="anchored" data-anchor-id="resolving-the-paradox-1">Resolving the Paradox</h2>
+<p>If we go ahead and plot risk vs age, we can see that the age of the patient is strongly positively correlated with disease risk.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>As the patient increases in age, their risk of the disease increases which means older patients are more likely to develop the disease than younger patients even with the same amount of exercise. Therefore, to assess the effect of just exercise on disease, we would want to hold the age constant and change the amount of weekly exercise.</p>
 
 
 </section>

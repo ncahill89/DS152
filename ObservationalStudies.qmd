@@ -1,0 +1,248 @@
+---
+title: "Observational Studies"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+```
+
+## Scientific Studies
+
+**Observational**
+
+-   Collect data in a way that does not directly interfere with how the data arise, i.e. merely "observe";
+
+-   Based on an observational study, we can only establish an association, in other words correlation, between the explanatory and response variables;
+
+-   With an observational study you are just observing the data and collecting it after or as it occurs.
+
+**Experimental**
+
+-   Randomly assign subjects to treatments
+
+-   Establish causal connections
+
+## Studies and Conclusions
+
+![](images/studies_conclusions.png)
+
+## Why use observational studies?
+
+Reasons why we must sometimes use an observational study instead of an experiment ...
+
+1.  It is unethical or impossible to assign people to receive a specific treatment.
+
+    -   For example, if you want to know the impact of smoking on cancer you cannot design a study and assign some people to be smokers and other to be non-smokers. That is not ethical.
+
+2.  Certain exposure variables are inherent traits and cannot be randomly assigned.
+
+## Observational studies
+
+-   Observational studies are very useful when it is not possible to design a study
+
+-   Obervational studies often have large sample sizes
+
+-   They are cheaper than designing a study (for example, clinical trials in medicine are very expensive)
+
+-   You have to get to know the data a lot better with observational studies. You haven't set up to study or controlled for influences other than the thing you are studying.
+
+## 
+
+\centering
+
+![](images/popsamp.png)
+
+## 
+
+\centering
+
+![](images/precbias.png)
+
+## Retrospective Vs Prospective Studies
+
+If an observational study uses data from the past, it is called retrospective study, whereas if data are collected throughout the study, it is called prospective;
+
+![](images/retroprosp.png)
+
+## Example: Does working out increase energy levels?
+
+We want to evaluate if regularly working out has any impact on energy levels.
+
+-   In an observational study, we sample two types of people from the population, those who choose to work out regularly and those who don't.
+
+-   We ask the people in each group to rate their enery levels from 1-10.
+
+-   Then, we find the average "energy level" for the two groups of people and compare.
+
+## Example: Does working out increase energy levels?
+
+![](images/EnergyLevels.jpg)
+
+Can we conclude from this that working out is the cause of increased energy levels?
+
+## Example: Does working out increase energy levels?
+
+-   There may be other variables that we didn't control for in this study that contribute to the observed difference.
+
+-   For example, people who have young children might have less time to work out and also have lower energy levels.
+
+-   This is known as **confounding**.
+
+-   This study allows us to make correlation statements. But, we cannot make a causal statement attributing increased energy levels to working out!
+
+## Confounding variables
+
+**Confounding variables:** Extraneous variables that affect both the exposure (e.g., working out) and the outcome variables (e.g., increased energy), and that make it seem like there is a relationship between them are called confounding variables.
+
+![](images/Confounding.jpg)
+
+## Example
+
+Many years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (*MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3*).
+
+![](images/Confounding3.png)
+
+## Example
+
+If we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.
+
+![](images/Confounding2.png)
+
+Once the confounding variable, smoking is taken into account the correlation between coffee and pancreatic cancer disappears.
+
+## Reducing confounding: Matching
+
+Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.
+
+-   Rather than using random assignment to equalize the experimental groups, the experimenters do it by matching observable characteristics.
+
+-   For every participant in the exposed group, the researchers find a participant with comparable traits to include in the control group.
+
+-   Matching subjects facilitates valid comparisons between those groups.
+
+-   The researchers use subject-area knowledge to identify characteristics that are critical to match.
+
+## Reducing confounding: Multiple Regression
+
+Multiple regression models specify the way in which different characteristics/variables (exposure and confounders) affects the outcome, thereby isolating the effect of each variable.
+
+chance of cancer = a x (coffee) + b x (smoking) + c x (gender) + d x (age)
+
+-   this allows us to make a statement about what would happen if one variable (i.e., the exposure) were to change while all the others (i.e., the confounders) remained the same.
+
+-   Obtaining isolated exposure effects conditional on the other variables remaining constant is said to adjust for (or control for) the effect of these confounders
+
+## Conditional Probability
+
+You and your friend are trying to find the perfect restaurant for dinner. You can't decide so you want to instead rely on some observational data (i.e., restaurant reviews).
+
+You find two worthy restaurants, Carla's and Sophia's each with 400 reviews and an indicator of whether the restaurant is recommended or not recommended.
+
+You find that
+
+-   recommended for Sophia's = 250/400
+
+-   recommended for Carla's = 216/400
+
+So what we have is a conditional probability:
+
+p(recommended\|Sophia's) = 62.5%
+
+p(recommended\|Carla's) = 54%
+
+## Conditional Probability
+
+What if we consider age as a factor here?
+
+-   recommended for 18-35 yr old diners at Sophia's = 50/150
+
+-   recommended for 35+ diners at Sophia's = 200/250
+
+-   recommended for 18-35 yr old diners at Carla's = 180/360
+
+-   recommended for 35+ diners at Carla's = 36/40
+
+So what we have is:
+
+p(recommended\|Sophia's, younger) = 30%
+
+p(recommended\|Sophia's, older) = 80%
+
+p(recommended\|Carla's, younger) = 50%
+
+p(recommended\|Carla's, older) = 90%
+
+## What's going on?
+
+You have unknowingly entered the world of Simpson's Paradox, where a restaurant can be both better and worse than its competitor, exercise can lower and increase the risk of disease, and the same dataset can be used to prove two opposing arguments. Instead of going out to dinner, perhaps you and your friend should spend the evening discussing this fascinating statistical phenomenon.
+
+**Simpson's Paradox occurs when trends that appear when a dataset is separated into groups reverse when the data are aggregated.**
+
+## Simpsons' Paradox: Correlation Reversal
+
+Say we have data on the number of hours of exercise per week versus the risk of developing a disease for two sets of patients, those below the age of 50 and those over the age of 50. Here are individual plots showing the relationship between exercise and risk of disease.
+
+```{r,echo = FALSE, message = FALSE, fig.width=6, fig.height=3.5}
+
+n_samples <- 100
+set.seed(424)
+ages <- round(runif(n_samples,15, 50))
+set.seed(424)
+hours <- round(runif(n_samples,1, 5)) + rnorm(n_samples)
+set.seed(424)
+p <- 7 + 0.5 * ages + -5.2 * hours + rnorm(n_samples)
+under_50 <- tibble(age = ages, `Hours Exercised` = hours, `Risk` = p)
+under_50$age_cat <- "under 50"
+            
+
+n_samples <- 100
+set.seed(42)
+ages <- round(runif(n_samples,50, 85))
+set.seed(42)
+hours <- round(runif(n_samples,3, 8)) +  rnorm(n_samples) * 0.5
+set.seed(42)
+p <- 20 + .7 * ages + -5.2 * hours +rnorm(n_samples) * 2
+over_50 = tibble(age = ages, `Hours Exercised` = hours, `Risk` = p)
+over_50$age_cat <- "over 50"
+
+exercise_dat <- rbind(under_50,over_50)
+
+
+ggplot(exercise_dat, aes(x = `Hours Exercised`, y = Risk))+
+  geom_point()+
+  geom_smooth(method = "lm")+
+  facet_wrap(~age_cat,scales="free")
+```
+
+## Example Continued
+
+We clearly saw a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let's combine the data together on a single plot:
+
+```{r,echo = FALSE, message = FALSE, fig.width=6, fig.height=4}
+ggplot(exercise_dat, aes(x = `Hours Exercised`, y = Risk))+
+  geom_point()+
+  geom_smooth(method = "lm")
+```
+
+## Resolving the Paradox
+
+To avoid Simpson's Paradox leading us to two opposite conclusions, we need to choose to segregate the data in groups or aggregate it together. That seems simple enough, but how do we decide which to do?
+
+The answer is to think causally: how was the data generated and based on this, what factors influence the results that we are not shown?
+
+In the exercise vs disease example, we intuitively know that exercise is not the only factor affecting the risk of developing a disease. In the data, there are two different causes of disease yet by aggregating the data and looking at only risk vs exercise, we ignore the second cause - age - completely.
+
+## Resolving the Paradox
+
+If we go ahead and plot risk vs age, we can see that the age of the patient is strongly positively correlated with disease risk.
+
+```{r,echo = FALSE, message = FALSE, fig.width=4, fig.height=3}
+ggplot(exercise_dat, aes(x = age, y = Risk))+
+  geom_point()+
+  geom_smooth(method = "lm")
+```
+
+As the patient increases in age, their risk of the disease increases which means older patients are more likely to develop the disease than younger patients even with the same amount of exercise. Therefore, to assess the effect of just exercise on disease, we would want to hold the age constant and change the amount of weekly exercise.

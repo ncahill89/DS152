@@ -249,7 +249,7 @@ golf <- readRDS("~/Dropbox/LecturingMaynooth/DS152/2_causation_correlation/golf.
 base1 <- ggplot(golf, aes(x=distance, y = accur)) +
   geom_point() + 
   labs(
-    x = "Distance)",
+    x = "Distance",
     y = "Accuracy",
     title = ""
   )
@@ -271,7 +271,7 @@ base1 +
 
 ## Example Data (2): What is the relationship between cars' weights and their mileage?
 
-The data was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
+The data `mtcars` was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
 
 
 ```{r}
