@@ -1,0 +1,382 @@
+---
+title: "Sampling Principles and Strategies"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+library(tigerstats)
+library(tidyverse)
+data("FakeSchool")
+FakeSchool <- as_tibble(FakeSchool)
+set.seed(1022)
+
+##NOTE: Materials here are mostly taken from https://homerhanumat.github.io/elemStats/sampling-and-surveys.html
+```
+
+The first step in conducting research is to identify topics or questions that are to be investigated. A clearly laid out research question is helpful in identifying what subjects or cases should be studied and what variables are important. It is also important to consider how data are collected so that the data are reliable and help achieve the research goals.
+
+### Research Question(s)
+
+**Research Question:** Over the last 5 years, how many MU Data Science or Statistics graduates have gone on to get a job in a field directly related to their degree.
+
+**Population:** All DS or Statistics graduates from MU from the last 5 years.
+
+**Q.** Can we survey the entire population?
+
+**A.** This would likely be very difficult. It is more realistic to assume that we can work with a fraction of the population.
+
+**Q.** How can we ensure the sample is an accurate reflection of the population?
+
+**A.** Appropriate sampling.
+
+Most research questions actually break down into 2 parts:
+
+-   Descriptive Statistics: What relationship can we observe between the variables in the sample?
+
+-   Inferential Statistics: Supposing we see a relationship in the sample data, how much evidence is provided for a relationship in the population? Does the data provide lots of evidence for a relationship in the population, or could the relationship we see in the sample be due just to chance variation in the sampling process that gave us the data?
+
+### Anecdotal Evidence
+
+"I met two students who did a Data Science degree in Maynooth but they are not working as data scientists. The degree must not get you a Data Science job."
+
+There are two problems here. First, the data only represent two cases. Second, and more importantly, it is unclear whether these cases are actually representative of the population. Data collected in this haphazard fashion are called **anecdotal evidence**.
+
+## Sampling from the population
+
+A **population** is the set of \underline{all} subjects of interest.
+
+A **sample** is the subset of the population for which we have data.
+
+Suppose that we were able to choose an appropriate sample that provides an accurate representation of the DS and Statistics Graduates:
+
+[![](images/fig-pop-to-sample-1.png)](https://openintro-ims.netlify.app/data-design)
+
+```{r, eval  = FALSE, include = FALSE}
+# Load necessary libraries
+library(ggplot2)
+library(ggforce)
+
+# Set seed for reproducibility
+set.seed(123)
+
+# Generate a large population of points
+n_population <- 200
+population <- data.frame(
+  x = rnorm(n_population, mean = 0, sd = 2),
+  y = rnorm(n_population, mean = 0, sd = 2)
+)
+
+# Randomly select a sample
+n_sample <- 10
+sample_indices <- sample(1:n_population, n_sample)
+sample_points <- population[sample_indices, ]
+
+# Create a mapping between population points and sample points
+mapping <- data.frame(
+  x1 = population[sample_indices, "x"],
+  y1 = population[sample_indices, "y"],
+  x2 = sample_points$x + 5,  # Shift sampled points to the right
+  y2 = sample_points$y
+)
+
+# Shift sample points to the right
+sample_points$x <- sample_points$x + 5
+
+# Create the plot
+ggplot() +
+  geom_point(data = population, aes(x, y), color = "lightblue") +  # All graduates
+  geom_point(data = sample_points, aes(x, y), color = "red", size = 3) +  # Sample
+  geom_segment(data = mapping, aes(x = x1, y = y1, xend = x2, yend = y2), 
+               arrow = arrow(length = unit(0.2, "cm")), size = 0.5) +  # Arrows
+  geom_ellipse(aes(x0 = 0, y0 = 0, a = 3, b = 3, angle = 0), color = "black") +  # Population ellipse
+  geom_ellipse(aes(x0 = 5, y0 = 0, a = 1.5, b = 1.5, angle = 0), color = "black") +  # Sample ellipse
+  annotate("text", x = 0, y = 3.5, label = "all graduates", size = 5, hjust = 0.5) +
+  annotate("text", x = 5, y = 2, label = "sample", size = 5, hjust = 0.5) +
+  theme_minimal() +
+  coord_fixed()
+
+```
+
+Now we have two different summaries to consider for our research question:
+
+**Proportion of the sample that went into a directly related field**
+
+-   Statistic - describes the sample
+
+-   Can be known, but it changes depending on the sample
+
+-   Symbol - $\hat{p}$
+
+**Proportion of the population that went into a directly related field**\*
+
+-   Parameter - describes the population
+
+-   Usually unknown - but we wish we knew it!
+
+-   Symbol - $\pi$
+
+    ![](images/Screenshot%202025-02-12%20at%2011.28.08.png)
+
+<!-- -->
+
+-   Our goal is to use the information we’ve gathered from the sample to infer, or predict, something about the population.
+
+-   For our example, we want to predict the population proportion, using our knowledge of the sample.
+
+-   The accuracy of our sample proportion relies heavily upon how well our sample represents the population at large.
+
+-   If our sample does a poor job at representing the population, then any inferences that we make about the population are also going to be poor.
+
+<!-- ![](images/precbias-01.png) -->
+
+<!-- ## Types of Samples -->
+
+<!-- There are 2 main kinds of sampling: -->
+
+<!--   - Random Sampling -->
+
+<!--   - Non-Random Sampling -->
+
+<!-- There are advantages and disadvantages of both. -->
+
+## Sampling Procedures
+
+Almost all statistical methods are based on the notion of implied randomness. If data are not collected in a random framework from a population, these statistical methods – the estimates and errors associated with the estimates – are not reliable.
+
+There are four different methods of random sampling that we will introduce:
+
+-   Simple Random Sampling (SRS)
+
+-   Systematic Sampling
+
+-   Stratified Sampling
+
+-   Cluster Sampling
+
+![](images/samplingpics-01.png)
+
+## Example Data: FakeSchool
+
+-   We will use the FakeSchool data to compare the sampling methods.
+
+-   The dataset contains information on 28 students from FakeSchool. We will assume that this is the population from which we will sample.
+
+Here is a snippet of the data:
+
+```{r, echo = FALSE}
+FakeSchool[1:4,]
+```
+
+-   Let's say that we are interested in mean GPA
+
+-   We can compute the true mean GPA
+
+```{r}
+FakeSchool %>% 
+  pull(GPA) %>% 
+  mean
+```
+
+-   Remember this value is not typically known!
+
+## Simple Random Sampling
+
+In **simple random sampling (SRS)**, for a given sample size, n, each member of the population has an equal chance of being selected.
+
+Let’s select a simple random sample of 7 elements without replacement. We can accomplish this easily with the `dplyr` function `sample_n()` in R. This function requires two pieces of information:
+
+-   the `size` of the sample
+
+-   the dataset from which to draw the sample
+
+### Simple Random Sampling in R
+
+```{r}
+## create a simple random sample (n = 7)
+srs <- FakeSchool %>% 
+          sample_n(7)
+srs
+
+## calculate the mean of the srs
+srs %>% 
+  pull(GPA) %>% 
+  mean
+```
+
+### SRS Strength vs Weaknesses
+
+**Strengths**
+
+-   The selection of one element does not affect the selection of others.
+
+-   Each possible sample, of a given size, has an equal chance of being selected.
+
+-   Simple random samples tend to be good representations of the population.
+
+-   Requires little knowledge of the population.
+
+**Weaknesses**
+
+-   If there are small subgroups within the population, a SRS may not give an accurate representation of that subgroup. In fact, it may not include it at all! This is especially true if the sample size is small.
+
+-   If the population is large and widely dispersed, it can be costly (both in time and money) to collect the data.
+
+## Systematic Sampling
+
+In a **systematic sample**, the sample members from a larger population are selected according to a random starting point but with a fixed, periodic interval, i.
+
+These are the two main steps required to implement systematic sampling:
+
+-   Divide the size of the target population “N” by sample size “n” to calculate the sampling interval “i”. If this value is in decimals, it must be rounded to the nearest whole number/integer.
+
+-   Then, a random starting point, “r”, may be chosen from where the sampling interval “i” is used in order to choose respondents from the target population.
+
+    -   Before selecting the sample group, researchers must ensure that the list of the sample frame is not organized in a cyclical or periodic way in order to avoid selecting a biased sample group.
+
+To illustrate the idea, let’s take a 1-in-4 systematic sample from our FakeSchool population.
+
+### Systematic Sampling in R
+
+```{r}
+# randomly selecting our starting element.
+start=sample(1:4,1)
+start
+
+# Now find every 4th row index starting with start
+sample_rows <- seq(start, nrow(FakeSchool), by = 4)
+sample_rows
+
+# Now choose the data corresponding to the row indexes
+sys_samp <- FakeSchool %>% 
+        filter(row_number() %in% sample_rows)
+
+
+```
+
+```{r}
+# print the systematic sample
+sys_samp
+
+# find the mean GPA from the sys_samp
+sys_samp %>% 
+  pull(GPA) %>% 
+  mean
+```
+
+### Strength vs Weaknesses
+
+**Strengths**
+
+-   Assures an even, random sampling of the population.
+
+-   It is especially useful when the population that you are studying is arranged in time. For example, suppose you are interested in the average amount of money that people spend at the grocery store on a Wednesday evening. A systematic sample could be used by selecting every 10th person that walks into the store.
+
+**Weaknesses**
+
+-   Not every combination has an equal chance of being selected. Many combinations will never be selected using a systematic sample!
+
+-   Beware of periodicity in the population! If, the selections match some pattern then the sample may not be representative of the population.
+
+### Noticing patterns in data
+
+-   The FakeSchool data is ordered according to the student’s year in school (freshmen, sophomore, junior, senior) and then by GPA (highest - lowest)
+
+-   Taking a systematic sample ensures that we have a person from each class represented in our sample.
+
+-   But, what would happen if we took a systematic sample where k = 7 and the sample started at 1?
+
+## Stratified Sampling
+
+In a **stratified sample**, the population must first be separated into homogeneous groups, or strata. Each element only belongs to one stratum and the stratum consist of elements that are alike in some way. A simple random sample is then drawn from each stratum, which is combined to make the stratified sample.
+
+Let’s take a stratified sample of 7 elements from FakeSchool using the following strata: Honors, Not Honors.
+
+### Stratified Sampling in R
+
+```{r}
+# determine how many elements belong to each strata
+FakeSchool %>% 
+  count(Honors) 
+
+# get the data for each strata
+# honors
+hon_strata <- FakeSchool %>% 
+                filter(Honors == "Yes")
+
+# not honors
+nonhon_strata <- FakeSchool %>% 
+                filter(Honors == "No")
+
+```
+
+Try to divide the sampling evenly, the sample size is odd so use the bigger number for the larger strata
+
+```{r }
+hon_samp <- hon_strata %>% 
+              sample_n(3)
+
+nonhon_samp <- nonhon_strata %>% 
+                sample_n(4)
+
+strat_samp <- full_join(hon_samp, nonhon_samp)
+```
+
+```{r}
+# print the stratified sample
+strat_samp
+
+# get the mean GPA from the stratified sample
+strat_samp %>% 
+  pull(GPA) %>% 
+  mean
+```
+
+### Strength vs Weaknesses
+
+**Strengths**
+
+-   Representative of the population, because elements from all strata are included in the sample.
+
+-   Ensures that specific groups are represented, sometimes even proportionally, in the sample.
+
+-   Allows comparisons to be made between strata, if necessary. For example, a stratified sample allows you to easily compare the mean GPA of Honors students to the mean GPA of non-Honors students.
+
+**Weaknesses**
+
+-   Requires prior knowledge of the population. You have to know something about the population to be able to split into strata!
+
+## Cluster Sampling
+
+**Cluster sampling** is a sampling method used when natural groups are evident in the population. The clusters should all be similar each other: each cluster should be a small scale representation of the population. To take a cluster sample, a random sample of the clusters is chosen. The elements of the randomly chosen clusters make up the sample.
+
+Let’s take a cluster sample using the grade level (freshmen, sophomore, junior, senior) of FakeSchool as the clusters. Let’s take a random sample of 2 of them.
+
+### Cluster Sampling in R
+
+```{r}
+cluster_samp <- FakeSchool %>% 
+                  group_nest(class) %>% 
+                  sample_n(size = 2) %>% 
+                  unnest(data)
+
+## what class groups were used 
+cluster_samp$class %>% unique()
+
+# calculate the mean GPA from the cluster sample
+cluster_samp %>% 
+  pull(GPA) %>% 
+  mean
+```
+
+### Strength vs Weaknesses
+
+**Strengths**
+
+Makes it possible to sample if there is no list of the entire population, but there is a list of subpopulations. For example, there is not a list of all school members in the United States. However, there is a list of schools that you could sample and then acquire the members list from each of the selected schools.
+
+**Weaknesses**
+
+Not always representative of the population. Elements within clusters tend to be similar to one another based on some characteristic(s). This can lead to over-representation or under-representation of those characteristics in the sample.
+
+![](images/samplingpics.png)
