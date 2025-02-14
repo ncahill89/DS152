@@ -24,3 +24,7 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 4: [Sampling Principles and Strategies](https://ncahill89.github.io/DS152/4-sampling.html)
 
+## Tutorial Sheets
+
+[Tutorial Sheet 1](https://ncahill89.github.io/DS152/Tutorial1.html)
+

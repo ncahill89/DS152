@@ -1,0 +1,140 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 1: Tidyverse Recap"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+
+#https://rpubs.com/aruntrivedi/final_rr_pa2
+
+
+nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzfrj/nat_disaster_dat.csv?rlkey=7nx78bcpnj6ufm0hdq91ke8np&raw=1")
+
+
+```
+
+## Instructions 
+Answer all questions for continuous assessment. Due: **4pm on Friday, 28th February 2025**. Please write your answers in a Word file, save it as a **pdf document** and upload it to Moodle before the deadline. Alternatively, you may write down your answers using pen and paper, take photographs and upload a **pdf document** of the photos you've taken of your assignment. 
+
+
+
+## Question
+
+Synopsis: US Department of Commerce, National Oceanic & Atmospheric Administration provides information on fatalities and injuries associated with natural calamities/disasters across different US states.  
+
+If you want to view the data in R you can run the following:
+
+\scriptsize
+
+```{r, eval = FALSE}
+nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzfrj/nat_disaster_dat.csv?rlkey=7nx78bcpnj6ufm0hdq91ke8np&raw=1")
+```
+
+
+A glimpse if the data is shown below
+
+
+```{r}
+glimpse(nat_disaster_dat)
+```
+
+Note: 
+
+  - `STATE` = US State
+  - `EVTYPE` = event type
+  - `FATALITIES` = \# of fatalities 
+  - `INJURIES` = \# if injuries. 
+
+(i) How many observations are in the dataset? 
+
+
+(ii) Assume you want to create the summary below, which sums up the number of fatalities within each event type and then arranges by the total fatalities, in descending order. 
+
+```{r, eval = TRUE, echo=FALSE}
+nat_disaster_summary <- nat_disaster_dat %>% 
+                          group_by(EVTYPE) %>% 
+                          summarise(total_fatalities = sum(FATALITIES)) %>% 
+                          arrange(desc(total_fatalities))
+nat_disaster_summary
+```
+
+In the code below, what should [A], [B], [C] and [D] be replaced with to create this summary? 
+
+```{r, eval = FALSE}
+nat_disaster__summary <- nat_disaster_dat %>% 
+                          group_by([A]) %>% 
+                          [B](total_fatalities = [C])) %>% 
+                          arrange([D](total_fatalities))
+```
+
+[A] = 
+
+[B] = 
+
+[C] = 
+
+[D] = 
+
+(iii) Now assume you want to filter the summarised data from (ii) so that you have a dataset with only events where the total fatalities are greater than 200, as shown.
+
+```{r, eval = TRUE, echo=FALSE}
+nat_disaster_filter <- nat_disaster_summary %>% 
+                        filter(total_fatalities > 200)
+nat_disaster_filter
+```
+
+
+In the code below, what should [A] and [B] be replaced with to create the filtered dataet? 
+
+
+```{r, eval = FALSE}
+nat_disaster_filter <- nat_disaster_summary %>% 
+                        [A]([B])
+```
+
+
+
+[A] = 
+
+[B] = 
+
+
+(iv) Now assume you want to create the following barplot which shows the total fatalities per event type, using the filtered data from part (iii). 
+
+```{r, eval = TRUE, echo=FALSE}
+ggplot(nat_disaster_filter, aes(x = EVTYPE, y = total_fatalities)) +
+  geom_bar(stat="identity") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  xlab("") +
+  ylab("# fatalities")
+```
+
+
+In the code below, what should [A], [B] and [C] be replaced with to create the plot? 
+
+
+```{r, eval = FALSE}
+ggplot(nat_disaster_filter, aes(x = [A], y = [B])) +
+  [C](stat="identity") +
+  theme(axis.text.x = element_text(angle = 90)) +
+  xlab("") +
+  ylab("# fatalities")
+```
+
+[A] = 
+
+[B] = 
+
+[C] = 
+
+
+

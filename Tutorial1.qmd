@@ -1,0 +1,137 @@
+---
+title: "DS152 Tutorial Sheet 1 "
+format: html
+editor: visual
+
+---
+
+
+## Instructions
+
+-   Attempt the questions below before your tutorial in the week beginning 24th February 2025.
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+
+untidy_tab1 <- table2
+untidy_tab2a <- table4a
+untidy_tab2b <- table4b
+tidy_tab2b <- read_csv("https://www.dropbox.com/scl/fi/s0swvn1bnsyu1m04ewza5/tidy_tab2b.csv?rlkey=lwc63zi4o4g9st4787y1zo6jc&raw=1")
+
+```
+
+## Exercise 1
+
+The table below displays the number of tuberculosis cases documented by the World Health Organization in Afghanistan, Brazil, and China between 1999 and 2000. The data contains values associated with four variables (country, year, cases, and population). The tidy format for the data is:
+
+```{r}
+table1
+```
+
+
+(a) The data table below organizes the same data in an untidy format. 
+
+
+```{r, echo = TRUE}
+untidy_tab1
+```
+
+
+(i) What are the characteristics of this dataset that make it not tidy?
+
+(ii) In the code below, what should [A], [B], [C], [D] and [E] be replaced with to make this dataset tidy?
+
+
+```{r, eval = FALSE}
+tidy_tab1 <- untidy_tab1 %>% 
+                pivot_[A]([B] = [C],
+                          [D] = [E])
+```
+
+[A] = 
+
+[B] = 
+
+[C] = 
+
+[D] = 
+
+[E] = 
+
+
+
+
+(b) The data table below, which includes only the cases data, is organized in an untidy format. 
+
+
+```{r, echo = TRUE}
+untidy_tab2a
+```
+
+
+(i) What are the characteristics of this dataset that make it not tidy?
+
+(ii) In the code below, what should [A], [B], [C], [D], [E] and [F] be replaced with to make this dataset tidy?
+
+
+```{r, eval = FALSE}
+tidy_tab2a <- untidy_tab2a %>%  
+                pivot_[A](-[B],
+                           [C] = [D],
+                           [E] = [F])
+```
+
+[A] = 
+
+[B] = 
+
+[C] = 
+
+[D] = 
+
+[E] = 
+
+[F] = 
+
+
+(c) Once `tidy_tab2a` has been created you should make the `year` variable numeric. Replace [G] in the code below to achieve this. 
+
+```{r, eval = FALSE}
+tidy_tab2a <- tidy_tab2a %>% mutate(year = [G](year))
+```
+
+[G] = 
+
+
+(d) The data table below includes the population data organized in a tidy format (note: China has an additional year of data): 
+
+```{r, echo = TRUE}
+tidy_tab2b
+```
+
+Assume you want to join `tidy_tab2a` and `tidy_tab2b` in order to produce `table1`. Would you use `left_join` or `right_join`? Give a reason for your answer. 
+
+
+## Exercise 2
+
+It is thought that the growth of a particular type of insect can be predicted by the temperature at which it is living in. In an experiment, eight insects of the same weight were given living temperatures ranging between 2\textsuperscript{o}C and 16\textsuperscript{o}C and their weight gain was recorded after three days. The data have been put into the following table.
+
+```{r}
+insect_id <- c(1, 2,3,4,5,6,7,8)
+temperature <- c(2 ,4 ,6 ,8 ,10,12,14,16)
+weight_gain <- c(1.21,0.96,1.31,1.52,1.41,1.43,1.87,1.67)
+
+insect_dat <- tibble(insect_id, temperature, weight_gain)
+insect_dat
+
+```
+
+(a) Calculate the correlation between temperature and weight gain.
+
+(b) Interpret the result you obtained.
+
+(c) What does it mean to say that two variables are negatively correlated?
+
+(d) Why should you inspect a scatter plot of the data even though you have information on the correlation between two variables?
+
