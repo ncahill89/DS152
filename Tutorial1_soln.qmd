@@ -5,7 +5,6 @@ format:
     embed-resources: true
     self-contained-math: true
 editor: visual
-
 ---
 
 
@@ -40,7 +39,7 @@ untidy_tab1
 
 (i) What are the characteristics of this dataset that make it not tidy? 
 
-  - The dataset is untidy because the observations are spread over multiple rows.
+  <span style="background-color: lightblue;"> The dataset is untidy because the observations are spread over multiple rows.</span>
 
 
 (ii) In the code below, what should [A], [B], [C], [D] and [E] be replaced with to make this dataset tidy? 
@@ -53,16 +52,13 @@ tidy_tab1 <- untidy_tab1 %>%
 tidy_tab1
 ```
 
-[A] = wider
-
-[B] = names_from
-
-[C] = type
-
-[D] = values_from
-
-[E] = count
-
+<span style="background-color: lightblue;"> 
+[A] = wider,
+[B] = names_from,
+[C] = type,
+[D] = values_from,
+[E] = count,
+</span>
 
 (b) The data table below, which includes the cases data, is organized in an untidy format. 
 
@@ -74,9 +70,9 @@ untidy_tab2a
 
 (i) What are the characteristics of this dataset that make it not tidy? 
 
-  - Column names are values of the `year` variable. 
+<span style="background-color: lightblue;"> Column names are values of the `year` variable. </span>
   
-  - The cases variable is spread over two columns.
+<span style="background-color: lightblue;"> The cases variable is spread over two columns.</span>
   
 (ii) In the code below, what should [A], [B], [C], [D], [E] and [F] be replaced with to make this dataset tidy? 
 
@@ -89,18 +85,14 @@ tidy_tab2a <- untidy_tab2a %>%
 tidy_tab2a
 ```
 
-[A] = longer
-
-[B] = country
-
-[C] = names_to
-
-[D] = "year" (note "" around year is important here because you are creating a new variable)
-
-[E] = values_to
-
+<span style="background-color: lightblue;">
+[A] = longer,
+[B] = country,
+[C] = names_to,
+[D] = "year" (note "" around year is important here because you are creating a new variable),
+[E] = values_to,
 [F] = "cases" (note as with year, "" around cases is important here)
-
+</span>
 
 
 (c) Once `tidy_tab2a` has been created you should make the `year` variable numeric. Replace [G] in the code below to achieve this.   
@@ -109,7 +101,7 @@ tidy_tab2a
 tidy_tab2a <- tidy_tab2a %>% mutate(year = as.numeric(year))
 ```
 
-[G] = as.numeric
+<span style="background-color: lightblue;">[G] = as.numeric</span>
 
 (d) The data table below includes the population data organized in a tidy format (note: China has an additional year of data): 
 
@@ -118,14 +110,13 @@ tidy_tab2b
 ```
 
 
-
 Assume you want to join `tidy_tab2a` and `tidy_tab2b` in order to produce `table1`. Would you use `left_join` or `right_join`? Give a reason for your answer.  
 
 ```{r, echo = TRUE}
 left_join(tidy_tab2a,tidy_tab2b)
 ```
 
-  - `right_join` would include the additional year for China with an NA for the cases data and so would not produce `table1`. 
+<span style="background-color: lightblue;">`right_join` would include the additional year for China with an NA for the cases data and so would not produce `table1`. </span>
 
 
 ## Exercise 2
@@ -149,11 +140,11 @@ cor(insect_dat$temperature, insect_dat$weight_gain)
 
 (b) Interpret the result you obtained.
 
-  - There is a strong positive correlation between temperature and weight gain.
+<span style="background-color: lightblue;">There is a strong positive correlation between temperature and weight gain.</span>
 
 (c) What does it mean to say that two variables are negatively correlated?
 
-  - As one variable increases in value the other decreases. 
+<span style="background-color: lightblue;">As one variable increases in value the other decreases. </span>
 
 (d) Why should you inspect a scatter plot of the data even though you have information on the correlation between two variables?
 
@@ -162,14 +153,14 @@ ggplot(insect_dat, aes(x = temperature, y = weight_gain)) +
   geom_point()
 ```
 
-  Inspecting a scatter plot of the data is valuable for several reasons, even if you already know the correlation between two variables:
+<span style="background-color: lightblue;">Inspecting a scatter plot of the data is valuable for several reasons, even if you already know the correlation between two variables:</span>
 
-1. **Visual Confirmation**: While correlation coefficients provide a numerical measure of the strength and direction of the relationship between two variables, a scatter plot allows you to visually confirm this relationship. Sometimes, the correlation coefficient might indicate a weak relationship, but upon visual inspection, you might notice a clear pattern or non-linear trend in the data that was not apparent from the correlation alone.
+<span style="background-color: lightblue;">1. **Visual Confirmation**: While correlation coefficients provide a numerical measure of the strength and direction of the relationship between two variables, a scatter plot allows you to visually confirm this relationship. Sometimes, the correlation coefficient might indicate a weak relationship, but upon visual inspection, you might notice a clear pattern or non-linear trend in the data that was not apparent from the correlation alone.</span>
 
-2. **Outlier Detection**: Scatter plots help in identifying outliers, which are data points that deviate significantly from the overall pattern of the data. Outliers can have a disproportionate influence on the correlation, potentially skewing the interpretation of the relationship between variables.
+<span style="background-color: lightblue;">2. **Outlier Detection**: Scatter plots help in identifying outliers, which are data points that deviate significantly from the overall pattern of the data. Outliers can have a disproportionate influence on the correlation, potentially skewing the interpretation of the relationship between variables.</span>
 
-3. **Contextual Understanding**: Viewing the actual data points on a scatter plot provides a richer understanding of the relationship between variables within the specific context of the dataset. This understanding can be crucial for making informed decisions or drawing meaningful conclusions from the data.
+<span style="background-color: lightblue;">3. **Contextual Understanding**: Viewing the actual data points on a scatter plot provides a richer understanding of the relationship between variables within the specific context of the dataset. This understanding can be crucial for making informed decisions or drawing meaningful conclusions from the data.</span>
 
-4. **Communication**: Scatter plots are often used for communication purposes, as they provide a clear and intuitive way to visualize the relationship between variables. They can be included in reports, presentations, or academic papers to effectively convey insights from the data to a broader audience.
+<span style="background-color: lightblue;">4. **Communication**: Scatter plots are often used for communication purposes, as they provide a clear and intuitive way to visualize the relationship between variables. They can be included in reports, presentations, or academic papers to effectively convey insights from the data to a broader audience.</span>
 
 
