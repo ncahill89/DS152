@@ -127,9 +127,9 @@ insect_dat
 
 ```
 
-(a) Calculate the correlation between temperature and weight gain.
+(a) The correlation between temperature and weight gain is 0.84. What code would you use to do this calculation in R?
 
-(b) Interpret the result you obtained.
+(b) Interpret the correlation result.
 
 (c) What does it mean to say that two variables are negatively correlated?
 

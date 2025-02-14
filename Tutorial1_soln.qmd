@@ -132,13 +132,13 @@ insect_dat <- tibble(insect_id, temperature, weight_gain)
 insect_dat
 ```
 
-(a) Calculate the correlation between temperature and weight gain.
+(a)  The correlation between temperature and weight gain is 0.84. What code would you use to do this calculation in R?
 
 ```{r}
 cor(insect_dat$temperature, insect_dat$weight_gain)
 ```
 
-(b) Interpret the result you obtained.
+(b) Interpret the correlation result.
 
 <span style="background-color: lightblue;">There is a strong positive correlation between temperature and weight gain.</span>
 
