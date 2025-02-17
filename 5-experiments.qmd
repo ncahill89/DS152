@@ -10,19 +10,17 @@ library(tidyverse)
 library(faraway)
 ```
 
+Studies where the researchers assign treatments to cases are called experiments. When this assignment includes randomization, e.g., using a coin flip to decide which treatment a patient receives, it is called a randomized experiment. Randomized experiments are fundamentally important when trying to show a causal connection between two variables.
+
 ## Establishing Causality
 
--   A treatment will often be a binary variable that is either 0 or 1.
+-   A treatment will often be a binary variable that is either 0 or 1. It is 0 if the person is not treated, which is to say they are in the control group, and 1 if they are treated.
 
-    -   It is 0 if the person is not treated, which is to say they are in the control group, and 1 if they are treated.
+-   We will typically have some outcome of interest, Y, for each person or observational unit, and that could be categorical or continuous.
 
--   We will typically have some outcome of interest, Y, for each person, and that could be categorical or continuous.
+-   A treatment is causal if the outcome for a person, given they were not treated, is different to their outcome given they were treated.
 
--   A treatment is causal if the outcome for a person given they were not treated, is different to their outcome given they were treated.
-
-    -   If we could both treat and control the one individual at the one time, then we would know that it was only the treatment that had caused any change
-
--   The fundamental problem of causal inference is that we cannot both treat and control the one individual at the one time.
+-   If we could both treat and control the one individual at the one time, then we would know that it was only the treatment that had caused any change. However, the fundamental problem of causal inference is that we cannot both treat and control the same individual at the same time.
 
     -   we instead compare the average of two groups — all those treated and all those not.
 
@@ -34,162 +32,104 @@ library(faraway)
 
 ## Controlled Experiments
 
--   Controlled Experiments are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) affect one or more outcome (response) variables.
+**Controlled experiments** are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) affect one or more outcome (response) variables. We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.
 
--   We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.
+**Design of experiments** can produce an experiment that efficiently answers the questions of interest, optimizing the information for the available resources. The scientific method involves:
 
--   Adequate planning is crucial to experimental success.
+```         
+(a) Stating a hypothesis
+(b) Planning an experiment to objectively test the hypothesis
+(c) Observing and carefully collecting data
+(d) Interpreting experimental results (test your hypothesis)
+```
 
--   **Design of experiments:** can produce an experiment that efficiently answers the questions of interest, optimizing the information for the available resources.
+## Principles of Experimental Design
 
--   The scientific method involves
+**Controlling.** Researchers assign treatments to cases, and they do their best to control any other differences in the groups.
 
-    (a) Stating a hypothesis
-    (b) Planning an experiment to objectively test the hypothesis
-    (c) Observing and carefully collecting data
-    (d) Interpreting experimental results (test your hypothesis)
+**Randomization.** Researchers randomize patients into treatment groups to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a *confounding variable*, which is defined as a variable that is associated with both the explanatory and response variables. Randomizing patients into the treatment or control group helps even out such differences.
 
-## General Considerations
+#### Confounding variables
 
--   **Basic considerations of experimentation**
+**Confounding variables:** Extraneous variables that affect both the exposure and the outcome variables, and that make it seem like there is a relationship between them are called confounding variables.
 
-    -   Provide a valid comparison between treatments
+![](images/Confounding.jpg)
 
-    -   Provide valid information on the relationship between variables of interest
+**Replication.** The more cases researchers observe, the more accurately they can estimate the effect of the explanatory variable on the response. In a single study, we replicate by collecting a sufficiently large sample. What is considered sufficiently large varies from experiment to experiment, but at a minimum we want to have multiple subjects (experimental units) per treatment group.
 
--   **Basic requisites**
+**Blocking.** Researchers sometimes know or suspect that variables, other than the treatment, influence the response. Under these circumstances, they may first group individuals based on this variable into blocks and then randomize cases within each block to the treatment groups. This strategy is often referred to as blocking. For instance, if we are looking at the effect of a drug on heart attacks, we might first split patients in the study into low-risk and high-risk blocks, then randomly assign half the patients from each block to the control group and the other half to the treatment group. This strategy ensures that each treatment group has the same number of low-risk patients and the same number of high-risk patients.
 
-    -   The experimental conditions must represent real conditions of the problem of interest
-
-    -   Treatment comparison must be made free from other possible explanations due to the presence of other variables (*confounding*)
-
-    -   Treatment comparison must be made with the lowest possible influence from random variation
-
-    -   The uncertainty level of the conclusions must be known
-
-    -   The experiment must be the simplest **possible**
+------------------------------------------------------------------------
 
 ## Steps of Experimentation
 
-**(1) Clear and precise definition of the problem and objectives**
+### 1. Define the Problem and Objectives
 
--   objectives $\rightarrow$ scientific hypotheses $\rightarrow$ statistical hypotheses
+-   Clearly state the research question and objectives.\
+-   Establish a logical progression: **Objectives → Scientific Hypotheses → Statistical Hypotheses**.\
+-   Examples:
+    -   Investigate the effect of Vitamin C on odontoblast length (cells responsible for tooth growth).\
+    -   Determine the lethal dose of a pesticide for an agricultural pest.\
+    -   Identify the optimal temperature settings for efficient machine operation.
 
--   single objective vs. multiple objectives
+### 2. Define Experimental Conditions
 
-    -   e.g., examine the effect of Vitamin C on the length of the odontoplasts, the cells responsible for teeth growth
+-   **Controlled conditions**: Experiments conducted in controlled environments (e.g., greenhouses, laboratories, experimental stations).\
+-   **Less controlled conditions**: Field studies in natural settings (e.g., farms, forests).
 
-    -   e.g. determine the lethal dose of a pesticide for an agricultural pest
+### 3. Identify Variables of Interest
 
-    -   e.g. determine the best temperature settings so that a machine may work properly
+-   **Response Variable** (dependent variable): The outcome being measured.
+    -   Example: Odontoblast length in guinea pigs, blood pressure rates.\
+-   **Treatment Factors and Levels** (independent variables): Variables manipulated in the experiment.
+    -   **Quantitative example**: Vitamin C dose (0.5, 1, 2 mg/day).\
+    -   **Qualitative example**: Diet type (natural vs. artificial).\
+-   **Local Control (Blocking) Factors**: Variables controlled to reduce variability (e.g., environmental conditions, batch effects).
 
-**(2) Definition of the conditions of the experiment**
+### 4. Identify Experimental and Observational Units
 
--   Controlled conditions
+-   **Experimental Unit**: The smallest unit to which a treatment is randomly assigned.
+    -   Examples: 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes.\
+-   **Observational Unit**: The entity from which data is collected.
+    -   Examples: A single insect, tree, or Petri dish.
 
-    -   e.g. greenhouses, laboratories, experimental stations etc.
+### 5. Define Observations to be Made
 
--   Less controlled conditions
+-   **Qualitative Observations**: Presence or absence of a feature (e.g., morphological traits).\
+-   **Quantitative Observations**: Measurable data (e.g., weight, height, count, proportion).\
+-   **Ordered Observations**: Ranked data with an inherent order (e.g., disease severity, grading scales).
 
-    -   e.g. farms, forests etc.
+### 6. Select the Experimental Design
 
--   Research programmes
+-   Choose the simplest design that meets the study’s needs without oversimplifying.
 
-    -   Preliminary, main and confirmation trials
+### 7. Conduct the Experiment
 
--   Selection programmes
+-   Ensure **bias-free** procedures by considering:
+    -   Who is conducting the experiment.\
+    -   The location of the experiment.\
+    -   Start and end dates.\
+    -   The relevance and feasibility of the experiment.\
+    -   Associated costs.
 
-    -   Screening, comparative and multilocal trials
+### 8. Analyze Data and Interpret Results
 
-**(3) Identification of the variables of interest**
+-   Conduct analysis according to the experimental design.\
+-   Interpret results within the context of:
+    -   Experimental conditions.\
+    -   Tested hypotheses.\
+    -   Established scientific knowledge.\
+-   Consider the potential consequences of incorrect conclusions.
 
--   Response variable
+------------------------------------------------------------------------
 
-    -   e.g., length of odontoplasts in guinea pigs
+## More on Randomization
 
-    -   e.g., blood pressure rates
+The key to telling a causal story is the counterfactual: what would have happened in the absence of the treatment. This means that establishing the control group is critical because when we do that, we establish the counterfactual. What we hope to be able to do is to find treatment and control groups that are the same, but for the treatment.
 
--   Treatment factor(s) and their levels
+-   We might be worried about, say, underlying trends, which is one issue with a before-and-after comparison, or selection bias, which could occur when we allow self-selection. Either of these issues could result in biased estimators.
 
-    -   Quantitative – factor: doses of vitamin C (levels: 0.5, 1, 2 milligrams/day)
-
-    -   Qualitative – factor: diet (levels: natural and artificial)
-
--   Local control factor(s) and their levels
-
-    -   blocks, rows, columns; *nuisance* factors, reflecting experimental design
-
-## Determination of the levels of a factor
-
--   **Selection:** obtain the best treatments within a big set of treatments
-
--   **Comparison:** a small group of treatments that qualitatively differ is compared to establish differences
-
-    -   e.g. comparison between the effects of two different diets on blood pressure
-
-    -   e.g., comparison of delivery method of vitamin C (orange juice or ascorbic acid)
-
--   **Optimization:** find the optimal level within a group of treatments
-
-    -   e.g. dose-response experiments
-
-**(4) Identification of the experimental and observational unit**
-
--   **Experimental unit:** individual or group of individuals in which a treatment is randomly applied; may give rise to one or more experimental units
-
-    -   e.g. 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes, etc
-
--   **Observational unit:** physical entity that produces a unique value for the response variable
-
-    -   e.g. a single insect, a single tree, a single Petri dish
-
-**(5) Definition of the observations to be made**
-
--   Observations: essential or accessory
-
--   **Qualitative:** presence or absence of a morphological feature,
-
--   **Quantitative:** weight, counts, proportion survived, proportion damaged
-
--   **Ordered:** degree of severity of a disease, grading scale $\rightarrow$ relationship of order
-
--   Important things to be aware of:
-
-    -   The way observations will be taken
-
-    -   The way they will be registered
-
-    -   If sampling: define the number and size of samples (consider representativeness)
-
-**(6) Selection of the experimental scheme**
-
--   Must be the simplest *possible*
-
--   Systematic experiments: must **not** be used
-
--   Randomized experiments: allow for the comparison of treatments, *free from confounding*
-
-## The Three Key Principles of Experimentation
-
--   **Randomization:** is the assignment of treatments to experimental units so that every unit has the same probability of receiving each treatment.
-
--   **Replication:** provides a measurement of uncontrolled variation; it is the application of each treatment several times, i.e. to several experimental units
-
--   **Local control:** is the grouping of experimental units into groups called BLOCKS, the units within a group being as similar as possible (e.g. different growth chambers, people, time periods, different trays in a lab bench, etc)
-
-### Randomization
-
--   The key to telling a causal story is the counterfactual: what would have happened in the absence of the treatment.
-
-    -   This means that establishing the control group is critical because when we do that, we establish the counterfactual.
-
--   What we hope to be able to do is to find treatment and control groups that are the same, but for the treatment.
-
-    -   We might be worried about, say, underlying trends, which is one issue with a before-and-after comparison, or selection bias, which could occur when we allow self-selection. Either of these issues could result in biased estimators.
-
-    -   We use randomization to go some way to addressing these.
-
-### Randomization
+-   We use randomization to go some way to addressing these.
 
 To explore ideas of randomization, we simulate a population, and then randomly sample from it. We will set it up so that 20% of the population are smokers, and the rest are not.
 
@@ -245,85 +185,87 @@ sample %>%
   mutate(prop = n / sum(n)) 
 ```
 
-### Internal validity
+------------------------------------------------------------------------
 
--   If the treated and control groups are the same in all ways and remain that way, but for the treatment, then we have internal validity, which is to say that our control will work as a counterfactual and our results can speak to a difference between the groups in that study.
+### Internal Validity
 
--   Internal validity means that our estimates of the effect of the treatment are speaking to the treatment and not some other aspect.
+-   Internal validity is achieved when the **only difference** between the treatment and control groups is the treatment itself.\
+-   This ensures that the control group serves as a true **counterfactual**, allowing us to attribute differences in outcomes solely to the treatment.\
+-   In other words, our estimates reflect the **true effect** of the treatment rather than other confounding factors.\
+-   With strong internal validity, we can confidently make claims about **causal relationships** within the experiment.
 
--   They mean that we can use our results to make claims about what happened in the experiment.
+### External Validity
 
-### External validity
+-   External validity refers to whether our experimental findings **generalize** beyond the study.\
+-   This requires:
+    1.  A sample that **represents the broader population**.\
+    2.  An experimental setup that **mirrors real-world conditions**.\
+-   If these conditions hold, our results are applicable outside the experiment.\
+-   **Randomization is key** to achieving external validity:
+    1.  First, random selection ensures that the study group is representative.\
+    2.  Second, random assignment to treatment and control ensures comparability within the experiment.
 
--   If the group to which we applied our randomization were representative of the broader population, and the experimental set-up were fairly similar to outside conditions, then we further could have external validity.
+------------------------------------------------------------------------
 
-    -   That would mean that the difference we find does not just apply in our own experiment, but also in the broader population.
+### Example: Tooth Growth
 
-    -   External validity means that we can use our experiment to make claims about what would happen outside the experiment.
+ToothGrowth is a built-in R dataset from a study that examined the effect of Vitamin C dose and delivery on the length of the odontoplasts, the cells responsible for teeth growth, in 60 guinea pigs, where tooth length was the measured outcome variable.
 
-    -   It is randomization that has allowed that to happen.
+#### Randomization
 
--   But this means we need randomization twice. Firstly, into the group that was subject to the experiment, and then secondly, between treatment and control.
+Randomization of subjects in an experiment helps spread any variability that exists naturally between subjects evenly across groups.
 
-### Blocking
+In the experiment that yielded the ToothGrowth dataset, guinea pigs were randomized to receive Vitamin C either through orange juice or ascorbic acid, indicated in the dataset by the supp variable.
 
--   Often there are covariates in the experimental units that are known to affect the response variable and must be taken into account.
-
--   Ideally an experimenter can group the experimental units into blocks where the within block variance is small, but the block to block variability is large.
-
-    -   For example, in testing a drug to prevent heart disease, we know that gender and age also impact the outcome. We may want to partition our study participants into gender and age groups and then randomly assign the treatment (placebo vs drug) within the group.
-
--   Often blocking variables are not the variables that we are primarily interested in, but must nevertheless be considered. We call these nuisance variables.
-
-### Blocking Example
-
-Example 1. An agricultural field study has three fields in which the researchers will evaluate the quality of three different varieties of barley. Due to how they harvest the barley, we can only create a maximum of three plots in each field. In this example we will block on field since there might be differences in soil type, drainage, etc from field to field. In each field, we will plant all three varieties so that we can tell the difference between varieties without the block effect of field confounding our inference. In this example, the varieties are nested within the fields.
-
-```{r, echo = FALSE}
-tribble(
-  ~Field, ~Plot, ~Variety, ~ Quality,
-  1,     1,      "A",     "value",
-  1,     2,      "B",     ".",
-  1,     3,      "C",     ".",
-  2,     1,      "A",     ".",
-  2,     2,      "B",     ".",
-  2,     3,      "C",     ".",
-  3,     1,      "A",     ".",
-  3,     2,      "B",     ".",
-  3,     3,      "C",      "."
-
-
-) 
+```{r}
+data("ToothGrowth")
 ```
 
-### Main types of blocks
+#### Replication
 
--   Natural divisions
+Replication means you need to conduct an experiment with an adequate number of subjects to achieve an acceptable statistical power.
 
-    -   Young animals -- litters, egg masses
+Let’s examine the ToothGrowth dataset to make sure they followed the principle of replication. We’ll use a `dplyr` function called `count` to help us.
 
-    -   People or animals -- gender
+```{r}
+ToothGrowth %>% count(supp)
+```
 
-    -   Continuous gradient of change
+#### Analysis
 
-        -   Plots on the field -- declivity, humidity, fertility
-        -   People or animals -- age, weight, size
-        -   Severity of disease on the field
+Suppose you know from previous studies that the average length of a guinea pigs odontoplasts is 18 micrometers. Therefore, you hypothesize that odontoplast length is equal to 18. To "test" this hypothesis, let's see how the value of 18 compares to our sample data by looking at the mean and standard deviation.
 
-    -   Experimental management
+```{r}
+ToothGrowth %>% pull(len) %>% mean
+```
 
-        -   Laboratory procedures -- technician, day, stand
-        -   Material availability
+It’s natural to wonder if there is a difference in tooth length by supplement type. Use `group_by` and `summarise` to explore this and create an appropriate visualization using `ggplot`.
 
-### Randomized Complete Block Design
+```{r, eval = FALSE}
+ToothGrowth %>% 
 
--   The aim is to have heterogeneity between blocks and homogeneity within
 
-    -   e.g. a greenhouse with a temperature gradient, different days, different observers
+```
 
-    -   Block is the replicate
+## More on Blocking
 
-    -   The number of experimental units per block is equal to the number of treatments and every treatment occurs once in each block, the order of the treatments within a block being randomized
+Often there are covariates in the experimental units that are known to affect the response variable and must be taken into account. Ideally an experimenter can group the experimental units into blocks where the within block variance is small, but the block to block variability is large.
+
+-   For example, in testing a drug to prevent heart disease, we know that gender and age also impact the outcome. We may want to partition our study participants into gender and age groups and then randomly assign the treatment (placebo vs drug) within the group.
+
+Often blocking variables are not the variables that we are primarily interested in, but must nevertheless be considered.
+
+### Randomized Complete Block Design (RCBD)
+
+-   The goal of RCBD is to **maximize differences between blocks** while ensuring **similarity within each block**.\
+-   This design helps control for known sources of variability, such as:
+    -   Temperature differences within a greenhouse.\
+    -   Variation across different days.\
+    -   Variation in fertility or drainage differences in a field\
+-   **Key features:**
+    -   Each **block acts as a replicate**.\
+    -   The number of **experimental units per block** equals the number of treatments.\
+    -   Each treatment appears **exactly once per block**, with the **order randomized** within the block.
 
 <!-- ## Randomized Complete Block Design -->
 
@@ -335,21 +277,25 @@ tribble(
 
 <!-- \end{center} -->
 
-Laboratory chamber with a humidity gradient inside
+#### Examples of blocks
 
-![](images/bod1.png)
+1.  Laboratory chamber with a humidity gradient inside
 
-Laboratory chambers with homogeneous temperature and humidity inside
+![](images/bod1.png){width="500"}
 
-![](images/bod2.png)
+2.  Laboratory chambers with homogeneous temperature and humidity inside
 
-A field with a fertility gradient
+![](images/bod2.png){width="500"}
 
-![](images/field1.png)
+3.  A field with a fertility gradient
 
-A greenhouse with a temperature gradient during the day
+![](images/field1.png){width="400"}
 
-![](images/greenhouse1.png)
+4.  A greenhouse with a temperature gradient during the day
+
+![](images/greenhouse1.png){width="500"}
+
+### Example: Oatvar
 
 The dataset `oatvar` in the `faraway` library contains information about an experiment on eight different varieties of oats.
 
@@ -357,24 +303,29 @@ The dataset `oatvar` in the `faraway` library contains information about an expe
 
 -   Within each block, the researchers created eight plots and randomly assigned a variety to a plot. This type of design is called a Randomized Complete Block Design (RCBD) because each block contains all possible levels of the factor of primary interest.
 
-### Randomized Complete Block Design - Example
+Visualise the data
 
-```{r, fig.width= 5, fig.height=3}
-data('oatvar', package='faraway')
+```{r }
 ggplot(oatvar, aes(y=yield, x=block, color=variety)) + 
     geom_point(size=5) +
     geom_line(aes(x=as.integer(block)))
 ```
 
-### Factorial Experiments
+Use `group_by` and `summarise` to look at the average yield within each variety.
 
--   There may often be more than one factor of interest to the experimenter
+```{r, eval = FALSE}
+oatvar %>% 
+```
 
--   Experiments that involve more than one randomized or treatment factor are called *factorial experiments*
+Look at the results of using `lm` with variety and block as predictors.
 
--   In general, the number of treatments in a factorial experiment is the product of the numbers of levels of the treatment factors.
+```{r, eval = FALSE}
+lm(....)
+```
 
--   The disadvantage of this is that the number of treatments increase very quickly.
+## Factorial Experiments
+
+Experiments that involve more than one treatment factor are called *factorial experiments*. In general, the number of treatments in a factorial experiment is the product of the numbers of levels of the treatment factors. The disadvantage of this is that the number of treatments increase very quickly.
 
 **Example:** Pest control
 
@@ -394,62 +345,46 @@ ggplot(oatvar, aes(y=yield, x=block, color=variety)) +
 
 <!-- \end{center} -->
 
+### Designs 
+
 For the Pesticide example, suppose 3 replicates and a completely randomized design
 
-![](images/fac2.png)
+![](images/fac2.png){width="500"}
 
 For the Pesticide example, suppose 3 replicates and a randomized complete block design
 
-![](images/fac3.png)
+![](images/fac3.png){width="500"}
 
--   The major advantage of factorial experiments is that they allow for the detection of interactions.
+
+### Interactions 
+
+ The major advantage of factorial experiments is that they allow for the detection of interactions.
 
 -   Two factors are said to interact if the effect of one, on the response variable, depends upon the level of the other.
 
 -   If they do not interact, they are said to be **independent**.
 
--   Other terms that are synonymous with “interacting factors” are **dependent** and **nonadditive**.
+#### Interaction Plots
 
-### Using an Interaction Plot
+A set of parallel lines indicates no interaction
 
-![](images/int1.png)
+![](images/int1.png){width="400"}
 
--   A set of parallel lines indicates no interaction
+The crossing over of lines indicates an interaction
 
-![](images/int3.png)
+![](images/int3.png){width="400"}
 
--   Clearly an interaction as lines have different slopes
 
-<!-- ## Splitting Interactions -->
+## Factorial Experiments: Tooth Growth 
 
-<!-- \begin{center} -->
+We've already seen to Tooth Growth data that examined the effect of Vitamin C delivery and dose on the length of the odontoplasts, the cells responsible for teeth growth, in 60 guinea pigs, where tooth length was the measured outcome variable.
 
-<!-- \includegraphics[width = .9\textwidth]{figures/int4.png} -->
+We initially looked at how the Vitamin C delivery impacted tooth growth. Now lets consider what happens when we bring dose into the analysis. In this case we have two factors to consider instead of 1. 
 
-<!-- \end{center} -->
+  - Vitamin C delivery has 2 levels 
+  - dose has 3 levels (0.5, 1, and 2 mg/day)
 
-## Steps of Experimentation
+```{r tooth2, exercise = TRUE}
+data("ToothGrowth")
+```
 
-**(7) Conduction of the experiment**
-
--   Bias-free procedures
-
--   Also consider
-
-    -   Entity carrying out the experiment
-
-    -   Place of execution
-
-    -   Start and end dates
-
-    -   Experiment relevance
-
-    -   Expenses
-
-**(8) Data analysis and interpretation of results**
-
--   Analysis in accordance with the experimental design
-
--   Interpretation of the results within the experimental conditions, tested hypotheses and related to the previously established facts
-
--   Consequences and probabilities of a wrong decision

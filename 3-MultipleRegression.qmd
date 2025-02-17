@@ -303,7 +303,7 @@ crab_dat <- crab_dat %>%
               mutate(CL_pred = predict(crab_mod1))
 
 ggplot(data = crab_dat,
-       mapping = aes(x = CL, y = CL_pred, colour = sex)) +
+       mapping = aes(x = CL, y = CL_pred)) +
   theme_bw() +
   geom_point() +
   geom_abline(intercept = 0, slope = 1) +
