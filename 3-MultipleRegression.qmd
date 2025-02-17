@@ -328,7 +328,13 @@ ggplot(data = crab_dat,
   theme_bw() +
   geom_point() +
   geom_line(aes(x = RW, y = CL_pred2)) 
+```
 
+::: question
+**Question:** How well does the model do at predicting carapace length?
+:::
+
+```{r}
 ggplot(data = crab_dat,
        aes(x = CL, y = CL_pred2)) +
   theme_bw() +
@@ -352,13 +358,29 @@ crab_mod3
 
 crab_dat <- crab_dat %>% 
               mutate(CL_pred3 = predict(crab_mod3))
+```
 
+::: question
+**Question:** How do we interpret the coefficients related to `sex`?
+:::
+
+For a male crab the expected carapace length increases by 5.67 compared to a female crab.
+
+```{r}
 ggplot(data = crab_dat,
       aes(x = RW, y = CL, colour = sex)) +
   theme_bw() +
   geom_point() +
   geom_line(aes(x = RW, y = CL_pred3, colour = sex)) 
+```
 
+
+
+::: question
+**Question:** How well does the model do at predicting carapace length?
+:::
+
+```{r}
 
 ggplot(data = crab_dat,
        aes(x = CL, y = CL_pred3, colour = sex)) +
@@ -369,11 +391,6 @@ ggplot(data = crab_dat,
   ylab("Predicted CL")
 ```
 
-::: question
-**Question:** How do we interpret the coefficients related to `sex`?
-:::
-
-For a male crab the expected carapace length increases by 5.67 compared to a female crab.
 
 ### Model Comparison
 
