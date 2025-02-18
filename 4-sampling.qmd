@@ -16,7 +16,7 @@ set.seed(1022)
 
 The first step in conducting research is to identify topics or questions that are to be investigated. A clearly laid out research question is helpful in identifying what subjects or cases should be studied and what variables are important. It is also important to consider how data are collected so that the data are reliable and help achieve the research goals.
 
-### Research Question(s)
+## Research Question(s)
 
 **Research Question:** Over the last 5 years, how many MU Data Science or Statistics graduates have gone on to get a job in a field directly related to their degree.
 
@@ -30,7 +30,7 @@ The first step in conducting research is to identify topics or questions that ar
 
 **A.** Appropriate sampling.
 
-Most research questions actually break down into 2 parts:
+Once we have an appropriate sample, most research questions actually break down into 2 parts:
 
 -   Descriptive Statistics: What relationship can we observe between the variables in the sample?
 
@@ -40,7 +40,7 @@ Most research questions actually break down into 2 parts:
 
 "I met two students who did a Data Science degree in Maynooth but they are not working as data scientists. The degree must not get you a Data Science job."
 
-There are two problems here. First, the data only represent two cases. Second, and more importantly, it is unclear whether these cases are actually representative of the population. Data collected in this haphazard fashion are called **anecdotal evidence**.
+There are two problems here. First, the data only represent two cases. Second, and more importantly, it is unclear whether these cases are actually representative of the population. Data collected in this haphazard fashion only provides **anecdotal evidence**.
 
 ## Sampling from the population
 
@@ -100,7 +100,7 @@ ggplot() +
 
 Now we have two different summaries to consider for our research question:
 
-**Proportion of the sample that went into a directly related field**
+**Proportion of the *sample* that went into a directly related field**
 
 -   Statistic - describes the sample
 
@@ -108,7 +108,7 @@ Now we have two different summaries to consider for our research question:
 
 -   Symbol - $\hat{p}$
 
-**Proportion of the population that went into a directly related field**\*
+**Proportion of the *population* that went into a directly related field**
 
 -   Parameter - describes the population
 
@@ -162,6 +162,13 @@ There are four different methods of random sampling that we will introduce:
 
 -   The dataset contains information on 28 students from FakeSchool. We will assume that this is the population from which we will sample.
 
+```{r, echo = TRUE, eval = FALSE}
+library(tigerstats)
+library(tidyverse)
+data("FakeSchool")
+FakeSchool <- as_tibble(FakeSchool)
+```
+
 Here is a snippet of the data:
 
 ```{r, echo = FALSE}
@@ -184,7 +191,7 @@ FakeSchool %>%
 
 In **simple random sampling (SRS)**, for a given sample size, n, each member of the population has an equal chance of being selected.
 
-Let’s select a simple random sample of 7 elements without replacement. We can accomplish this easily with the `dplyr` function `sample_n()` in R. This function requires two pieces of information:
+Let’s select a simple random sample of 7, without replacement. We can accomplish this easily with the `dplyr` function `sample_n()` in R. This function requires two pieces of information:
 
 -   the `size` of the sample
 
@@ -348,20 +355,31 @@ strat_samp %>%
 
 ## Cluster Sampling
 
-**Cluster sampling** is a sampling method used when natural groups are evident in the population. The clusters should all be similar each other: each cluster should be a small scale representation of the population. To take a cluster sample, a random sample of the clusters is chosen. The elements of the randomly chosen clusters make up the sample.
+**Cluster sampling** is a sampling method used when natural groups are evident in the population. The clusters should all be to similar each other: each cluster should be a small scale representation of the population. To take a cluster sample, a random sample of the clusters is chosen. The elements of the randomly chosen clusters make up the sample.
 
-Let’s take a cluster sample using the grade level (freshmen, sophomore, junior, senior) of FakeSchool as the clusters. Let’s take a random sample of 2 of them.
+Let’s assume that we have a cluster variable (with clusters 1-4) in the FakeSchool data. 
+
+
+```{r, echo =FALSE}
+set.seed(10201)
+FakeSchool <- FakeSchool %>% group_by(class) %>% mutate(cluster = sample(1:4, n(), replace = TRUE)) %>% ungroup()
+
+# View the first few rows to check the new column
+FakeSchool
+```
 
 ### Cluster Sampling in R
 
+Let’s take a random sample of 2 of two clusters. 
+
 ```{r}
 cluster_samp <- FakeSchool %>% 
-                  group_nest(class) %>% 
+                  group_nest(cluster) %>% 
                   sample_n(size = 2) %>% 
                   unnest(data)
 
 ## what class groups were used 
-cluster_samp$class %>% unique()
+cluster_samp$cluster %>% unique()
 
 # calculate the mean GPA from the cluster sample
 cluster_samp %>% 
@@ -379,4 +397,3 @@ Makes it possible to sample if there is no list of the entire population, but th
 
 Not always representative of the population. Elements within clusters tend to be similar to one another based on some characteristic(s). This can lead to over-representation or under-representation of those characteristics in the sample.
 
-![](images/samplingpics.png)

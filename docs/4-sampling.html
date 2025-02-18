@@ -145,8 +145,10 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#research-questions" id="toc-research-questions" class="nav-link active" data-scroll-target="#research-questions">Research Question(s)</a></li>
+  <li><a href="#research-questions" id="toc-research-questions" class="nav-link active" data-scroll-target="#research-questions">Research Question(s)</a>
+  <ul class="collapse">
   <li><a href="#anecdotal-evidence" id="toc-anecdotal-evidence" class="nav-link" data-scroll-target="#anecdotal-evidence">Anecdotal Evidence</a></li>
+  </ul></li>
   <li><a href="#sampling-from-the-population" id="toc-sampling-from-the-population" class="nav-link" data-scroll-target="#sampling-from-the-population">Sampling from the population</a></li>
   <li><a href="#sampling-procedures" id="toc-sampling-procedures" class="nav-link" data-scroll-target="#sampling-procedures">Sampling Procedures</a></li>
   <li><a href="#example-data-fakeschool" id="toc-example-data-fakeschool" class="nav-link" data-scroll-target="#example-data-fakeschool">Example Data: FakeSchool</a></li>
@@ -197,24 +199,24 @@ window.Quarto = {
 
 
 <p>The first step in conducting research is to identify topics or questions that are to be investigated. A clearly laid out research question is helpful in identifying what subjects or cases should be studied and what variables are important. It is also important to consider how data are collected so that the data are reliable and help achieve the research goals.</p>
-<section id="research-questions" class="level3">
-<h3 class="anchored" data-anchor-id="research-questions">Research Question(s)</h3>
+<section id="research-questions" class="level2">
+<h2 class="anchored" data-anchor-id="research-questions">Research Question(s)</h2>
 <p><strong>Research Question:</strong> Over the last 5 years, how many MU Data Science or Statistics graduates have gone on to get a job in a field directly related to their degree.</p>
 <p><strong>Population:</strong> All DS or Statistics graduates from MU from the last 5 years.</p>
 <p><strong>Q.</strong> Can we survey the entire population?</p>
 <p><strong>A.</strong> This would likely be very difficult. It is more realistic to assume that we can work with a fraction of the population.</p>
 <p><strong>Q.</strong> How can we ensure the sample is an accurate reflection of the population?</p>
 <p><strong>A.</strong> Appropriate sampling.</p>
-<p>Most research questions actually break down into 2 parts:</p>
+<p>Once we have an appropriate sample, most research questions actually break down into 2 parts:</p>
 <ul>
 <li><p>Descriptive Statistics: What relationship can we observe between the variables in the sample?</p></li>
 <li><p>Inferential Statistics: Supposing we see a relationship in the sample data, how much evidence is provided for a relationship in the population? Does the data provide lots of evidence for a relationship in the population, or could the relationship we see in the sample be due just to chance variation in the sampling process that gave us the data?</p></li>
 </ul>
-</section>
 <section id="anecdotal-evidence" class="level3">
 <h3 class="anchored" data-anchor-id="anecdotal-evidence">Anecdotal Evidence</h3>
 <p>“I met two students who did a Data Science degree in Maynooth but they are not working as data scientists. The degree must not get you a Data Science job.”</p>
-<p>There are two problems here. First, the data only represent two cases. Second, and more importantly, it is unclear whether these cases are actually representative of the population. Data collected in this haphazard fashion are called <strong>anecdotal evidence</strong>.</p>
+<p>There are two problems here. First, the data only represent two cases. Second, and more importantly, it is unclear whether these cases are actually representative of the population. Data collected in this haphazard fashion only provides <strong>anecdotal evidence</strong>.</p>
+</section>
 </section>
 <section id="sampling-from-the-population" class="level2">
 <h2 class="anchored" data-anchor-id="sampling-from-the-population">Sampling from the population</h2>
@@ -223,13 +225,13 @@ window.Quarto = {
 <p>Suppose that we were able to choose an appropriate sample that provides an accurate representation of the DS and Statistics Graduates:</p>
 <p><a href="https://openintro-ims.netlify.app/data-design"><img src="images/fig-pop-to-sample-1.png" class="img-fluid"></a></p>
 <p>Now we have two different summaries to consider for our research question:</p>
-<p><strong>Proportion of the sample that went into a directly related field</strong></p>
+<p><strong>Proportion of the <em>sample</em> that went into a directly related field</strong></p>
 <ul>
 <li><p>Statistic - describes the sample</p></li>
 <li><p>Can be known, but it changes depending on the sample</p></li>
 <li><p>Symbol - <span class="math inline">\(\hat{p}\)</span></p></li>
 </ul>
-<p><strong>Proportion of the population that went into a directly related field</strong>*</p>
+<p><strong>Proportion of the <em>population</em> that went into a directly related field</strong></p>
 <ul>
 <li><p>Parameter - describes the population</p></li>
 <li><p>Usually unknown - but we wish we knew it!</p></li>
@@ -268,6 +270,12 @@ window.Quarto = {
 <li><p>We will use the FakeSchool data to compare the sampling methods.</p></li>
 <li><p>The dataset contains information on 28 students from FakeSchool. We will assume that this is the population from which we will sample.</p></li>
 </ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tigerstats)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"FakeSchool"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>FakeSchool <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(FakeSchool)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Here is a snippet of the data:</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -285,9 +293,9 @@ window.Quarto = {
 <li><p>We can compute the true mean GPA</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>FakeSchool <span class="sc">%&gt;%</span> </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>FakeSchool <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.766429</code></pre>
 </div>
@@ -299,7 +307,7 @@ window.Quarto = {
 <section id="simple-random-sampling" class="level2">
 <h2 class="anchored" data-anchor-id="simple-random-sampling">Simple Random Sampling</h2>
 <p>In <strong>simple random sampling (SRS)</strong>, for a given sample size, n, each member of the population has an equal chance of being selected.</p>
-<p>Let’s select a simple random sample of 7 elements without replacement. We can accomplish this easily with the <code>dplyr</code> function <code>sample_n()</code> in R. This function requires two pieces of information:</p>
+<p>Let’s select a simple random sample of 7, without replacement. We can accomplish this easily with the <code>dplyr</code> function <code>sample_n()</code> in R. This function requires two pieces of information:</p>
 <ul>
 <li><p>the <code>size</code> of the sample</p></li>
 <li><p>the dataset from which to draw the sample</p></li>
@@ -307,10 +315,10 @@ window.Quarto = {
 <section id="simple-random-sampling-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="simple-random-sampling-in-r">Simple Random Sampling in R</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="do">## create a simple random sample (n = 7)</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>srs <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">sample_n</span>(<span class="dv">7</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>srs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">## create a simple random sample (n = 7)</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>srs <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>          <span class="fu">sample_n</span>(<span class="dv">7</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>srs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 5
   Students Sex   class   GPA Honors
@@ -323,10 +331,10 @@ window.Quarto = {
 6 Angela   F     Sr      4   Yes   
 7 Chris    M     So      4   Yes   </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate the mean of the srs</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>srs <span class="sc">%&gt;%</span> </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="do">## calculate the mean of the srs</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>srs <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.7</code></pre>
 </div>
@@ -363,25 +371,25 @@ window.Quarto = {
 <section id="systematic-sampling-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="systematic-sampling-in-r">Systematic Sampling in R</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># randomly selecting our starting element.</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>start<span class="ot">=</span><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">1</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>start</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># randomly selecting our starting element.</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>start<span class="ot">=</span><span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>,<span class="dv">1</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>start</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now find every 4th row index starting with start</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>sample_rows <span class="ot">&lt;-</span> <span class="fu">seq</span>(start, <span class="fu">nrow</span>(FakeSchool), <span class="at">by =</span> <span class="dv">4</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sample_rows</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now find every 4th row index starting with start</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>sample_rows <span class="ot">&lt;-</span> <span class="fu">seq</span>(start, <span class="fu">nrow</span>(FakeSchool), <span class="at">by =</span> <span class="dv">4</span>)</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sample_rows</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  3  7 11 15 19 23 27</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now choose the data corresponding to the row indexes</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sys_samp <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> sample_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Now choose the data corresponding to the row indexes</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sys_samp <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">filter</span>(<span class="fu">row_number</span>() <span class="sc">%in%</span> sample_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the systematic sample</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sys_samp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the systematic sample</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>sys_samp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 5
   Students Sex   class   GPA Honors
@@ -394,10 +402,10 @@ window.Quarto = {
 6 Bob      M     Sr     3.8  Yes   
 7 Ed       M     Sr     1.5  No    </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the mean GPA from the sys_samp</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>sys_samp <span class="sc">%&gt;%</span> </span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find the mean GPA from the sys_samp</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>sys_samp <span class="sc">%&gt;%</span> </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.704286</code></pre>
 </div>
@@ -432,9 +440,9 @@ window.Quarto = {
 <section id="stratified-sampling-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="stratified-sampling-in-r">Stratified Sampling in R</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># determine how many elements belong to each strata</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>FakeSchool <span class="sc">%&gt;%</span> </span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Honors) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># determine how many elements belong to each strata</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>FakeSchool <span class="sc">%&gt;%</span> </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Honors) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 2
   Honors     n
@@ -442,31 +450,31 @@ window.Quarto = {
 1 No        16
 2 Yes       12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the data for each strata</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="co"># honors</span></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>hon_strata <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">filter</span>(Honors <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># not honors</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>nonhon_strata <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">filter</span>(Honors <span class="sc">==</span> <span class="st">"No"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the data for each strata</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co"># honors</span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>hon_strata <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                <span class="fu">filter</span>(Honors <span class="sc">==</span> <span class="st">"Yes"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># not honors</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>nonhon_strata <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>                <span class="fu">filter</span>(Honors <span class="sc">==</span> <span class="st">"No"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Try to divide the sampling evenly, the sample size is odd so use the bigger number for the larger strata</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>hon_samp <span class="ot">&lt;-</span> hon_strata <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">sample_n</span>(<span class="dv">3</span>)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>nonhon_samp <span class="ot">&lt;-</span> nonhon_strata <span class="sc">%&gt;%</span> </span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample_n</span>(<span class="dv">4</span>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>strat_samp <span class="ot">&lt;-</span> <span class="fu">full_join</span>(hon_samp, nonhon_samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hon_samp <span class="ot">&lt;-</span> hon_strata <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>              <span class="fu">sample_n</span>(<span class="dv">3</span>)</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>nonhon_samp <span class="ot">&lt;-</span> nonhon_strata <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                <span class="fu">sample_n</span>(<span class="dv">4</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>strat_samp <span class="ot">&lt;-</span> <span class="fu">full_join</span>(hon_samp, nonhon_samp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Joining with `by = join_by(Students, Sex, class, GPA, Honors)`</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the stratified sample</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>strat_samp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># print the stratified sample</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>strat_samp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 7 × 5
   Students Sex   class   GPA Honors
@@ -479,10 +487,10 @@ window.Quarto = {
 6 Frank    M     Sr     2    No    
 7 Eva      F     Fr     1.8  No    </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the mean GPA from the stratified sample</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>strat_samp <span class="sc">%&gt;%</span> </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># get the mean GPA from the stratified sample</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>strat_samp <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2.932857</code></pre>
 </div>
@@ -504,28 +512,46 @@ window.Quarto = {
 </section>
 <section id="cluster-sampling" class="level2">
 <h2 class="anchored" data-anchor-id="cluster-sampling">Cluster Sampling</h2>
-<p><strong>Cluster sampling</strong> is a sampling method used when natural groups are evident in the population. The clusters should all be similar each other: each cluster should be a small scale representation of the population. To take a cluster sample, a random sample of the clusters is chosen. The elements of the randomly chosen clusters make up the sample.</p>
-<p>Let’s take a cluster sample using the grade level (freshmen, sophomore, junior, senior) of FakeSchool as the clusters. Let’s take a random sample of 2 of them.</p>
+<p><strong>Cluster sampling</strong> is a sampling method used when natural groups are evident in the population. The clusters should all be to similar each other: each cluster should be a small scale representation of the population. To take a cluster sample, a random sample of the clusters is chosen. The elements of the randomly chosen clusters make up the sample.</p>
+<p>Let’s assume that we have a cluster variable (with clusters 1-4) in the FakeSchool data.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 28 × 6
+   Students Sex   class   GPA Honors cluster
+   &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt; &lt;dbl&gt; &lt;fct&gt;    &lt;int&gt;
+ 1 Alice    F     Fr     3.8  Yes          1
+ 2 Brad     M     Fr     2.6  Yes          1
+ 3 Caleb    M     Fr     2.25 No           2
+ 4 Daisy    F     Fr     2.1  No           4
+ 5 Faye     F     Fr     2    No           2
+ 6 Eva      F     Fr     1.8  No           4
+ 7 Georg    M     Fr     1.4  No           2
+ 8 Andrea   F     So     4    Yes          2
+ 9 Betsy    F     So     4    Yes          1
+10 Chris    M     So     4    Yes          1
+# ℹ 18 more rows</code></pre>
+</div>
+</div>
 <section id="cluster-sampling-in-r" class="level3">
 <h3 class="anchored" data-anchor-id="cluster-sampling-in-r">Cluster Sampling in R</h3>
+<p>Let’s take a random sample of 2 of two clusters.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>cluster_samp <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_nest</span>(class) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">unnest</span>(data)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="do">## what class groups were used </span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>cluster_samp<span class="sc">$</span>class <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cluster_samp <span class="ot">&lt;-</span> FakeSchool <span class="sc">%&gt;%</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">group_nest</span>(cluster) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">sample_n</span>(<span class="at">size =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">unnest</span>(data)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="do">## what class groups were used </span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>cluster_samp<span class="sc">$</span>cluster <span class="sc">%&gt;%</span> <span class="fu">unique</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] Jr So
-Levels: Fr Jr So Sr</code></pre>
+<pre><code>[1] 4 1</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the mean GPA from the cluster sample</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>cluster_samp <span class="sc">%&gt;%</span> </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># calculate the mean GPA from the cluster sample</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>cluster_samp <span class="sc">%&gt;%</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(GPA) <span class="sc">%&gt;%</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  mean</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.057857</code></pre>
+<pre><code>[1] 2.82</code></pre>
 </div>
 </div>
 </section>
@@ -535,7 +561,6 @@ Levels: Fr Jr So Sr</code></pre>
 <p>Makes it possible to sample if there is no list of the entire population, but there is a list of subpopulations. For example, there is not a list of all school members in the United States. However, there is a list of schools that you could sample and then acquire the members list from each of the selected schools.</p>
 <p><strong>Weaknesses</strong></p>
 <p>Not always representative of the population. Elements within clusters tend to be similar to one another based on some characteristic(s). This can lead to over-representation or under-representation of those characteristics in the sample.</p>
-<p><img src="images/samplingpics.png" class="img-fluid"></p>
 
 
 </section>

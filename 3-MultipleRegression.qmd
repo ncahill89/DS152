@@ -356,8 +356,6 @@ $$\hat{\mbox{CL}}=\beta_0+\beta_1\mbox{RW}+\beta_2I(\mbox{sex}=\mbox{M})$$ (NB: 
 crab_mod3 <- lm(CL ~ RW + sex, data = crab_dat)
 crab_mod3
 
-crab_dat <- crab_dat %>% 
-              mutate(CL_pred3 = predict(crab_mod3))
 ```
 
 ::: question
@@ -366,7 +364,13 @@ crab_dat <- crab_dat %>%
 
 For a male crab the expected carapace length increases by 5.67 compared to a female crab.
 
+
 ```{r}
+
+crab_dat <- crab_dat %>% 
+              mutate(CL_pred3 = predict(crab_mod3))
+
+
 ggplot(data = crab_dat,
       aes(x = RW, y = CL, colour = sex)) +
   theme_bw() +
