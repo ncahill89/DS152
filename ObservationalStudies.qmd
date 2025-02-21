@@ -95,14 +95,15 @@ glimpse(gcfeeling)
 ```
 
 
-### **1. Understanding Categorical Variables**
+### **1. Exploring Categorical Variables**
 
 If `gcfeeling` contains categorical variables, we can visualize their distributions:
 
 ```{r}
 # Count and visualize categorical variables
 gcfeeling %>%
-  gather(key = "Variable", value = "Value") %>%
+  select_if(is.factor) %>% 
+  pivot_longer(everything(),names_to = "Variable", values_to = "Value") %>%
   ggplot(aes(x = Value)) +
   geom_bar() +
   facet_wrap(~ Variable, scales = "free") +
@@ -117,37 +118,44 @@ gcfeeling %>%
 # Check numeric variable distributions
 gcfeeling %>%
   select_if(is.numeric) %>%
-  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Value") %>%
-  ggplot(aes(x = Value)) +
-  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
-  facet_wrap(~ Variable, scales = "free") +
+  pivot_longer(everything(), names_to = "Variable", values_to = "Value") %>%
+  ggplot(aes(x = Variable,y = Value)) +
+  geom_boxplot() +
   theme_minimal()
 ```
 
 ### **3. Relationships Between Variables**
 
 #### **Pairwise Correlation (For Numeric Variables)**
+
 ```{r}
 # Compute correlation matrix
-cor(gcfeeling %>% select_if(is.numeric), use = "complete.obs")
+cor(gcfeeling$rating.fresh, gcfeeling$rating.js)
 ```
 
 #### **Scatterplots for Numeric Variables**
+
 ```{r}
-# Scatterplots for numeric variables
-gcfeeling %>%
-  select_if(is.numeric) %>%
-  GGally::ggpairs()
+ggplot(gcfeeling, aes(x = rating.fresh, y = rating.js)) +
+  geom_point()
 ```
 
 #### **Boxplots of Numerical Variables by Categories**
+
 ```{r}
 # Boxplots grouped by a categorical variable (assuming `groupvar` is categorical)
 gcfeeling %>%
-  ggplot(aes(x = factor(groupvar), y = numeric_var, fill = factor(groupvar))) +
+  ggplot(aes(x = athlete, y = rating.js)) +
   geom_boxplot() +
   theme_minimal()
 ```
+
+### **4. Modelling**
+
+```{r}
+lm(rating.js ~ rating.fresh + athlete + greek, data = gcfeeling)
+```
+
 
 
 ## Example 2: Does working out increase energy levels?

@@ -83,11 +83,20 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#observational-study" id="toc-observational-study" class="nav-link active" data-scroll-target="#observational-study">Observational Study</a></li>
-  <li><a href="#example-does-working-out-increase-energy-levels" id="toc-example-does-working-out-increase-energy-levels" class="nav-link" data-scroll-target="#example-does-working-out-increase-energy-levels">Example: Does working out increase energy levels?</a></li>
+  <li><a href="#example-1-student-happiness" id="toc-example-1-student-happiness" class="nav-link" data-scroll-target="#example-1-student-happiness">Example 1: Student Happiness</a>
+  <ul class="collapse">
+  <li><a href="#exploring-categorical-variables" id="toc-exploring-categorical-variables" class="nav-link" data-scroll-target="#exploring-categorical-variables"><strong>1. Exploring Categorical Variables</strong></a></li>
+  <li><a href="#exploring-numeric-variables" id="toc-exploring-numeric-variables" class="nav-link" data-scroll-target="#exploring-numeric-variables"><strong>2. Exploring Numeric Variables</strong></a></li>
+  <li><a href="#relationships-between-variables" id="toc-relationships-between-variables" class="nav-link" data-scroll-target="#relationships-between-variables"><strong>3. Relationships Between Variables</strong></a></li>
+  <li><a href="#modelling" id="toc-modelling" class="nav-link" data-scroll-target="#modelling"><strong>4. Modelling</strong></a></li>
+  </ul></li>
+  <li><a href="#example-2-does-working-out-increase-energy-levels" id="toc-example-2-does-working-out-increase-energy-levels" class="nav-link" data-scroll-target="#example-2-does-working-out-increase-energy-levels">Example 2: Does working out increase energy levels?</a></li>
   <li><a href="#confounding-variables" id="toc-confounding-variables" class="nav-link" data-scroll-target="#confounding-variables">Confounding variables</a></li>
-  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example 3</a>
+  <ul class="collapse">
   <li><a href="#reducing-confounding-matching" id="toc-reducing-confounding-matching" class="nav-link" data-scroll-target="#reducing-confounding-matching">Reducing confounding: Matching</a></li>
   <li><a href="#reducing-confounding-multiple-regression" id="toc-reducing-confounding-multiple-regression" class="nav-link" data-scroll-target="#reducing-confounding-multiple-regression">Reducing confounding: Multiple Regression</a></li>
+  </ul></li>
   <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability">Conditional Probability</a></li>
   <li><a href="#conditional-probability-1" id="toc-conditional-probability-1" class="nav-link" data-scroll-target="#conditional-probability-1">Conditional Probability</a></li>
   <li><a href="#whats-going-on" id="toc-whats-going-on" class="nav-link" data-scroll-target="#whats-going-on">What’s going on?</a></li>
@@ -159,8 +168,171 @@ ul.task-list li input[type="checkbox"] {
 <li><p>In retrospective observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.</p></li>
 </ul>
 </section>
-<section id="example-does-working-out-increase-energy-levels" class="level2">
-<h2 class="anchored" data-anchor-id="example-does-working-out-increase-energy-levels">Example: Does working out increase energy levels?</h2>
+<section id="example-1-student-happiness" class="level2">
+<h2 class="anchored" data-anchor-id="example-1-student-happiness">Example 1: Student Happiness</h2>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: abd</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: nlme</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'nlme'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:dplyr':
+
+    collapse</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: lattice</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: grid</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: mosaic</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Registered S3 method overwritten by 'mosaic':
+  method                           from   
+  fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+The 'mosaic' package masks several functions from core packages in order to add 
+additional features.  The original behavior of these functions should not be affected by this.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'mosaic'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:Matrix':
+
+    mean</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:dplyr':
+
+    count, do, tally</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:purrr':
+
+    cross</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following object is masked from 'package:ggplot2':
+
+    stat</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    binom.test, cor, cor.test, cov, fivenum, IQR, median, prop.test,
+    quantile, sd, t.test, var</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    max, mean, min, prod, range, sample, sum</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Welcome to tigerstats!
+To learn more about this package, consult its website:
+    http://homerhanumat.github.io/tigerstats</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 47
+Columns: 6
+$ rating.fresh &lt;int&gt; 9, 8, 5, 5, 8, 7, 9, 9, 7, 9, 8, 10, 8, 8, 9, 9, 6, 10, 1…
+$ rating.js    &lt;int&gt; 7, 10, 8, 8, 10, 9, 9, 8, 8, 8, 8, 10, 8, 10, 9, 7, 7, 10…
+$ greek        &lt;fct&gt; y, n, y, n, n, y, y, y, y, y, n, n, n, n, n, n, n, y, n, …
+$ athlete      &lt;fct&gt; n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, n, y, y, …
+$ rating.diff  &lt;int&gt; -2, 2, 3, 3, 2, 2, 0, -1, 1, -1, 0, 0, 0, 2, 0, -2, 1, 0,…
+$ happier      &lt;fct&gt; NO, YES, YES, YES, YES, YES, YES, NO, YES, NO, YES, YES, …</code></pre>
+</div>
+</div>
+<section id="exploring-categorical-variables" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-categorical-variables"><strong>1. Exploring Categorical Variables</strong></h3>
+<p>If <code>gcfeeling</code> contains categorical variables, we can visualize their distributions:</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="exploring-numeric-variables" class="level3">
+<h3 class="anchored" data-anchor-id="exploring-numeric-variables"><strong>2. Exploring Numeric Variables</strong></h3>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="relationships-between-variables" class="level3">
+<h3 class="anchored" data-anchor-id="relationships-between-variables"><strong>3. Relationships Between Variables</strong></h3>
+<section id="pairwise-correlation-for-numeric-variables" class="level4">
+<h4 class="anchored" data-anchor-id="pairwise-correlation-for-numeric-variables"><strong>Pairwise Correlation (For Numeric Variables)</strong></h4>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.402741</code></pre>
+</div>
+</div>
+</section>
+<section id="scatterplots-for-numeric-variables" class="level4">
+<h4 class="anchored" data-anchor-id="scatterplots-for-numeric-variables"><strong>Scatterplots for Numeric Variables</strong></h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="boxplots-of-numerical-variables-by-categories" class="level4">
+<h4 class="anchored" data-anchor-id="boxplots-of-numerical-variables-by-categories"><strong>Boxplots of Numerical Variables by Categories</strong></h4>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modelling" class="level3">
+<h3 class="anchored" data-anchor-id="modelling"><strong>4. Modelling</strong></h3>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rating.js ~ rating.fresh + athlete + greek, data = gcfeeling)
+
+Coefficients:
+ (Intercept)  rating.fresh      athletey        greeky  
+      5.0287        0.3277        0.7594        0.8272  </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="example-2-does-working-out-increase-energy-levels" class="level2">
+<h2 class="anchored" data-anchor-id="example-2-does-working-out-increase-energy-levels">Example 2: Does working out increase energy levels?</h2>
 <p>We want to evaluate if regularly working out has any impact on energy levels.</p>
 <ul>
 <li><p>In an observational study, we sample two types of people from the population, those who choose to work out regularly and those who don’t.</p></li>
@@ -181,16 +353,15 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Confounding variables:</strong> Extraneous variables that affect both the exposure (e.g., working out) and the outcome variables (e.g., increased energy), and that make it seem like there is a relationship between them are called confounding variables.</p>
 <p><img src="images/Confounding.jpg" class="img-fluid"></p>
 </section>
-<section id="example" class="level2">
-<h2 class="anchored" data-anchor-id="example">Example</h2>
+<section id="example-3" class="level2">
+<h2 class="anchored" data-anchor-id="example-3">Example 3</h2>
 <p>Many years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (<em>MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3</em>).</p>
 <p><img src="images/Confounding3.png" class="img-fluid"></p>
 <p>If we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.</p>
 <p><img src="images/Confounding2.png" class="img-fluid"></p>
 <p>Once the confounding variable, smoking is taken into account the correlation between coffee and pancreatic cancer disappears.</p>
-</section>
-<section id="reducing-confounding-matching" class="level2">
-<h2 class="anchored" data-anchor-id="reducing-confounding-matching">Reducing confounding: Matching</h2>
+<section id="reducing-confounding-matching" class="level3">
+<h3 class="anchored" data-anchor-id="reducing-confounding-matching">Reducing confounding: Matching</h3>
 <p>Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.</p>
 <ul>
 <li><p>Rather than using random assignment to equalize the experimental groups, the experimenters do it by matching observable characteristics.</p></li>
@@ -199,14 +370,15 @@ ul.task-list li input[type="checkbox"] {
 <li><p>The researchers use subject-area knowledge to identify characteristics that are critical to match.</p></li>
 </ul>
 </section>
-<section id="reducing-confounding-multiple-regression" class="level2">
-<h2 class="anchored" data-anchor-id="reducing-confounding-multiple-regression">Reducing confounding: Multiple Regression</h2>
+<section id="reducing-confounding-multiple-regression" class="level3">
+<h3 class="anchored" data-anchor-id="reducing-confounding-multiple-regression">Reducing confounding: Multiple Regression</h3>
 <p>Multiple regression models specify the way in which different characteristics/variables (exposure and confounders) affects the outcome, thereby isolating the effect of each variable.</p>
 <p>chance of cancer = a x (coffee) + b x (smoking) + c x (gender) + d x (age)</p>
 <ul>
 <li><p>this allows us to make a statement about what would happen if one variable (i.e., the exposure) were to change while all the others (i.e., the confounders) remained the same.</p></li>
 <li><p>Obtaining isolated exposure effects conditional on the other variables remaining constant is said to adjust for (or control for) the effect of these confounders</p></li>
 </ul>
+</section>
 </section>
 <section id="conditional-probability" class="level2">
 <h2 class="anchored" data-anchor-id="conditional-probability">Conditional Probability</h2>
@@ -248,7 +420,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -261,7 +433,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -280,7 +452,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="384"></p>
 </figure>
 </div>
 </div>

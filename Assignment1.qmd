@@ -24,7 +24,7 @@ nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzf
 
 ## Instructions
 
-Answer all questions for continuous assessment. Due: **4pm on Friday, 28th February 2025**. Please write your answers in a Word file, save it as a **pdf document** and upload it to Moodle before the deadline. Alternatively, you may write down your answers using pen and paper, take photographs and upload a **pdf document** of the photos you've taken of your assignment.
+Answer all questions for continuous assessment. Due: **4pm on Friday, 28th February 2025**. 
 
 ## Question
 
