@@ -1,0 +1,95 @@
+---
+title: "DS152 Tutorial Sheet 2"
+format: html
+editor: visual
+---
+
+## Instructions
+
+-   Attempt the questions below before your tutorial in the week beginning 3rd March 2025.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## **Exercise**
+
+Run the code below to read a dataset called `car_evaluation` into R. Look at the data and the variables that you have to work with. More details about the data are given below. 
+
+```{r, message = FALSE}
+library(tidyverse)
+car_evaluation <- read_csv("https://www.dropbox.com/s/s54upw5jhoe6r4q/car_evaluation.csv?raw=1")
+```
+
+There are 1594 cars in this database that are classified as acceptable (acc) or unacceptable (unacc) according to the following attributes:
+
+  - buying_price: buying price (low, medium, high, vhigh)
+  
+  - maintenance_cost: ("vhigh", "high",  "med",   "low")
+  
+  - doors: ("2","3","4","5more")
+  
+  - persons: capacity in terms of persons to carry (2,4,more)
+  
+  - lugboot: the size of luggage boot (small, med, big)
+  
+  - safety: estimated safety of the car (low, med, high)
+
+**(a)** Complete the code below to create a bar plot that shows the number of observations within each `buying_price` category. What do you learn from this visualisation?  
+
+```{r, eval = FALSE}
+ggplot(car_evaluation, aes(??)) +
+  geom_??
+```
+
+   (i) Now add  `fill = decision` to the `aes()` of the plot. What do you learn from this visualisation? 
+
+  (ii) Next facet using the `safety` variable. What do you learn from this visualisation? 
+
+**(b)** Run the following code which aims to fit a logistic regression model using `buying_price` and `safety` as predictor variables for the decision. This code will give you an error. What is causing the error?
+
+```{r, eval = FALSE}
+fit_logistic <- glm(decision ~ buying_price + safety, 
+                    family = "binomial", 
+                    data = car_evaluation)
+fit_logistic
+```
+
+**(c)** Complete the code below to create a variable in the dataset called `decision_binary` with "acc" as the reference group. 
+
+```{r, eval = FALSE}
+car_evaluation <- car_evaluation %>%
+  mutate(decision_binary = ??)
+```
+
+  (i) Now complete the code below to run the logistic regression with `decision_binary` as the outcome. Does this give you an error? What do you note about the coefficients? 
+
+```{r, eval = FALSE}
+fit_logistic <- glm(??)
+fit_logistic
+```
+
+  (ii) Once you have fit the model, run the following code to obtain the accuracy of the decision classification. (Note: The code is similar to the code you used in Lab 3 but here we use summarise when doing the calculation for `percentage_correct`). Change to `eval = TRUE` when you are ready to run this code. Did your model do a good job? 
+
+```{r, eval = FALSE}
+threshold <- 0.5
+
+car_predict <- car_evaluation %>%
+                   mutate(p_hat = predict(fit_logistic, type = "response") %>% round(2),
+                          type_pred = ifelse(p_hat >= threshold, 1,0))
+ 
+car_predict %>% summarise(n_correct = sum(type_pred == decision_binary),
+                          n_total = n(),
+                          percentage_correct = n_correct*100/n_total)
+```
+
+  (iii) Now use `group_by` to breakdown the accuracy results by decision category (Note: because we set up the code using `summarise` it's easy to add `group_by()` in here and get the breakdown within each decision group). Change to `eval = TRUE` when you are ready to run this code. What do you learn from these results? 
+
+```{r, eval = FALSE}
+car_predict %>% group_by(decision) %>% 
+                summarise(n_correct = sum(type_pred == decision_binary),
+                          n_total = n(),
+                          percentage_correct = n_correct*100/n_total)
+```
+

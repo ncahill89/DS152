@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to Introduction to Data Science (2)! – Introduction to Data Science (2)</title>
+<title>DS152 Tutorial Sheet 2 – Introduction to Data Science (2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -82,9 +116,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lecture-notes" id="toc-lecture-notes" class="nav-link active" data-scroll-target="#lecture-notes">Lecture Notes</a></li>
-  <li><a href="#tutorial-sheets" id="toc-tutorial-sheets" class="nav-link" data-scroll-target="#tutorial-sheets">Tutorial Sheets</a></li>
-  <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a></li>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise"><strong>Exercise</strong></a></li>
   </ul>
 </nav>
     </div>
@@ -93,7 +126,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to Introduction to Data Science (2)!</h1>
+<h1 class="title">DS152 Tutorial Sheet 2</h1>
 </div>
 
 
@@ -110,24 +143,79 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the course website for DS152 Introduction to Data Science (2).</p>
-<p><a href="https://ncahill89.github.io/DS152/0-Information.html">Module information</a></p>
-<p>Lecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.</p>
-<p>Contact: Niamh Cahill (niamh.cahill@mu.ie)</p>
-<section id="lecture-notes" class="level2">
-<h2 class="anchored" data-anchor-id="lecture-notes">Lecture Notes</h2>
-<p>1: <a href="https://ncahill89.github.io/DS152/1-TidyverseRecap.html">Tidyverse Recap</a></p>
-<p>2: <a href="https://ncahill89.github.io/DS152/2-Correlation.html">Correlation (and Causation)</a></p>
-<p>3: <a href="https://ncahill89.github.io/DS152/3-MultipleRegression.html">Multiple Regression Models</a></p>
-<p>4: <a href="https://ncahill89.github.io/DS152/4-sampling.html">Sampling Principles and Strategies</a></p>
+<section id="instructions" class="level2">
+<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
+<ul>
+<li>Attempt the questions below before your tutorial in the week beginning 3rd March 2025.</li>
+</ul>
 </section>
-<section id="tutorial-sheets" class="level2">
-<h2 class="anchored" data-anchor-id="tutorial-sheets">Tutorial Sheets</h2>
-<p>Tutorial Sheet 1: <a href="https://ncahill89.github.io/DS152/Tutorial1.html">Tidyverse Recap</a></p>
-</section>
-<section id="assignments" class="level2">
-<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
-<p>Assignment 1: <a href="https://ncahill89.github.io/DS152/Assignment1.html">Tidyverse Recap</a></p>
+<section id="exercise" class="level2">
+<h2 class="anchored" data-anchor-id="exercise"><strong>Exercise</strong></h2>
+<p>Run the code below to read a dataset called <code>car_evaluation</code> into R. Look at the data and the variables that you have to work with. More details about the data are given below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>car_evaluation <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://www.dropbox.com/s/s54upw5jhoe6r4q/car_evaluation.csv?raw=1"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>There are 1594 cars in this database that are classified as acceptable (acc) or unacceptable (unacc) according to the following attributes:</p>
+<ul>
+<li><p>buying_price: buying price (low, medium, high, vhigh)</p></li>
+<li><p>maintenance_cost: (“vhigh”, “high”, “med”, “low”)</p></li>
+<li><p>doors: (“2”,“3”,“4”,“5more”)</p></li>
+<li><p>persons: capacity in terms of persons to carry (2,4,more)</p></li>
+<li><p>lugboot: the size of luggage boot (small, med, big)</p></li>
+<li><p>safety: estimated safety of the car (low, med, high)</p></li>
+</ul>
+<p><strong>(a)</strong> Complete the code below to create a bar plot that shows the number of observations within each <code>buying_price</code> category. What do you learn from this visualisation?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(car_evaluation, <span class="fu">aes</span>(??)) <span class="sc">+</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  geom_??</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="i">
+<li><p>Now add <code>fill = decision</code> to the <code>aes()</code> of the plot. What do you learn from this visualisation?</p></li>
+<li><p>Next facet using the <code>safety</code> variable. What do you learn from this visualisation?</p></li>
+</ol>
+<p><strong>(b)</strong> Run the following code which aims to fit a logistic regression model using <code>buying_price</code> and <code>safety</code> as predictor variables for the decision. This code will give you an error. What is causing the error?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fit_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(decision <span class="sc">~</span> buying_price <span class="sc">+</span> safety, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="at">family =</span> <span class="st">"binomial"</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> car_evaluation)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fit_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>(c)</strong> Complete the code below to create a variable in the dataset called <code>decision_binary</code> with “acc” as the reference group.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>car_evaluation <span class="ot">&lt;-</span> car_evaluation <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">decision_binary =</span> ??)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="i">
+<li>Now complete the code below to run the logistic regression with <code>decision_binary</code> as the outcome. Does this give you an error? What do you note about the coefficients?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(??)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="i">
+<li>Once you have fit the model, run the following code to obtain the accuracy of the decision classification. (Note: The code is similar to the code you used in Lab 3 but here we use summarise when doing the calculation for <code>percentage_correct</code>). Change to <code>eval = TRUE</code> when you are ready to run this code. Did your model do a good job?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>threshold <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>car_predict <span class="ot">&lt;-</span> car_evaluation <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">p_hat =</span> <span class="fu">predict</span>(fit_logistic, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">type_pred =</span> <span class="fu">ifelse</span>(p_hat <span class="sc">&gt;=</span> threshold, <span class="dv">1</span>,<span class="dv">0</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>car_predict <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n_correct =</span> <span class="fu">sum</span>(type_pred <span class="sc">==</span> decision_binary),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_total =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">percentage_correct =</span> n_correct<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>n_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="i">
+<li>Now use <code>group_by</code> to breakdown the accuracy results by decision category (Note: because we set up the code using <code>summarise</code> it’s easy to add <code>group_by()</code> in here and get the breakdown within each decision group). Change to <code>eval = TRUE</code> when you are ready to run this code. What do you learn from these results?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>car_predict <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(decision) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">summarise</span>(<span class="at">n_correct =</span> <span class="fu">sum</span>(type_pred <span class="sc">==</span> decision_binary),</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_total =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">percentage_correct =</span> n_correct<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>n_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 </section>

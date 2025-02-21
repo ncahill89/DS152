@@ -9,81 +9,161 @@ knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 ```
 
-## Scientific Studies
+<!-- ## Scientific Studies -->
 
-**Observational**
+<!-- **Observational** -->
 
--   Collect data in a way that does not directly interfere with how the data arise, i.e. merely "observe";
+<!-- -   Collect data in a way that does not directly interfere with how the data arise, i.e. merely "observe"; -->
 
--   Based on an observational study, we can only establish an association, in other words correlation, between the explanatory and response variables;
+<!-- -   Based on an observational study, we can only establish an association, in other words correlation, between the explanatory and response variables; -->
 
--   With an observational study you are just observing the data and collecting it after or as it occurs.
+<!-- -   With an observational study you are just observing the data and collecting it after or as it occurs. -->
 
-**Experimental**
+<!-- **Experimental** -->
 
--   Randomly assign subjects to treatments
+<!-- -   Randomly assign subjects to treatments -->
 
--   Establish causal connections
+<!-- -   Establish causal connections -->
 
-## Studies and Conclusions
+<!-- ## Studies and Conclusions -->
 
-![](images/studies_conclusions.png)
+<!-- ![](images/studies_conclusions.png) -->
 
-## Why use observational studies?
+<!-- ## Why use observational studies? -->
 
-Reasons why we must sometimes use an observational study instead of an experiment ...
+<!-- Reasons why we must sometimes use an observational study instead of an experiment ... -->
 
-1.  It is unethical or impossible to assign people to receive a specific treatment.
+<!-- 1.  It is unethical or impossible to assign people to receive a specific treatment. -->
 
-    -   For example, if you want to know the impact of smoking on cancer you cannot design a study and assign some people to be smokers and other to be non-smokers. That is not ethical.
+<!--     -   For example, if you want to know the impact of smoking on cancer you cannot design a study and assign some people to be smokers and other to be non-smokers. That is not ethical. -->
 
-2.  Certain exposure variables are inherent traits and cannot be randomly assigned.
+<!-- 2.  Certain exposure variables are inherent traits and cannot be randomly assigned. -->
 
-## Observational studies
+<!-- ## Observational studies -->
 
--   Observational studies are very useful when it is not possible to design a study
+<!-- -   Observational studies are very useful when it is not possible to design a study -->
 
--   Obervational studies often have large sample sizes
+<!-- -   Obervational studies often have large sample sizes -->
 
--   They are cheaper than designing a study (for example, clinical trials in medicine are very expensive)
+<!-- -   They are cheaper than designing a study (for example, clinical trials in medicine are very expensive) -->
 
--   You have to get to know the data a lot better with observational studies. You haven't set up to study or controlled for influences other than the thing you are studying.
+<!-- -   You have to get to know the data a lot better with observational studies. You haven't set up to study or controlled for influences other than the thing you are studying. -->
 
-## 
+<!-- ##  -->
 
-\centering
+<!-- \centering -->
 
-![](images/popsamp.png)
+<!-- ![](images/popsamp.png) -->
 
-## 
+<!-- ##  -->
 
-\centering
+<!-- \centering -->
 
-![](images/precbias.png)
+<!-- ![](images/precbias.png) -->
 
-## Retrospective Vs Prospective Studies
+<!-- ## Retrospective Vs Prospective Studies -->
 
-If an observational study uses data from the past, it is called retrospective study, whereas if data are collected throughout the study, it is called prospective;
+<!-- If an observational study uses data from the past, it is called retrospective study, whereas if data are collected throughout the study, it is called prospective; -->
 
-![](images/retroprosp.png)
+<!-- ![](images/retroprosp.png) -->
 
-## Example: Does working out increase energy levels?
+## Observational Study
+
+**Observational Study: A study which observes individuals and measures variables, but does not attempt to influence the responses.**
+
+
+  - An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.
+
+  - An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain
+  
+  - In prospective observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”
+  
+  - In retrospective observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.
+
+## Example 1: Student Happiness 
+
+```{r}
+# Load necessary packages
+library(tidyverse)
+library(tigerstats)
+
+# Load the dataset
+data("gcfeeling")
+
+# View basic structure
+glimpse(gcfeeling)
+```
+
+
+### **1. Understanding Categorical Variables**
+
+If `gcfeeling` contains categorical variables, we can visualize their distributions:
+
+```{r}
+# Count and visualize categorical variables
+gcfeeling %>%
+  gather(key = "Variable", value = "Value") %>%
+  ggplot(aes(x = Value)) +
+  geom_bar() +
+  facet_wrap(~ Variable, scales = "free") +
+  theme_minimal() +
+  coord_flip()
+```
+
+
+### **2. Exploring Numeric Variables**
+
+```{r}
+# Check numeric variable distributions
+gcfeeling %>%
+  select_if(is.numeric) %>%
+  pivot_longer(cols = everything(), names_to = "Variable", values_to = "Value") %>%
+  ggplot(aes(x = Value)) +
+  geom_histogram(bins = 30, fill = "steelblue", color = "black") +
+  facet_wrap(~ Variable, scales = "free") +
+  theme_minimal()
+```
+
+### **3. Relationships Between Variables**
+
+#### **Pairwise Correlation (For Numeric Variables)**
+```{r}
+# Compute correlation matrix
+cor(gcfeeling %>% select_if(is.numeric), use = "complete.obs")
+```
+
+#### **Scatterplots for Numeric Variables**
+```{r}
+# Scatterplots for numeric variables
+gcfeeling %>%
+  select_if(is.numeric) %>%
+  GGally::ggpairs()
+```
+
+#### **Boxplots of Numerical Variables by Categories**
+```{r}
+# Boxplots grouped by a categorical variable (assuming `groupvar` is categorical)
+gcfeeling %>%
+  ggplot(aes(x = factor(groupvar), y = numeric_var, fill = factor(groupvar))) +
+  geom_boxplot() +
+  theme_minimal()
+```
+
+
+## Example 2: Does working out increase energy levels?
 
 We want to evaluate if regularly working out has any impact on energy levels.
 
 -   In an observational study, we sample two types of people from the population, those who choose to work out regularly and those who don't.
 
--   We ask the people in each group to rate their enery levels from 1-10.
+-   We ask the people in each group to rate their energy levels from 1-10.
 
 -   Then, we find the average "energy level" for the two groups of people and compare.
 
-## Example: Does working out increase energy levels?
 
 ![](images/EnergyLevels.jpg)
 
 Can we conclude from this that working out is the cause of increased energy levels?
-
-## Example: Does working out increase energy levels?
 
 -   There may be other variables that we didn't control for in this study that contribute to the observed difference.
 
@@ -99,13 +179,11 @@ Can we conclude from this that working out is the cause of increased energy leve
 
 ![](images/Confounding.jpg)
 
-## Example
+## Example 3
 
 Many years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (*MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3*).
 
 ![](images/Confounding3.png)
-
-## Example
 
 If we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.
 
@@ -113,7 +191,7 @@ If we take coffee as our exposure of interest and correlate it with an increased
 
 Once the confounding variable, smoking is taken into account the correlation between coffee and pancreatic cancer disappears.
 
-## Reducing confounding: Matching
+### Reducing confounding: Matching
 
 Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.
 
@@ -125,7 +203,7 @@ Matching is a technique that involves selecting study participants with similar 
 
 -   The researchers use subject-area knowledge to identify characteristics that are critical to match.
 
-## Reducing confounding: Multiple Regression
+### Reducing confounding: Multiple Regression
 
 Multiple regression models specify the way in which different characteristics/variables (exposure and confounders) affects the outcome, thereby isolating the effect of each variable.
 

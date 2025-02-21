@@ -22,42 +22,37 @@ nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzf
 
 ```
 
-## Instructions 
-Answer all questions for continuous assessment. Due: **4pm on Friday, 28th February 2025**. Please write your answers in a Word file, save it as a **pdf document** and upload it to Moodle before the deadline. Alternatively, you may write down your answers using pen and paper, take photographs and upload a **pdf document** of the photos you've taken of your assignment. 
+## Instructions
 
-
+Answer all questions for continuous assessment. Due: **4pm on Friday, 28th February 2025**. Please write your answers in a Word file, save it as a **pdf document** and upload it to Moodle before the deadline. Alternatively, you may write down your answers using pen and paper, take photographs and upload a **pdf document** of the photos you've taken of your assignment.
 
 ## Question
 
-Synopsis: US Department of Commerce, National Oceanic & Atmospheric Administration provides information on fatalities and injuries associated with natural calamities/disasters across different US states.  
+Synopsis: US Department of Commerce, National Oceanic & Atmospheric Administration provides information on fatalities and injuries associated with natural calamities/disasters across different US states.
 
 If you want to view the data in R you can run the following:
 
-\scriptsize
 
 ```{r, eval = FALSE}
 nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzfrj/nat_disaster_dat.csv?rlkey=7nx78bcpnj6ufm0hdq91ke8np&raw=1")
 ```
 
-
 A glimpse if the data is shown below
-
 
 ```{r}
 glimpse(nat_disaster_dat)
 ```
 
-Note: 
+Note:
 
-  - `STATE` = US State
-  - `EVTYPE` = event type
-  - `FATALITIES` = \# of fatalities 
-  - `INJURIES` = \# if injuries. 
+-   `STATE` = US State
+-   `EVTYPE` = event type
+-   `FATALITIES` = \# of fatalities
+-   `INJURIES` = \# if injuries.
 
-(i) How many observations are in the dataset? 
+(i) How many observations are in the dataset?
 
-
-(ii) Assume you want to create the summary below, which sums up the number of fatalities within each event type and then arranges by the total fatalities, in descending order. 
+(ii) Assume you want to create the summary below, which sums up the number of fatalities within each event type and then arranges by the total fatalities, in descending order.
 
 ```{r, eval = TRUE, echo=FALSE}
 nat_disaster_summary <- nat_disaster_dat %>% 
@@ -67,7 +62,7 @@ nat_disaster_summary <- nat_disaster_dat %>%
 nat_disaster_summary
 ```
 
-In the code below, what should [A], [B], [C] and [D] be replaced with to create this summary? 
+In the code below, what should \[A\], \[B\], \[C\] and \[D\] be replaced with to create this summary?
 
 ```{r, eval = FALSE}
 nat_disaster__summary <- nat_disaster_dat %>% 
@@ -76,13 +71,13 @@ nat_disaster__summary <- nat_disaster_dat %>%
                           arrange([D](total_fatalities))
 ```
 
-[A] = 
+\[A\] =
 
-[B] = 
+\[B\] =
 
-[C] = 
+\[C\] =
 
-[D] = 
+\[D\] =
 
 (iii) Now assume you want to filter the summarised data from (ii) so that you have a dataset with only events where the total fatalities are greater than 200, as shown.
 
@@ -92,23 +87,18 @@ nat_disaster_filter <- nat_disaster_summary %>%
 nat_disaster_filter
 ```
 
-
-In the code below, what should [A] and [B] be replaced with to create the filtered dataet? 
-
+In the code below, what should \[A\] and \[B\] be replaced with to create the filtered dataet?
 
 ```{r, eval = FALSE}
 nat_disaster_filter <- nat_disaster_summary %>% 
                         [A]([B])
 ```
 
+\[A\] =
 
+\[B\] =
 
-[A] = 
-
-[B] = 
-
-
-(iv) Now assume you want to create the following barplot which shows the total fatalities per event type, using the filtered data from part (iii). 
+(iv) Now assume you want to create the following barplot which shows the total fatalities per event type, using the filtered data from part (iii).
 
 ```{r, eval = TRUE, echo=FALSE}
 ggplot(nat_disaster_filter, aes(x = EVTYPE, y = total_fatalities)) +
@@ -118,9 +108,7 @@ ggplot(nat_disaster_filter, aes(x = EVTYPE, y = total_fatalities)) +
   ylab("# fatalities")
 ```
 
-
-In the code below, what should [A], [B] and [C] be replaced with to create the plot? 
-
+In the code below, what should \[A\], \[B\] and \[C\] be replaced with to create the plot?
 
 ```{r, eval = FALSE}
 ggplot(nat_disaster_filter, aes(x = [A], y = [B])) +
@@ -130,11 +118,8 @@ ggplot(nat_disaster_filter, aes(x = [A], y = [B])) +
   ylab("# fatalities")
 ```
 
-[A] = 
+\[A\] =
 
-[B] = 
+\[B\] =
 
-[C] = 
-
-
-
+\[C\] =

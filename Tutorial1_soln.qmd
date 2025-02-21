@@ -7,8 +7,6 @@ format:
 editor: visual
 ---
 
-
-
 ## Exercise 1
 
 ```{r setup, include=FALSE}
@@ -28,22 +26,17 @@ The table below displays the number of tuberculosis cases documented by the Worl
 table1
 ```
 
-
-(a) The data table below organizes the same data in an untidy format. 
-
+(a) The data table below organizes the same data in an untidy format.
 
 ```{r, echo = TRUE}
 untidy_tab1
 ```
 
+(i) What are the characteristics of this dataset that make it not tidy?
 
-(i) What are the characteristics of this dataset that make it not tidy? 
+[The dataset is untidy because the observations are spread over multiple rows.]{style="background-color: lightblue;"}
 
-  <span style="background-color: lightblue;"> The dataset is untidy because the observations are spread over multiple rows.</span>
-
-
-(ii) In the code below, what should [A], [B], [C], [D] and [E] be replaced with to make this dataset tidy? 
-
+(ii) In the code below, what should \[A\], \[B\], \[C\], \[D\] and \[E\] be replaced with to make this dataset tidy?
 
 ```{r}
 tidy_tab1 <- untidy_tab1 %>% 
@@ -52,30 +45,21 @@ tidy_tab1 <- untidy_tab1 %>%
 tidy_tab1
 ```
 
-<span style="background-color: lightblue;"> 
-[A] = wider,
-[B] = names_from,
-[C] = type,
-[D] = values_from,
-[E] = count,
-</span>
+[\[A\] = wider, \[B\] = names_from, \[C\] = type, \[D\] = values_from, \[E\] = count,]{style="background-color: lightblue;"}
 
-(b) The data table below, which includes the cases data, is organized in an untidy format. 
-
+(b) The data table below, which includes the cases data, is organized in an untidy format.
 
 ```{r, echo = TRUE}
 untidy_tab2a
 ```
 
+(i) What are the characteristics of this dataset that make it not tidy?
 
-(i) What are the characteristics of this dataset that make it not tidy? 
+[Column names are values of the `year` variable.]{style="background-color: lightblue;"}
 
-<span style="background-color: lightblue;"> Column names are values of the `year` variable. </span>
-  
-<span style="background-color: lightblue;"> The cases variable is spread over two columns.</span>
-  
-(ii) In the code below, what should [A], [B], [C], [D], [E] and [F] be replaced with to make this dataset tidy? 
+[The cases variable is spread over two columns.]{style="background-color: lightblue;"}
 
+(ii) In the code below, what should \[A\], \[B\], \[C\], \[D\], \[E\] and \[F\] be replaced with to make this dataset tidy?
 
 ```{r}
 tidy_tab2a <- untidy_tab2a %>%  
@@ -85,39 +69,29 @@ tidy_tab2a <- untidy_tab2a %>%
 tidy_tab2a
 ```
 
-<span style="background-color: lightblue;">
-[A] = longer,
-[B] = country,
-[C] = names_to,
-[D] = "year" (note "" around year is important here because you are creating a new variable),
-[E] = values_to,
-[F] = "cases" (note as with year, "" around cases is important here)
-</span>
+[\[A\] = longer, \[B\] = country, \[C\] = names_to, \[D\] = "year" (note "" around year is important here because you are creating a new variable), \[E\] = values_to, \[F\] = "cases" (note as with year, "" around cases is important here)]{style="background-color: lightblue;"}
 
-
-(c) Once `tidy_tab2a` has been created you should make the `year` variable numeric. Replace [G] in the code below to achieve this.   
+(c) Once `tidy_tab2a` has been created you should make the `year` variable numeric. Replace \[G\] in the code below to achieve this.
 
 ```{r}
 tidy_tab2a <- tidy_tab2a %>% mutate(year = as.numeric(year))
 ```
 
-<span style="background-color: lightblue;">[G] = as.numeric</span>
+[\[G\] = as.numeric]{style="background-color: lightblue;"}
 
-(d) The data table below includes the population data organized in a tidy format (note: China has an additional year of data): 
+(d) The data table below includes the population data organized in a tidy format (note: China has an additional year of data):
 
 ```{r, echo = TRUE}
 tidy_tab2b
 ```
 
-
-Assume you want to join `tidy_tab2a` and `tidy_tab2b` in order to produce `table1`. Would you use `left_join` or `right_join`? Give a reason for your answer.  
+Assume you want to join `tidy_tab2a` and `tidy_tab2b` in order to produce `table1`. Would you use `left_join` or `right_join`? Give a reason for your answer.
 
 ```{r, echo = TRUE}
 left_join(tidy_tab2a,tidy_tab2b)
 ```
 
-<span style="background-color: lightblue;">`right_join` would include the additional year for China with an NA for the cases data and so would not produce `table1`. </span>
-
+[`right_join` would include the additional year for China with an NA for the cases data and so would not produce `table1`.]{style="background-color: lightblue;"}
 
 ## Exercise 2
 
@@ -132,7 +106,7 @@ insect_dat <- tibble(insect_id, temperature, weight_gain)
 insect_dat
 ```
 
-(a)  The correlation between temperature and weight gain is 0.84. What code would you use to do this calculation in R?
+(a) The correlation between temperature and weight gain is 0.84. What code would you use to do this calculation in R?
 
 ```{r}
 cor(insect_dat$temperature, insect_dat$weight_gain)
@@ -140,11 +114,11 @@ cor(insect_dat$temperature, insect_dat$weight_gain)
 
 (b) Interpret the correlation result.
 
-<span style="background-color: lightblue;">There is a strong positive correlation between temperature and weight gain.</span>
+[There is a strong positive correlation between temperature and weight gain.]{style="background-color: lightblue;"}
 
 (c) What does it mean to say that two variables are negatively correlated?
 
-<span style="background-color: lightblue;">As one variable increases in value the other decreases. </span>
+[As one variable increases in value the other decreases.]{style="background-color: lightblue;"}
 
 (d) Why should you inspect a scatter plot of the data even though you have information on the correlation between two variables?
 
@@ -153,14 +127,12 @@ ggplot(insect_dat, aes(x = temperature, y = weight_gain)) +
   geom_point()
 ```
 
-<span style="background-color: lightblue;">Inspecting a scatter plot of the data is valuable for several reasons, even if you already know the correlation between two variables:</span>
+[Inspecting a scatter plot of the data is valuable for several reasons, even if you already know the correlation between two variables:]{style="background-color: lightblue;"}
 
-<span style="background-color: lightblue;">1. **Visual Confirmation**: While correlation coefficients provide a numerical measure of the strength and direction of the relationship between two variables, a scatter plot allows you to visually confirm this relationship. Sometimes, the correlation coefficient might indicate a weak relationship, but upon visual inspection, you might notice a clear pattern or non-linear trend in the data that was not apparent from the correlation alone.</span>
+[1. **Visual Confirmation**: While correlation coefficients provide a numerical measure of the strength and direction of the relationship between two variables, a scatter plot allows you to visually confirm this relationship. Sometimes, the correlation coefficient might indicate a weak relationship, but upon visual inspection, you might notice a clear pattern or non-linear trend in the data that was not apparent from the correlation alone.]{style="background-color: lightblue;"}
 
-<span style="background-color: lightblue;">2. **Outlier Detection**: Scatter plots help in identifying outliers, which are data points that deviate significantly from the overall pattern of the data. Outliers can have a disproportionate influence on the correlation, potentially skewing the interpretation of the relationship between variables.</span>
+[2. **Outlier Detection**: Scatter plots help in identifying outliers, which are data points that deviate significantly from the overall pattern of the data. Outliers can have a disproportionate influence on the correlation, potentially skewing the interpretation of the relationship between variables.]{style="background-color: lightblue;"}
 
-<span style="background-color: lightblue;">3. **Contextual Understanding**: Viewing the actual data points on a scatter plot provides a richer understanding of the relationship between variables within the specific context of the dataset. This understanding can be crucial for making informed decisions or drawing meaningful conclusions from the data.</span>
+[3. **Contextual Understanding**: Viewing the actual data points on a scatter plot provides a richer understanding of the relationship between variables within the specific context of the dataset. This understanding can be crucial for making informed decisions or drawing meaningful conclusions from the data.]{style="background-color: lightblue;"}
 
-<span style="background-color: lightblue;">4. **Communication**: Scatter plots are often used for communication purposes, as they provide a clear and intuitive way to visualize the relationship between variables. They can be included in reports, presentations, or academic papers to effectively convey insights from the data to a broader audience.</span>
-
-
+[4. **Communication**: Scatter plots are often used for communication purposes, as they provide a clear and intuitive way to visualize the relationship between variables. They can be included in reports, presentations, or academic papers to effectively convey insights from the data to a broader audience.]{style="background-color: lightblue;"}

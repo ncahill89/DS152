@@ -293,6 +293,7 @@ sys_samp %>%
 
 -   But, what would happen if we took a systematic sample where k = 7 and the sample started at 1?
 
+
 ## Stratified Sampling
 
 In a **stratified sample**, the population must first be separated into homogeneous groups, or strata. Each element only belongs to one stratum and the stratum consist of elements that are alike in some way. A simple random sample is then drawn from each stratum, which is combined to make the stratified sample.
@@ -396,4 +397,6 @@ Makes it possible to sample if there is no list of the entire population, but th
 **Weaknesses**
 
 Not always representative of the population. Elements within clusters tend to be similar to one another based on some characteristic(s). This can lead to over-representation or under-representation of those characteristics in the sample.
+
+
 

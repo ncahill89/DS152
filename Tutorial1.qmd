@@ -2,9 +2,7 @@
 title: "DS152 Tutorial Sheet 1 "
 format: html
 editor: visual
-
 ---
-
 
 ## Instructions
 
@@ -29,19 +27,15 @@ The table below displays the number of tuberculosis cases documented by the Worl
 table1
 ```
 
-
-(a) The data table below organizes the same data in an untidy format. 
-
+(a) The data table below organizes the same data in an untidy format.
 
 ```{r, echo = TRUE}
 untidy_tab1
 ```
 
-
 (i) What are the characteristics of this dataset that make it not tidy?
 
-(ii) In the code below, what should [A], [B], [C], [D] and [E] be replaced with to make this dataset tidy?
-
+(ii) In the code below, what should \[A\], \[B\], \[C\], \[D\] and \[E\] be replaced with to make this dataset tidy?
 
 ```{r, eval = FALSE}
 tidy_tab1 <- untidy_tab1 %>% 
@@ -49,31 +43,25 @@ tidy_tab1 <- untidy_tab1 %>%
                           [D] = [E])
 ```
 
-[A] = 
+\[A\] =
 
-[B] = 
+\[B\] =
 
-[C] = 
+\[C\] =
 
-[D] = 
+\[D\] =
 
-[E] = 
+\[E\] =
 
-
-
-
-(b) The data table below, which includes only the cases data, is organized in an untidy format. 
-
+(b) The data table below, which includes only the cases data, is organized in an untidy format.
 
 ```{r, echo = TRUE}
 untidy_tab2a
 ```
 
-
 (i) What are the characteristics of this dataset that make it not tidy?
 
-(ii) In the code below, what should [A], [B], [C], [D], [E] and [F] be replaced with to make this dataset tidy?
-
+(ii) In the code below, what should \[A\], \[B\], \[C\], \[D\], \[E\] and \[F\] be replaced with to make this dataset tidy?
 
 ```{r, eval = FALSE}
 tidy_tab2a <- untidy_tab2a %>%  
@@ -82,36 +70,33 @@ tidy_tab2a <- untidy_tab2a %>%
                            [E] = [F])
 ```
 
-[A] = 
+\[A\] =
 
-[B] = 
+\[B\] =
 
-[C] = 
+\[C\] =
 
-[D] = 
+\[D\] =
 
-[E] = 
+\[E\] =
 
-[F] = 
+\[F\] =
 
-
-(c) Once `tidy_tab2a` has been created you should make the `year` variable numeric. Replace [G] in the code below to achieve this. 
+(c) Once `tidy_tab2a` has been created you should make the `year` variable numeric. Replace \[G\] in the code below to achieve this.
 
 ```{r, eval = FALSE}
 tidy_tab2a <- tidy_tab2a %>% mutate(year = [G](year))
 ```
 
-[G] = 
+\[G\] =
 
-
-(d) The data table below includes the population data organized in a tidy format (note: China has an additional year of data): 
+(d) The data table below includes the population data organized in a tidy format (note: China has an additional year of data):
 
 ```{r, echo = TRUE}
 tidy_tab2b
 ```
 
-Assume you want to join `tidy_tab2a` and `tidy_tab2b` in order to produce `table1`. Would you use `left_join` or `right_join`? Give a reason for your answer. 
-
+Assume you want to join `tidy_tab2a` and `tidy_tab2b` in order to produce `table1`. Would you use `left_join` or `right_join`? Give a reason for your answer.
 
 ## Exercise 2
 
@@ -134,4 +119,3 @@ insect_dat
 (c) What does it mean to say that two variables are negatively correlated?
 
 (d) Why should you inspect a scatter plot of the data even though you have information on the correlation between two variables?
-
