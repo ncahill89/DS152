@@ -5,7 +5,7 @@ editor: visual
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
@@ -82,7 +82,7 @@ library(tidyverse)
 
 ## Example 1: Student Happiness 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 # Load necessary packages
 library(tidyverse)
 library(tigerstats)

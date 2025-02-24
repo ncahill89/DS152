@@ -28,6 +28,9 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 Tutorial Sheet 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Tutorial1.html)
 
+Tutorial Sheet 2: [Logistic Regression](https://ncahill89.github.io/DS152/Tutorial2.html)
+
+
 ## Assignments
 
 Assignment 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Assignment1.html)

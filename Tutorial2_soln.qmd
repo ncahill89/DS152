@@ -7,9 +7,9 @@ format:
 editor: visual
 ---
 
-## Exercise 
+## Exercise
 
-Run the code below to read a dataset called `car_evaluation` into R. 
+Run the code below to read a dataset called `car_evaluation` into R.
 
 ```{r, message = FALSE}
 library(tidyverse)
@@ -18,38 +18,37 @@ car_evaluation <- read_csv("https://www.dropbox.com/s/s54upw5jhoe6r4q/car_evalua
 
 There are 1594 cars in this database that are classified as acceptable (acc) or unacceptable (unacc) according to the following attributes:
 
-  - buying_price: buying price (low, medium, high, vhigh)
-  
-  - maintenance_cost: ("vhigh", "high",  "med",   "low")
-  
-  - doors: ("2","3","4","5more")
-  
-  - persons: capacity in terms of persons to carry (2,4,more)
-  
-  - lugboot: the size of luggage boot (small, med, big)
-  
-  - safety: estimated safety of the car (low, med, high)
+-   buying_price: buying price (low, medium, high, vhigh)
 
-**(a)** Create a bar plot that shows the number of observations within each buying price category. What do you learn from this visualisation?  
+-   maintenance_cost: ("vhigh", "high", "med", "low")
+
+-   doors: ("2","3","4","5more")
+
+-   persons: capacity in terms of persons to carry (2,4,more)
+
+-   lugboot: the size of luggage boot (small, med, big)
+
+-   safety: estimated safety of the car (low, med, high)
+
+**(a)** Complete the code below to create a bar plot that shows the number of observations within each `buying_price` category. What do you learn from this visualisation?
 
 ```{r}
 ggplot(car_evaluation, aes(x = buying_price)) +
   geom_bar()
 ```
 
-__Note for Tutors:__ Key thing to mention here is that this plot clearly shows that there's differences in counts within each buying price category. 
+**Note for Tutors:** Key thing to mention here is that this plot clearly shows that there's differences in counts within each buying price category.
 
-  (i) Now add  `fill = decision` to the `aes()` of the plot. What do you learn from this visualisation? 
+(i) Now add `fill = decision` to the `aes()` of the plot. What do you learn from this visualisation?
 
 ```{r}
 ggplot(car_evaluation, aes(x = buying_price, fill = decision)) +
   geom_bar()
 ```
 
-__Note for Tutors:__ Key thing to mention here is that the majority of the decisions are "unacceptable" but the proportion of "acceptable" seems to be lowest in the very high buying category. So, perhaps the buying price can be of some use as a predictor of the decision. 
+**Note for Tutors:** Key thing to mention here is that the majority of the decisions are "unacceptable" but the proportion of "acceptable" seems to be lowest in the very high buying category. So, perhaps the buying price can be of some use as a predictor of the decision.
 
-
-  (ii) Now facet using the `safety` variable. What do you learn from this visualisation? 
+(ii) Now facet using the `safety` variable. What do you learn from this visualisation?
 
 ```{r}
 ggplot(car_evaluation, aes(x = buying_price, fill = decision)) +
@@ -57,8 +56,7 @@ ggplot(car_evaluation, aes(x = buying_price, fill = decision)) +
   facet_wrap(~safety)
 ```
 
-__Note for Tutors:__ Key things to mention here is that low safety results in a decision of "unacceptable". Also having "high" safety seems to increase the proportion of "acceptable" in the "high" and "very high" buying categories, relative to medium safety. So perhaps both variables together would be useful as predictors of the decision. 
-
+**Note for Tutors:** Key things to mention here is that low safety results in a decision of "unacceptable". Also having "high" safety seems to increase the proportion of "acceptable" in the "high" and "very high" buying categories, relative to medium safety. So perhaps both variables together would be useful as predictors of the decision.
 
 **(b)** Run the following code which aims to fit a logistic regression model using `buying_price` and `safety` as predictor variables for the decision. This code will give you an error. What is causing the error?
 
@@ -67,29 +65,27 @@ fit_logistic <- glm(decision ~ buying_price + safety, family = "binomial", data 
 fit_logistic
 ```
 
-__Note for Tutors:__ The problem was not having the `decision` variable as binary. 
+**Note for Tutors:** The problem was not having the `decision` variable as binary.
 
-
-**(c)** Complete the code below to create a variable in the dataset called `decision_binary` with "acc" as the reference group. 
+**(c)** Complete the code below to create a variable in the dataset called `decision_binary` with "acc" as the reference group (there's an example of this in your lecture notes).
 
 ```{r}
 car_evaluation <- car_evaluation %>%
   mutate(decision_binary = as.numeric(decision == "acc"))
 ```
 
-__Note for Tutors:__ This means that "acc" will be 1 and "unacc" will be 0.  
+**Note for Tutors:** This means that "acc" will be 1 and "unacc" will be 0.
 
-  (i) Now run the logistic regression with `decision_binary` as the outcome. Does this give you an error? What do you note about the coefficients? 
+(i) Now complete the code below to run the logistic regression with `decision_binary` as the outcome. Does this give you an error? What do you note about the coefficients?
 
 ```{r}
 fit_logistic <- glm(decision_binary ~ buying_price + safety, family = "binomial", data = car_evaluation)
 fit_logistic
 ```
 
-__Note for Tutors:__ Just give a broad overview of results here (i.e., don't get into exponential transformations etc). Reminder that "acc" has been chosen is the reference group for the outcome. Mention that all the predictors are categorical and so a "reference" category is also chosen for each predictor. For the `buying_price` the reference group is "high". So based on the output, moving from "high" buying price to the "low" buying price will increase the chance (technically speaking the log odds but don't get wrapped up in that) off an "acceptable" decision (although the coefficient is small). Whereas, moving from the high buying price to the very high buy price will decrease the chance of an "acceptable" decision (but again the coefficient is small). Similarly, the reference category for the `safety` predictor is "high". Results show that moving from "high" safety to "low" safety decreases the chance of an "acceptable" decision (large coefficient here). Moving from high to medium does not have as big of an impact (small coefficient).   
+**Note for Tutors:** Just give a broad overview of results here (i.e., don't get into exponential transformations etc). Reminder that "acc" has been chosen is the reference group for the outcome. Mention that all the predictors are categorical and so a "reference" category is also chosen for each predictor. For the `buying_price` the reference group is "high". So based on the output, moving from "high" buying price to the "low" buying price will increase the chance (technically speaking the log odds but don't get wrapped up in that) off an "acceptable" decision (although the coefficient is small). Whereas, moving from the high buying price to the very high buy price will decrease the chance of an "acceptable" decision (but again the coefficient is small). Similarly, the reference category for the `safety` predictor is "high". Results show that moving from "high" safety to "low" safety decreases the chance of an "acceptable" decision (large coefficient here). Moving from high to medium does not have as big of an impact (small coefficient).
 
-
-  (ii) Once you have fit the model, run the following code to obtain the accuracy of the decision classification. (Note: The code is similar to the code you used in Lab 3 but here we use summarise when doing the calculation for `percentage_correct`). Change to `eval = TRUE` when you are ready to run this code. Did your model do a good job? 
+(ii) Once you have fit the model, run the following code to obtain the accuracy of the decision classification. (Note: The code is similar to the code you used in Lab 3 but here we use summarise when doing the calculation for `percentage_correct`). Change to `eval = TRUE` when you are ready to run this code. Did your model do a good job?
 
 ```{r, eval = TRUE}
 threshold <- 0.5
@@ -98,20 +94,24 @@ car_predict <- car_evaluation %>%
                    mutate(p_hat = predict(fit_logistic, type = "response") %>% round(2),
                           type_pred = ifelse(p_hat >= threshold, 1,0))
  
-car_predict %>% summarise(n_correct = sum(type_pred == decision_binary),
-                          n_total = n(),
-                          percentage_correct = n_correct*100/n_total)
+accuracy_results <- car_predict %>% summarise(n_correct = sum(type_pred == decision_binary),
+                                              n_total = n(),
+                                              percentage_correct = n_correct*100/n_total)
+accuracy_results
 ```
 
-__Note for Tutors:__ Just talk through what `summarise` is doing here and note the accuracy.   
+**Note for Tutors:** Just talk through what `summarise` is doing here and note the accuracy.
 
-  (iii) Now use `group_by` to breakdown the accuracy results by decision category (Note: because we set up the code using summarise it's easy to add `group_by()` in here and get the breakdown within each decision group). Change to `eval = TRUE` when you are ready to run this code. What do you learn from these results? 
+(iii) Now modify the summary code above to add a `group_by` function that will breakdown the accuracy results by decision category. Change to `eval = TRUE` when you are ready to run this code. What do you learn from these results?
+
 
 ```{r, eval = TRUE}
-car_predict %>% group_by(decision) %>% 
-                summarise(n_correct = sum(type_pred ==decision_binary),
-                          n_total = n(),
-                          percentage_correct = n_correct*100/n_total)
-```
-
-__Note for Tutors:__ Just talk through what the addition of `group_by` achieves and then explain that the accuracy is much better in the "unacceptable" group. Note to students that this happens because of the imbalance in the dataset (much higher proportion of "unacceptable" in the dataset) which was noted in one of the plots earlier. 
+accuracy_results <-car_predict %>% 
+                      group_by(decision) %>% 
+                      summarise(n_correct = sum(type_pred ==decision_binary),
+                                n_total = n(),
+                                percentage_correct = n_correct*100/n_total)
+accuracy_results
+```     
+        
+**Note for Tutors:** Just talk through what the addition of `group_by` achieves and then explain that the accuracy is much better in the "unacceptable" group. Note to students that this happens because of the imbalance in the dataset (much higher proportion of "unacceptable" in the dataset) which was noted in one of the plots earlier.

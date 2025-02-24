@@ -181,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                    <span class="at">data =</span> car_evaluation)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>fit_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>(c)</strong> Complete the code below to create a variable in the dataset called <code>decision_binary</code> with “acc” as the reference group.</p>
+<p><strong>(c)</strong> Complete the code below to create a variable in the dataset called <code>decision_binary</code> with “acc” as the reference group (there’s an example of this in your lecture notes).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>car_evaluation <span class="ot">&lt;-</span> car_evaluation <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">decision_binary =</span> ??)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -203,18 +203,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                   <span class="fu">mutate</span>(<span class="at">p_hat =</span> <span class="fu">predict</span>(fit_logistic, <span class="at">type =</span> <span class="st">"response"</span>) <span class="sc">%&gt;%</span> <span class="fu">round</span>(<span class="dv">2</span>),</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                          <span class="at">type_pred =</span> <span class="fu">ifelse</span>(p_hat <span class="sc">&gt;=</span> threshold, <span class="dv">1</span>,<span class="dv">0</span>))</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>car_predict <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n_correct =</span> <span class="fu">sum</span>(type_pred <span class="sc">==</span> decision_binary),</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_total =</span> <span class="fu">n</span>(),</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                          <span class="at">percentage_correct =</span> n_correct<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>n_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>accuracy_results <span class="ot">&lt;-</span> car_predict <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">n_correct =</span> <span class="fu">sum</span>(type_pred <span class="sc">==</span> decision_binary),</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">n_total =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>                                              <span class="at">percentage_correct =</span> n_correct<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>n_total)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>accuracy_results</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ol start="3" type="i">
-<li>Now use <code>group_by</code> to breakdown the accuracy results by decision category (Note: because we set up the code using <code>summarise</code> it’s easy to add <code>group_by()</code> in here and get the breakdown within each decision group). Change to <code>eval = TRUE</code> when you are ready to run this code. What do you learn from these results?</li>
+<li>Now modify the summary code above to add a <code>group_by</code> function that will breakdown the accuracy results by decision category. Change to <code>eval = TRUE</code> when you are ready to run this code. What do you learn from these results?</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>car_predict <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(decision) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">summarise</span>(<span class="at">n_correct =</span> <span class="fu">sum</span>(type_pred <span class="sc">==</span> decision_binary),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                          <span class="at">n_total =</span> <span class="fu">n</span>(),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                          <span class="at">percentage_correct =</span> n_correct<span class="sc">*</span><span class="dv">100</span><span class="sc">/</span>n_total)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>accuracy_results <span class="ot">&lt;-</span> car_predict <span class="sc">%&gt;%</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 
 
