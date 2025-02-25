@@ -82,6 +82,8 @@ library(tidyverse)
 
 ## Example 1: Student Happiness 
 
+The `gcfeeling` data contains results of a survey conducted by Georgetown College students on 47 Georgetown College upper-class students in relation to feelings about Georgetown College.
+
 ```{r, message=FALSE, warning=FALSE}
 # Load necessary packages
 library(tidyverse)
@@ -97,7 +99,7 @@ glimpse(gcfeeling)
 
 ### **1. Exploring Categorical Variables**
 
-If `gcfeeling` contains categorical variables, we can visualize their distributions:
+`gcfeeling` contains categorical variables. We can visualize their distributions:
 
 ```{r}
 # Count and visualize categorical variables
@@ -114,6 +116,9 @@ gcfeeling %>%
 
 ### **2. Exploring Numeric Variables**
 
+`gcfeeling` contains numeric variables. We can visualize their distributions:
+
+
 ```{r}
 # Check numeric variable distributions
 gcfeeling %>%
@@ -126,14 +131,27 @@ gcfeeling %>%
 
 ### **3. Relationships Between Variables**
 
+
+#### **Contingency Table (For Categorical Variables)**
+
+A contingency table shows the relationship between two categorical variables by displaying their frequency distribution.
+
+```{r}
+gcfeeling %>%
+  select(happier, athlete) %>% 
+  table()
+```
+
+
 #### **Pairwise Correlation (For Numeric Variables)**
+
 
 ```{r}
 # Compute correlation matrix
 cor(gcfeeling$rating.fresh, gcfeeling$rating.js)
 ```
 
-#### **Scatterplots for Numeric Variables**
+#### **Scatterplots (For  Numeric Variables)**
 
 ```{r}
 ggplot(gcfeeling, aes(x = rating.fresh, y = rating.js)) +
@@ -152,10 +170,11 @@ gcfeeling %>%
 
 ### **4. Modelling**
 
+We can use multiple regression to model student happiness. 
+
 ```{r}
 lm(rating.js ~ rating.fresh + athlete + greek, data = gcfeeling)
 ```
-
 
 
 ## Example 2: Does working out increase energy levels?
@@ -181,13 +200,13 @@ Can we conclude from this that working out is the cause of increased energy leve
 
 -   This study allows us to make correlation statements. But, we cannot make a causal statement attributing increased energy levels to working out!
 
-## Confounding variables
+### Confounding variables
 
 **Confounding variables:** Extraneous variables that affect both the exposure (e.g., working out) and the outcome variables (e.g., increased energy), and that make it seem like there is a relationship between them are called confounding variables.
 
 ![](images/Confounding.jpg)
 
-## Example 3
+## Example 3: Pancreatic Cancer Study
 
 Many years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (*MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3*).
 
@@ -221,7 +240,7 @@ chance of cancer = a x (coffee) + b x (smoking) + c x (gender) + d x (age)
 
 -   Obtaining isolated exposure effects conditional on the other variables remaining constant is said to adjust for (or control for) the effect of these confounders
 
-## Conditional Probability
+## Example 4: Restaurant Reviews
 
 You and your friend are trying to find the perfect restaurant for dinner. You can't decide so you want to instead rely on some observational data (i.e., restaurant reviews).
 
@@ -235,11 +254,11 @@ You find that
 
 So what we have is a conditional probability:
 
-p(recommended\|Sophia's) = 62.5%
+  - p(recommended\|Sophia's) = 62.5%
 
-p(recommended\|Carla's) = 54%
+  - p(recommended\|Carla's) = 54%
 
-## Conditional Probability
+___
 
 What if we consider age as a factor here?
 
@@ -253,13 +272,13 @@ What if we consider age as a factor here?
 
 So what we have is:
 
-p(recommended\|Sophia's, younger) = 30%
+  - p(recommended\|Sophia's, younger) = 30%
 
-p(recommended\|Sophia's, older) = 80%
+  - p(recommended\|Sophia's, older) = 80%
 
-p(recommended\|Carla's, younger) = 50%
+  - p(recommended\|Carla's, younger) = 50%
 
-p(recommended\|Carla's, older) = 90%
+  - p(recommended\|Carla's, older) = 90%
 
 ## What's going on?
 
@@ -267,68 +286,91 @@ You have unknowingly entered the world of Simpson's Paradox, where a restaurant 
 
 **Simpson's Paradox occurs when trends that appear when a dataset is separated into groups reverse when the data are aggregated.**
 
-## Simpsons' Paradox: Correlation Reversal
 
-Say we have data on the number of hours of exercise per week versus the risk of developing a disease for two sets of patients, those below the age of 50 and those over the age of 50. Here are individual plots showing the relationship between exercise and risk of disease.
+## Example 5: Exercise and Disease
+
+Say we have (made up) data on the number of hours of exercise per week versus the risk of developing a disease for two sets of patients, those below the age of 50 and those over the age of 50. Here are individual plots showing the relationship between exercise and risk of disease.
 
 ```{r,echo = FALSE, message = FALSE, fig.width=6, fig.height=3.5}
 
-n_samples <- 100
-set.seed(424)
-ages <- round(runif(n_samples,15, 50))
-set.seed(424)
-hours <- round(runif(n_samples,1, 5)) + rnorm(n_samples)
-set.seed(424)
-p <- 7 + 0.5 * ages + -5.2 * hours + rnorm(n_samples)
-under_50 <- tibble(age = ages, `Hours Exercised` = hours, `Risk` = p)
-under_50$age_cat <- "under 50"
-            
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
 
-n_samples <- 100
-set.seed(42)
-ages <- round(runif(n_samples,50, 85))
-set.seed(42)
-hours <- round(runif(n_samples,3, 8)) +  rnorm(n_samples) * 0.5
-set.seed(42)
-p <- 20 + .7 * ages + -5.2 * hours +rnorm(n_samples) * 2
-over_50 = tibble(age = ages, `Hours Exercised` = hours, `Risk` = p)
-over_50$age_cat <- "over 50"
+# Set seed for reproducibility
+set.seed(123)
 
-exercise_dat <- rbind(under_50,over_50)
+# Generate data for younger group (under 50)
+n_young <- 100
+ages_young <- round(runif(n_young, 20, 49))
+hours_young <- round(runif(n_young, 1, 5)) + rnorm(n_young, 0, 0.5)
+risk_young <- 50 - 2 * hours_young + rnorm(n_young, 0, 3)  # Negative correlation
+
+# Generate data for older group (over 50)
+n_old <- 100
+ages_old <- round(runif(n_old, 50, 80))
+hours_old <- round(runif(n_old, 3, 8)) + rnorm(n_old, 0, 0.5)
+risk_old <- 80 - 2 * hours_old + rnorm(n_old, 0, 3)  # Negative correlation
+
+# Combine data into a dataframe
+exercise_dat <- tibble(
+  age = c(ages_young, ages_old),
+  hours_exercised = c(hours_young, hours_old),
+  risk = c(risk_young, risk_old),
+  age_group = rep(c("Under 50", "Over 50"), each = n_young)
+)
+
+# Scatter plot with separate age groups
+ggplot(exercise_dat, aes(x = hours_exercised, y = risk, color = age_group)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Exercise vs. Health Risk",
+       x = "Hours Exercised",
+       y = "Health Risk",
+       color = "Age Group") +
+  theme_minimal()
 
 
-ggplot(exercise_dat, aes(x = `Hours Exercised`, y = Risk))+
-  geom_point()+
-  geom_smooth(method = "lm")+
-  facet_wrap(~age_cat,scales="free")
 ```
 
-## Example Continued
 
-We clearly saw a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let's combine the data together on a single plot:
+We clearly see a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let's combine the data together on a single plot:
 
 ```{r,echo = FALSE, message = FALSE, fig.width=6, fig.height=4}
-ggplot(exercise_dat, aes(x = `Hours Exercised`, y = Risk))+
+ggplot(exercise_dat, aes(x = hours_exercised, y = risk))+
   geom_point()+
-  geom_smooth(method = "lm")
+  geom_smooth(method = "lm", se = FALSE) +
+    labs(title = "Exercise vs. Health Risk",
+       x = "Hours Exercised",
+       y = "Health Risk") +
+  theme_minimal()
+
 ```
 
-## Resolving the Paradox
+❌ Surprise! The overall correlation is positive: More exercise → Higher risk.
 
-To avoid Simpson's Paradox leading us to two opposite conclusions, we need to choose to segregate the data in groups or aggregate it together. That seems simple enough, but how do we decide which to do?
 
-The answer is to think causally: how was the data generated and based on this, what factors influence the results that we are not shown?
+### Explanation of the Paradox:
 
-In the exercise vs disease example, we intuitively know that exercise is not the only factor affecting the risk of developing a disease. In the data, there are two different causes of disease yet by aggregating the data and looking at only risk vs exercise, we ignore the second cause - age - completely.
+Within each age group: More exercise is associated with lower risk (negative correlation).
 
-## Resolving the Paradox
-
-If we go ahead and plot risk vs age, we can see that the age of the patient is strongly positively correlated with disease risk.
+Across both groups: Older individuals exercise more... 
 
 ```{r,echo = FALSE, message = FALSE, fig.width=4, fig.height=3}
-ggplot(exercise_dat, aes(x = age, y = Risk))+
-  geom_point()+
-  geom_smooth(method = "lm")
+ggplot(exercise_dat, aes(x = age_group, y = hours_exercised))+
+  geom_boxplot()
 ```
 
-As the patient increases in age, their risk of the disease increases which means older patients are more likely to develop the disease than younger patients even with the same amount of exercise. Therefore, to assess the effect of just exercise on disease, we would want to hold the age constant and change the amount of weekly exercise.
+
+...but have higher baseline risk due to age.
+
+```{r,echo = FALSE, message = FALSE, fig.width=4, fig.height=3}
+ggplot(exercise_dat, aes(x = age_group, y = risk))+
+  geom_boxplot()
+```
+
+
+
+When aggregated, the higher risk of the older group skews the data, making it seem like more exercise increases risk. This is Simpson’s Paradox — where a trend appears in subgroups but reverses when the data is combined!
+
+

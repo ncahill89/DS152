@@ -124,20 +124,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#relationships-between-variables" id="toc-relationships-between-variables" class="nav-link" data-scroll-target="#relationships-between-variables"><strong>3. Relationships Between Variables</strong></a></li>
   <li><a href="#modelling" id="toc-modelling" class="nav-link" data-scroll-target="#modelling"><strong>4. Modelling</strong></a></li>
   </ul></li>
-  <li><a href="#example-2-does-working-out-increase-energy-levels" id="toc-example-2-does-working-out-increase-energy-levels" class="nav-link" data-scroll-target="#example-2-does-working-out-increase-energy-levels">Example 2: Does working out increase energy levels?</a></li>
+  <li><a href="#example-2-does-working-out-increase-energy-levels" id="toc-example-2-does-working-out-increase-energy-levels" class="nav-link" data-scroll-target="#example-2-does-working-out-increase-energy-levels">Example 2: Does working out increase energy levels?</a>
+  <ul class="collapse">
   <li><a href="#confounding-variables" id="toc-confounding-variables" class="nav-link" data-scroll-target="#confounding-variables">Confounding variables</a></li>
-  <li><a href="#example-3" id="toc-example-3" class="nav-link" data-scroll-target="#example-3">Example 3</a>
+  </ul></li>
+  <li><a href="#example-3-pancreatic-cancer-study" id="toc-example-3-pancreatic-cancer-study" class="nav-link" data-scroll-target="#example-3-pancreatic-cancer-study">Example 3: Pancreatic Cancer Study</a>
   <ul class="collapse">
   <li><a href="#reducing-confounding-matching" id="toc-reducing-confounding-matching" class="nav-link" data-scroll-target="#reducing-confounding-matching">Reducing confounding: Matching</a></li>
   <li><a href="#reducing-confounding-multiple-regression" id="toc-reducing-confounding-multiple-regression" class="nav-link" data-scroll-target="#reducing-confounding-multiple-regression">Reducing confounding: Multiple Regression</a></li>
   </ul></li>
-  <li><a href="#conditional-probability" id="toc-conditional-probability" class="nav-link" data-scroll-target="#conditional-probability">Conditional Probability</a></li>
-  <li><a href="#conditional-probability-1" id="toc-conditional-probability-1" class="nav-link" data-scroll-target="#conditional-probability-1">Conditional Probability</a></li>
+  <li><a href="#example-4-restaurant-reviews" id="toc-example-4-restaurant-reviews" class="nav-link" data-scroll-target="#example-4-restaurant-reviews">Example 4: Restaurant Reviews</a></li>
   <li><a href="#whats-going-on" id="toc-whats-going-on" class="nav-link" data-scroll-target="#whats-going-on">What’s going on?</a></li>
-  <li><a href="#simpsons-paradox-correlation-reversal" id="toc-simpsons-paradox-correlation-reversal" class="nav-link" data-scroll-target="#simpsons-paradox-correlation-reversal">Simpsons’ Paradox: Correlation Reversal</a></li>
-  <li><a href="#example-continued" id="toc-example-continued" class="nav-link" data-scroll-target="#example-continued">Example Continued</a></li>
-  <li><a href="#resolving-the-paradox" id="toc-resolving-the-paradox" class="nav-link" data-scroll-target="#resolving-the-paradox">Resolving the Paradox</a></li>
-  <li><a href="#resolving-the-paradox-1" id="toc-resolving-the-paradox-1" class="nav-link" data-scroll-target="#resolving-the-paradox-1">Resolving the Paradox</a></li>
+  <li><a href="#example-5-exercise-and-disease" id="toc-example-5-exercise-and-disease" class="nav-link" data-scroll-target="#example-5-exercise-and-disease">Example 5: Exercise and Disease</a>
+  <ul class="collapse">
+  <li><a href="#explanation-of-the-paradox" id="toc-explanation-of-the-paradox" class="nav-link" data-scroll-target="#explanation-of-the-paradox">Explanation of the Paradox:</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -204,6 +205,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="example-1-student-happiness" class="level2">
 <h2 class="anchored" data-anchor-id="example-1-student-happiness">Example 1: Student Happiness</h2>
+<p>The <code>gcfeeling</code> data contains results of a survey conducted by Georgetown College students on 47 Georgetown College upper-class students in relation to feelings about Georgetown College.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -227,7 +229,7 @@ $ happier      &lt;fct&gt; NO, YES, YES, YES, YES, YES, YES, NO, YES, NO, YES, Y
 </div>
 <section id="exploring-categorical-variables" class="level3">
 <h3 class="anchored" data-anchor-id="exploring-categorical-variables"><strong>1. Exploring Categorical Variables</strong></h3>
-<p>If <code>gcfeeling</code> contains categorical variables, we can visualize their distributions:</p>
+<p><code>gcfeeling</code> contains categorical variables. We can visualize their distributions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Count and visualize categorical variables</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
@@ -249,6 +251,7 @@ $ happier      &lt;fct&gt; NO, YES, YES, YES, YES, YES, YES, NO, YES, NO, YES, Y
 </section>
 <section id="exploring-numeric-variables" class="level3">
 <h3 class="anchored" data-anchor-id="exploring-numeric-variables"><strong>2. Exploring Numeric Variables</strong></h3>
+<p><code>gcfeeling</code> contains numeric variables. We can visualize their distributions:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check numeric variable distributions</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
@@ -268,38 +271,36 @@ $ happier      &lt;fct&gt; NO, YES, YES, YES, YES, YES, YES, NO, YES, NO, YES, Y
 </section>
 <section id="relationships-between-variables" class="level3">
 <h3 class="anchored" data-anchor-id="relationships-between-variables"><strong>3. Relationships Between Variables</strong></h3>
+<section id="contingency-table-for-categorical-variables" class="level4">
+<h4 class="anchored" data-anchor-id="contingency-table-for-categorical-variables"><strong>Contingency Table (For Categorical Variables)</strong></h4>
+<p>A contingency table shows the relationship between two categorical variables by displaying their frequency distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happier, athlete) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       athlete
+happier  n  y
+    NO  10  1
+    YES 25 11</code></pre>
+</div>
+</div>
+</section>
 <section id="pairwise-correlation-for-numeric-variables" class="level4">
 <h4 class="anchored" data-anchor-id="pairwise-correlation-for-numeric-variables"><strong>Pairwise Correlation (For Numeric Variables)</strong></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute correlation matrix</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(gcfeeling<span class="sc">$</span>rating.fresh, gcfeeling<span class="sc">$</span>rating.js)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute correlation matrix</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(gcfeeling<span class="sc">$</span>rating.fresh, gcfeeling<span class="sc">$</span>rating.js)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.402741</code></pre>
 </div>
 </div>
 </section>
 <section id="scatterplots-for-numeric-variables" class="level4">
-<h4 class="anchored" data-anchor-id="scatterplots-for-numeric-variables"><strong>Scatterplots for Numeric Variables</strong></h4>
+<h4 class="anchored" data-anchor-id="scatterplots-for-numeric-variables"><strong>Scatterplots (For Numeric Variables)</strong></h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gcfeeling, <span class="fu">aes</span>(<span class="at">x =</span> rating.fresh, <span class="at">y =</span> rating.js)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="boxplots-of-numerical-variables-by-categories" class="level4">
-<h4 class="anchored" data-anchor-id="boxplots-of-numerical-variables-by-categories"><strong>Boxplots of Numerical Variables by Categories</strong></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots grouped by a categorical variable (assuming `groupvar` is categorical)</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> athlete, <span class="at">y =</span> rating.js)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gcfeeling, <span class="fu">aes</span>(<span class="at">x =</span> rating.fresh, <span class="at">y =</span> rating.js)) <span class="sc">+</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -309,11 +310,29 @@ $ happier      &lt;fct&gt; NO, YES, YES, YES, YES, YES, YES, NO, YES, NO, YES, Y
 </div>
 </div>
 </section>
+<section id="boxplots-of-numerical-variables-by-categories" class="level4">
+<h4 class="anchored" data-anchor-id="boxplots-of-numerical-variables-by-categories"><strong>Boxplots of Numerical Variables by Categories</strong></h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots grouped by a categorical variable (assuming `groupvar` is categorical)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> athlete, <span class="at">y =</span> rating.js)) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="modelling" class="level3">
 <h3 class="anchored" data-anchor-id="modelling"><strong>4. Modelling</strong></h3>
+<p>We can use multiple regression to model student happiness.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rating.js <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete <span class="sc">+</span> greek, <span class="at">data =</span> gcfeeling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rating.js <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete <span class="sc">+</span> greek, <span class="at">data =</span> gcfeeling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -342,14 +361,14 @@ Coefficients:
 <li><p>This is known as <strong>confounding</strong>.</p></li>
 <li><p>This study allows us to make correlation statements. But, we cannot make a causal statement attributing increased energy levels to working out!</p></li>
 </ul>
-</section>
-<section id="confounding-variables" class="level2">
-<h2 class="anchored" data-anchor-id="confounding-variables">Confounding variables</h2>
+<section id="confounding-variables" class="level3">
+<h3 class="anchored" data-anchor-id="confounding-variables">Confounding variables</h3>
 <p><strong>Confounding variables:</strong> Extraneous variables that affect both the exposure (e.g., working out) and the outcome variables (e.g., increased energy), and that make it seem like there is a relationship between them are called confounding variables.</p>
 <p><img src="images/Confounding.jpg" class="img-fluid"></p>
 </section>
-<section id="example-3" class="level2">
-<h2 class="anchored" data-anchor-id="example-3">Example 3</h2>
+</section>
+<section id="example-3-pancreatic-cancer-study" class="level2">
+<h2 class="anchored" data-anchor-id="example-3-pancreatic-cancer-study">Example 3: Pancreatic Cancer Study</h2>
 <p>Many years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (<em>MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3</em>).</p>
 <p><img src="images/Confounding3.png" class="img-fluid"></p>
 <p>If we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.</p>
@@ -375,8 +394,8 @@ Coefficients:
 </ul>
 </section>
 </section>
-<section id="conditional-probability" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-probability">Conditional Probability</h2>
+<section id="example-4-restaurant-reviews" class="level2">
+<h2 class="anchored" data-anchor-id="example-4-restaurant-reviews">Example 4: Restaurant Reviews</h2>
 <p>You and your friend are trying to find the perfect restaurant for dinner. You can’t decide so you want to instead rely on some observational data (i.e., restaurant reviews).</p>
 <p>You find two worthy restaurants, Carla’s and Sophia’s each with 400 reviews and an indicator of whether the restaurant is recommended or not recommended.</p>
 <p>You find that</p>
@@ -385,11 +404,11 @@ Coefficients:
 <li><p>recommended for Carla’s = 216/400</p></li>
 </ul>
 <p>So what we have is a conditional probability:</p>
-<p>p(recommended|Sophia’s) = 62.5%</p>
-<p>p(recommended|Carla’s) = 54%</p>
-</section>
-<section id="conditional-probability-1" class="level2">
-<h2 class="anchored" data-anchor-id="conditional-probability-1">Conditional Probability</h2>
+<ul>
+<li><p>p(recommended|Sophia’s) = 62.5%</p></li>
+<li><p>p(recommended|Carla’s) = 54%</p></li>
+</ul>
+<hr>
 <p>What if we consider age as a factor here?</p>
 <ul>
 <li><p>recommended for 18-35 yr old diners at Sophia’s = 50/150</p></li>
@@ -398,32 +417,21 @@ Coefficients:
 <li><p>recommended for 35+ diners at Carla’s = 36/40</p></li>
 </ul>
 <p>So what we have is:</p>
-<p>p(recommended|Sophia’s, younger) = 30%</p>
-<p>p(recommended|Sophia’s, older) = 80%</p>
-<p>p(recommended|Carla’s, younger) = 50%</p>
-<p>p(recommended|Carla’s, older) = 90%</p>
+<ul>
+<li><p>p(recommended|Sophia’s, younger) = 30%</p></li>
+<li><p>p(recommended|Sophia’s, older) = 80%</p></li>
+<li><p>p(recommended|Carla’s, younger) = 50%</p></li>
+<li><p>p(recommended|Carla’s, older) = 90%</p></li>
+</ul>
 </section>
 <section id="whats-going-on" class="level2">
 <h2 class="anchored" data-anchor-id="whats-going-on">What’s going on?</h2>
 <p>You have unknowingly entered the world of Simpson’s Paradox, where a restaurant can be both better and worse than its competitor, exercise can lower and increase the risk of disease, and the same dataset can be used to prove two opposing arguments. Instead of going out to dinner, perhaps you and your friend should spend the evening discussing this fascinating statistical phenomenon.</p>
 <p><strong>Simpson’s Paradox occurs when trends that appear when a dataset is separated into groups reverse when the data are aggregated.</strong></p>
 </section>
-<section id="simpsons-paradox-correlation-reversal" class="level2">
-<h2 class="anchored" data-anchor-id="simpsons-paradox-correlation-reversal">Simpsons’ Paradox: Correlation Reversal</h2>
-<p>Say we have data on the number of hours of exercise per week versus the risk of developing a disease for two sets of patients, those below the age of 50 and those over the age of 50. Here are individual plots showing the relationship between exercise and risk of disease.</p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="576"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
-<section id="example-continued" class="level2">
-<h2 class="anchored" data-anchor-id="example-continued">Example Continued</h2>
-<p>We clearly saw a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let’s combine the data together on a single plot:</p>
+<section id="example-5-exercise-and-disease" class="level2">
+<h2 class="anchored" data-anchor-id="example-5-exercise-and-disease">Example 5: Exercise and Disease</h2>
+<p>Say we have (made up) data on the number of hours of exercise per week versus the risk of developing a disease for two sets of patients, those below the age of 50 and those over the age of 50. Here are individual plots showing the relationship between exercise and risk of disease.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -433,28 +441,44 @@ Coefficients:
 </div>
 </div>
 </div>
-</section>
-<section id="resolving-the-paradox" class="level2">
-<h2 class="anchored" data-anchor-id="resolving-the-paradox">Resolving the Paradox</h2>
-<p>To avoid Simpson’s Paradox leading us to two opposite conclusions, we need to choose to segregate the data in groups or aggregate it together. That seems simple enough, but how do we decide which to do?</p>
-<p>The answer is to think causally: how was the data generated and based on this, what factors influence the results that we are not shown?</p>
-<p>In the exercise vs disease example, we intuitively know that exercise is not the only factor affecting the risk of developing a disease. In the data, there are two different causes of disease yet by aggregating the data and looking at only risk vs exercise, we ignore the second cause - age - completely.</p>
-</section>
-<section id="resolving-the-paradox-1" class="level2">
-<h2 class="anchored" data-anchor-id="resolving-the-paradox-1">Resolving the Paradox</h2>
-<p>If we go ahead and plot risk vs age, we can see that the age of the patient is strongly positively correlated with disease risk.</p>
+<p>We clearly see a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let’s combine the data together on a single plot:</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
 </div>
-<p>As the patient increases in age, their risk of the disease increases which means older patients are more likely to develop the disease than younger patients even with the same amount of exercise. Therefore, to assess the effect of just exercise on disease, we would want to hold the age constant and change the amount of weekly exercise.</p>
+<p>❌ Surprise! The overall correlation is positive: More exercise → Higher risk.</p>
+<section id="explanation-of-the-paradox" class="level3">
+<h3 class="anchored" data-anchor-id="explanation-of-the-paradox">Explanation of the Paradox:</h3>
+<p>Within each age group: More exercise is associated with lower risk (negative correlation).</p>
+<p>Across both groups: Older individuals exercise more…</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>…but have higher baseline risk due to age.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="ObservationalStudies_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="384"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>When aggregated, the higher risk of the older group skews the data, making it seem like more exercise increases risk. This is Simpson’s Paradox — where a trend appears in subgroups but reverses when the data is combined!</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
