@@ -293,7 +293,6 @@ sys_samp %>%
 
 -   But, what would happen if we took a systematic sample where k = 7 and the sample started at 1?
 
-
 ## Stratified Sampling
 
 In a **stratified sample**, the population must first be separated into homogeneous groups, or strata. Each element only belongs to one stratum and the stratum consist of elements that are alike in some way. A simple random sample is then drawn from each stratum, which is combined to make the stratified sample.
@@ -358,8 +357,7 @@ strat_samp %>%
 
 **Cluster sampling** is a sampling method used when natural groups are evident in the population. The clusters should all be to similar each other: each cluster should be a small scale representation of the population. To take a cluster sample, a random sample of the clusters is chosen. The elements of the randomly chosen clusters make up the sample.
 
-Let’s assume that we have a cluster variable (with clusters 1-4) in the FakeSchool data. 
-
+Let’s assume that we have a cluster variable (with clusters 1-4) in the FakeSchool data.
 
 ```{r, echo =FALSE}
 set.seed(10201)
@@ -371,7 +369,7 @@ FakeSchool
 
 ### Cluster Sampling in R
 
-Let’s take a random sample of 2 of two clusters. 
+Let’s take a random sample of 2 of two clusters.
 
 ```{r}
 cluster_samp <- FakeSchool %>% 
@@ -397,6 +395,3 @@ Makes it possible to sample if there is no list of the entire population, but th
 **Weaknesses**
 
 Not always representative of the population. Elements within clusters tend to be similar to one another based on some characteristic(s). This can lead to over-representation or under-representation of those characteristics in the sample.
-
-
-
