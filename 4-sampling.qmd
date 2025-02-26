@@ -436,7 +436,7 @@ The paper can be found [here](https://www.nature.com/articles/s41612-020-0121-5)
 expert_survey_dat <- readRDS("data/expert_survey_dat.rds")
 ```
 
-```{r, warning=FALSE}
+```{r, warning=FALSE, fig.cap= "Participants were asked to estimate likely (17th to 83rd percentiles) and very likely (5th to 95th percentiles) sea-level rise under a high emission temperature scenarios for 2100."}
 glimpse(expert_survey_dat)
 
 expert_survey_dat_long <- expert_survey_dat %>% 
