@@ -176,11 +176,7 @@ window.Quarto = {
   <li><a href="#non-random-sampling" id="toc-non-random-sampling" class="nav-link" data-scroll-target="#non-random-sampling">Non random sampling</a>
   <ul class="collapse">
   <li><a href="#expert-elicitation" id="toc-expert-elicitation" class="nav-link" data-scroll-target="#expert-elicitation">Expert Elicitation</a></li>
-  <li><a href="#example-estimating-global-mean-sea-level-rise-and-its-uncertainties-by-2100-and-2300-from-an-expert-survey" id="toc-example-estimating-global-mean-sea-level-rise-and-its-uncertainties-by-2100-and-2300-from-an-expert-survey" class="nav-link" data-scroll-target="#example-estimating-global-mean-sea-level-rise-and-its-uncertainties-by-2100-and-2300-from-an-expert-survey">Example: Estimating global mean sea-level rise and its uncertainties by 2100 and 2300 from an expert survey</a></li>
-  <li><a href="#analysis" id="toc-analysis" class="nav-link" data-scroll-target="#analysis">Analysis</a></li>
   <li><a href="#snowball-sampling" id="toc-snowball-sampling" class="nav-link" data-scroll-target="#snowball-sampling">Snowball Sampling</a></li>
-  <li><a href="#example-global-survey-shows-planners-use-widely-varying-sea-level-rise-projections-for-coastal-adaptation" id="toc-example-global-survey-shows-planners-use-widely-varying-sea-level-rise-projections-for-coastal-adaptation" class="nav-link" data-scroll-target="#example-global-survey-shows-planners-use-widely-varying-sea-level-rise-projections-for-coastal-adaptation">Example: Global survey shows planners use widely varying sea-level rise projections for coastal adaptation</a></li>
-  <li><a href="#analysis-1" id="toc-analysis-1" class="nav-link" data-scroll-target="#analysis-1">Analysis</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -582,9 +578,8 @@ window.Quarto = {
 <li><p>✅ Used when empirical data is scarce or uncertain (e.g., climate change risks).</p></li>
 <li><p>❌ Relies on expert judgment, which can introduce biases based on individual perspectives.</p></li>
 </ul>
-</section>
-<section id="example-estimating-global-mean-sea-level-rise-and-its-uncertainties-by-2100-and-2300-from-an-expert-survey" class="level3">
-<h3 class="anchored" data-anchor-id="example-estimating-global-mean-sea-level-rise-and-its-uncertainties-by-2100-and-2300-from-an-expert-survey">Example: Estimating global mean sea-level rise and its uncertainties by 2100 and 2300 from an expert survey</h3>
+<section id="example-estimating-global-mean-sea-level-rise-and-its-uncertainties-by-2100-and-2300-from-an-expert-survey" class="level4">
+<h4 class="anchored" data-anchor-id="example-estimating-global-mean-sea-level-rise-and-its-uncertainties-by-2100-and-2300-from-an-expert-survey">Example: Estimating global mean sea-level rise and its uncertainties by 2100 and 2300 from an expert survey</h4>
 <ul>
 <li><p>A survey selected experts who (co-)authored sea-level related papers (&gt;6).</p>
 <ul>
@@ -600,8 +595,8 @@ window.Quarto = {
 <p>Thus, a total of 106 sea-level experts from 817 invites (13%) provided their probabilistic assessment of GMSL rise, given two temperature projection scenarios.</p>
 <p>The paper can be found <a href="https://www.nature.com/articles/s41612-020-0121-5">here</a>.</p>
 </section>
-<section id="analysis" class="level3">
-<h3 class="anchored" data-anchor-id="analysis">Analysis</h3>
+<section id="analysis" class="level4">
+<h4 class="anchored" data-anchor-id="analysis">Analysis</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(expert_survey_dat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -655,6 +650,7 @@ $ Red_5_2300   &lt;dbl&gt; 140, 300, NA, 90, 220, 30, 125, 40, 100, 1, 400, NA, 
 </div>
 </div>
 </section>
+</section>
 <section id="snowball-sampling" class="level3">
 <h3 class="anchored" data-anchor-id="snowball-sampling">Snowball Sampling</h3>
 <p>Snowball sampling is a non-random sampling technique where existing participants help recruit new participants, forming a growing “snowball” effect.</p>
@@ -662,17 +658,16 @@ $ Red_5_2300   &lt;dbl&gt; 140, 300, NA, 90, 220, 30, 125, 40, 100, 1, 400, NA, 
 <li><p>✅ Useful for hard-to-reach populations</p></li>
 <li><p>❌ Relies on social networks, which can lead to bias since participants are likely to refer similar individuals.</p></li>
 </ul>
-</section>
-<section id="example-global-survey-shows-planners-use-widely-varying-sea-level-rise-projections-for-coastal-adaptation" class="level3">
-<h3 class="anchored" data-anchor-id="example-global-survey-shows-planners-use-widely-varying-sea-level-rise-projections-for-coastal-adaptation">Example: Global survey shows planners use widely varying sea-level rise projections for coastal adaptation</h3>
+<section id="example-global-survey-shows-planners-use-widely-varying-sea-level-rise-projections-for-coastal-adaptation" class="level4">
+<h4 class="anchored" data-anchor-id="example-global-survey-shows-planners-use-widely-varying-sea-level-rise-projections-for-coastal-adaptation">Example: Global survey shows planners use widely varying sea-level rise projections for coastal adaptation</h4>
 <ul>
 <li><p>Collaborating researchers known to be involved in sea level rise planning were contacted, sometimes targeting specific regions and cities.</p></li>
 <li><p>Regional leads sent emails to their contact lists.</p></li>
 </ul>
 <p>More details for this snowball sampling method can be found <a href="https://www.nature.com/articles/s43247-023-00703-x#Sec7">here</a>.</p>
 </section>
-<section id="analysis-1" class="level3">
-<h3 class="anchored" data-anchor-id="analysis-1">Analysis</h3>
+<section id="analysis-1" class="level4">
+<h4 class="anchored" data-anchor-id="analysis-1">Analysis</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>sl_planning_dat <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">"data/sl_planning_dat.rds"</span>)</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>sl_planning_dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -725,6 +720,7 @@ $ Red_5_2300   &lt;dbl&gt; 140, 300, NA, 90, 220, 30, 125, 40, 100, 1, 400, NA, 
 </div>
 
 
+</section>
 </section>
 </section>
 
