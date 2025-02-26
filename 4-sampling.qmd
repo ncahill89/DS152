@@ -395,3 +395,114 @@ Makes it possible to sample if there is no list of the entire population, but th
 **Weaknesses**
 
 Not always representative of the population. Elements within clusters tend to be similar to one another based on some characteristic(s). This can lead to over-representation or under-representation of those characteristics in the sample.
+
+---
+
+## Non random sampling 
+
+### Expert Elicitation 
+
+Expert elicitation is a form of non-random survey sampling where experts in a specific field are intentionally selected to provide insights or judgments on a topic.
+
+  - ✅ Used when empirical data is scarce or uncertain (e.g., climate change risks).
+  
+  - ❌ Relies on expert judgment, which can introduce biases based on individual perspectives.
+  
+### Example: Estimating global mean sea-level rise and its uncertainties by 2100 and 2300 from an expert survey
+
+  - A survey selected experts who (co-)authored sea-level related papers (>6). 
+  
+    - To objectively select sea-level experts, we used the scientific publication database Web of Science of Clarivate to identify the most active publishers of sea-level papers. 
+    
+    - On 15 February 2019, we searched for all papers published in peer-reviewed journals since (and including) 2014 where the term “sea level” appeared in the title, keywords or “KeyWords Plus” (an algorithm used to review words or phrases that appear in the cited references of an article) to identify scientists who (co-)authored the greatest number of these papers.
+    
+    - We obtained a sample of 878 experts who published at least six papers on “sea level” since 2014. 
+    
+    - We found e-mail addresses for 817 of these experts and accordingly invited them to participate in the survey on 18 March 2019, using a unique identifier to ensure anonymity and avoid duplicate responses. 
+    
+    - A total of 458 experts opened the e-mail invitation, and of these 112 completed the survey, which is typical for this type of internet survey. 
+    
+    - The main reason given for declining to participate was a (perceived) lack of expertise in projecting GMSL rise. 
+    
+    - We closed the survey on 30 June 2019. We could not analyze six responses from participants because they either left all boxes blank or filled with a question mark. Not all survey respondents completed every percentile box.
+
+Thus, a total of 106 sea-level experts from 817 invites (13%) provided their probabilistic assessment of GMSL rise, given two temperature projection scenarios.
+
+The paper can be found [here](https://www.nature.com/articles/s41612-020-0121-5).
+
+### Analysis 
+
+```{r, echo = FALSE}
+expert_survey_dat <- readRDS("data/expert_survey_dat.rds")
+```
+
+```{r, warning=FALSE}
+glimpse(expert_survey_dat)
+
+expert_survey_dat_long <- expert_survey_dat %>% 
+                            pivot_longer(Blue_95_2100:Red_5_2300,
+                                         names_to = "scenario",
+                                         values_to = "prediction") %>% 
+  separate(col = scenario, into = c("Scenario","Percentile","Year")) 
+
+  
+  
+expert_survey_dat_long %>% filter(Scenario == "Red",Year == 2100) %>% 
+  ggplot(aes(x=Percentile,y=prediction)) +
+  geom_boxplot(fill="firebrick")+
+  labs(x="Percentile",y="GMSL Rise (cm)",caption="Red 2100")+
+  ylim(-200,600)+
+  theme_bw()
+```
+
+
+### Snowball Sampling
+
+Snowball sampling is a non-random sampling technique where existing participants help recruit new participants, forming a growing "snowball" effect.  
+
+  - ✅ Useful for hard-to-reach populations 
+
+  - ❌ Relies on social networks, which can lead to bias since participants are likely to refer similar individuals.  
+
+### Example: Global survey shows planners use widely varying sea-level rise projections for coastal adaptation
+
+  - Collaborating researchers known to be involved in sea level rise planning were contacted, sometimes targeting specific regions and cities.
+
+  - Regional leads sent emails to their contact lists.
+
+More details for this snowball sampling method can be found [here](https://www.nature.com/articles/s43247-023-00703-x#Sec7). 
+
+### Analysis
+
+```{r, fig.cap= "Respondents formally structure the use of sea-level rise projections for planning purposes in four ways: A is a singular estimate, B is a low and a high estimate, C is a low, intermediate, and high estimate, and D is a low, intermediate, high, and high-end estimate. Shown are aggregated responses for five distinct geographical regions and the globe."}
+
+sl_planning_dat <- readRDS("data/sl_planning_dat.rds")
+sl_planning_dat
+
+## create barplot with % in each category 
+
+## The colour palette
+cbPalette <- c("#E69F00","#009E73","#999999","#56B4E9", "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+## The plot
+ggplot(sl_planning_dat, aes(x = fct_rev(Continent),y = relative, fill = group)) + 
+  geom_bar(stat = "identity")+
+  geom_text(aes(x = Continent, label = paste0(round(relative,1),'% \n (',n,')')),
+            colour = 'white', position=position_stack(vjust=0.5), size = 3) +
+  ggtitle('')+
+  coord_flip() +
+  ylab("Percentage (Count)")+
+  xlab("")+
+  labs(fill = "Structure") +
+  scale_y_reverse() +
+  theme_classic() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(size=12),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  scale_fill_manual(values=cbPalette) 
+
+
+```
+
+
