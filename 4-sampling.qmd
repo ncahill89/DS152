@@ -408,7 +408,7 @@ Expert elicitation is a form of non-random survey sampling where experts in a sp
   
   - ❌ Relies on expert judgment, which can introduce biases based on individual perspectives.
   
-#### Example: Estimating global mean sea-level rise and its uncertainties by 2100 and 2300 from an expert survey
+#### **Example: Estimating global mean sea-level rise and its uncertainties by 2100 and 2300 from an expert survey**
 
   - A survey selected experts who (co-)authored sea-level related papers (>6). 
   
@@ -430,7 +430,7 @@ Thus, a total of 106 sea-level experts from 817 invites (13%) provided their pro
 
 The paper can be found [here](https://www.nature.com/articles/s41612-020-0121-5).
 
-#### Analysis 
+#### **Analysis**
 
 ```{r, echo = FALSE}
 expert_survey_dat <- readRDS("data/expert_survey_dat.rds")
@@ -464,7 +464,7 @@ Snowball sampling is a non-random sampling technique where existing participants
 
   - ❌ Relies on social networks, which can lead to bias since participants are likely to refer similar individuals.  
 
-#### Example: Global survey shows planners use widely varying sea-level rise projections for coastal adaptation
+#### **Example: Global survey shows planners use widely varying sea-level rise projections for coastal adaptation**
 
   - Collaborating researchers known to be involved in sea level rise planning were contacted, sometimes targeting specific regions and cities.
 
@@ -472,7 +472,7 @@ Snowball sampling is a non-random sampling technique where existing participants
 
 More details for this snowball sampling method can be found [here](https://www.nature.com/articles/s43247-023-00703-x#Sec7). 
 
-#### Analysis
+#### **Analysis**
 
 ```{r, fig.cap= "Respondents formally structure the use of sea-level rise projections for planning purposes in four ways: A is a singular estimate, B is a low and a high estimate, C is a low, intermediate, and high estimate, and D is a low, intermediate, high, and high-end estimate. Shown are aggregated responses for five distinct geographical regions and the globe."}
 
