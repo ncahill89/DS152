@@ -7,7 +7,12 @@ format:
     embed-resources: true
     self-contained-math: true
 editor: visual
+
 ---
+
+
+## **Solutions** **\[Total = 20 Marks\]**
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -22,46 +27,24 @@ nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzf
 
 ```
 
-## Instructions
 
-Answer all questions for continuous assessment. Due: **4pm on Friday, 28th February 2025**.
 
-## Question
+(i) How many observations are in the dataset? __[2 Mark]__
 
-Synopsis: US Department of Commerce, National Oceanic & Atmospheric Administration provides information on fatalities and injuries associated with natural calamities/disasters across different US states.
+  - 902,297
 
-If you want to view the data in R you can run the following:
 
-```{r, eval = FALSE}
-nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzfrj/nat_disaster_dat.csv?rlkey=7nx78bcpnj6ufm0hdq91ke8np&raw=1")
-```
+(ii) Assume you want to create the summary below, which sums up the number of fatalities within each event type and then arranges by the total fatalities, in descending order. __[8 Marks]__
 
-A glimpse if the data is shown below
-
-```{r}
-glimpse(nat_disaster_dat)
-```
-
-Note:
-
--   `STATE` = US State
--   `EVTYPE` = event type
--   `FATALITIES` = \# of fatalities
--   `INJURIES` = \# if injuries.
-
-(i) How many observations are in the dataset?
-
-(ii) Assume you want to create the summary below, which sums up the number of fatalities within each event type and then arranges by the total fatalities, in descending order.
-
-```{r, eval = TRUE, echo=FALSE}
+```{r, eval = TRUE}
 nat_disaster_summary <- nat_disaster_dat %>% 
                           group_by(EVTYPE) %>% 
                           summarise(total_fatalities = sum(FATALITIES)) %>% 
                           arrange(desc(total_fatalities))
-nat_disaster_summary
+nat_disaster_summary 
 ```
 
-In the code below, what should \[A\], \[B\], \[C\] and \[D\] be replaced with to create this summary?
+In the code below, what should [A], [B], [C] and [D] be replaced with to create this summary? 
 
 ```{r, eval = FALSE}
 nat_disaster__summary <- nat_disaster_dat %>% 
@@ -70,36 +53,43 @@ nat_disaster__summary <- nat_disaster_dat %>%
                           arrange([D](total_fatalities))
 ```
 
-\[A\] =
 
-\[B\] =
+[A] = EVTYPE
 
-\[C\] =
+[B] = summarise
 
-\[D\] =
+[C] = sum(FATALITIES)
+
+[D] = desc
+
 
 (iii) Now assume you want to filter the summarised data from (ii) so that you have a dataset with only events where the total fatalities are greater than 200, as shown.
 
-```{r, eval = TRUE, echo=FALSE}
+```{r, eval = TRUE}
 nat_disaster_filter <- nat_disaster_summary %>% 
                         filter(total_fatalities > 200)
 nat_disaster_filter
 ```
 
-In the code below, what should \[A\] and \[B\] be replaced with to create the filtered dataet?
+
+In the code below, what should [A] and [B] be replaced with to create the filtered dataet? __[4 Marks]__
+
 
 ```{r, eval = FALSE}
 nat_disaster_filter <- nat_disaster_summary %>% 
                         [A]([B])
 ```
 
-\[A\] =
 
-\[B\] =
 
-(iv) Now assume you want to create the following barplot which shows the total fatalities per event type, using the filtered data from part (iii).
+[A] = filter
 
-```{r, eval = TRUE, echo=FALSE}
+[B] = total_facilities > 200
+
+
+(iv) Now assume you want to create the following barplot which shows the total fatalities per event type, using the filtered data from part (iii). 
+
+```{r, eval = TRUE}
 ggplot(nat_disaster_filter, aes(x = EVTYPE, y = total_fatalities)) +
   geom_bar(stat="identity") +
   theme(axis.text.x = element_text(angle = 90)) +
@@ -107,18 +97,23 @@ ggplot(nat_disaster_filter, aes(x = EVTYPE, y = total_fatalities)) +
   ylab("# fatalities")
 ```
 
-In the code below, what should \[A\], \[B\] and \[C\] be replaced with to create the plot?
+
+In the code below, what should [A], [B] and [C] be replaced with to create the plot? __[6 Marks]__
+
 
 ```{r, eval = FALSE}
 ggplot(nat_disaster_filter, aes(x = [A], y = [B])) +
   [C](stat="identity") +
   theme(axis.text.x = element_text(angle = 90)) +
   xlab("") +
-  ylab("# fatalities")
+  ylab("# fatalities") 
 ```
 
-\[A\] =
+[A] = EVTYPE
 
-\[B\] =
+[B] = total_fatalities
 
-\[C\] =
+[C] = geom_bar
+
+
+

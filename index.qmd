@@ -26,16 +26,15 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 5: [Observational Studies](https://ncahill89.github.io/DS152/5-ObservationalStudies.html)
 
-
 ## Tutorial Sheets
 
 Tutorial Sheet 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Tutorial1.html)
 
 Tutorial Sheet 2: [Logistic Regression](https://ncahill89.github.io/DS152/Tutorial2.html)
 
-
 ## Assignments
 
 Assignment 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Assignment1.html)
 
+Assignment 2: [Linear Regression](https://ncahill89.github.io/DS152/Assignment2.html)
 

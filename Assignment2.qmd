@@ -1,0 +1,159 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 2: Linear Regression"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+#library(docxtools)
+Cars93 <- MASS::Cars93
+```
+
+
+
+## Instructions
+
+Answer all questions for continuous assessment. Due: **4pm on Friday, 7th March 2025**.
+
+## Exercise 
+
+For this exercise, we will work with the `Cars93` data frame from package `MASS`. Open an R session in the R Studio Server, and type in the code below to glimpse the dataset and access the help file to see more information on the data.
+
+```{r, eval = FALSE}
+library(tidyverse)
+Cars93 <- MASS::Cars93
+
+glimpse(Cars93)
+?Cars93
+```
+
+(a) How many observations and how many variables are in the `Cars93` dataset?
+
+(b) Suppose we would like to predict the `Price` of the cars. Why would *logistic* regression *not* be suitable in this case?
+
+(c) Assume you want to fit a simple linear regression model to predict `Price` using `Horsepower` as the predictor. How would you fill the gaps, [A], [B], [C] and [D] in the code below to fit the linear regression model?
+
+```{r, eval = FALSE}
+lm_mod1 <-  [A]([B] ~ [C], data = [D])
+```
+
+[A] = 
+
+[B] = 
+
+[C] = 
+
+[D] = 
+
+
+(d) After fitting the linear regression model and inspecting the estimated coefficients, we obtain the following results in R:
+
+```{r, echo = FALSE}
+lm_mod1 <- Cars93 %>%
+  lm(Price ~ Horsepower, data = .) 
+``` 
+
+```
+## Coefficients:
+## (Intercept)   Horsepower
+##     -1.3988       0.1454
+``` 
+
+What would the predicted `Price` be  if `Horsepower` was 100?
+
+(e) Explain in your own words what the code below is doing and why the plot being created would be useful?
+
+```{r, eval = FALSE}
+Cars93_pred <- Cars93 %>%  mutate(price_pred = predict(lm_mod1))
+
+ggplot(data = Cars93_pred,
+       mapping = aes(x = Price, y = price_pred)) +
+  theme_bw() +
+  geom_point() +
+  geom_abline(intercept = 0, slope = 1) +
+  xlab("Observed CL") + 
+  ylab("Predicted CL")
+```
+
+
+(f) Now fit a multiple linear regression using the predictor variables: `MPG.city`, `MPG.highway`, `EngineSize`, `Horsepower`, `RPM`, `Rev.per.mile`, `Fuel.tank.capacity`, and `Width`. Save this model as `lm_mod2`. Look at the estimated coefficients. Which ones seem to be negatively related to the response `Price`?
+
+
+(g) Create the plot shown in (e) but instead use `lm_mod2` to get your predictions. Which model appears to perform better in terms of prediction, give a reason for your answer. 
+
+
+(h) Below we present the sum of the squared residuals (discrepancy) for both model fits. Which one (model A or B) is more likely to correspond to the multiple linear regression (`lm_mod2`)? Justify your answer.
+
+```{r, echo = FALSE}
+a <- Cars93 %>%
+  lm(Price ~ Horsepower,
+     data = .) %>%
+  resid %>%
+  "^"(2) %>%
+  sum
+
+b <- Cars93 %>%
+  lm(Price ~ MPG.city + MPG.highway + EngineSize + Horsepower + RPM + Rev.per.mile + Fuel.tank.capacity + Width,
+     data = .) %>%
+  resid %>%
+  "^"(2) %>%
+  sum
+
+c("model A" = b, "model B" = a)
+```
+
+<!-- ## Exercise 2 -->
+
+<!-- A breast cancer study was conducted by Dr William Wolberg from the University of Wisconsin-Madison. He assessed biopsies of breast tumours for 699 patients up to 15 July 1992, and recorded nine different attributes, which are scores based on a scale from 1 to 10 on different features of the tumours. The response variable is whether the tumour was "benign" or "malignant". If you would like to see more information, type this in R: -->
+
+<!-- ```{r, eval = FALSE} -->
+<!-- library(MASS) -->
+
+<!-- ?biopsy -->
+<!-- ``` -->
+
+<!-- Answer the following questions. -->
+
+<!-- \textbf{(a)} Is this an \textit{observational} study? Why or why not? -->
+
+<!-- \textbf{(b)} Is this a \textit{retrospective} or \textit{prospective} study? Or isn't there enough information to tell? Justify your answer. -->
+
+<!-- \textbf{(c)} Suppose you would like to predict, based on the attributes, whether the tumour was benign or malignant. Why would \textit{linear} regression be unsuitable in this case? -->
+
+<!-- \textbf{(d)} The following is a result from carrying out multiple logistic regression in this data, using a binary response variable (1 if the tumour was malignant and 0 if it was benign). -->
+
+<!-- ```{r} -->
+<!-- library(tidyverse) -->
+<!-- library(MASS) -->
+
+<!-- biopsy %>% -->
+<!--   mutate(malignant = as.numeric(class == "malignant")) %>% -->
+<!--   glm(malignant ~ V1 + V2 + V3 + V4 + V5 + V7 + V8 + V9, -->
+<!--       family = binomial, -->
+<!--       data = .) %>% -->
+<!--   coef %>% -->
+<!--   round(4) -->
+<!-- ``` -->
+
+<!-- The predictor `V3` is a scale referring to the uniformity of cell shape. How would an increase of 1 unit in this scale affect the prediction of this model as to whether the tumour is malignant or benign? -->
+
+<!-- ## Exercise 3 -->
+
+<!-- For each of the scenarios below, answer the following question: -->
+
+<!-- Is there evidence of a causal relationship between the variables? List possible confounders that could affect both variables and would have to be corrected for when analysing the data. -->
+
+<!-- \textbf{(a) Scenario 1} The number of hits on a particular website is positively correlated with the rate of success of that company in delivering a good solution to their clients. -->
+
+<!-- \textbf{(b) Scenario 2} The number of people buying umbrellas is positively correlated with the number of people hit by a car. -->
+
+<!-- \textbf{(c) Scenario 3} The number of coats and gloves bought in a department store is positively correlated with the number of people buying cold and flu tablets in a local pharmacy. -->
+
+<!-- \textbf{(d) Scenario 4} The number of flyers and posters depicting politicians in different towns is positively correlated with the number of tweets about politics from people that live in those areas. -->
