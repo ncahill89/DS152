@@ -71,16 +71,15 @@ library(tidyverse)
 
 **Observational Study: A study which observes individuals and measures variables, but does not attempt to influence the responses.**
 
+-   An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.
 
-  - An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.
+-   An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain
 
-  - An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain
-  
-  - In prospective observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”
-  
-  - In retrospective observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.
+-   In prospective observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”
 
-## Example 1: Student Happiness 
+-   In retrospective observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.
+
+## Example 1: Student Happiness
 
 The `gcfeeling` data contains results of a survey conducted by Georgetown College students on 47 Georgetown College upper-class students in relation to feelings about Georgetown College.
 
@@ -95,7 +94,6 @@ data("gcfeeling")
 # View basic structure
 glimpse(gcfeeling)
 ```
-
 
 ### **1. Exploring Categorical Variables**
 
@@ -113,11 +111,9 @@ gcfeeling %>%
   coord_flip()
 ```
 
-
 ### **2. Exploring Numeric Variables**
 
 `gcfeeling` contains numeric variables. We can visualize their distributions:
-
 
 ```{r}
 # Check numeric variable distributions
@@ -131,7 +127,6 @@ gcfeeling %>%
 
 ### **3. Relationships Between Variables**
 
-
 #### **Contingency Table (For Categorical Variables)**
 
 A contingency table shows the relationship between two categorical variables by displaying their frequency distribution.
@@ -142,16 +137,14 @@ gcfeeling %>%
   table()
 ```
 
-
 #### **Pairwise Correlation (For Numeric Variables)**
-
 
 ```{r}
 # Compute correlation matrix
 cor(gcfeeling$rating.fresh, gcfeeling$rating.js)
 ```
 
-#### **Scatterplots (For  Numeric Variables)**
+#### **Scatterplots (For Numeric Variables)**
 
 ```{r}
 ggplot(gcfeeling, aes(x = rating.fresh, y = rating.js)) +
@@ -170,12 +163,11 @@ gcfeeling %>%
 
 ### **4. Modelling**
 
-We can use multiple regression to model student happiness. 
+We can use multiple regression to model student happiness.
 
 ```{r}
 lm(rating.js ~ rating.fresh + athlete + greek, data = gcfeeling)
 ```
-
 
 ## Example 2: Does working out increase energy levels?
 
@@ -186,7 +178,6 @@ We want to evaluate if regularly working out has any impact on energy levels.
 -   We ask the people in each group to rate their energy levels from 1-10.
 
 -   Then, we find the average "energy level" for the two groups of people and compare.
-
 
 ![](images/EnergyLevels.jpg)
 
@@ -254,11 +245,11 @@ You find that
 
 So what we have is a conditional probability:
 
-  - p(recommended\|Sophia's) = 62.5%
+-   p(recommended\|Sophia's) = 62.5%
 
-  - p(recommended\|Carla's) = 54%
+-   p(recommended\|Carla's) = 54%
 
-___
+------------------------------------------------------------------------
 
 What if we consider age as a factor here?
 
@@ -272,20 +263,19 @@ What if we consider age as a factor here?
 
 So what we have is:
 
-  - p(recommended\|Sophia's, younger) = 30%
+-   p(recommended\|Sophia's, younger) = 30%
 
-  - p(recommended\|Sophia's, older) = 80%
+-   p(recommended\|Sophia's, older) = 80%
 
-  - p(recommended\|Carla's, younger) = 50%
+-   p(recommended\|Carla's, younger) = 50%
 
-  - p(recommended\|Carla's, older) = 90%
+-   p(recommended\|Carla's, older) = 90%
 
 ## What's going on?
 
 You have unknowingly entered the world of Simpson's Paradox, where a restaurant can be both better and worse than its competitor, exercise can lower and increase the risk of disease, and the same dataset can be used to prove two opposing arguments. Instead of going out to dinner, perhaps you and your friend should spend the evening discussing this fascinating statistical phenomenon.
 
 **Simpson's Paradox occurs when trends that appear when a dataset is separated into groups reverse when the data are aggregated.**
-
 
 ## Example 5: Exercise and Disease
 
@@ -333,7 +323,6 @@ ggplot(exercise_dat, aes(x = hours_exercised, y = risk, color = age_group)) +
 
 ```
 
-
 We clearly see a negative correlation, indicating that increased levels of exercise per week are correlated with a lower risk of developing the disease for both groups. Now, let's combine the data together on a single plot:
 
 ```{r,echo = FALSE, message = FALSE, fig.width=6, fig.height=4}
@@ -349,18 +338,16 @@ ggplot(exercise_dat, aes(x = hours_exercised, y = risk))+
 
 ❌ Surprise! The overall correlation is positive: More exercise → Higher risk.
 
-
 ### Explanation of the Paradox:
 
 Within each age group: More exercise is associated with lower risk (negative correlation).
 
-Across both groups: Older individuals exercise more... 
+Across both groups: Older individuals exercise more...
 
 ```{r,echo = FALSE, message = FALSE, fig.width=4, fig.height=3}
 ggplot(exercise_dat, aes(x = age_group, y = hours_exercised))+
   geom_boxplot()
 ```
-
 
 ...but have higher baseline risk due to age.
 
@@ -369,8 +356,4 @@ ggplot(exercise_dat, aes(x = age_group, y = risk))+
   geom_boxplot()
 ```
 
-
-
 When aggregated, the higher risk of the older group skews the data, making it seem like more exercise increases risk. This is Simpson’s Paradox — where a trend appears in subgroups but reverses when the data is combined!
-
-

@@ -1,0 +1,83 @@
+---
+title: "DS152 Tutorial Sheet 3 with Solutions"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+knitr::opts_chunk$set(echo = TRUE)
+biopsy <- MASS::biopsy
+
+```
+
+## Exercise 
+
+A breast cancer study was conducted by Dr William Wolberg from the University of Wisconsin-Madison. He assessed biopsies of breast tumours for 699 patients up to 15 July 1992, and recorded nine different attributes, which are scores based on a scale from 1 to 10 on different features of the tumours. The response variable is whether the tumour was "benign" or "malignant". A `glimpse` of the data is shown below.
+
+```{r, eval = TRUE}
+biopsy <- MASS::biopsy
+glimpse(biopsy)
+```
+
+If you would like to see more information, type this in R:
+
+```{r}
+?biopsy
+```
+
+Answer the following questions.
+
+**(a)** Is this an *observational* study? Why or why not?
+
+\color{blue} Yes, because the data are simply being observed. Dr Wolberg does not control or influence the attributes of the patients' tumours. \color{black}
+
+**(b)** Is this a *retrospective* or *prospective* study? Or isn't there enough information to tell? Justify your answer.
+
+\color{blue} Given the way the data is presented, this seems to be a retrospective study, since Dr Wolberg obtained the information on the patients after their breast tumours had been detected, and no extra data on the patients is recorded, so probably this isn't a follow-up study. \color{black}
+
+**(c)** Below is a function you have not met before called `summarise_if`. What do you think this function is doing when being used with `group_by` as shown below? Run this code. what do you learn from the output?
+
+```{r, message = FALSE}
+library(tidyverse)
+biopsy %>% group_by(class) %>% summarise_if(is.numeric, mean)
+```
+
+\color{blue} This function is only applying the summary to columns in the dataset if they are numeric. In this case the chosen summary is the mean. The output indicates that on average there appears to be differences in variables V1 - V9 across the benign and malignant groups. (Note: try showing them the summary when you use median instead of mean) \color{black}
+
+
+**(d)** Note when you run the code above that the summary for V6 has NAs. Try adding na.rm = TRUE to the `summarise_if` function and see what happens. What do you think this achieves? 
+
+```{r, message = FALSE}
+biopsy %>% group_by(class) %>% summarise_if(is.numeric, mean, na.rm = TRUE)
+```
+
+\color{blue} It doesn't remove the V6 column as might be expected. What it does is calculate the mean based on only the rows that have data and not NAs \color{black}
+
+
+**(e)** Suppose you would like to predict, based on the attributes, whether the tumour was benign or malignant. Why would *linear* regression be unsuitable in this case?
+
+\color{blue} Because our response would be bounded between 0 and 1, and the linear regression model would fit a line ranging from $-\infty$ and $+\infty$, which doesn't make sense in this case. \color{black}
+
+**(f)** What is the code below doing and why? 
+
+```{r, message = FALSE}
+biopsy <- biopsy %>% mutate(malignant = as.numeric(class == "malignant"))
+```
+
+Turning the class variable into a new variable call malignant which has a value of 1 if the tumour was malignant and 0 if it was benign. The glm function will only work with values between 0 and 1 or if the outcome is coded as a factor (which isn't always the case). In this case the class variable is a factor so glm will work using malignant or class as the outcome.
+
+**(g)** Carry out a multiple logistic regression with this data using the binary response variable called malignant and predictors V1 - V9. What are the values of the coefficients?
+
+```{r}
+glm(malignant ~ V1 + V2 + V3 + V4 + V5 + V7 + V8 + V9,
+      family = binomial,
+      data = biopsy)
+```
+
+**(h)** The predictor `V3` is a scale referring to the uniformity of cell shape. How would an increase of 1 unit in this scale affect the prediction of this model as to whether the tumour is malignant or benign?
+
+\color{blue} It would increase the log-odds of it being malignant by 0.5679. Broadly speaking this means that an increase in V3 increases the chance of a malignant tumor.  \color{black}

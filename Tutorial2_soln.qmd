@@ -104,7 +104,6 @@ accuracy_results
 
 (iii) Now modify the summary code above to add a `group_by` function that will breakdown the accuracy results by decision category. Change to `eval = TRUE` when you are ready to run this code. What do you learn from these results?
 
-
 ```{r, eval = TRUE}
 accuracy_results <-car_predict %>% 
                       group_by(decision) %>% 
@@ -112,6 +111,6 @@ accuracy_results <-car_predict %>%
                                 n_total = n(),
                                 percentage_correct = n_correct*100/n_total)
 accuracy_results
-```     
-        
+```
+
 **Note for Tutors:** Just talk through what the addition of `group_by` achieves and then explain that the accuracy is much better in the "unacceptable" group. Note to students that this happens because of the imbalance in the dataset (much higher proportion of "unacceptable" in the dataset) which was noted in one of the plots earlier.
