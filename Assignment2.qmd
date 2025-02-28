@@ -68,7 +68,7 @@ lm_mod1 <- Cars93 %>%
 
 What would the predicted `Price` be  if `Horsepower` was 100?
 
-(e) Explain in your own words what the code below is doing and why the plot being created would be useful?
+(e) Briefly explain, in your own words, why the plot being created with the code below is useful.
 
 ```{r, eval = FALSE}
 Cars93_pred <- Cars93 %>%  mutate(price_pred = predict(lm_mod1))
