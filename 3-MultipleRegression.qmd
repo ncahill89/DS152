@@ -364,7 +364,6 @@ crab_mod3
 
 For a male crab the expected carapace length increases by 5.67 compared to a female crab.
 
-
 ```{r}
 
 crab_dat <- crab_dat %>% 
@@ -377,8 +376,6 @@ ggplot(data = crab_dat,
   geom_point() +
   geom_line(aes(x = RW, y = CL_pred3, colour = sex)) 
 ```
-
-
 
 ::: question
 **Question:** How well does the model do at predicting carapace length?
@@ -394,7 +391,6 @@ ggplot(data = crab_dat,
   xlab("Observed CL") + 
   ylab("Predicted CL")
 ```
-
 
 ### Model Comparison
 
@@ -418,17 +414,15 @@ Typically we would split the data into *training* and *test* set, use only the t
 
 Logistic regression is a generalized regression model where the outcome is a two-level categorical variable. The outcome, takes the value 1 or 0 with probability. Ultimately, it is the probability of the outcome taking the value 1 (i.e., being a “success”) that we model in relation to the predictor variables. For this to work, we transform the expected outcome in such a way that it will be bounded between 0 and 1, and hence our estimates will be sensical. The transformation we use is called the *logit*, and is the natural logarithm of the odds of success.
 
-
-
 ### Modelling binary outcomes
 
-  - $y$ takes on values 0 (failure) or 1 (success)
+-   $y$ takes on values 0 (failure) or 1 (success)
 
-  - $p$: probability of success
+-   $p$: probability of success
 
-  - $1-p$: probability of failure
+-   $1-p$: probability of failure
 
-  - We can't model $y$ directly, so instead we model $p$
+-   We can't model $y$ directly, so instead we model $p$
 
 **Linear model**
 
@@ -463,7 +457,6 @@ tibble(
   labs(x = "p", y = "logit(p)", title = "logit(p) vs. p")
 ```
 
-
 **Generalized linear model**
 
 -   We model the logit (log-odds) of $p$ :
@@ -491,23 +484,18 @@ plot.function(sigmoid, from = 0, to = 20, n = 101,
               lwd = 3)
 ```
 
-
-
-
 ## Example: The Iris Dataset
 
 You will have explored the *Iris* dataset initially last semester in DS151.
 
 *Iris* is a genus of about 300 species of flowering plants, taking its name from the Greek word for a rainbow (which is also the name for the Greek goddess of rainbows, Iris). The flowers are very showy, and we would like to know if it is possible to identify some of the species based on measurements of different parts of the flowers.
 
-
 The dataset gives the measurements in centimeters of the variables:
 
-
-- sepal length
-- sepal width
-- petal length
-- petal width
+-   sepal length
+-   sepal width
+-   petal length
+-   petal width
 
 for 50 flowers from each of three species of *Iris*: *Iris setosa*, *Iris versicolor*, and *Iris virginica*.
 
@@ -518,8 +506,7 @@ library(tidyverse)
 glimpse(iris)
 ```
 
-
-### Exploratory Analysis 
+### Exploratory Analysis
 
 Let's work, initially, only with species *versicolor* and *virginica*. We create a plot that shows in the $x$ axis the petal length, and in the $y$ axis only the values of 0 and 1, representing whether the observation belongs to class *virginica* or not (0 = the observation belongs to class *versicolor*; 1 = it belongs to class *virginica*). We call this a binary (or dummy) variable.
 
@@ -554,8 +541,7 @@ ggplot(iris2, aes(x = Petal.Length, y = Species.binary)) +
   theme_bw()
 ```
 
-We may interpret the y-axis numbers here as the probability $p$ of belonging to class *virginica*. It appears that as the petal length increases, so does the likelihood of belonging to the *virginica* class. 
-
+We may interpret the y-axis numbers here as the probability $p$ of belonging to class *virginica*. It appears that as the petal length increases, so does the likelihood of belonging to the *virginica* class.
 
 ## Multiple Logistic Regression
 
@@ -571,7 +557,6 @@ iris_mod2 <- glm(Species.binary ~ Sepal.Length + Sepal.Width + Petal.Length + Pe
                  data = iris2)
 iris_mod2 %>% coef %>% round(digits = 4)
 ```
-
 
 ### Classification
 

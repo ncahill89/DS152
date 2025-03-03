@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#observational-study" id="toc-observational-study" class="nav-link active" data-scroll-target="#observational-study">Observational Study</a></li>
+  <li><a href="#about-observational-studies" id="toc-about-observational-studies" class="nav-link active" data-scroll-target="#about-observational-studies">About Observational Studies</a></li>
   <li><a href="#example-1-student-happiness" id="toc-example-1-student-happiness" class="nav-link" data-scroll-target="#example-1-student-happiness">Example 1: Student Happiness</a>
   <ul class="collapse">
   <li><a href="#exploring-categorical-variables" id="toc-exploring-categorical-variables" class="nav-link" data-scroll-target="#exploring-categorical-variables"><strong>1. Exploring Categorical Variables</strong></a></li>
@@ -193,19 +193,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- ## Retrospective Vs Prospective Studies -->
 <!-- If an observational study uses data from the past, it is called retrospective study, whereas if data are collected throughout the study, it is called prospective; -->
 <!-- ![](images/retroprosp.png) -->
-<section id="observational-study" class="level2">
-<h2 class="anchored" data-anchor-id="observational-study">Observational Study</h2>
-<p><strong>Observational Study: A study which observes individuals and measures variables, but does not attempt to influence the responses.</strong></p>
+<section id="about-observational-studies" class="level2">
+<h2 class="anchored" data-anchor-id="about-observational-studies">About Observational Studies</h2>
+<ul>
+<li><p><strong>Exposure</strong>: A variable that represents a factor of interest that may influence an outcome, such as a risk factor, treatment, behavior, or environmental condition (e.g., smoking, diet, air pollution, or a medical intervention).</p></li>
+<li><p><strong>Outcome</strong>: The event or condition that is being studied as the possible effect of the exposure, such as disease occurrence, recovery, mortality, or any measurable health-related change (e.g., lung cancer, weight loss, or blood pressure levels).</p></li>
+</ul>
+<p>In <strong>observational studies</strong>, researchers examine the relationship between exposure and outcome without intervening, aiming to identify associations while controlling for confounders (more on this later).</p>
 <ul>
 <li><p>An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.</p></li>
 <li><p>An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain</p></li>
-<li><p>In prospective observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”</p></li>
-<li><p>In retrospective observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.</p></li>
+<li><p>In <strong>retrospective</strong> observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.</p></li>
+<li><p>In <strong>prospective</strong> observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”</p></li>
 </ul>
+<p><img src="images/Screenshot 2025-03-03 at 10.12.32.png" class="img-fluid"></p>
 </section>
 <section id="example-1-student-happiness" class="level2">
 <h2 class="anchored" data-anchor-id="example-1-student-happiness">Example 1: Student Happiness</h2>
-<p>The <code>gcfeeling</code> data contains results of a survey conducted by Georgetown College students on 47 Georgetown College upper-class students in relation to feelings about Georgetown College.</p>
+<p>The <code>gcfeeling</code> data contains results of a survey conducted by Georgetown College students on 47 Georgetown College students in relation to feelings about Georgetown College.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load necessary packages</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
@@ -276,48 +281,51 @@ $ happier      &lt;fct&gt; NO, YES, YES, YES, YES, YES, YES, NO, YES, NO, YES, Y
 <p>A contingency table shows the relationship between two categorical variables by displaying their frequency distribution.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(happier, athlete) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(athlete, happier) <span class="sc">%&gt;%</span> </span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">table</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>       athlete
-happier  n  y
-    NO  10  1
-    YES 25 11</code></pre>
+<pre><code>       happier
+athlete NO YES
+      n 10  25
+      y  1  11</code></pre>
 </div>
 </div>
 </section>
-<section id="pairwise-correlation-for-numeric-variables" class="level4">
-<h4 class="anchored" data-anchor-id="pairwise-correlation-for-numeric-variables"><strong>Pairwise Correlation (For Numeric Variables)</strong></h4>
+<section id="barplots-for-categorical-variables" class="level4">
+<h4 class="anchored" data-anchor-id="barplots-for-categorical-variables"><strong>Barplots (For Categorical Variables)</strong></h4>
+<p>We can visualise conditional distributions, for example, given the student is an athlete what is the chance they were happier?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute correlation matrix</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(gcfeeling<span class="sc">$</span>rating.fresh, gcfeeling<span class="sc">$</span>rating.js)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.402741</code></pre>
-</div>
-</div>
-</section>
-<section id="scatterplots-for-numeric-variables" class="level4">
-<h4 class="anchored" data-anchor-id="scatterplots-for-numeric-variables"><strong>Scatterplots (For Numeric Variables)</strong></h4>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gcfeeling, <span class="fu">aes</span>(<span class="at">x =</span> rating.fresh, <span class="at">y =</span> rating.js)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(athlete, happier) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(athlete, happier) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> athlete, <span class="at">fill =</span> happier, <span class="at">weight =</span> n)) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 </section>
-<section id="boxplots-of-numerical-variables-by-categories" class="level4">
-<h4 class="anchored" data-anchor-id="boxplots-of-numerical-variables-by-categories"><strong>Boxplots of Numerical Variables by Categories</strong></h4>
+<section id="pairwise-correlation-for-numeric-variables" class="level4">
+<h4 class="anchored" data-anchor-id="pairwise-correlation-for-numeric-variables"><strong>Pairwise Correlation (For Numeric Variables)</strong></h4>
+<p>As we’ve seen before, correlation measures the strength and direction of the relationship between two variables, indicating how changes in one variable are associated with changes in another.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots grouped by a categorical variable (assuming `groupvar` is categorical)</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> athlete, <span class="at">y =</span> rating.js)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Compute correlation matrix</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cor</span>(gcfeeling<span class="sc">$</span>rating.fresh, gcfeeling<span class="sc">$</span>rating.diff)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -0.6694201</code></pre>
+</div>
+</div>
+</section>
+<section id="scatterplots-for-numeric-variables" class="level4">
+<h4 class="anchored" data-anchor-id="scatterplots-for-numeric-variables"><strong>Scatterplots (For Numeric Variables)</strong></h4>
+<p>We can visualise the relationship between two numerical variables, for example, current happiness level vs past happiness level.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gcfeeling, <span class="fu">aes</span>(<span class="at">x =</span> rating.fresh, <span class="at">y =</span> rating.diff)) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -327,22 +335,63 @@ happier  n  y
 </div>
 </div>
 </section>
+<section id="boxplots-of-numerical-variables-by-categories" class="level4">
+<h4 class="anchored" data-anchor-id="boxplots-of-numerical-variables-by-categories"><strong>Boxplots of Numerical Variables by Categories</strong></h4>
+<p>We can visualise the relationship between a categorical and a numerical variable, for example, current happiness level broken down by athlete categories.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplots grouped by a categorical variable</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>gcfeeling <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> athlete, <span class="at">y =</span> rating.diff)) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="modelling" class="level3">
 <h3 class="anchored" data-anchor-id="modelling"><strong>4. Modelling</strong></h3>
-<p>We can use multiple regression to model student happiness.</p>
+<section id="numerical-outcome" class="level4">
+<h4 class="anchored" data-anchor-id="numerical-outcome"><strong>Numerical outcome</strong></h4>
+<p>We can use multiple linear regression to model student happiness.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rating.js <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete <span class="sc">+</span> greek, <span class="at">data =</span> gcfeeling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rating.diff <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete <span class="sc">+</span> greek, <span class="at">data =</span> gcfeeling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
-lm(formula = rating.js ~ rating.fresh + athlete + greek, data = gcfeeling)
+lm(formula = rating.diff ~ rating.fresh + athlete + greek, data = gcfeeling)
 
 Coefficients:
  (Intercept)  rating.fresh      athletey        greeky  
-      5.0287        0.3277        0.7594        0.8272  </code></pre>
+      5.0287       -0.6723        0.7594        0.8272  </code></pre>
 </div>
 </div>
+</section>
+<section id="binary-outcome" class="level4">
+<h4 class="anchored" data-anchor-id="binary-outcome"><strong>Binary outcome</strong></h4>
+<p>We can use multiple logisitc regression to model student happiness.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(happier <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete <span class="sc">+</span> greek, <span class="at">data =</span> gcfeeling, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = happier ~ rating.fresh + athlete + greek, family = "binomial", 
+    data = gcfeeling)
+
+Coefficients:
+ (Intercept)  rating.fresh      athletey        greeky  
+      4.6555       -0.4595        1.7066       -0.5962  
+
+Degrees of Freedom: 46 Total (i.e. Null);  43 Residual
+Null Deviance:      51.15 
+Residual Deviance: 43.37    AIC: 51.37</code></pre>
+</div>
+</div>
+</section>
 </section>
 </section>
 <section id="example-2-does-working-out-increase-energy-levels" class="level2">
@@ -371,12 +420,12 @@ Coefficients:
 <h2 class="anchored" data-anchor-id="example-3-pancreatic-cancer-study">Example 3: Pancreatic Cancer Study</h2>
 <p>Many years ago, investigators reported an association between coffee drinking and pancreatic cancer in an observational study (<em>MacMahon B, Yen S, Trichopoulos D, Warren K, Nardi G. Coffee and cancer of the pancreas. N Eng J Med 1981; 304: 630-3</em>).</p>
 <p><img src="images/Confounding3.png" class="img-fluid"></p>
-<p>If we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.</p>
+<p>If we take coffee as our exposure of interest and correlate it with the development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled. There is a third causal factor, cigarette smoking, that was more common among those who reported drinking coffee and those with pancreatic cancer.</p>
 <p><img src="images/Confounding2.png" class="img-fluid"></p>
 <p>Once the confounding variable, smoking is taken into account the correlation between coffee and pancreatic cancer disappears.</p>
 <section id="reducing-confounding-matching" class="level3">
 <h3 class="anchored" data-anchor-id="reducing-confounding-matching">Reducing confounding: Matching</h3>
-<p>Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.</p>
+<p>Matching is a technique used in observational studies to reduce confounding by ensuring that compared groups have similar distributions of key variables. Since observational studies lack randomization of the exposure, confounders—variables that are related to both the exposure and the outcome—can introduce bias. Matching helps control for these confounders by pairing or grouping subjects with similar characteristics across different exposure levels. Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.</p>
 <ul>
 <li><p>Rather than using random assignment to equalize the experimental groups, the experimenters do it by matching observable characteristics.</p></li>
 <li><p>For every participant in the exposed group, the researchers find a participant with comparable traits to include in the control group.</p></li>
@@ -436,7 +485,7 @@ Coefficients:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -446,7 +495,7 @@ Coefficients:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -460,7 +509,7 @@ Coefficients:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="384"></p>
 </figure>
 </div>
 </div>
@@ -470,7 +519,7 @@ Coefficients:
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="384"></p>
 </figure>
 </div>
 </div>

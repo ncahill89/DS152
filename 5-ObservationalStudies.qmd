@@ -67,21 +67,27 @@ library(tidyverse)
 
 <!-- ![](images/retroprosp.png) -->
 
-## Observational Study
+## About Observational Studies
 
-**Observational Study: A study which observes individuals and measures variables, but does not attempt to influence the responses.**
+-   **Exposure**: A variable that represents a factor of interest that may influence an outcome, such as a risk factor, treatment, behavior, or environmental condition (e.g., smoking, diet, air pollution, or a medical intervention).
+
+-   **Outcome**: The event or condition that is being studied as the possible effect of the exposure, such as disease occurrence, recovery, mortality, or any measurable health-related change (e.g., lung cancer, weight loss, or blood pressure levels).
+
+In **observational studies**, researchers examine the relationship between exposure and outcome without intervening, aiming to identify associations while controlling for confounders (more on this later).
 
 -   An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.
 
 -   An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain
 
--   In prospective observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”
+-   In **retrospective** observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.
 
--   In retrospective observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.
+-   In **prospective** observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”
+
+![](images/Screenshot%202025-03-03%20at%2010.12.32.png)
 
 ## Example 1: Student Happiness
 
-The `gcfeeling` data contains results of a survey conducted by Georgetown College students on 47 Georgetown College upper-class students in relation to feelings about Georgetown College.
+The `gcfeeling` data contains results of a survey conducted by Georgetown College students on 47 Georgetown College students in relation to feelings about Georgetown College.
 
 ```{r, message=FALSE, warning=FALSE}
 # Load necessary packages
@@ -133,40 +139,68 @@ A contingency table shows the relationship between two categorical variables by 
 
 ```{r}
 gcfeeling %>%
-  select(happier, athlete) %>% 
+  select(athlete, happier) %>% 
   table()
+```
+
+#### **Barplots (For Categorical Variables)**
+
+We can visualise conditional distributions, for example, given the student is an athlete what is the chance they were happier?
+
+```{r}
+gcfeeling %>%
+  select(athlete, happier) %>% 
+  count(athlete, happier) %>% 
+  ggplot(aes(x = athlete, fill = happier, weight = n)) +
+  geom_bar(position = "fill") 
 ```
 
 #### **Pairwise Correlation (For Numeric Variables)**
 
+As we've seen before, correlation measures the strength and direction of the relationship between two variables, indicating how changes in one variable are associated with changes in another.
+
 ```{r}
 # Compute correlation matrix
-cor(gcfeeling$rating.fresh, gcfeeling$rating.js)
+cor(gcfeeling$rating.fresh, gcfeeling$rating.diff)
 ```
 
 #### **Scatterplots (For Numeric Variables)**
 
+We can visualise the relationship between two numerical variables, for example, current happiness level vs past happiness level.
+
 ```{r}
-ggplot(gcfeeling, aes(x = rating.fresh, y = rating.js)) +
+ggplot(gcfeeling, aes(x = rating.fresh, y = rating.diff)) +
   geom_point()
 ```
 
 #### **Boxplots of Numerical Variables by Categories**
 
+We can visualise the relationship between a categorical and a numerical variable, for example, current happiness level broken down by athlete categories.
+
 ```{r}
-# Boxplots grouped by a categorical variable (assuming `groupvar` is categorical)
+# Boxplots grouped by a categorical variable
 gcfeeling %>%
-  ggplot(aes(x = athlete, y = rating.js)) +
+  ggplot(aes(x = athlete, y = rating.diff)) +
   geom_boxplot() +
   theme_minimal()
 ```
 
 ### **4. Modelling**
 
-We can use multiple regression to model student happiness.
+#### **Numerical outcome**
+
+We can use multiple linear regression to model student happiness.
 
 ```{r}
-lm(rating.js ~ rating.fresh + athlete + greek, data = gcfeeling)
+lm(rating.diff ~ rating.fresh + athlete + greek, data = gcfeeling)
+```
+
+#### **Binary outcome**
+
+We can use multiple logisitc regression to model student happiness.
+
+```{r}
+glm(happier ~ rating.fresh + athlete + greek, data = gcfeeling, family = "binomial")
 ```
 
 ## Example 2: Does working out increase energy levels?
@@ -203,7 +237,7 @@ Many years ago, investigators reported an association between coffee drinking an
 
 ![](images/Confounding3.png)
 
-If we take coffee as our exposure of interest and correlate it with an increased development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled if there is a third causal factor, such as cigarette smoking, that was more common among those who reported drinking coffee.
+If we take coffee as our exposure of interest and correlate it with the development of pancreatic cancer there is the potential, as was the case with these investigators, to be misled. There is a third causal factor, cigarette smoking, that was more common among those who reported drinking coffee and those with pancreatic cancer.
 
 ![](images/Confounding2.png)
 
@@ -211,7 +245,7 @@ Once the confounding variable, smoking is taken into account the correlation bet
 
 ### Reducing confounding: Matching
 
-Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.
+Matching is a technique used in observational studies to reduce confounding by ensuring that compared groups have similar distributions of key variables. Since observational studies lack randomization of the exposure, confounders—variables that are related to both the exposure and the outcome—can introduce bias. Matching helps control for these confounders by pairing or grouping subjects with similar characteristics across different exposure levels. Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.
 
 -   Rather than using random assignment to equalize the experimental groups, the experimenters do it by matching observable characteristics.
 
