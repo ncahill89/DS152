@@ -198,15 +198,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li><p><strong>Exposure</strong>: A variable that represents a factor of interest that may influence an outcome, such as a risk factor, treatment, behavior, or environmental condition (e.g., smoking, diet, air pollution, or a medical intervention).</p></li>
 <li><p><strong>Outcome</strong>: The event or condition that is being studied as the possible effect of the exposure, such as disease occurrence, recovery, mortality, or any measurable health-related change (e.g., lung cancer, weight loss, or blood pressure levels).</p></li>
-</ul>
-<p>In <strong>observational studies</strong>, researchers examine the relationship between exposure and outcome without intervening, aiming to identify associations while controlling for confounders (more on this later).</p>
-<ul>
-<li><p>An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.</p></li>
-<li><p>An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain</p></li>
 <li><p>In <strong>retrospective</strong> observational studies, investigators “look backwards in time” and use data that have already been collected. Retrospective studies are often criticized for having more confounding and bias compared to prospective studies.</p></li>
 <li><p>In <strong>prospective</strong> observational studies, investigators choose a sample and collect new data generated from that sample. That is, the investigators “look forward in time.”</p></li>
 </ul>
 <p><img src="images/Screenshot 2025-03-03 at 10.12.32.png" class="img-fluid"></p>
+<p>In <strong>observational studies</strong>, researchers examine the relationship between exposure and outcome without intervening, aiming to identify associations while controlling for confounders (more on this later).</p>
+<ul>
+<li><p>An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.</p></li>
+<li><p>An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain</p></li>
+</ul>
 </section>
 <section id="example-1-student-happiness" class="level2">
 <h2 class="anchored" data-anchor-id="example-1-student-happiness">Example 1: Student Happiness</h2>
@@ -425,13 +425,7 @@ Residual Deviance: 43.37    AIC: 51.37</code></pre>
 <p>Once the confounding variable, smoking is taken into account the correlation between coffee and pancreatic cancer disappears.</p>
 <section id="reducing-confounding-matching" class="level3">
 <h3 class="anchored" data-anchor-id="reducing-confounding-matching">Reducing confounding: Matching</h3>
-<p>Matching is a technique used in observational studies to reduce confounding by ensuring that compared groups have similar distributions of key variables. Since observational studies lack randomization of the exposure, confounders—variables that are related to both the exposure and the outcome—can introduce bias. Matching helps control for these confounders by pairing or grouping subjects with similar characteristics across different exposure levels. Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables.</p>
-<ul>
-<li><p>Rather than using random assignment to equalize the experimental groups, the experimenters do it by matching observable characteristics.</p></li>
-<li><p>For every participant in the exposed group, the researchers find a participant with comparable traits to include in the control group.</p></li>
-<li><p>Matching subjects facilitates valid comparisons between those groups.</p></li>
-<li><p>The researchers use subject-area knowledge to identify characteristics that are critical to match.</p></li>
-</ul>
+<p>Matching is a technique used in observational studies to reduce confounding by ensuring that compared groups have similar distributions of key variables. Since observational studies lack randomization of the exposure, confounders—variables that are related to both the exposure and the outcome—can introduce bias. Matching helps control for these confounders by pairing or grouping subjects with similar characteristics across different exposure levels. Matching is a technique that involves selecting study participants with similar characteristics outside the outcome or exposure variables of interest.</p>
 </section>
 <section id="reducing-confounding-multiple-regression" class="level3">
 <h3 class="anchored" data-anchor-id="reducing-confounding-multiple-regression">Reducing confounding: Multiple Regression</h3>
