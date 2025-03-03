@@ -58,7 +58,7 @@ biopsy %>% group_by(class) %>% summarise_if(is.numeric, mean, na.rm = TRUE)
 \color{blue} It doesn't remove the V6 column as might be expected. What it does is calculate the mean based on only the rows that have data and not NAs \color{black}
 
 
-**(e)** Suppose you would like to predict, based on the attributes, whether the tumour was benign or malignant. Why would *linear* regression be unsuitable in this case?
+**(e)** Suppose you would like to predict, based on the attributes, whether the tumour was benign or malignant. Why would *linear* regression not be suitable in this case?
 
 \color{blue} Because our response would be bounded between 0 and 1, and the linear regression model would fit a line ranging from $-\infty$ and $+\infty$, which doesn't make sense in this case. \color{black}
 

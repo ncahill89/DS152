@@ -32,6 +32,9 @@ Tutorial Sheet 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Tutorial1.
 
 Tutorial Sheet 2: [Logistic Regression](https://ncahill89.github.io/DS152/Tutorial2.html)
 
+Tutorial Sheet 3: [Observational Studies](https://ncahill89.github.io/DS152/Tutorial3.html)
+
+
 ## Assignments
 
 Assignment 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Assignment1.html)

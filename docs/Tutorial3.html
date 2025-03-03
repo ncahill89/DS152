@@ -4815,8 +4815,8 @@ $ class &lt;fct&gt; benign, benign, benign, benign, benign, malignant, benign, b
 2 malignant  7.20  6.57  6.56  5.55  5.30    NA  5.98  5.86  2.59</code></pre>
 </div>
 </div>
-<p><strong>(d)</strong> Note when you run the code above that the summary for V6 has NAs. Try adding na.rm = TRUE to the <code>summarise_if</code> function and see what happens. What do you think this achieves?</p>
-<p><strong>(e)</strong> Suppose you would like to predict, based on the attributes, whether the tumour was benign or malignant. Why would <em>linear</em> regression be unsuitable in this case?</p>
+<p><strong>(d)</strong> Note, when you run the code above, the summary for V6 has NAs. Try adding na.rm = TRUE to the <code>summarise_if</code> function and see what happens. What do you think this achieves?</p>
+<p><strong>(e)</strong> Suppose you would like to predict, based on the attributes, whether the tumour was benign or malignant. Why would <em>linear</em> regression not be suitable in this case?</p>
 <p><strong>(f)</strong> What is the code below doing and why?</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>biopsy <span class="ot">&lt;-</span> biopsy <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">malignant =</span> <span class="fu">as.numeric</span>(class <span class="sc">==</span> <span class="st">&quot;malignant&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
