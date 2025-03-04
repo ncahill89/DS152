@@ -14,7 +14,7 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 ## Establishing Causality
 
--   A treatment will often be a binary variable that is either 0 or 1. It is 0 if the person is not treated, which is to say they are in the control group, and 1 if they are treated.
+-   A treatment (exposure variable) will often be a binary variable that is either 0 or 1. It is 0 if the person is not treated, which is to say they are in the control group, and 1 if they are treated.
 
 -   We will typically have some outcome of interest, Y, for each person or observational unit, and that could be categorical or continuous.
 
@@ -34,30 +34,36 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 **Controlled experiments** are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) affect one or more outcome (response) variables. We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.
 
-**Design of experiments** can produce an experiment that efficiently answers the questions of interest, optimizing the information for the available resources. The scientific method involves:
+**Design of experiments** can produce an experiment that efficiently answers the questions of interest. The scientific method involves:
 
 ```         
 (a) Stating a hypothesis
 (b) Planning an experiment to objectively test the hypothesis
 (c) Observing and carefully collecting data
-(d) Interpreting experimental results (test your hypothesis)
+(d) Interpreting experimental results 
 ```
 
 ## Principles of Experimental Design
 
-**Controlling.** Researchers assign treatments to cases, and they do their best to control any other differences in the groups.
+**Control.** Need to control for effects due to factors other than the ones of primary interest.
 
-**Randomization.** Researchers randomize patients into treatment groups to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a *confounding variable*, which is defined as a variable that is associated with both the explanatory and response variables. Randomizing patients into the treatment or control group helps even out such differences.
+**Randomization.** Subjects should be randomly selected from the population (where possible) and randomly divided into treatment groups to avoid unintentional selection bias in the groups and to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a *confounding variable*, which is defined as a variable that is associated with both the exposure and outcome variables. Randomizing patients into the treatment or control group helps even out such differences.
 
-#### Confounding variables
+#### The benefits to randomization are:
 
-**Confounding variables:** Extraneous variables that affect both the exposure and the outcome variables, and that make it seem like there is a relationship between them are called confounding variables.
+  - If a random assignment of treatment is done then significant results can be concluded as causal or cause and effect conclusions. That is, that the treatment caused the result. 
 
-![](images/Confounding.jpg)
+  - If random selection is done where the subjects are randomly selected from some population, then the results can be extended to that population. The random assignment is required for an experiment. When both random assignment and selection are part of the study then we have a completely randomized experiment. Without random assignment (i.e., an observational study) then the treatment can only be referred to as being related to the outcome.
 
-**Replication.** The more cases researchers observe, the more accurately they can estimate the effect of the explanatory variable on the response. In a single study, we replicate by collecting a sufficiently large sample. What is considered sufficiently large varies from experiment to experiment, but at a minimum we want to have multiple subjects (experimental units) per treatment group.
+<!-- #### Confounding variables -->
 
-**Blocking.** Researchers sometimes know or suspect that variables, other than the treatment, influence the response. Under these circumstances, they may first group individuals based on this variable into blocks and then randomize cases within each block to the treatment groups. This strategy is often referred to as blocking. For instance, if we are looking at the effect of a drug on heart attacks, we might first split patients in the study into low-risk and high-risk blocks, then randomly assign half the patients from each block to the control group and the other half to the treatment group. This strategy ensures that each treatment group has the same number of low-risk patients and the same number of high-risk patients.
+<!-- **Confounding variables:** Extraneous variables that affect both the exposure and the outcome variables, and that make it seem like there is a relationship between them are called confounding variables. -->
+
+<!-- ![](images/Confounding.jpg) -->
+
+**Replication.** A sufficient number of subjects should be used to ensure that randomization creates groups that resemble each other closely and to increase the chances of detecting differences among the treatments when such differences actually exist. In a single study, we replicate by collecting a sufficiently large sample. What is considered sufficiently large varies from experiment to experiment, but at a minimum we want to have multiple subjects per treatment group.
+
+**Local Control (Blocking).** Researchers sometimes know or suspect that variables, other than the treatment, influence the response. Under these circumstances, they may first group individuals based on this variable into blocks and then randomize cases within each block to the treatment groups. This strategy is often referred to as blocking. For instance, if we are looking at the effect of a drug on heart attacks, we might first split patients in the study into low-risk and high-risk blocks, then randomly assign half the patients from each block to the control group and the other half to the treatment group. This strategy ensures that each treatment group has the same number of low-risk patients and the same number of high-risk patients.
 
 ------------------------------------------------------------------------
 
@@ -65,39 +71,41 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 ### 1. Define the Problem and Objectives
 
--   Clearly state the research question and objectives.\
--   Establish a logical progression: **Objectives → Scientific Hypotheses → Statistical Hypotheses**.\
+-   Clearly state the research question and objectives.
+-   Establish a logical progression: *Objectives → Scientific Hypotheses → Statistical Hypotheses*.
 -   Examples:
-    -   Investigate the effect of Vitamin C on odontoblast length (cells responsible for tooth growth).\
-    -   Determine the lethal dose of a pesticide for an agricultural pest.\
+    -   Investigate the effect of Vitamin C on odontoblast length (cells responsible for tooth growth).
+    -   Determine the lethal dose of a pesticide for an agricultural pest.
     -   Identify the optimal temperature settings for efficient machine operation.
 
 ### 2. Define Experimental Conditions
 
--   **Controlled conditions**: Experiments conducted in controlled environments (e.g., greenhouses, laboratories, experimental stations).\
--   **Less controlled conditions**: Field studies in natural settings (e.g., farms, forests).
+-   Controlled conditions: Experiments conducted in controlled environments (e.g., greenhouses, laboratories, experimental stations).\
+-   Less controlled conditions: Field studies in natural settings (e.g., farms, forests).
 
 ### 3. Identify Variables of Interest
 
--   **Response Variable** (dependent variable): The outcome being measured.
-    -   Example: Odontoblast length in guinea pigs, blood pressure rates.\
--   **Treatment Factors and Levels** (independent variables): Variables manipulated in the experiment.
-    -   **Quantitative example**: Vitamin C dose (0.5, 1, 2 mg/day).\
-    -   **Qualitative example**: Diet type (natural vs. artificial).\
--   **Local Control (Blocking) Factors**: Variables controlled to reduce variability (e.g., environmental conditions, batch effects).
+-   Outcome Variable (response variable): The outcome being measured.
+    -   Example: Odontoblast length in guinea pigs, blood pressure rates.
+    
+-   Treatment Factors and Levels (exposure variables): Variables manipulated in the experiment.
+    -   Quantitative example: Vitamin C dose (0.5, 1, 2 mg/day).
+    -   Qualitative example: Diet type (natural vs. artificial).
+    
+-   Local Control (Blocking) Factors: Variables controlled to reduce variability (e.g., environmental conditions, batch effects).
 
 ### 4. Identify Experimental and Observational Units
 
--   **Experimental Unit**: The smallest unit to which a treatment is randomly assigned.
-    -   Examples: 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes.\
--   **Observational Unit**: The entity from which data is collected.
+-   Experimental Unit: The smallest unit to which a treatment is randomly assigned.
+    -   Examples: 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes.
+-   Observational Uni*: The entity from which data is collected.
     -   Examples: A single insect, tree, or Petri dish.
 
 ### 5. Define Observations to be Made
 
--   **Qualitative Observations**: Presence or absence of a feature (e.g., morphological traits).\
--   **Quantitative Observations**: Measurable data (e.g., weight, height, count, proportion).\
--   **Ordered Observations**: Ranked data with an inherent order (e.g., disease severity, grading scales).
+-   Qualitative Observations: Presence or absence of a feature (e.g., morphological traits).\
+-   Quantitative Observations: Measurable data (e.g., weight, height, count, proportion).\
+-   Ordered Observations: Ranked data with an inherent order (e.g., disease severity, grading scales).
 
 ### 6. Select the Experimental Design
 
@@ -106,19 +114,19 @@ Studies where the researchers assign treatments to cases are called experiments.
 ### 7. Conduct the Experiment
 
 -   Ensure **bias-free** procedures by considering:
-    -   Who is conducting the experiment.\
-    -   The location of the experiment.\
-    -   Start and end dates.\
-    -   The relevance and feasibility of the experiment.\
+    -   Who is conducting the experiment.
+    -   The location of the experiment.
+    -   Start and end dates.
+    -   The relevance and feasibility of the experiment.
     -   Associated costs.
 
 ### 8. Analyze Data and Interpret Results
 
--   Conduct analysis according to the experimental design.\
+-   Conduct analysis according to the experimental design.
 -   Interpret results within the context of:
-    -   Experimental conditions.\
-    -   Tested hypotheses.\
-    -   Established scientific knowledge.\
+    -   Experimental conditions.
+    -   Tested hypotheses.
+    -   Established scientific knowledge.
 -   Consider the potential consequences of incorrect conclusions.
 
 ------------------------------------------------------------------------
@@ -345,7 +353,7 @@ Experiments that involve more than one treatment factor are called *factorial ex
 
 <!-- \end{center} -->
 
-### Designs 
+### Designs
 
 For the Pesticide example, suppose 3 replicates and a completely randomized design
 
@@ -355,10 +363,9 @@ For the Pesticide example, suppose 3 replicates and a randomized complete block 
 
 ![](images/fac3.png){width="500"}
 
+### Interactions
 
-### Interactions 
-
- The major advantage of factorial experiments is that they allow for the detection of interactions.
+The major advantage of factorial experiments is that they allow for the detection of interactions.
 
 -   Two factors are said to interact if the effect of one, on the response variable, depends upon the level of the other.
 
@@ -374,17 +381,15 @@ The crossing over of lines indicates an interaction
 
 ![](images/int3.png){width="400"}
 
-
-## Factorial Experiments: Tooth Growth 
+## Factorial Experiments: Tooth Growth
 
 We've already seen to Tooth Growth data that examined the effect of Vitamin C delivery and dose on the length of the odontoplasts, the cells responsible for teeth growth, in 60 guinea pigs, where tooth length was the measured outcome variable.
 
-We initially looked at how the Vitamin C delivery impacted tooth growth. Now lets consider what happens when we bring dose into the analysis. In this case we have two factors to consider instead of 1. 
+We initially looked at how the Vitamin C delivery impacted tooth growth. Now lets consider what happens when we bring dose into the analysis. In this case we have two factors to consider instead of 1.
 
-  - Vitamin C delivery has 2 levels 
-  - dose has 3 levels (0.5, 1, and 2 mg/day)
+-   Vitamin C delivery has 2 levels
+-   dose has 3 levels (0.5, 1, and 2 mg/day)
 
 ```{r tooth2, exercise = TRUE}
 data("ToothGrowth")
 ```
-

@@ -205,7 +205,7 @@ window.Quarto = {
 <section id="establishing-causality" class="level2">
 <h2 class="anchored" data-anchor-id="establishing-causality">Establishing Causality</h2>
 <ul>
-<li><p>A treatment will often be a binary variable that is either 0 or 1. It is 0 if the person is not treated, which is to say they are in the control group, and 1 if they are treated.</p></li>
+<li><p>A treatment (exposure variable) will often be a binary variable that is either 0 or 1. It is 0 if the person is not treated, which is to say they are in the control group, and 1 if they are treated.</p></li>
 <li><p>We will typically have some outcome of interest, Y, for each person or observational unit, and that could be categorical or continuous.</p></li>
 <li><p>A treatment is causal if the outcome for a person, given they were not treated, is different to their outcome given they were treated.</p></li>
 <li><p>If we could both treat and control the one individual at the one time, then we would know that it was only the treatment that had caused any change. However, the fundamental problem of causal inference is that we cannot both treat and control the same individual at the same time.</p>
@@ -220,22 +220,27 @@ window.Quarto = {
 <section id="controlled-experiments" class="level2">
 <h2 class="anchored" data-anchor-id="controlled-experiments">Controlled Experiments</h2>
 <p><strong>Controlled experiments</strong> are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) affect one or more outcome (response) variables. We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.</p>
-<p><strong>Design of experiments</strong> can produce an experiment that efficiently answers the questions of interest, optimizing the information for the available resources. The scientific method involves:</p>
+<p><strong>Design of experiments</strong> can produce an experiment that efficiently answers the questions of interest. The scientific method involves:</p>
 <pre><code>(a) Stating a hypothesis
 (b) Planning an experiment to objectively test the hypothesis
 (c) Observing and carefully collecting data
-(d) Interpreting experimental results (test your hypothesis)</code></pre>
+(d) Interpreting experimental results </code></pre>
 </section>
 <section id="principles-of-experimental-design" class="level2">
 <h2 class="anchored" data-anchor-id="principles-of-experimental-design">Principles of Experimental Design</h2>
-<p><strong>Controlling.</strong> Researchers assign treatments to cases, and they do their best to control any other differences in the groups.</p>
-<p><strong>Randomization.</strong> Researchers randomize patients into treatment groups to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a <em>confounding variable</em>, which is defined as a variable that is associated with both the explanatory and response variables. Randomizing patients into the treatment or control group helps even out such differences.</p>
-<section id="confounding-variables" class="level4">
-<h4 class="anchored" data-anchor-id="confounding-variables">Confounding variables</h4>
-<p><strong>Confounding variables:</strong> Extraneous variables that affect both the exposure and the outcome variables, and that make it seem like there is a relationship between them are called confounding variables.</p>
-<p><img src="images/Confounding.jpg" class="img-fluid"></p>
-<p><strong>Replication.</strong> The more cases researchers observe, the more accurately they can estimate the effect of the explanatory variable on the response. In a single study, we replicate by collecting a sufficiently large sample. What is considered sufficiently large varies from experiment to experiment, but at a minimum we want to have multiple subjects (experimental units) per treatment group.</p>
-<p><strong>Blocking.</strong> Researchers sometimes know or suspect that variables, other than the treatment, influence the response. Under these circumstances, they may first group individuals based on this variable into blocks and then randomize cases within each block to the treatment groups. This strategy is often referred to as blocking. For instance, if we are looking at the effect of a drug on heart attacks, we might first split patients in the study into low-risk and high-risk blocks, then randomly assign half the patients from each block to the control group and the other half to the treatment group. This strategy ensures that each treatment group has the same number of low-risk patients and the same number of high-risk patients.</p>
+<p><strong>Control.</strong> Need to control for effects due to factors other than the ones of primary interest.</p>
+<p><strong>Randomization.</strong> Subjects should be randomly selected from the population (where possible) and randomly divided into treatment groups to avoid unintentional selection bias in the groups and to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a <em>confounding variable</em>, which is defined as a variable that is associated with both the exposure and outcome variables. Randomizing patients into the treatment or control group helps even out such differences.</p>
+<section id="the-benefits-to-randomization-are" class="level4">
+<h4 class="anchored" data-anchor-id="the-benefits-to-randomization-are">The benefits to randomization are:</h4>
+<ul>
+<li><p>If a random assignment of treatment is done then significant results can be concluded as causal or cause and effect conclusions. That is, that the treatment caused the result.</p></li>
+<li><p>If random selection is done where the subjects are randomly selected from some population, then the results can be extended to that population. The random assignment is required for an experiment. When both random assignment and selection are part of the study then we have a completely randomized experiment. Without random assignment (i.e., an observational study) then the treatment can only be referred to as being related to the outcome.</p></li>
+</ul>
+<!-- #### Confounding variables -->
+<!-- **Confounding variables:** Extraneous variables that affect both the exposure and the outcome variables, and that make it seem like there is a relationship between them are called confounding variables. -->
+<!-- ![](images/Confounding.jpg) -->
+<p><strong>Replication.</strong> A sufficient number of subjects should be used to ensure that randomization creates groups that resemble each other closely and to increase the chances of detecting differences among the treatments when such differences actually exist. In a single study, we replicate by collecting a sufficiently large sample. What is considered sufficiently large varies from experiment to experiment, but at a minimum we want to have multiple subjects per treatment group.</p>
+<p><strong>Local Control (Blocking).</strong> Researchers sometimes know or suspect that variables, other than the treatment, influence the response. Under these circumstances, they may first group individuals based on this variable into blocks and then randomize cases within each block to the treatment groups. This strategy is often referred to as blocking. For instance, if we are looking at the effect of a drug on heart attacks, we might first split patients in the study into low-risk and high-risk blocks, then randomly assign half the patients from each block to the control group and the other half to the treatment group. This strategy ensures that each treatment group has the same number of low-risk patients and the same number of high-risk patients.</p>
 <hr>
 </section>
 </section>
@@ -244,16 +249,12 @@ window.Quarto = {
 <section id="define-the-problem-and-objectives" class="level3">
 <h3 class="anchored" data-anchor-id="define-the-problem-and-objectives">1. Define the Problem and Objectives</h3>
 <ul>
-<li>Clearly state the research question and objectives.<br>
-</li>
-<li>Establish a logical progression: <strong>Objectives → Scientific Hypotheses → Statistical Hypotheses</strong>.<br>
-</li>
+<li>Clearly state the research question and objectives.</li>
+<li>Establish a logical progression: <em>Objectives → Scientific Hypotheses → Statistical Hypotheses</em>.</li>
 <li>Examples:
 <ul>
-<li>Investigate the effect of Vitamin C on odontoblast length (cells responsible for tooth growth).<br>
-</li>
-<li>Determine the lethal dose of a pesticide for an agricultural pest.<br>
-</li>
+<li>Investigate the effect of Vitamin C on odontoblast length (cells responsible for tooth growth).</li>
+<li>Determine the lethal dose of a pesticide for an agricultural pest.</li>
 <li>Identify the optimal temperature settings for efficient machine operation.</li>
 </ul></li>
 </ul>
@@ -261,38 +262,34 @@ window.Quarto = {
 <section id="define-experimental-conditions" class="level3">
 <h3 class="anchored" data-anchor-id="define-experimental-conditions">2. Define Experimental Conditions</h3>
 <ul>
-<li><strong>Controlled conditions</strong>: Experiments conducted in controlled environments (e.g., greenhouses, laboratories, experimental stations).<br>
+<li>Controlled conditions: Experiments conducted in controlled environments (e.g., greenhouses, laboratories, experimental stations).<br>
 </li>
-<li><strong>Less controlled conditions</strong>: Field studies in natural settings (e.g., farms, forests).</li>
+<li>Less controlled conditions: Field studies in natural settings (e.g., farms, forests).</li>
 </ul>
 </section>
 <section id="identify-variables-of-interest" class="level3">
 <h3 class="anchored" data-anchor-id="identify-variables-of-interest">3. Identify Variables of Interest</h3>
 <ul>
-<li><strong>Response Variable</strong> (dependent variable): The outcome being measured.
+<li>Outcome Variable (response variable): The outcome being measured.
 <ul>
-<li>Example: Odontoblast length in guinea pigs, blood pressure rates.<br>
-</li>
+<li>Example: Odontoblast length in guinea pigs, blood pressure rates.</li>
 </ul></li>
-<li><strong>Treatment Factors and Levels</strong> (independent variables): Variables manipulated in the experiment.
+<li>Treatment Factors and Levels (exposure variables): Variables manipulated in the experiment.
 <ul>
-<li><strong>Quantitative example</strong>: Vitamin C dose (0.5, 1, 2 mg/day).<br>
-</li>
-<li><strong>Qualitative example</strong>: Diet type (natural vs.&nbsp;artificial).<br>
-</li>
+<li>Quantitative example: Vitamin C dose (0.5, 1, 2 mg/day).</li>
+<li>Qualitative example: Diet type (natural vs.&nbsp;artificial).</li>
 </ul></li>
-<li><strong>Local Control (Blocking) Factors</strong>: Variables controlled to reduce variability (e.g., environmental conditions, batch effects).</li>
+<li>Local Control (Blocking) Factors: Variables controlled to reduce variability (e.g., environmental conditions, batch effects).</li>
 </ul>
 </section>
 <section id="identify-experimental-and-observational-units" class="level3">
 <h3 class="anchored" data-anchor-id="identify-experimental-and-observational-units">4. Identify Experimental and Observational Units</h3>
 <ul>
-<li><strong>Experimental Unit</strong>: The smallest unit to which a treatment is randomly assigned.
+<li>Experimental Unit: The smallest unit to which a treatment is randomly assigned.
 <ul>
-<li>Examples: 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes.<br>
-</li>
+<li>Examples: 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes.</li>
 </ul></li>
-<li><strong>Observational Unit</strong>: The entity from which data is collected.
+<li>Observational Uni*: The entity from which data is collected.
 <ul>
 <li>Examples: A single insect, tree, or Petri dish.</li>
 </ul></li>
@@ -301,11 +298,11 @@ window.Quarto = {
 <section id="define-observations-to-be-made" class="level3">
 <h3 class="anchored" data-anchor-id="define-observations-to-be-made">5. Define Observations to be Made</h3>
 <ul>
-<li><strong>Qualitative Observations</strong>: Presence or absence of a feature (e.g., morphological traits).<br>
+<li>Qualitative Observations: Presence or absence of a feature (e.g., morphological traits).<br>
 </li>
-<li><strong>Quantitative Observations</strong>: Measurable data (e.g., weight, height, count, proportion).<br>
+<li>Quantitative Observations: Measurable data (e.g., weight, height, count, proportion).<br>
 </li>
-<li><strong>Ordered Observations</strong>: Ranked data with an inherent order (e.g., disease severity, grading scales).</li>
+<li>Ordered Observations: Ranked data with an inherent order (e.g., disease severity, grading scales).</li>
 </ul>
 </section>
 <section id="select-the-experimental-design" class="level3">
@@ -319,14 +316,10 @@ window.Quarto = {
 <ul>
 <li>Ensure <strong>bias-free</strong> procedures by considering:
 <ul>
-<li>Who is conducting the experiment.<br>
-</li>
-<li>The location of the experiment.<br>
-</li>
-<li>Start and end dates.<br>
-</li>
-<li>The relevance and feasibility of the experiment.<br>
-</li>
+<li>Who is conducting the experiment.</li>
+<li>The location of the experiment.</li>
+<li>Start and end dates.</li>
+<li>The relevance and feasibility of the experiment.</li>
 <li>Associated costs.</li>
 </ul></li>
 </ul>
@@ -334,16 +327,12 @@ window.Quarto = {
 <section id="analyze-data-and-interpret-results" class="level3">
 <h3 class="anchored" data-anchor-id="analyze-data-and-interpret-results">8. Analyze Data and Interpret Results</h3>
 <ul>
-<li>Conduct analysis according to the experimental design.<br>
-</li>
+<li>Conduct analysis according to the experimental design.</li>
 <li>Interpret results within the context of:
 <ul>
-<li>Experimental conditions.<br>
-</li>
-<li>Tested hypotheses.<br>
-</li>
-<li>Established scientific knowledge.<br>
-</li>
+<li>Experimental conditions.</li>
+<li>Tested hypotheses.</li>
+<li>Established scientific knowledge.</li>
 </ul></li>
 <li>Consider the potential consequences of incorrect conclusions.</li>
 </ul>
@@ -564,7 +553,7 @@ window.Quarto = {
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-experiments_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="6-experiments_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
