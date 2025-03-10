@@ -219,7 +219,7 @@ window.Quarto = {
 </section>
 <section id="controlled-experiments" class="level2">
 <h2 class="anchored" data-anchor-id="controlled-experiments">Controlled Experiments</h2>
-<p><strong>Controlled experiments</strong> are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) affect one or more outcome (response) variables. We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.</p>
+<p><strong>Controlled experiments</strong> are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) effect one or more outcome (response) variables. We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.</p>
 <p><strong>Design of experiments</strong> can produce an experiment that efficiently answers the questions of interest. The scientific method involves:</p>
 <pre><code>(a) Stating a hypothesis
 (b) Planning an experiment to objectively test the hypothesis
@@ -228,21 +228,14 @@ window.Quarto = {
 </section>
 <section id="principles-of-experimental-design" class="level2">
 <h2 class="anchored" data-anchor-id="principles-of-experimental-design">Principles of Experimental Design</h2>
-<p><strong>Control.</strong> Need to control for effects due to factors other than the ones of primary interest.</p>
+<!-- **Control.** Need to control for effects due to factors other than the ones of primary interest. -->
 <p><strong>Randomization.</strong> Subjects should be randomly selected from the population (where possible) and randomly divided into treatment groups to avoid unintentional selection bias in the groups and to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a <em>confounding variable</em>, which is defined as a variable that is associated with both the exposure and outcome variables. Randomizing patients into the treatment or control group helps even out such differences.</p>
-<section id="the-benefits-to-randomization-are" class="level4">
-<h4 class="anchored" data-anchor-id="the-benefits-to-randomization-are">The benefits to randomization are:</h4>
-<ul>
-<li><p>If a random assignment of treatment is done then significant results can be concluded as causal or cause and effect conclusions. That is, that the treatment caused the result.</p></li>
-<li><p>If random selection is done where the subjects are randomly selected from some population, then the results can be extended to that population. The random assignment is required for an experiment. When both random assignment and selection are part of the study then we have a completely randomized experiment. Without random assignment (i.e., an observational study) then the treatment can only be referred to as being related to the outcome.</p></li>
-</ul>
 <!-- #### Confounding variables -->
 <!-- **Confounding variables:** Extraneous variables that affect both the exposure and the outcome variables, and that make it seem like there is a relationship between them are called confounding variables. -->
 <!-- ![](images/Confounding.jpg) -->
 <p><strong>Replication.</strong> A sufficient number of subjects should be used to ensure that randomization creates groups that resemble each other closely and to increase the chances of detecting differences among the treatments when such differences actually exist. In a single study, we replicate by collecting a sufficiently large sample. What is considered sufficiently large varies from experiment to experiment, but at a minimum we want to have multiple subjects per treatment group.</p>
 <p><strong>Local Control (Blocking).</strong> Researchers sometimes know or suspect that variables, other than the treatment, influence the response. Under these circumstances, they may first group individuals based on this variable into blocks and then randomize cases within each block to the treatment groups. This strategy is often referred to as blocking. For instance, if we are looking at the effect of a drug on heart attacks, we might first split patients in the study into low-risk and high-risk blocks, then randomly assign half the patients from each block to the control group and the other half to the treatment group. This strategy ensures that each treatment group has the same number of low-risk patients and the same number of high-risk patients.</p>
 <hr>
-</section>
 </section>
 <section id="steps-of-experimentation" class="level2">
 <h2 class="anchored" data-anchor-id="steps-of-experimentation">Steps of Experimentation</h2>
@@ -289,7 +282,7 @@ window.Quarto = {
 <ul>
 <li>Examples: 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes.</li>
 </ul></li>
-<li>Observational Uni*: The entity from which data is collected.
+<li>Observational Unit: The entity from which data is collected.
 <ul>
 <li>Examples: A single insect, tree, or Petri dish.</li>
 </ul></li>
@@ -342,9 +335,11 @@ window.Quarto = {
 <section id="more-on-randomization" class="level2">
 <h2 class="anchored" data-anchor-id="more-on-randomization">More on Randomization</h2>
 <p>The key to telling a causal story is the counterfactual: what would have happened in the absence of the treatment. This means that establishing the control group is critical because when we do that, we establish the counterfactual. What we hope to be able to do is to find treatment and control groups that are the same, but for the treatment.</p>
+<section id="the-benefits-to-randomization-are" class="level4">
+<h4 class="anchored" data-anchor-id="the-benefits-to-randomization-are">The benefits to randomization are:</h4>
 <ul>
-<li><p>We might be worried about, say, underlying trends, which is one issue with a before-and-after comparison, or selection bias, which could occur when we allow self-selection. Either of these issues could result in biased estimators.</p></li>
-<li><p>We use randomization to go some way to addressing these.</p></li>
+<li><p>If a random assignment of treatment and controls groups is done then significant results can be concluded as causal or cause and effect conclusions. That is, that the treatment caused the result.</p></li>
+<li><p>If random selection is done where the subjects are randomly selected from some population, then the results can be extended to that population. The random assignment is required for an experiment. When both random assignment and random selection are part of the study then we have a completely randomized experiment. Without random assignment (i.e., an observational study) then the treatment can only be referred to as being related to the outcome.</p></li>
 </ul>
 <p>To explore ideas of randomization, we simulate a population, and then randomly sample from it. We will set it up so that 20% of the population are smokers, and the rest are not.</p>
 <div class="cell">
@@ -408,6 +403,7 @@ window.Quarto = {
 </div>
 </div>
 <hr>
+</section>
 <section id="internal-validity" class="level3">
 <h3 class="anchored" data-anchor-id="internal-validity">Internal Validity</h3>
 <ul>
@@ -508,7 +504,7 @@ window.Quarto = {
 <ul>
 <li>Each <strong>block acts as a replicate</strong>.<br>
 </li>
-<li>The number of <strong>experimental units per block</strong> equals the number of treatments.<br>
+<li>The number of <strong>observational units per block</strong> equals the number of treatments.<br>
 </li>
 <li>Each treatment appears <strong>exactly once per block</strong>, with the <strong>order randomized</strong> within the block.</li>
 </ul></li>

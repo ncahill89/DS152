@@ -7,12 +7,9 @@ format:
     embed-resources: true
     self-contained-math: true
 editor: visual
-
 ---
 
-
 ## **Solutions** **\[Total = 20 Marks\]**
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -27,14 +24,11 @@ nat_disaster_dat <- read_csv("https://www.dropbox.com/scl/fi/kepof8k55mzlefy7nzf
 
 ```
 
+(i) How many observations are in the dataset? **\[2 Mark\]**
 
+-   902,297
 
-(i) How many observations are in the dataset? __[2 Mark]__
-
-  - 902,297
-
-
-(ii) Assume you want to create the summary below, which sums up the number of fatalities within each event type and then arranges by the total fatalities, in descending order. __[8 Marks]__
+(ii) Assume you want to create the summary below, which sums up the number of fatalities within each event type and then arranges by the total fatalities, in descending order. **\[8 Marks\]**
 
 ```{r, eval = TRUE}
 nat_disaster_summary <- nat_disaster_dat %>% 
@@ -44,7 +38,7 @@ nat_disaster_summary <- nat_disaster_dat %>%
 nat_disaster_summary 
 ```
 
-In the code below, what should [A], [B], [C] and [D] be replaced with to create this summary? 
+In the code below, what should \[A\], \[B\], \[C\] and \[D\] be replaced with to create this summary?
 
 ```{r, eval = FALSE}
 nat_disaster__summary <- nat_disaster_dat %>% 
@@ -53,15 +47,13 @@ nat_disaster__summary <- nat_disaster_dat %>%
                           arrange([D](total_fatalities))
 ```
 
+\[A\] = EVTYPE
 
-[A] = EVTYPE
+\[B\] = summarise
 
-[B] = summarise
+\[C\] = sum(FATALITIES)
 
-[C] = sum(FATALITIES)
-
-[D] = desc
-
+\[D\] = desc
 
 (iii) Now assume you want to filter the summarised data from (ii) so that you have a dataset with only events where the total fatalities are greater than 200, as shown.
 
@@ -71,23 +63,18 @@ nat_disaster_filter <- nat_disaster_summary %>%
 nat_disaster_filter
 ```
 
-
-In the code below, what should [A] and [B] be replaced with to create the filtered dataet? __[4 Marks]__
-
+In the code below, what should \[A\] and \[B\] be replaced with to create the filtered dataet? **\[4 Marks\]**
 
 ```{r, eval = FALSE}
 nat_disaster_filter <- nat_disaster_summary %>% 
                         [A]([B])
 ```
 
+\[A\] = filter
 
+\[B\] = total_facilities \> 200
 
-[A] = filter
-
-[B] = total_facilities > 200
-
-
-(iv) Now assume you want to create the following barplot which shows the total fatalities per event type, using the filtered data from part (iii). 
+(iv) Now assume you want to create the following barplot which shows the total fatalities per event type, using the filtered data from part (iii).
 
 ```{r, eval = TRUE}
 ggplot(nat_disaster_filter, aes(x = EVTYPE, y = total_fatalities)) +
@@ -97,9 +84,7 @@ ggplot(nat_disaster_filter, aes(x = EVTYPE, y = total_fatalities)) +
   ylab("# fatalities")
 ```
 
-
-In the code below, what should [A], [B] and [C] be replaced with to create the plot? __[6 Marks]__
-
+In the code below, what should \[A\], \[B\] and \[C\] be replaced with to create the plot? **\[6 Marks\]**
 
 ```{r, eval = FALSE}
 ggplot(nat_disaster_filter, aes(x = [A], y = [B])) +
@@ -109,11 +94,8 @@ ggplot(nat_disaster_filter, aes(x = [A], y = [B])) +
   ylab("# fatalities") 
 ```
 
-[A] = EVTYPE
+\[A\] = EVTYPE
 
-[B] = total_fatalities
+\[B\] = total_fatalities
 
-[C] = geom_bar
-
-
-
+\[C\] = geom_bar

@@ -32,7 +32,7 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 ## Controlled Experiments
 
-**Controlled experiments** are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) affect one or more outcome (response) variables. We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.
+**Controlled experiments** are a scientific test (or a series of tests) to verify how one or more conditions (treatments - variables that are controlled by the scientist) effect one or more outcome (response) variables. We usually consider a default of there being no effect and we look for evidence that would cause us to change our mind.
 
 **Design of experiments** can produce an experiment that efficiently answers the questions of interest. The scientific method involves:
 
@@ -45,15 +45,9 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 ## Principles of Experimental Design
 
-**Control.** Need to control for effects due to factors other than the ones of primary interest.
+<!-- **Control.** Need to control for effects due to factors other than the ones of primary interest. -->
 
 **Randomization.** Subjects should be randomly selected from the population (where possible) and randomly divided into treatment groups to avoid unintentional selection bias in the groups and to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a *confounding variable*, which is defined as a variable that is associated with both the exposure and outcome variables. Randomizing patients into the treatment or control group helps even out such differences.
-
-#### The benefits to randomization are:
-
-  - If a random assignment of treatment is done then significant results can be concluded as causal or cause and effect conclusions. That is, that the treatment caused the result. 
-
-  - If random selection is done where the subjects are randomly selected from some population, then the results can be extended to that population. The random assignment is required for an experiment. When both random assignment and selection are part of the study then we have a completely randomized experiment. Without random assignment (i.e., an observational study) then the treatment can only be referred to as being related to the outcome.
 
 <!-- #### Confounding variables -->
 
@@ -87,18 +81,16 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 -   Outcome Variable (response variable): The outcome being measured.
     -   Example: Odontoblast length in guinea pigs, blood pressure rates.
-    
 -   Treatment Factors and Levels (exposure variables): Variables manipulated in the experiment.
     -   Quantitative example: Vitamin C dose (0.5, 1, 2 mg/day).
     -   Qualitative example: Diet type (natural vs. artificial).
-    
 -   Local Control (Blocking) Factors: Variables controlled to reduce variability (e.g., environmental conditions, batch effects).
 
 ### 4. Identify Experimental and Observational Units
 
 -   Experimental Unit: The smallest unit to which a treatment is randomly assigned.
     -   Examples: 60 guinea pigs, a plot of land with 200 trees, a section of a laboratory bench with 20 Petri dishes.
--   Observational Uni*: The entity from which data is collected.
+-   Observational Unit: The entity from which data is collected.
     -   Examples: A single insect, tree, or Petri dish.
 
 ### 5. Define Observations to be Made
@@ -135,9 +127,11 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 The key to telling a causal story is the counterfactual: what would have happened in the absence of the treatment. This means that establishing the control group is critical because when we do that, we establish the counterfactual. What we hope to be able to do is to find treatment and control groups that are the same, but for the treatment.
 
--   We might be worried about, say, underlying trends, which is one issue with a before-and-after comparison, or selection bias, which could occur when we allow self-selection. Either of these issues could result in biased estimators.
+#### The benefits to randomization are:
 
--   We use randomization to go some way to addressing these.
+-   If a random assignment of treatment and controls groups is done then significant results can be concluded as causal or cause and effect conclusions. That is, that the treatment caused the result.
+
+-   If random selection is done where the subjects are randomly selected from some population, then the results can be extended to that population. The random assignment is required for an experiment. When both random assignment and random selection are part of the study then we have a completely randomized experiment. Without random assignment (i.e., an observational study) then the treatment can only be referred to as being related to the outcome.
 
 To explore ideas of randomization, we simulate a population, and then randomly sample from it. We will set it up so that 20% of the population are smokers, and the rest are not.
 
@@ -272,7 +266,7 @@ Often blocking variables are not the variables that we are primarily interested 
     -   Variation in fertility or drainage differences in a field\
 -   **Key features:**
     -   Each **block acts as a replicate**.\
-    -   The number of **experimental units per block** equals the number of treatments.\
+    -   The number of **observational units per block** equals the number of treatments.\
     -   Each treatment appears **exactly once per block**, with the **order randomized** within the block.
 
 <!-- ## Randomized Complete Block Design -->
