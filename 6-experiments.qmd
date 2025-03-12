@@ -310,9 +310,9 @@ Visualise the data
 ```{r }
 oatvar <- faraway::oatvar
 
-ggplot(oatvar, aes(y=yield, x=block, color=variety)) + 
-    geom_point(size=5) +
-    geom_line(aes(x=as.integer(block)))
+ggplot(oatvar, aes(y=yield, x=block, colour = variety, group = variety)) + 
+  geom_point(size = 5) +
+  geom_line()
 ```
 
 Use `group_by` and `summarise` to look at the average yield within each variety.
