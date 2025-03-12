@@ -1,0 +1,353 @@
+---
+title: "Predictive Analytics"
+format: html
+editor: visual
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(class)
+library(rpart)
+library(rpart.plot)
+
+film_dat <- read_csv("film_dat.csv")
+```
+
+# Predictive Analytics
+
+- Encompasses a variety of statistical techniques
+- e.g. data mining, predictive modelling, machine learning
+- Involves the analysis of current and historical facts to make predictions about the future or otherwise unknown events
+- Used in many areas, e.g. insurance companies, banks, stock market, medical research, ecological monitoring, etc
+
+# Classification Problems
+
+For classification problems, usual predictive analytics techniques include
+
+- logistic regression
+- classification trees
+- k-nearest neighbours
+- support vector machines
+- discriminant analysis
+- neural networks
+
+We will study classification trees and k-nearest neighbours in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
+
+## Classification trees
+
+Classification trees can be used to create predictions for a categorical variable.
+
+The basic idea is to split the predictors so as to minimise the classification error. There are many algorithms that can be used to produce a classification tree, and different criteria to be minimised so as to improve predictive power.
+
+Each split is \textit{binary}, i.e. two branches are generated. At the end of the tree we have the \textit{leaves} or \textit{terminal nodes}. In the case of a classification tree, the predictions will be the classes for the majority of observations belonging to that terminal node.
+
+See below for an example of a classification tree --
+
+
+<!-- ![](class_tree.jpg){width=70%} -->
+
+
+## K-nearest neighbours
+
+Imagine we want to predict whether a film is classified as action or romance, based on two variables: number of kisses or number of kicks that appear in the film. Suppose that we have a database of films and the data looks like this:
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE, fig.width=6, fig.height=4}
+glimpse(film_dat)
+film_unknown <- tibble(kicks = 10, kisses = 7)
+ggplot(film_dat, aes(x = kisses, y = kicks, col = genre)) +
+  theme_bw() +
+  geom_point(cex = 2) +
+  geom_point(data = film_unknown, aes(col = NULL), cex = 3)
+```
+
+
+What genre is the film represented by a black dot? We could employ the $k$-nearest neighbours algorithm to classify it. If we choose, e.g. $k=5$, then we would have 4 out of the 5 nearest neighbours classified as an action film. Therefore, the algorithm would classify the film represented by the black dot as an action film as well. 
+
+This is an example with two predictors, but this can be easily extended to higher dimensions.
+
+## Example: Diabetes in Pima Indian Women data
+
+We will now use logistic regression, a classification tree, and the k-nearest neighbours algorithm to predict whether a woman in the `Pima.tr` dataset has diabetes or not.
+
+The `Pima.tr` dataset from package `MASS` has been used before during a lab. It has information on several biomarkers, such as glucose levels and blood pressure, as well as other variables such as age. The response `type` indicates whether that particular individual had diabetes or not. Our objective is to predict whether a woman has diabetes using information from the other variables in the dataset.
+
+```{r}
+Pima.tr <- MASS::Pima.tr
+glimpse(Pima.tr)
+```
+
+__Let's split our data__
+
+```{r}
+library(rsample)
+# Fix random numbers by setting the seed 
+set.seed(1116)
+# Put 80% of the data into the training set 
+pima_split <- initial_split(Pima.tr, prop = 0.80)
+# Create data frames for the two sets:
+train_pima_data <- training(pima_split)
+test_pima_data  <- testing(pima_split)
+```
+
+___We will start with logistic regression___
+
+Let's fit a multiple logistic regression model:
+
+```{r}
+fit_logistic <- glm(type ~ ., family = binomial, data = train_pima_data)
+fit_logistic
+```
+
+We can use the `predict` function to obtain predictions for each individual in the dataset:
+
+```{r}
+pima_res_test <- test_pima_data %>%
+                  mutate(pred_p = 
+                         predict(fit_logistic, 
+                                     type = "response", newdata = test_pima_data)) %>% 
+   mutate(pred_type = ifelse(pred_p >=0.5,"yes","no"))
+
+pima_res_test
+```
+
+
+We set the threshold for prediction as `threshold = 0.50`, now we can have a look at the accuracy of the method:
+
+```{r}
+N <- nrow(pima_res_test)
+
+confusion_mat <- table(pima_res_test %>% select(type, pred_type))
+confusion_mat
+
+accuracy <- (confusion_mat %>% diag %>% sum)/N
+accuracy
+```
+
+  - Overall accuracy $= (17+8)/(17+9+6+8) = 0.625$
+
+  - True positive rate (TPR)  = TP/(TP + FN) $= 8/(8+6) = 0.57$
+
+    - TPR is the probability that an actual positive will be classified as positive. This is also known as _sensitivity_.
+  
+  - True negative rate (TNR) = TN/(TN + FP) $= 17/(17+9) = 0.65$
+
+    - TNR is the probability that an actual negative will be classified as negative. This is also known as _specificity_.
+
+
+___Now we will fit a classification tree___
+
+```{r}
+fit_tree <- rpart(type ~ ., data = train_pima_data)
+rpart.plot(fit_tree)
+```
+
+Let's check the predictions:
+
+```{r}
+
+pima_res_test2 <- test_pima_data %>%
+                  mutate(pred_p = 
+                         predict(fit_tree, 
+                                 newdata = test_pima_data) %>% as_tibble() %>% pull(Yes)) %>% 
+                  mutate(pred_type = ifelse(pred_p >=0.5,"yes","no"))
+
+pima_res_test2
+```
+
+
+We set the threshold for prediction as `threshold = 0.50`, now we can have a look at the accuracy of the method:
+
+```{r}
+N <- nrow(pima_res_test2)
+
+confusion_mat2 <- table(pima_res_test2 %>% select(type, pred_type))
+confusion_mat2
+
+accuracy2 <- (confusion_mat2 %>% diag %>% sum)/N
+accuracy2
+```
+
+  - Overall accuracy $= (16+6)/(16+10+8+6) = 0.55$
+
+  - True positive rate $= 6/(6+8) = 0.43$
+
+  - True negative rate $= 16/(16+10) = 0.62$
+
+___Now we will use the k-nearest neighbours algorithm___
+
+We'll use 10 nearest neighbours. 
+
+```{r}
+pred_type_knn <- knn(train_pima_data %>% select(-type), 
+                     test_pima_data %>% select(-type), 
+                     cl =   train_pima_data$type, 
+                     k = 10)
+
+pima_res_test3 <- test_pima_data %>%
+                  mutate(pred_type = pred_type_knn)
+
+pima_res_test3
+```
+
+Now we can have a look at the accuracy of the method:
+
+```{r}
+N <- nrow(pima_res_test3)
+
+confusion_mat3 <- table(pima_res_test3 %>% select(type, pred_type))
+confusion_mat3
+
+accuracy3 <- (confusion_mat3 %>% diag %>% sum)/N
+accuracy3
+```
+
+Overall accuracy $= (21+10)/(21+5+4+10) = 0.78$
+
+True positive rate $= 10/(4+10) = 0.71$
+
+True negative rate $= 21/(21+5) = 0.81$
+
+
+We can assess the overall accuracy, true positive and true negative rates for different values of $k$:
+
+
+# Regression Problems
+
+For regression problems, usual predictive analytics techniques include
+
+- linear regression
+- regression trees
+- random forests
+- generalised additive models
+
+We have studied linear regression. We will now study regression trees. Again, we will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
+
+## Regression Trees
+
+Regression trees are similar to classification trees. The difference is that the response variable is continuous instead of categorical.
+
+The same reasoning is employed when constructing a regression tree: the predictors are split in such a way that the prediction error is minimised. In the case of regression trees, we may opt to minimise the residual sum of squares, for example.
+
+For the leaves or terminal nodes, the predictions will be the average estimate for the observations that belong to that terminal node.
+
+## Example: Pima data
+
+We will now use linear regression and a regression tree to obtain predictions for the `glu` variable using the `Pima.tr` data.
+
+__Recall that we split our data. we can use the same split again__
+
+```{r}
+library(rsample)
+# Fix random numbers by setting the seed 
+set.seed(1116)
+# Put 80% of the data into the training set 
+pima_split <- initial_split(Pima.tr, prop = 0.80)
+# Create data frames for the two sets:
+train_pima_data <- training(pima_split)
+test_pima_data  <- testing(pima_split)
+```
+
+
+___Fitting a multiple linear regression model___
+
+```{r}
+fit_lm <- lm(glu ~ ., data = train_pima_data)
+fit_lm
+```
+
+__Evaluate the performance on the test data:__
+
+```{r}
+glu_res_test <- test_pima_data %>% 
+                    mutate(pred_glu = predict(fit_lm, test_pima_data))
+
+ggplot(glu_res_test, aes(x = glu, y = pred_glu)) +
+  geom_point() + 
+  geom_line(aes(x = glu, y = glu))
+
+```
+
+
+__Summarise the model accuracy__
+
+In addition to mean error and mean absolute error which we have used before, we can also have a look at the correlation between observed and predicted values to help us summarise how well our model performs:
+
+```{r}
+glu_res_test %>% 
+  summarise(mean_error = mean(glu - pred_glu),
+            mean_abs_error = mean(abs(glu - pred_glu)),
+            cor = cor(glu, pred_glu))
+```
+
+___Now fitting a regression tree___
+
+```{r}
+fit_reg_tree <- rpart(glu ~ ., data = train_pima_data)
+rpart.plot(fit_reg_tree)
+```
+
+
+__Evaluate the performance on the test data:__
+
+```{r}
+glu_res_test2 <- test_pima_data %>% 
+                    mutate(pred_glu = predict(fit_reg_tree, test_pima_data))
+
+ggplot(glu_res_test2, aes(x = glu, y = pred_glu)) +
+  geom_point() + 
+  geom_line(aes(x = glu, y = glu))
+
+```
+
+__Summarise the model accuracy__
+
+
+```{r}
+glu_res_test2 %>% 
+  summarise(mean_error = mean(glu - pred_glu),
+            mean_abs_error = mean(abs(glu - pred_glu)),
+            cor = cor(glu, pred_glu))
+```
+
+
+# Summary of Training and testing
+
+__Splitting Data__
+
+Training set:
+
+  - Sandbox for model building
+  - Spend most of your time using the training set to develop the model
+  - Majority of the data (usually 80%)
+
+Testing set:
+
+  - Held in reserve to determine efficacy of one or two chosen models
+  - Remainder of the data (usually 20%)
+
+It is important to note that while we've only looked at training/test splits of the data, 3 splits are often used when there's multiple modelling options to choose from. In this case the procedure is broken down into three steps 
+
+1. Training - to train the various models
+2. Validation - do assess performance of models and choose the best one
+3. Test - to assess the performance of the chosen model
+
+We won't go into these splits but it's important to be aware of this practice.
+
+<!-- ![](train_test.png){width=70%} -->
+
+## Training vs test accuracy/mean errors
+
+We expect the test error to be greater than the training error, after all the model ``has not seen'' the test data before. This is essentialy what we want in real life, after all we will use our data to fit a machine learning model/algorithm, and we will use it to predict responses that are unknown.
+
+<!-- \begin{center} -->
+<!-- \includegraphics[width = \textwidth]{bias_variance.png} -->
+<!-- \end{center} -->
+
+
+<!-- \begin{center} -->
+<!-- \includegraphics[width = .3\textwidth]{overfitting.jpg} -->
+<!-- \includegraphics[width = .5\textwidth]{overfitting2.png} -->
+<!-- \end{center} -->

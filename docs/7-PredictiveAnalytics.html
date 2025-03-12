@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Predictive Analytics – Introduction to Data Science (2)</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div id="quarto-search-results"></div>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#predictive-analytics" id="toc-predictive-analytics" class="nav-link active" data-scroll-target="#predictive-analytics">Predictive Analytics</a></li>
+  <li><a href="#classification-problems" id="toc-classification-problems" class="nav-link" data-scroll-target="#classification-problems">Classification Problems</a>
+  <ul class="collapse">
+  <li><a href="#classification-trees" id="toc-classification-trees" class="nav-link" data-scroll-target="#classification-trees">Classification trees</a></li>
+  <li><a href="#k-nearest-neighbours" id="toc-k-nearest-neighbours" class="nav-link" data-scroll-target="#k-nearest-neighbours">K-nearest neighbours</a></li>
+  <li><a href="#example-diabetes-in-pima-indian-women-data" id="toc-example-diabetes-in-pima-indian-women-data" class="nav-link" data-scroll-target="#example-diabetes-in-pima-indian-women-data">Example: Diabetes in Pima Indian Women data</a></li>
+  </ul></li>
+  <li><a href="#regression-problems" id="toc-regression-problems" class="nav-link" data-scroll-target="#regression-problems">Regression Problems</a>
+  <ul class="collapse">
+  <li><a href="#regression-trees" id="toc-regression-trees" class="nav-link" data-scroll-target="#regression-trees">Regression Trees</a></li>
+  <li><a href="#example-pima-data" id="toc-example-pima-data" class="nav-link" data-scroll-target="#example-pima-data">Example: Pima data</a></li>
+  </ul></li>
+  <li><a href="#summary-of-training-and-testing" id="toc-summary-of-training-and-testing" class="nav-link" data-scroll-target="#summary-of-training-and-testing">Summary of Training and testing</a>
+  <ul class="collapse">
+  <li><a href="#training-vs-test-accuracymean-errors" id="toc-training-vs-test-accuracymean-errors" class="nav-link" data-scroll-target="#training-vs-test-accuracymean-errors">Training vs test accuracy/mean errors</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Predictive Analytics</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="predictive-analytics" class="level1">
+<h1>Predictive Analytics</h1>
+<ul>
+<li>Encompasses a variety of statistical techniques</li>
+<li>e.g.&nbsp;data mining, predictive modelling, machine learning</li>
+<li>Involves the analysis of current and historical facts to make predictions about the future or otherwise unknown events</li>
+<li>Used in many areas, e.g.&nbsp;insurance companies, banks, stock market, medical research, ecological monitoring, etc</li>
+</ul>
+</section>
+<section id="classification-problems" class="level1">
+<h1>Classification Problems</h1>
+<p>For classification problems, usual predictive analytics techniques include</p>
+<ul>
+<li>logistic regression</li>
+<li>classification trees</li>
+<li>k-nearest neighbours</li>
+<li>support vector machines</li>
+<li>discriminant analysis</li>
+<li>neural networks</li>
+</ul>
+<p>We will study classification trees and k-nearest neighbours in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.</p>
+<section id="classification-trees" class="level2">
+<h2 class="anchored" data-anchor-id="classification-trees">Classification trees</h2>
+<p>Classification trees can be used to create predictions for a categorical variable.</p>
+<p>The basic idea is to split the predictors so as to minimise the classification error. There are many algorithms that can be used to produce a classification tree, and different criteria to be minimised so as to improve predictive power.</p>
+<p>Each split is , i.e.&nbsp;two branches are generated. At the end of the tree we have the or . In the case of a classification tree, the predictions will be the classes for the majority of observations belonging to that terminal node.</p>
+<p>See below for an example of a classification tree –</p>
+<!-- ![](class_tree.jpg){width=70%} -->
+</section>
+<section id="k-nearest-neighbours" class="level2">
+<h2 class="anchored" data-anchor-id="k-nearest-neighbours">K-nearest neighbours</h2>
+<p>Imagine we want to predict whether a film is classified as action or romance, based on two variables: number of kisses or number of kicks that appear in the film. Suppose that we have a database of films and the data looks like this:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 20
+Columns: 3
+$ kicks  &lt;dbl&gt; 3, 2, 5, 4, 5, 7, 3, 5, 6, 3, 16, 16, 13, 11, 10, 17, 12, 15, 8…
+$ kisses &lt;dbl&gt; 20, 17, 16, 14, 12, 9, 12, 19, 17, 27, 3, 2, 2, 4, 3, 3, 2, 5, …
+$ genre  &lt;chr&gt; "romance", "romance", "romance", "romance", "romance", "romance…</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>What genre is the film represented by a black dot? We could employ the <span class="math inline">\(k\)</span>-nearest neighbours algorithm to classify it. If we choose, e.g.&nbsp;<span class="math inline">\(k=5\)</span>, then we would have 4 out of the 5 nearest neighbours classified as an action film. Therefore, the algorithm would classify the film represented by the black dot as an action film as well.</p>
+<p>This is an example with two predictors, but this can be easily extended to higher dimensions.</p>
+</section>
+<section id="example-diabetes-in-pima-indian-women-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-diabetes-in-pima-indian-women-data">Example: Diabetes in Pima Indian Women data</h2>
+<p>We will now use logistic regression, a classification tree, and the k-nearest neighbours algorithm to predict whether a woman in the <code>Pima.tr</code> dataset has diabetes or not.</p>
+<p>The <code>Pima.tr</code> dataset from package <code>MASS</code> has been used before during a lab. It has information on several biomarkers, such as glucose levels and blood pressure, as well as other variables such as age. The response <code>type</code> indicates whether that particular individual had diabetes or not. Our objective is to predict whether a woman has diabetes using information from the other variables in the dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Pima.tr <span class="ot">&lt;-</span> MASS<span class="sc">::</span>Pima.tr</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Pima.tr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 200
+Columns: 8
+$ npreg &lt;int&gt; 5, 7, 5, 0, 0, 5, 3, 1, 3, 2, 0, 9, 1, 12, 1, 4, 1, 11, 1, 0, 2,…
+$ glu   &lt;int&gt; 86, 195, 77, 165, 107, 97, 83, 193, 142, 128, 137, 154, 189, 92,…
+$ bp    &lt;int&gt; 68, 70, 82, 76, 60, 76, 58, 50, 80, 78, 40, 78, 60, 62, 66, 76, …
+$ skin  &lt;int&gt; 28, 33, 41, 43, 25, 27, 31, 16, 15, 37, 35, 30, 23, 7, 52, 15, 8…
+$ bmi   &lt;dbl&gt; 30.2, 25.1, 35.8, 47.9, 26.4, 35.6, 34.3, 25.9, 32.4, 43.3, 43.1…
+$ ped   &lt;dbl&gt; 0.364, 0.163, 0.156, 0.259, 0.133, 0.378, 0.336, 0.655, 0.200, 1…
+$ age   &lt;int&gt; 24, 55, 35, 26, 23, 52, 25, 24, 63, 31, 33, 45, 59, 44, 29, 21, …
+$ type  &lt;fct&gt; No, Yes, No, No, No, Yes, No, No, No, Yes, Yes, No, Yes, Yes, No…</code></pre>
+</div>
+</div>
+<p><strong>Let’s split our data</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix random numbers by setting the seed </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Put 80% of the data into the training set </span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>pima_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Pima.tr, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>train_pima_data <span class="ot">&lt;-</span> <span class="fu">training</span>(pima_split)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>test_pima_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(pima_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong><em>We will start with logistic regression</em></strong></p>
+<p>Let’s fit a multiple logistic regression model:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(type <span class="sc">~</span> ., <span class="at">family =</span> binomial, <span class="at">data =</span> train_pima_data)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:  glm(formula = type ~ ., family = binomial, data = train_pima_data)
+
+Coefficients:
+(Intercept)        npreg          glu           bp         skin          bmi  
+ -12.565120     0.053341     0.028476     0.005766     0.001172     0.139419  
+        ped          age  
+   2.263408     0.060450  
+
+Degrees of Freedom: 159 Total (i.e. Null);  152 Residual
+Null Deviance:      204.6 
+Residual Deviance: 134.7    AIC: 150.7</code></pre>
+</div>
+</div>
+<p>We can use the <code>predict</code> function to obtain predictions for each individual in the dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pima_res_test <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_p =</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">predict</span>(fit_logistic, </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">newdata =</span> test_pima_data)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">pred_type =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span><span class="fl">0.5</span>,<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>pima_res_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   npreg glu  bp skin  bmi   ped age type      pred_p pred_type
+1      7 195  70   33 25.1 0.163  55  Yes 0.730366555       yes
+2      0 165  76   43 47.9 0.259  26   No 0.811244142       yes
+3      1 189  60   23 30.1 0.398  59  Yes 0.870681831       yes
+4      4  99  76   15 23.2 0.223  21   No 0.016821666        no
+5      1  87  68   34 37.6 0.401  24   No 0.119008947        no
+6      1  79  80   25 25.4 0.583  22   No 0.027096514        no
+7      0 119  66   27 38.8 0.259  22   No 0.191746781        no
+8      3 171  72   33 33.3 0.199  24  Yes 0.368649896        no
+9      4 127  88   11 34.5 0.598  28   No 0.411219278        no
+10     1 124  74   36 27.8 0.100  30   No 0.069383986        no
+11     6 109  60   27 25.0 0.206  27   No 0.039936807        no
+12     5 139  80   35 31.6 0.361  25  Yes 0.248995767        no
+13     6 134  70   23 35.4 0.542  29  Yes 0.479145323        no
+14     3 106  54   21 30.9 0.292  24   No 0.067175718        no
+15     0 135  94   46 40.6 0.284  26   No 0.437816778        no
+16     1 168  88   29 35.0 0.905  52  Yes 0.947101920       yes
+17     1 144  82   46 46.1 0.335  46  Yes 0.889106686       yes
+18    12 121  78   17 26.5 0.259  62   No 0.504745008       yes
+19     6 125  78   31 27.6 0.565  49  Yes 0.472366580        no
+20     1  79  75   30 32.0 0.396  22   No 0.042821739        no
+21     4 112  78   40 39.4 0.236  38   No 0.415459765        no
+22     2  94  76   18 31.6 0.649  23   No 0.113303157        no
+23     2  84  50   23 30.4 0.968  21   No 0.113806856        no
+24     4 117  62   12 29.7 0.380  30  Yes 0.137742566        no
+25     1  81  74   41 46.3 1.096  32   No 0.757626954       yes
+26     1 120  80   48 38.9 1.162  41   No 0.875970147       yes
+27     7 187  68   39 37.7 0.254  41  Yes 0.867670601       yes
+28     7 179  95   31 34.2 0.164  60   No 0.905158936       yes
+29     6  80  66   30 26.2 0.313  41   No 0.062292657        no
+30     1  97  70   15 18.2 0.147  21   No 0.005547706        no
+31     0 100  88   60 46.8 0.962  31   No 0.807891465       yes
+32     6 154  78   41 46.1 0.571  27   No 0.879721246       yes
+33     2  56  56   28 24.2 0.332  22   No 0.006350983        no
+34     0 188  82   14 32.0 0.682  22  Yes 0.648518039       yes
+35     2 197  70   99 34.7 0.575  62  Yes 0.972298384       yes
+36     2 142  82   18 24.7 0.761  21   No 0.184614941        no
+37     1 164  82   43 32.8 0.341  50   No 0.740536767       yes
+38     6 144  72   27 33.9 0.255  40   No 0.505934522       yes
+39    14 175  62   30 33.6 0.212  38  Yes 0.734781108       yes
+40     1 133 102   28 32.8 0.234  45  Yes 0.430286553        no</code></pre>
+</div>
+</div>
+<p>We set the threshold for prediction as <code>threshold = 0.50</code>, now we can have a look at the accuracy of the method:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>confusion_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     pred_type
+type  no yes
+  No  17   9
+  Yes  6   8</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.625</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Overall accuracy <span class="math inline">\(= (17+8)/(17+9+6+8) = 0.625\)</span></p></li>
+<li><p>True positive rate (TPR) = TP/(TP + FN) <span class="math inline">\(= 8/(8+6) = 0.57\)</span></p>
+<ul>
+<li>TPR is the probability that an actual positive will be classified as positive. This is also known as <em>sensitivity</em>.</li>
+</ul></li>
+<li><p>True negative rate (TNR) = TN/(TN + FP) <span class="math inline">\(= 17/(17+9) = 0.65\)</span></p>
+<ul>
+<li>TNR is the probability that an actual negative will be classified as negative. This is also known as <em>specificity</em>.</li>
+</ul></li>
+</ul>
+<p><strong><em>Now we will fit a classification tree</em></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(type <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(fit_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Let’s check the predictions:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pima_res_test2 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_p =</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">predict</span>(fit_tree, </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">newdata =</span> test_pima_data) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Yes)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span><span class="fl">0.5</span>,<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>pima_res_test2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   npreg glu  bp skin  bmi   ped age type     pred_p pred_type
+1      7 195  70   33 25.1 0.163  55  Yes 0.33333333        no
+2      0 165  76   43 47.9 0.259  26   No 0.84375000       yes
+3      1 189  60   23 30.1 0.398  59  Yes 0.33333333        no
+4      4  99  76   15 23.2 0.223  21   No 0.07246377        no
+5      1  87  68   34 37.6 0.401  24   No 0.07246377        no
+6      1  79  80   25 25.4 0.583  22   No 0.07246377        no
+7      0 119  66   27 38.8 0.259  22   No 0.07246377        no
+8      3 171  72   33 33.3 0.199  24  Yes 0.00000000        no
+9      4 127  88   11 34.5 0.598  28   No 0.84375000       yes
+10     1 124  74   36 27.8 0.100  30   No 0.33333333        no
+11     6 109  60   27 25.0 0.206  27   No 0.07246377        no
+12     5 139  80   35 31.6 0.361  25  Yes 0.00000000        no
+13     6 134  70   23 35.4 0.542  29  Yes 0.84375000       yes
+14     3 106  54   21 30.9 0.292  24   No 0.07246377        no
+15     0 135  94   46 40.6 0.284  26   No 0.84375000       yes
+16     1 168  88   29 35.0 0.905  52  Yes 0.84375000       yes
+17     1 144  82   46 46.1 0.335  46  Yes 0.84375000       yes
+18    12 121  78   17 26.5 0.259  62   No 0.11111111        no
+19     6 125  78   31 27.6 0.565  49  Yes 0.80000000       yes
+20     1  79  75   30 32.0 0.396  22   No 0.07246377        no
+21     4 112  78   40 39.4 0.236  38   No 0.61538462       yes
+22     2  94  76   18 31.6 0.649  23   No 0.07246377        no
+23     2  84  50   23 30.4 0.968  21   No 0.07246377        no
+24     4 117  62   12 29.7 0.380  30  Yes 0.07246377        no
+25     1  81  74   41 46.3 1.096  32   No 0.61538462       yes
+26     1 120  80   48 38.9 1.162  41   No 0.61538462       yes
+27     7 187  68   39 37.7 0.254  41  Yes 0.84375000       yes
+28     7 179  95   31 34.2 0.164  60   No 0.84375000       yes
+29     6  80  66   30 26.2 0.313  41   No 0.11111111        no
+30     1  97  70   15 18.2 0.147  21   No 0.07246377        no
+31     0 100  88   60 46.8 0.962  31   No 0.61538462       yes
+32     6 154  78   41 46.1 0.571  27   No 0.84375000       yes
+33     2  56  56   28 24.2 0.332  22   No 0.07246377        no
+34     0 188  82   14 32.0 0.682  22  Yes 0.00000000        no
+35     2 197  70   99 34.7 0.575  62  Yes 0.84375000       yes
+36     2 142  82   18 24.7 0.761  21   No 0.00000000        no
+37     1 164  82   43 32.8 0.341  50   No 0.33333333        no
+38     6 144  72   27 33.9 0.255  40   No 0.84375000       yes
+39    14 175  62   30 33.6 0.212  38  Yes 0.33333333        no
+40     1 133 102   28 32.8 0.234  45  Yes 0.33333333        no</code></pre>
+</div>
+</div>
+<p>We set the threshold for prediction as <code>threshold = 0.50</code>, now we can have a look at the accuracy of the method:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test2)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>confusion_mat2 <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>confusion_mat2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     pred_type
+type  no yes
+  No  16  10
+  Yes  8   6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>accuracy2 <span class="ot">&lt;-</span> (confusion_mat2 <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>accuracy2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.55</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Overall accuracy <span class="math inline">\(= (16+6)/(16+10+8+6) = 0.55\)</span></p></li>
+<li><p>True positive rate <span class="math inline">\(= 6/(6+8) = 0.43\)</span></p></li>
+<li><p>True negative rate <span class="math inline">\(= 16/(16+10) = 0.62\)</span></p></li>
+</ul>
+<p><strong><em>Now we will use the k-nearest neighbours algorithm</em></strong></p>
+<p>We’ll use 10 nearest neighbours.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pred_type_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                     test_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cl =</span>   train_pima_data<span class="sc">$</span>type, </span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">k =</span> <span class="dv">10</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>pima_res_test3 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> pred_type_knn)</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>pima_res_test3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   npreg glu  bp skin  bmi   ped age type pred_type
+1      7 195  70   33 25.1 0.163  55  Yes       Yes
+2      0 165  76   43 47.9 0.259  26   No       Yes
+3      1 189  60   23 30.1 0.398  59  Yes       Yes
+4      4  99  76   15 23.2 0.223  21   No        No
+5      1  87  68   34 37.6 0.401  24   No        No
+6      1  79  80   25 25.4 0.583  22   No        No
+7      0 119  66   27 38.8 0.259  22   No        No
+8      3 171  72   33 33.3 0.199  24  Yes       Yes
+9      4 127  88   11 34.5 0.598  28   No        No
+10     1 124  74   36 27.8 0.100  30   No        No
+11     6 109  60   27 25.0 0.206  27   No        No
+12     5 139  80   35 31.6 0.361  25  Yes        No
+13     6 134  70   23 35.4 0.542  29  Yes        No
+14     3 106  54   21 30.9 0.292  24   No        No
+15     0 135  94   46 40.6 0.284  26   No        No
+16     1 168  88   29 35.0 0.905  52  Yes       Yes
+17     1 144  82   46 46.1 0.335  46  Yes       Yes
+18    12 121  78   17 26.5 0.259  62   No        No
+19     6 125  78   31 27.6 0.565  49  Yes        No
+20     1  79  75   30 32.0 0.396  22   No        No
+21     4 112  78   40 39.4 0.236  38   No        No
+22     2  94  76   18 31.6 0.649  23   No        No
+23     2  84  50   23 30.4 0.968  21   No        No
+24     4 117  62   12 29.7 0.380  30  Yes        No
+25     1  81  74   41 46.3 1.096  32   No        No
+26     1 120  80   48 38.9 1.162  41   No        No
+27     7 187  68   39 37.7 0.254  41  Yes       Yes
+28     7 179  95   31 34.2 0.164  60   No       Yes
+29     6  80  66   30 26.2 0.313  41   No        No
+30     1  97  70   15 18.2 0.147  21   No        No
+31     0 100  88   60 46.8 0.962  31   No        No
+32     6 154  78   41 46.1 0.571  27   No       Yes
+33     2  56  56   28 24.2 0.332  22   No        No
+34     0 188  82   14 32.0 0.682  22  Yes       Yes
+35     2 197  70   99 34.7 0.575  62  Yes       Yes
+36     2 142  82   18 24.7 0.761  21   No        No
+37     1 164  82   43 32.8 0.341  50   No       Yes
+38     6 144  72   27 33.9 0.255  40   No       Yes
+39    14 175  62   30 33.6 0.212  38  Yes       Yes
+40     1 133 102   28 32.8 0.234  45  Yes       Yes</code></pre>
+</div>
+</div>
+<p>Now we can have a look at the accuracy of the method:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test3)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>confusion_mat3 <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test3 <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>confusion_mat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     pred_type
+type  No Yes
+  No  21   5
+  Yes  4  10</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>accuracy3 <span class="ot">&lt;-</span> (confusion_mat3 <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>accuracy3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.775</code></pre>
+</div>
+</div>
+<p>Overall accuracy <span class="math inline">\(= (21+10)/(21+5+4+10) = 0.78\)</span></p>
+<p>True positive rate <span class="math inline">\(= 10/(4+10) = 0.71\)</span></p>
+<p>True negative rate <span class="math inline">\(= 21/(21+5) = 0.81\)</span></p>
+<p>We can assess the overall accuracy, true positive and true negative rates for different values of <span class="math inline">\(k\)</span>:</p>
+</section>
+</section>
+<section id="regression-problems" class="level1">
+<h1>Regression Problems</h1>
+<p>For regression problems, usual predictive analytics techniques include</p>
+<ul>
+<li>linear regression</li>
+<li>regression trees</li>
+<li>random forests</li>
+<li>generalised additive models</li>
+</ul>
+<p>We have studied linear regression. We will now study regression trees. Again, we will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.</p>
+<section id="regression-trees" class="level2">
+<h2 class="anchored" data-anchor-id="regression-trees">Regression Trees</h2>
+<p>Regression trees are similar to classification trees. The difference is that the response variable is continuous instead of categorical.</p>
+<p>The same reasoning is employed when constructing a regression tree: the predictors are split in such a way that the prediction error is minimised. In the case of regression trees, we may opt to minimise the residual sum of squares, for example.</p>
+<p>For the leaves or terminal nodes, the predictions will be the average estimate for the observations that belong to that terminal node.</p>
+</section>
+<section id="example-pima-data" class="level2">
+<h2 class="anchored" data-anchor-id="example-pima-data">Example: Pima data</h2>
+<p>We will now use linear regression and a regression tree to obtain predictions for the <code>glu</code> variable using the <code>Pima.tr</code> data.</p>
+<p><strong>Recall that we split our data. we can use the same split again</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix random numbers by setting the seed </span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Put 80% of the data into the training set </span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>pima_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Pima.tr, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>train_pima_data <span class="ot">&lt;-</span> <span class="fu">training</span>(pima_split)</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>test_pima_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(pima_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong><em>Fitting a multiple linear regression model</em></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fit_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(glu <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fit_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = glu ~ ., data = train_pima_data)
+
+Coefficients:
+(Intercept)        npreg           bp         skin          bmi          ped  
+    70.2137      -0.5522       0.4133      -0.0431       0.2508       4.0819  
+        age      typeYes  
+     0.2751      22.6378  </code></pre>
+</div>
+</div>
+<p><strong>Evaluate the performance on the test data:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>glu_res_test <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_glu =</span> <span class="fu">predict</span>(fit_lm, test_pima_data))</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(glu_res_test, <span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> pred_glu)) <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Summarise the model accuracy</strong></p>
+<p>In addition to mean error and mean absolute error which we have used before, we can also have a look at the correlation between observed and predicted values to help us summarise how well our model performs:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>glu_res_test <span class="sc">%&gt;%</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_error =</span> <span class="fu">mean</span>(glu <span class="sc">-</span> pred_glu),</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_abs_error =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(glu <span class="sc">-</span> pred_glu)),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cor =</span> <span class="fu">cor</span>(glu, pred_glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean_error mean_abs_error       cor
+1   5.105036       25.05825 0.6643261</code></pre>
+</div>
+</div>
+<p><strong><em>Now fitting a regression tree</em></strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fit_reg_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(glu <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(fit_reg_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Evaluate the performance on the test data:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>glu_res_test2 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_glu =</span> <span class="fu">predict</span>(fit_reg_tree, test_pima_data))</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(glu_res_test2, <span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> pred_glu)) <span class="sc">+</span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Summarise the model accuracy</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>glu_res_test2 <span class="sc">%&gt;%</span> </span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_error =</span> <span class="fu">mean</span>(glu <span class="sc">-</span> pred_glu),</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_abs_error =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(glu <span class="sc">-</span> pred_glu)),</span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cor =</span> <span class="fu">cor</span>(glu, pred_glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  mean_error mean_abs_error       cor
+1   10.35319       29.49208 0.3722016</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="summary-of-training-and-testing" class="level1">
+<h1>Summary of Training and testing</h1>
+<p><strong>Splitting Data</strong></p>
+<p>Training set:</p>
+<ul>
+<li>Sandbox for model building</li>
+<li>Spend most of your time using the training set to develop the model</li>
+<li>Majority of the data (usually 80%)</li>
+</ul>
+<p>Testing set:</p>
+<ul>
+<li>Held in reserve to determine efficacy of one or two chosen models</li>
+<li>Remainder of the data (usually 20%)</li>
+</ul>
+<p>It is important to note that while we’ve only looked at training/test splits of the data, 3 splits are often used when there’s multiple modelling options to choose from. In this case the procedure is broken down into three steps</p>
+<ol type="1">
+<li>Training - to train the various models</li>
+<li>Validation - do assess performance of models and choose the best one</li>
+<li>Test - to assess the performance of the chosen model</li>
+</ol>
+<p>We won’t go into these splits but it’s important to be aware of this practice.</p>
+<!-- ![](train_test.png){width=70%} -->
+<section id="training-vs-test-accuracymean-errors" class="level2">
+<h2 class="anchored" data-anchor-id="training-vs-test-accuracymean-errors">Training vs test accuracy/mean errors</h2>
+<p>We expect the test error to be greater than the training error, after all the model ``has not seen’’ the test data before. This is essentialy what we want in real life, after all we will use our data to fit a machine learning model/algorithm, and we will use it to predict responses that are unknown.</p>
+<!-- \begin{center} -->
+<!-- \includegraphics[width = \textwidth]{bias_variance.png} -->
+<!-- \end{center} -->
+<!-- \begin{center} -->
+<!-- \includegraphics[width = .3\textwidth]{overfitting.jpg} -->
+<!-- \includegraphics[width = .5\textwidth]{overfitting2.png} -->
+<!-- \end{center} -->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+          // default icon
+          link.classList.add("external");
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

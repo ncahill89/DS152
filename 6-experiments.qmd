@@ -308,6 +308,8 @@ The dataset `oatvar` in the `faraway` library contains information about an expe
 Visualise the data
 
 ```{r }
+oatvar <- faraway::oatvar
+
 ggplot(oatvar, aes(y=yield, x=block, color=variety)) + 
     geom_point(size=5) +
     geom_line(aes(x=as.integer(block)))
