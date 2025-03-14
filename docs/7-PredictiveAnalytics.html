@@ -145,7 +145,28 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#predictive-analytics" id="toc-predictive-analytics" class="nav-link active" data-scroll-target="#predictive-analytics">Predictive Analytics</a></li>
+  <li><a href="#definition-of-predictive-analytics" id="toc-definition-of-predictive-analytics" class="nav-link active" data-scroll-target="#definition-of-predictive-analytics">Definition of predictive analytics</a>
+  <ul class="collapse">
+  <li><a href="#key-components" id="toc-key-components" class="nav-link" data-scroll-target="#key-components">Key components</a></li>
+  <li><a href="#types-of-data" id="toc-types-of-data" class="nav-link" data-scroll-target="#types-of-data">Types of data</a></li>
+  </ul></li>
+  <li><a href="#predictive-modeling-process" id="toc-predictive-modeling-process" class="nav-link" data-scroll-target="#predictive-modeling-process">Predictive modeling process</a>
+  <ul class="collapse">
+  <li><a href="#problem-definition" id="toc-problem-definition" class="nav-link" data-scroll-target="#problem-definition">Problem definition</a></li>
+  <li><a href="#data-preparation" id="toc-data-preparation" class="nav-link" data-scroll-target="#data-preparation">Data preparation</a></li>
+  <li><a href="#model-training" id="toc-model-training" class="nav-link" data-scroll-target="#model-training">Model training</a></li>
+  <li><a href="#model-evaluation" id="toc-model-evaluation" class="nav-link" data-scroll-target="#model-evaluation">Model evaluation</a></li>
+  <li><a href="#model-selection" id="toc-model-selection" class="nav-link" data-scroll-target="#model-selection">Model selection</a></li>
+  </ul></li>
+  <li><a href="#common-predictive-techniques" id="toc-common-predictive-techniques" class="nav-link" data-scroll-target="#common-predictive-techniques">Common predictive techniques</a>
+  <ul class="collapse">
+  <li><a href="#for-regression-problems" id="toc-for-regression-problems" class="nav-link" data-scroll-target="#for-regression-problems">For regression problems</a></li>
+  <li><a href="#for-classification-problems" id="toc-for-classification-problems" class="nav-link" data-scroll-target="#for-classification-problems">For classification problems</a></li>
+  </ul></li>
+  <li><a href="#evaluating-prediction-performance" id="toc-evaluating-prediction-performance" class="nav-link" data-scroll-target="#evaluating-prediction-performance">Evaluating Prediction Performance</a>
+  <ul class="collapse">
+  <li><a href="#performing-the-split" id="toc-performing-the-split" class="nav-link" data-scroll-target="#performing-the-split">Performing the split</a></li>
+  </ul></li>
   <li><a href="#classification-problems" id="toc-classification-problems" class="nav-link" data-scroll-target="#classification-problems">Classification Problems</a>
   <ul class="collapse">
   <li><a href="#classification-trees" id="toc-classification-trees" class="nav-link" data-scroll-target="#classification-trees">Classification trees</a></li>
@@ -186,17 +207,89 @@ window.Quarto = {
 </header>
 
 
-<section id="predictive-analytics" class="level1">
-<h1>Predictive Analytics</h1>
+<section id="definition-of-predictive-analytics" class="level1">
+<h1>Definition of predictive analytics</h1>
 <ul>
-<li>Encompasses a variety of statistical techniques</li>
-<li>e.g.&nbsp;data mining, predictive modelling, machine learning</li>
-<li>Involves the analysis of current and historical facts to make predictions about the future or otherwise unknown events</li>
-<li>Used in many areas, e.g.&nbsp;insurance companies, banks, stock market, medical research, ecological monitoring, etc</li>
+<li><p>Analyzes historical and current data to make predictions about future events or behaviors</p></li>
+<li><p>Combines statistical techniques, machine learning algorithms, and data mining to identify patterns and trends</p></li>
+<li><p>Used in many areas, e.g.&nbsp;insurance companies, banks, stock market, medical research, ecological monitoring, etc</p></li>
+</ul>
+<section id="key-components" class="level2">
+<h2 class="anchored" data-anchor-id="key-components">Key components</h2>
+<ul>
+<li><p>Data collection gathers relevant information from various sources</p></li>
+<li><p>Data preprocessing cleans and transforms raw data into a suitable format for analysis</p></li>
+<li><p>Feature engineering creates new variables or selects relevant features to improve model performance</p></li>
+<li><p>Model development builds and trains predictive algorithms using historical data</p></li>
+<li><p>Model evaluation assesses the accuracy and reliability of predictions using various metrics</p></li>
 </ul>
 </section>
-<section id="classification-problems" class="level1">
-<h1>Classification Problems</h1>
+<section id="types-of-data" class="level2">
+<h2 class="anchored" data-anchor-id="types-of-data">Types of data</h2>
+<ul>
+<li><p>Structured data organized in predefined formats (spreadsheets)</p></li>
+<li><p>Unstructured data lacks a predefined structure (text documents, images, videos)</p></li>
+<li><p>Time series data represents observations collected at regular intervals over time (stock prices, weather data)</p></li>
+<li><p>Cross-sectional data captures information from multiple subjects at a single point in time (survey responses)</p></li>
+</ul>
+</section>
+</section>
+<section id="predictive-modeling-process" class="level1">
+<h1>Predictive modeling process</h1>
+<section id="problem-definition" class="level2">
+<h2 class="anchored" data-anchor-id="problem-definition">Problem definition</h2>
+<ul>
+<li><p>Identifies the specific problem or question to be addressed</p></li>
+<li><p>Determines the outcome to be predicted (e.g., customer churn, sales volume)</p></li>
+</ul>
+</section>
+<section id="data-preparation" class="level2">
+<h2 class="anchored" data-anchor-id="data-preparation">Data preparation</h2>
+<ul>
+<li><p>Data cleaning removes or corrects errors, inconsistencies, and missing values in the dataset</p></li>
+<li><p>Data integration combines data from multiple sources into a unified format for analysis</p></li>
+<li><p>Data transformation applies mathematical or logical operations to create new variables or modify existing ones</p></li>
+</ul>
+</section>
+<section id="model-training" class="level2">
+<h2 class="anchored" data-anchor-id="model-training">Model training</h2>
+<ul>
+<li><p>Explores both traditional statistical methods and advanced machine learning algorithms</p></li>
+<li><p>Splits the prepared data into training and testing sets to assess model performance</p></li>
+<li><p>Applies selected algorithms to the training data to learn patterns and relationships</p></li>
+</ul>
+</section>
+<section id="model-evaluation" class="level2">
+<h2 class="anchored" data-anchor-id="model-evaluation">Model evaluation</h2>
+<ul>
+<li><p>Calculates relevant evaluation metrics to assesses model performance on the held-out test data to measure generalization</p></li>
+<li><p>Evaluates different types of predictive models based on the problem and data characteristics</p></li>
+<li><p>Considers factors such as interpretability, scalability, and computational requirements</p></li>
+<li><p>Assesses the trade-offs between model complexity and performance</p></li>
+</ul>
+</section>
+<section id="model-selection" class="level2">
+<h2 class="anchored" data-anchor-id="model-selection">Model selection</h2>
+<ul>
+<li>Selects an appropriate model for the specific predictive task</li>
+</ul>
+</section>
+</section>
+<section id="common-predictive-techniques" class="level1">
+<h1>Common predictive techniques</h1>
+<section id="for-regression-problems" class="level2">
+<h2 class="anchored" data-anchor-id="for-regression-problems">For regression problems</h2>
+<p>For regression problems, usual predictive analytics techniques include</p>
+<ul>
+<li>linear regression</li>
+<li>regression trees</li>
+<li>random forests</li>
+<li>generalised additive models</li>
+</ul>
+<p>We will study regression trees in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.</p>
+</section>
+<section id="for-classification-problems" class="level2">
+<h2 class="anchored" data-anchor-id="for-classification-problems">For classification problems</h2>
 <p>For classification problems, usual predictive analytics techniques include</p>
 <ul>
 <li>logistic regression</li>
@@ -207,6 +300,110 @@ window.Quarto = {
 <li>neural networks</li>
 </ul>
 <p>We will study classification trees and k-nearest neighbours in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.</p>
+</section>
+</section>
+<section id="evaluating-prediction-performance" class="level1">
+<h1>Evaluating Prediction Performance</h1>
+<p>The mechanics of prediction is easy:</p>
+<ul>
+<li>Plug in values of predictors to the model equation</li>
+<li>Calculate the predicted value of the response variable,</li>
+</ul>
+<p>Getting it right is hard!</p>
+<ul>
+<li>There is no guarantee the model estimates you have are correct</li>
+<li>Or that your model will perform as well with new data as it did with your sample data</li>
+</ul>
+<p><strong>Spending our data</strong></p>
+<ul>
+<li><p>Several steps to create a useful model: parameter estimation,performance assessment,model selection etc.</p></li>
+<li><p>Doing all of this on the entire data we have available can lead to overfitting</p></li>
+<li><p>Allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we’ve done so far)</p></li>
+</ul>
+<p><strong>Splitting Data</strong></p>
+<p>Training set:</p>
+<ul>
+<li>Sandbox for model building</li>
+<li>Spend most of your time using the training set to develop the model</li>
+<li>Majority of the data (usually 80%)</li>
+</ul>
+<p>Testing set:</p>
+<ul>
+<li>Held in reserve to determine efficacy of one or two chosen models</li>
+<li>Critical to look at it once, otherwise it becomes part of the modeling process</li>
+<li>Remainder of the data (usually 20%)</li>
+</ul>
+<section id="performing-the-split" class="level2">
+<h2 class="anchored" data-anchor-id="performing-the-split">Performing the split</h2>
+<p>Let’s consider an example here. We have data on paintings from auction catalogs in paris. A glimpse of the data is shown below.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(paris_paintings)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 220
+Columns: 12
+$ name         &lt;chr&gt; "L1764-4", "L1764-7a", "L1764-7b", "L1764-10a", "L1764-10…
+$ sale         &lt;chr&gt; "L1764", "L1764", "L1764", "L1764", "L1764", "L1764", "L1…
+$ lot          &lt;chr&gt; "4", "7", "7", "10", "10", "10", "15", "16", "16", "40", …
+$ year         &lt;dbl&gt; 1764, 1764, 1764, 1764, 1764, 1764, 1764, 1764, 1764, 176…
+$ logprice     &lt;dbl&gt; 2.4849067, 2.4849067, 2.4849067, 0.2876818, 0.2876818, 0.…
+$ price        &lt;dbl&gt; 12.0, 12.0, 12.0, 1.3, 1.3, 1.3, 6.0, 12.0, 12.0, 300.0, …
+$ subject      &lt;chr&gt; "L'enfant Jesus &amp; Saint Jean", "(2) Venus qui retient Ado…
+$ Height_in    &lt;dbl&gt; 13.00, 6.00, 6.00, 16.00, 16.00, 16.00, 36.00, 27.00, 27.…
+$ Width_in     &lt;dbl&gt; 16.00, 13.00, 13.00, 12.00, 12.00, 12.00, 48.00, 36.00, 3…
+$ Surface_Rect &lt;dbl&gt; 208.0000, 78.0000, 78.0000, 192.0000, 192.0000, 192.0000,…
+$ materialCat  &lt;chr&gt; "wood", "canvas", "canvas", "canvas", "canvas", "canvas",…
+$ landsALL     &lt;dbl&gt; 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, …</code></pre>
+</div>
+</div>
+<p>We will split the data into training and testing datasets</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix random numbers by setting the seed </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Put 80% of the data into the training set </span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>price_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(paris_paintings, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(price_split)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>test_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(price_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Fit a model and “learn” from the training data:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>lm_model_train <span class="ot">&lt;-</span> <span class="fu">lm</span>(logprice <span class="sc">~</span> Height_in <span class="sc">+</span> Width_in <span class="sc">+</span> year <span class="sc">+</span> Surface_Rect <span class="sc">+</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                       materialCat <span class="sc">+</span> landsALL, <span class="at">data =</span> train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>Evaluate the performance on the test data:</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>price_res_test <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">select</span>(logprice) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_price =</span> <span class="fu">predict</span>(lm_model_train, test_data))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(price_res_test, <span class="fu">aes</span>(<span class="at">x =</span> logprice, <span class="at">y =</span> pred_price)) <span class="sc">+</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> logprice, <span class="at">y =</span> logprice))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>Summarise the model accuracy</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>price_res_test <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_error =</span> <span class="fu">mean</span>(logprice <span class="sc">-</span> pred_price),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_abs_error =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(logprice <span class="sc">-</span> pred_price)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 2
+  mean_error mean_abs_error
+       &lt;dbl&gt;          &lt;dbl&gt;
+1    0.00278           1.71</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="classification-problems" class="level1">
+<h1>Classification Problems</h1>
 <section id="classification-trees" class="level2">
 <h2 class="anchored" data-anchor-id="classification-trees">Classification trees</h2>
 <p>Classification trees can be used to create predictions for a categorical variable.</p>
@@ -229,7 +426,7 @@ $ genre  &lt;chr&gt; "romance", "romance", "romance", "romance", "romance", "rom
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -242,8 +439,8 @@ $ genre  &lt;chr&gt; "romance", "romance", "romance", "romance", "romance", "rom
 <p>We will now use logistic regression, a classification tree, and the k-nearest neighbours algorithm to predict whether a woman in the <code>Pima.tr</code> dataset has diabetes or not.</p>
 <p>The <code>Pima.tr</code> dataset from package <code>MASS</code> has been used before during a lab. It has information on several biomarkers, such as glucose levels and blood pressure, as well as other variables such as age. The response <code>type</code> indicates whether that particular individual had diabetes or not. Our objective is to predict whether a woman has diabetes using information from the other variables in the dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Pima.tr <span class="ot">&lt;-</span> MASS<span class="sc">::</span>Pima.tr</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Pima.tr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>Pima.tr <span class="ot">&lt;-</span> MASS<span class="sc">::</span>Pima.tr</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Pima.tr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 200
 Columns: 8
@@ -259,20 +456,20 @@ $ type  &lt;fct&gt; No, Yes, No, No, No, Yes, No, No, No, Yes, Yes, No, Yes, Yes
 </div>
 <p><strong>Let’s split our data</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix random numbers by setting the seed </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Put 80% of the data into the training set </span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>pima_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Pima.tr, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>train_pima_data <span class="ot">&lt;-</span> <span class="fu">training</span>(pima_split)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>test_pima_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(pima_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix random numbers by setting the seed </span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Put 80% of the data into the training set </span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>pima_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Pima.tr, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>train_pima_data <span class="ot">&lt;-</span> <span class="fu">training</span>(pima_split)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>test_pima_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(pima_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong><em>We will start with logistic regression</em></strong></p>
 <p>Let’s fit a multiple logistic regression model:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fit_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(type <span class="sc">~</span> ., <span class="at">family =</span> binomial, <span class="at">data =</span> train_pima_data)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>fit_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>fit_logistic <span class="ot">&lt;-</span> <span class="fu">glm</span>(type <span class="sc">~</span> ., <span class="at">family =</span> binomial, <span class="at">data =</span> train_pima_data)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>fit_logistic</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:  glm(formula = type ~ ., family = binomial, data = train_pima_data)
@@ -290,13 +487,13 @@ Residual Deviance: 134.7    AIC: 150.7</code></pre>
 </div>
 <p>We can use the <code>predict</code> function to obtain predictions for each individual in the dataset:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pima_res_test <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_p =</span> </span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">predict</span>(fit_logistic, </span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">newdata =</span> test_pima_data)) <span class="sc">%&gt;%</span> </span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">pred_type =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span><span class="fl">0.5</span>,<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>pima_res_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pima_res_test <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_p =</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">predict</span>(fit_logistic, </span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">type =</span> <span class="st">"response"</span>, <span class="at">newdata =</span> test_pima_data)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>   <span class="fu">mutate</span>(<span class="at">pred_type =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span><span class="fl">0.5</span>,<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>pima_res_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   npreg glu  bp skin  bmi   ped age type      pred_p pred_type
 1      7 195  70   33 25.1 0.163  55  Yes 0.730366555       yes
@@ -343,18 +540,18 @@ Residual Deviance: 134.7    AIC: 150.7</code></pre>
 </div>
 <p>We set the threshold for prediction as <code>threshold = 0.50</code>, now we can have a look at the accuracy of the method:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>confusion_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>confusion_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     pred_type
 type  no yes
   No  17   9
   Yes  6   8</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.625</code></pre>
 </div>
@@ -372,25 +569,25 @@ type  no yes
 </ul>
 <p><strong><em>Now we will fit a classification tree</em></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>fit_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(type <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(fit_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>fit_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(type <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(fit_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Let’s check the predictions:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>pima_res_test2 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_p =</span> </span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">predict</span>(fit_tree, </span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">newdata =</span> test_pima_data) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Yes)) <span class="sc">%&gt;%</span> </span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span><span class="fl">0.5</span>,<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>pima_res_test2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pima_res_test2 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_p =</span> </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                         <span class="fu">predict</span>(fit_tree, </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                                 <span class="at">newdata =</span> test_pima_data) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(Yes)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span><span class="fl">0.5</span>,<span class="st">"yes"</span>,<span class="st">"no"</span>))</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>pima_res_test2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   npreg glu  bp skin  bmi   ped age type     pred_p pred_type
 1      7 195  70   33 25.1 0.163  55  Yes 0.33333333        no
@@ -437,18 +634,18 @@ type  no yes
 </div>
 <p>We set the threshold for prediction as <code>threshold = 0.50</code>, now we can have a look at the accuracy of the method:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test2)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>confusion_mat2 <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>confusion_mat2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test2)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>confusion_mat2 <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test2 <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>confusion_mat2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     pred_type
 type  no yes
   No  16  10
   Yes  8   6</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>accuracy2 <span class="ot">&lt;-</span> (confusion_mat2 <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>accuracy2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>accuracy2 <span class="ot">&lt;-</span> (confusion_mat2 <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>accuracy2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.55</code></pre>
 </div>
@@ -461,15 +658,15 @@ type  no yes
 <p><strong><em>Now we will use the k-nearest neighbours algorithm</em></strong></p>
 <p>We’ll use 10 nearest neighbours.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>pred_type_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>                     test_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cl =</span>   train_pima_data<span class="sc">$</span>type, </span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">k =</span> <span class="dv">10</span>)</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>pima_res_test3 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> pred_type_knn)</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>pima_res_test3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>pred_type_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>                     test_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cl =</span>   train_pima_data<span class="sc">$</span>type, </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">k =</span> <span class="dv">10</span>)</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>pima_res_test3 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> pred_type_knn)</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>pima_res_test3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   npreg glu  bp skin  bmi   ped age type pred_type
 1      7 195  70   33 25.1 0.163  55  Yes       Yes
@@ -516,18 +713,18 @@ type  no yes
 </div>
 <p>Now we can have a look at the accuracy of the method:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test3)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>confusion_mat3 <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test3 <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>confusion_mat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(pima_res_test3)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>confusion_mat3 <span class="ot">&lt;-</span> <span class="fu">table</span>(pima_res_test3 <span class="sc">%&gt;%</span> <span class="fu">select</span>(type, pred_type))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>confusion_mat3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     pred_type
 type  No Yes
   No  21   5
   Yes  4  10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>accuracy3 <span class="ot">&lt;-</span> (confusion_mat3 <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>accuracy3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>accuracy3 <span class="ot">&lt;-</span> (confusion_mat3 <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>accuracy3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.775</code></pre>
 </div>
@@ -540,14 +737,6 @@ type  No Yes
 </section>
 <section id="regression-problems" class="level1">
 <h1>Regression Problems</h1>
-<p>For regression problems, usual predictive analytics techniques include</p>
-<ul>
-<li>linear regression</li>
-<li>regression trees</li>
-<li>random forests</li>
-<li>generalised additive models</li>
-</ul>
-<p>We have studied linear regression. We will now study regression trees. Again, we will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.</p>
 <section id="regression-trees" class="level2">
 <h2 class="anchored" data-anchor-id="regression-trees">Regression Trees</h2>
 <p>Regression trees are similar to classification trees. The difference is that the response variable is continuous instead of categorical.</p>
@@ -557,21 +746,21 @@ type  No Yes
 <section id="example-pima-data" class="level2">
 <h2 class="anchored" data-anchor-id="example-pima-data">Example: Pima data</h2>
 <p>We will now use linear regression and a regression tree to obtain predictions for the <code>glu</code> variable using the <code>Pima.tr</code> data.</p>
-<p><strong>Recall that we split our data. we can use the same split again</strong></p>
+<p><strong>Split the data</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix random numbers by setting the seed </span></span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Put 80% of the data into the training set </span></span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>pima_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Pima.tr, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>train_pima_data <span class="ot">&lt;-</span> <span class="fu">training</span>(pima_split)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>test_pima_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(pima_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Fix random numbers by setting the seed </span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Put 80% of the data into the training set </span></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>pima_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Pima.tr, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Create data frames for the two sets:</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>train_pima_data <span class="ot">&lt;-</span> <span class="fu">training</span>(pima_split)</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>test_pima_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(pima_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong><em>Fitting a multiple linear regression model</em></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>fit_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(glu <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>fit_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>fit_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(glu <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>fit_lm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Call:
@@ -586,16 +775,16 @@ Coefficients:
 </div>
 <p><strong>Evaluate the performance on the test data:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>glu_res_test <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span> </span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_glu =</span> <span class="fu">predict</span>(fit_lm, test_pima_data))</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(glu_res_test, <span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> pred_glu)) <span class="sc">+</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>glu_res_test <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_glu =</span> <span class="fu">predict</span>(fit_lm, test_pima_data))</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(glu_res_test, <span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> pred_glu)) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-19-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -603,49 +792,49 @@ Coefficients:
 <p><strong>Summarise the model accuracy</strong></p>
 <p>In addition to mean error and mean absolute error which we have used before, we can also have a look at the correlation between observed and predicted values to help us summarise how well our model performs:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>glu_res_test <span class="sc">%&gt;%</span> </span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_error =</span> <span class="fu">mean</span>(glu <span class="sc">-</span> pred_glu),</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_abs_error =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(glu <span class="sc">-</span> pred_glu)),</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cor =</span> <span class="fu">cor</span>(glu, pred_glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>glu_res_test <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_error =</span> <span class="fu">mean</span>(glu <span class="sc">-</span> pred_glu),</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_abs_error =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(glu <span class="sc">-</span> pred_glu)),</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cor =</span> <span class="fu">cor</span>(glu, pred_glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean_error mean_abs_error       cor
 1   5.105036       25.05825 0.6643261</code></pre>
 </div>
 </div>
-<p><strong><em>Now fitting a regression tree</em></strong></p>
+<p><strong><em>Now fit a regression tree</em></strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>fit_reg_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(glu <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(fit_reg_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>fit_reg_tree <span class="ot">&lt;-</span> <span class="fu">rpart</span>(glu <span class="sc">~</span> ., <span class="at">data =</span> train_pima_data)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(fit_reg_tree)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-21-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Evaluate the performance on the test data:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>glu_res_test2 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span> </span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_glu =</span> <span class="fu">predict</span>(fit_reg_tree, test_pima_data))</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(glu_res_test2, <span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> pred_glu)) <span class="sc">+</span></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>glu_res_test2 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span> </span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_glu =</span> <span class="fu">predict</span>(fit_reg_tree, test_pima_data))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(glu_res_test2, <span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> pred_glu)) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">x =</span> glu, <span class="at">y =</span> glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-17-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="7-PredictiveAnalytics_files/figure-html/unnamed-chunk-22-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>Summarise the model accuracy</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>glu_res_test2 <span class="sc">%&gt;%</span> </span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_error =</span> <span class="fu">mean</span>(glu <span class="sc">-</span> pred_glu),</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_abs_error =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(glu <span class="sc">-</span> pred_glu)),</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cor =</span> <span class="fu">cor</span>(glu, pred_glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>glu_res_test2 <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_error =</span> <span class="fu">mean</span>(glu <span class="sc">-</span> pred_glu),</span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_abs_error =</span> <span class="fu">mean</span>(<span class="fu">abs</span>(glu <span class="sc">-</span> pred_glu)),</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">cor =</span> <span class="fu">cor</span>(glu, pred_glu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  mean_error mean_abs_error       cor
 1   10.35319       29.49208 0.3722016</code></pre>

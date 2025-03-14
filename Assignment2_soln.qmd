@@ -18,8 +18,7 @@ library(MASS)
 
 ```
 
-
-## Exercise 
+## Exercise
 
 For this exercise, we will work with the `Cars93` data frame from package `MASS`. Open an R session in the R Studio Server, and type in the code below to glimpse the dataset and access the help file to see more information on the data.
 
@@ -31,50 +30,45 @@ glimpse(Cars93)
 ?Cars93
 ```
 
-
 \bigskip
 
-(a) How many observations and how many variables are in the `Cars93` dataset? __[2 Marks]__
+(a) How many observations and how many variables are in the `Cars93` dataset? **\[2 Marks\]**
 
-  - 93 observations, 27 variables
-  
+-   93 observations, 27 variables
 
-(b) Suppose we would like to predict the `Price` of the cars. Why would *logistic* regression *not* be suitable in this case? __[2 Marks]__
+(b) Suppose we would like to predict the `Price` of the cars. Why would *logistic* regression *not* be suitable in this case? **\[2 Marks\]**
 
-  - Logistic regression is not suitable for a continuous response variable. 
-  
+-   Logistic regression is not suitable for a continuous response variable.
 
-(c) Assume you want to fit a simple linear regression model to predict `Price` using `Horsepower` as the predictor. How would you fill the gaps, \[A\], \[B\], \[C\] and \[D\] in the code below to fit the linear regression model?
- __[8 Marks]__
+(c) Assume you want to fit a simple linear regression model to predict `Price` using `Horsepower` as the predictor. How would you fill the gaps, \[A\], \[B\], \[C\] and \[D\] in the code below to fit the linear regression model? **\[8 Marks\]**
 
 ```{r, eval = FALSE}
 lm_mod1 <-  lm(Price ~ Horsepower, data = Cars93)
 ```
 
-[A] = lm
+\[A\] = lm
 
-[B] = Price
+\[B\] = Price
 
-[C] = Horsepower
+\[C\] = Horsepower
 
-[D] = Cars93
-
+\[D\] = Cars93
 
 (d) After fitting the linear regression model and inspecting the estimated coefficients, we obtain the following results in R:
 
 ```{r, echo = FALSE}
 lm_mod1 <- lm(Price ~ Horsepower, data = Cars93) 
-``` 
+```
 
 ```{r}
 lm_mod1 
-``` 
+```
 
-What would the predicted `Price` be  if `Horsepower` was 100? __[4 Marks]__
+What would the predicted `Price` be if `Horsepower` was 100? **\[4 Marks\]**
 
-  - -1.3988 + 0.1454*100 = 13.1412
+-   -1.3988 + 0.1454\*100 = 13.1412
 
-(e) Briefly explain, in your own words, why the plot being created with the code below is useful. __[4 Marks]__
+(e) Briefly explain, in your own words, why the plot being created with the code below is useful. **\[4 Marks\]**
 
 ```{r, eval = TRUE}
 Cars93_pred <- Cars93 %>%  mutate(price_pred = predict(lm_mod1))
@@ -88,10 +82,9 @@ ggplot(data = Cars93_pred,
   ylab("Predicted CL")
 ```
 
-  - This code is adding the model predictions of `Price` to the Cars93 data and creating a new dataset called Cars93_pred. Then the plot is comparing the predicted values to the observed values. The inclusion of the identity line allows for a good visual as to whether or not the model is doing a good job (if points fall along/close to the line the model is predicting well). 
+-   This code is adding the model predictions of `Price` to the Cars93 data and creating a new dataset called Cars93_pred. Then the plot is comparing the predicted values to the observed values. The inclusion of the identity line allows for a good visual as to whether or not the model is doing a good job (if points fall along/close to the line the model is predicting well).
 
-(f) Now fit a multiple linear regression using the predictor variables: `MPG.city`, `MPG.highway`, `EngineSize`, `Horsepower`, `RPM`, `Rev.per.mile`, `Fuel.tank.capacity`, and `Width`. Save this model as `lm_mod2`. Look at the estimated coefficients. Which ones seem to be negatively related to the response `Price`?
- __[3 Marks]__
+(f) Now fit a multiple linear regression using the predictor variables: `MPG.city`, `MPG.highway`, `EngineSize`, `Horsepower`, `RPM`, `Rev.per.mile`, `Fuel.tank.capacity`, and `Width`. Save this model as `lm_mod2`. Look at the estimated coefficients. Which ones seem to be negatively related to the response `Price`? **\[3 Marks\]**
 
 ```{r, echo = TRUE}
 lm_mod2 <-  lm(Price ~ MPG.city + MPG.highway + EngineSize + 
@@ -101,11 +94,9 @@ lm_mod2 <-  lm(Price ~ MPG.city + MPG.highway + EngineSize +
 lm_mod2
 ```
 
-  - `MPG.city` and `Width` are having a negative impact. `MPG.highway`, `EngineSize`, `Horsepower` and `Fuel.tank.capacity` are having a positive impact. `RPM` and `Rev.per.mile` don't seem to be having much of an impact at all. 
+-   `MPG.city` and `Width` are having a negative impact. `MPG.highway`, `EngineSize`, `Horsepower` and `Fuel.tank.capacity` are having a positive impact. `RPM` and `Rev.per.mile` don't seem to be having much of an impact at all.
 
-
-
-(g) Create the plot shown in (e) but instead use `lm_mod2` to get your predictions. Which model appears to perform better in terms of prediction, give a reason for your answer. __[4 Marks]__
+(g) Create the plot shown in (e) but instead use `lm_mod2` to get your predictions. Which model appears to perform better in terms of prediction, give a reason for your answer. **\[4 Marks\]**
 
 ```{r, eval = TRUE}
 Cars93_pred <- Cars93 %>%  mutate(price_pred2 = predict(lm_mod2))
@@ -119,10 +110,9 @@ ggplot(data = Cars93_pred,
   ylab("Predicted CL")
 ```
 
+-   Model 2 appears to be performing better as the points are generally closer to the identity line.
 
-  - Model 2 appears to be performing better as the points are generally closer to the identity line. 
-  
-(h) Below we present the sum of the squared residuals (discrepancy) for both model fits. Which one (model A or B) is more likely to correspond to the multiple linear regression (`lm_mod2`)? Justify your answer. __[3 Marks]__
+(h) Below we present the sum of the squared residuals (discrepancy) for both model fits. Which one (model A or B) is more likely to correspond to the multiple linear regression (`lm_mod2`)? Justify your answer. **\[3 Marks\]**
 
 ```{r, echo = FALSE}
 a <- Cars93 %>%
@@ -142,7 +132,4 @@ b <- Cars93 %>%
 c("model A" = b, "model B" = a)
 ```
 
-  - "model A" is the multiple regression as the sum of the squared residuals is lower. The reason for this is that the model with more predictors is explaining more of the variation in price and is a better fit for the data. 
-  
-  
-  
+-   "model A" is the multiple regression as the sum of the squared residuals is lower. The reason for this is that the model with more predictors is explaining more of the variation in price and is a better fit for the data.

@@ -388,4 +388,8 @@ We initially looked at how the Vitamin C delivery impacted tooth growth. Now let
 
 ```{r tooth2, exercise = TRUE}
 data("ToothGrowth")
+
+ggplot(ToothGrowth, aes(x = as.factor(dose), y = len, colour = supp)) +
+  geom_boxplot()
+
 ```

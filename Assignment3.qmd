@@ -9,7 +9,6 @@ format:
 editor: visual
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
@@ -21,45 +20,46 @@ credit_dat <- read_csv("https://www.dropbox.com/s/u9937ip6dkm8vbw/credit_dat.csv
 
 credit_dat <- credit_dat %>% mutate(limit_bracket = factor(limit_bracket, levels = c("low", "medium-low","medium-high","high")))
 
-```
+saveRDS(credit_dat, "credit_dat.rds")
 
+```
 
 ## Instructions
 
 Answer all questions for continuous assessment. Due: **4pm on Friday, 14th March 2025**.
 
-
 ## Question 1
 
-(a) An organization has 500 employees and the HR team decides to conduct a focus group to explore ideas for team building activities. From the list of employee emails they randomly sample 25 to take part in their focus group. 
+(a) An organization has 500 employees and the HR team decides to conduct a focus group to explore ideas for team building activities. From the list of employee emails they randomly sample 25 to take part in their focus group.
 
-This is an example of 
+This is an example of
 
-i. Simple random sampling
+i.  Simple random sampling
 ii. Cluster sampling
 iii. Stratified sampling
 iv. Systematic sampling
 
-
-
+```{=html}
+<!-- -->
+```
 (b) Suppose you are studying rural communities in Ireland. To survey residents of rural areas you pick a random sample of 10 rural communities and focus your efforts on surveying people within those randomly chosen communities.
 
-This is an example of 
+This is an example of
 
-i. Simple random sampling
+i.  Simple random sampling
 ii. Cluster sampling
 iii. Stratified sampling
 iv. Systematic sampling
 
 ## Question 2
 
-Data was collected on 400 individuals to examine the relationship between a person's income and credit card debt. The variable for credit card debt is called `Balance`. Other variables like credit limit brackets (`limit_bracket`) and marital status (`Married`) are included in the dataset as well. A glimpse of the dataset is shown below. 
+Data was collected on 400 individuals to examine the relationship between a person's income and credit card debt. The variable for credit card debt is called `Balance`. Other variables like credit limit brackets (`limit_bracket`) and marital status (`Married`) are included in the dataset as well. A glimpse of the dataset is shown below.
 
 ```{r}
 glimpse(credit_dat)
 ```
 
-(a) The plot below shows the relationship between credit card debt (`Balance`) and `Income`. Briefly describe the relationship in your own words. 
+(a) The plot below shows the relationship between credit card debt (`Balance`) and `Income`. Briefly describe the relationship in your own words.
 
 ```{r, echo = FALSE, fig.width = 5, fig.height = 3.5, fig.align = "center", message=FALSE}
 ggplot(credit_dat, aes(x = Income, y = Balance)) +
@@ -67,7 +67,7 @@ ggplot(credit_dat, aes(x = Income, y = Balance)) +
   geom_smooth(method = "lm")
 ```
 
-(b) Assume you now want to visualise the same information in __(a)__ but also include the credit-limit variable (`limit_bracket`).  Replace [A], [B], [C], [D], and [E] in the code below to produce the following plot:
+(b) Assume you now want to visualise the same information in **(a)** but also include the credit-limit variable (`limit_bracket`). Replace \[A\], \[B\], \[C\], \[D\], and \[E\] in the code below to produce the following plot:
 
 ```{r, eval = FALSE}
   ggplot(credit_dat, aes(x = [A], y = [B], [C] = limit_bracket)) +
@@ -81,25 +81,23 @@ ggplot(credit_dat, aes(x = Income, y = Balance, colour = limit_bracket)) +
   geom_smooth(method = "lm")
 ```
 
-[A] = 
+\[A\] =
 
-[B] = 
+\[B\] =
 
-[C] = 
+\[C\] =
 
-[D] = 
+\[D\] =
 
-[E] = 
+\[E\] =
 
-(c) From looking at the plot in __(b)__, what impact does including information on credit limits have on how you interpret the relationship between credit-card debt and income? Does Simpson's Paradox happen here?
-
+(c) From looking at the plot in **(b)**, what impact does including information on credit limits have on how you interpret the relationship between credit-card debt and income? Does Simpson's Paradox happen here?
 
 ```{r, fig.height = 1, echo = FALSE}
 #put_gap(col = "black")
 ```
 
-
-(d)  Assume you now want to calculate the average `Balance` and the average `Income` within each credit-limit bracket. Replace [A], [B], [C] and [D] in the code below to produce the following summary table:
+(d) Assume you now want to calculate the average `Balance` and the average `Income` within each credit-limit bracket. Replace \[A\], \[B\], \[C\] and \[D\] in the code below to produce the following summary table:
 
 ```{r, echo = FALSE}
 credit_dat %>% 
@@ -115,15 +113,12 @@ credit_dat %>%
       [D] = mean(Balance))
 ```
 
-A = 
+A =
 
-B = 
+B =
 
-C = 
+C =
 
-D = 
+D =
 
-(e) How does the summary in __(d)__ help to explain why the credit limit variable (`limit_bracket`) is a confounding variable when looking at the relationship between credit-card debt and income?
-
-
-
+(e) How does the summary in **(d)** help to explain why the credit limit variable (`limit_bracket`) is a confounding variable when looking at the relationship between credit-card debt and income?

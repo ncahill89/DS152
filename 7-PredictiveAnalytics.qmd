@@ -14,16 +14,101 @@ library(rpart)
 library(rpart.plot)
 
 film_dat <- read_csv("film_dat.csv")
+
+paris_paintings <- read_csv("https://www.dropbox.com/s/dwr3z1ug26gnc34/paris-paintings.csv?raw=1")
+paris_paintings <- paris_paintings %>% select(name, sale, lot, year, logprice, price, subject, Height_in, Width_in, Surface_Rect, materialCat, landsALL) %>% drop_na() %>% filter(lot %in% c(15,16,4,20,7,10,40))
+
+Pima.tr <- MASS::Pima.tr
+
 ```
 
-# Predictive Analytics
 
-- Encompasses a variety of statistical techniques
-- e.g. data mining, predictive modelling, machine learning
-- Involves the analysis of current and historical facts to make predictions about the future or otherwise unknown events
+# Definition of predictive analytics
+
+  - Analyzes historical and current data to make predictions about future events or behaviors
+  
+  - Combines statistical techniques, machine learning algorithms, and data mining to identify patterns and trends
+  
 - Used in many areas, e.g. insurance companies, banks, stock market, medical research, ecological monitoring, etc
 
-# Classification Problems
+## Key components
+
+  - Data collection gathers relevant information from various sources 
+
+  - Data preprocessing cleans and transforms raw data into a suitable format for analysis
+  
+  - Feature engineering creates new variables or selects relevant features to improve model performance
+  
+  - Model development builds and trains predictive algorithms using historical data
+  
+  - Model evaluation assesses the accuracy and reliability of predictions using various metrics 
+
+## Types of data
+
+  - Structured data organized in predefined formats (spreadsheets)
+
+  - Unstructured data lacks a predefined structure (text documents, images, videos)
+
+  - Time series data represents observations collected at regular intervals over time (stock prices, weather data)
+
+  - Cross-sectional data captures information from multiple subjects at a single point in time (survey responses)
+
+
+# Predictive modeling process
+
+## Problem definition
+
+  - Identifies the specific problem or question to be addressed 
+
+  - Determines the outcome to be predicted (e.g., customer churn, sales volume)
+  
+## Data preparation
+
+  - Data cleaning removes or corrects errors, inconsistencies, and missing values in the dataset
+
+  - Data integration combines data from multiple sources into a unified format for analysis
+
+  - Data transformation applies mathematical or logical operations to create new variables or modify existing ones
+
+## Model training
+
+  - Explores both traditional statistical methods and advanced machine learning algorithms
+
+  - Splits the prepared data into training and testing sets to assess model performance
+
+  - Applies selected algorithms to the training data to learn patterns and relationships
+
+
+## Model evaluation
+
+  - Calculates relevant evaluation metrics to assesses model performance on the held-out test data to measure generalization
+
+  - Evaluates different types of predictive models based on the problem and data characteristics
+  
+  - Considers factors such as interpretability, scalability, and computational requirements
+
+  - Assesses the trade-offs between model complexity and performance
+
+## Model selection
+
+  - Selects an appropriate model for the specific predictive task
+
+
+# Common predictive techniques
+
+
+## For regression problems
+
+For regression problems, usual predictive analytics techniques include
+
+- linear regression
+- regression trees
+- random forests
+- generalised additive models
+
+We will study regression trees in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
+
+## For classification problems
 
 For classification problems, usual predictive analytics techniques include
 
@@ -35,6 +120,95 @@ For classification problems, usual predictive analytics techniques include
 - neural networks
 
 We will study classification trees and k-nearest neighbours in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
+
+# Evaluating Prediction Performance
+
+The mechanics of prediction is easy:
+
+  - Plug in values of predictors to the model equation
+  - Calculate the predicted value of the response variable, 
+
+Getting it right is hard!
+
+  - There is no guarantee the model estimates you have are correct
+  - Or that your model will perform as well with new data as it did with your sample data
+  
+__Spending our data__
+
+  - Several steps to create a useful model: parameter estimation,performance assessment,model selection etc.
+
+  - Doing all of this on the entire data we have available can lead to overfitting
+
+  - Allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we've done so far)
+  
+__Splitting Data__
+
+Training set:
+
+  - Sandbox for model building
+  - Spend most of your time using the training set to develop the model
+  - Majority of the data (usually 80%)
+
+Testing set:
+
+  - Held in reserve to determine efficacy of one or two chosen models
+  - Critical to look at it once, otherwise it becomes part of the modeling process
+  - Remainder of the data (usually 20%)
+  
+## Performing the split 
+
+ Let's consider an example here. We have data on paintings from auction catalogs in paris. A glimpse of the data is shown below. 
+
+```{r}
+glimpse(paris_paintings)
+```
+
+We will split the data into training and testing datasets 
+ 
+```{r}
+library(rsample)
+# Fix random numbers by setting the seed 
+set.seed(1116)
+# Put 80% of the data into the training set 
+price_split <- initial_split(paris_paintings, prop = 0.80)
+# Create data frames for the two sets:
+train_data <- training(price_split)
+test_data  <- testing(price_split)
+```
+
+
+__Fit a model and "learn" from the training data:__
+
+```{r}
+lm_model_train <- lm(logprice ~ Height_in + Width_in + year + Surface_Rect + 
+                       materialCat + landsALL, data = train_data)
+```
+
+__Evaluate the performance on the test data:__
+
+```{r}
+
+price_res_test <- test_data %>% 
+                    select(logprice) %>% 
+                    mutate(pred_price = predict(lm_model_train, test_data))
+
+ggplot(price_res_test, aes(x = logprice, y = pred_price)) +
+  geom_point() + 
+  geom_line(aes(x = logprice, y = logprice))
+
+
+```
+
+__Summarise the model accuracy__
+
+```{r}
+price_res_test %>% 
+  summarise(mean_error = mean(logprice - pred_price),
+            mean_abs_error = mean(abs(logprice - pred_price)))
+```
+
+
+# Classification Problems 
 
 ## Classification trees
 
@@ -214,16 +388,8 @@ True negative rate $= 21/(21+5) = 0.81$
 We can assess the overall accuracy, true positive and true negative rates for different values of $k$:
 
 
+
 # Regression Problems
-
-For regression problems, usual predictive analytics techniques include
-
-- linear regression
-- regression trees
-- random forests
-- generalised additive models
-
-We have studied linear regression. We will now study regression trees. Again, we will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
 
 ## Regression Trees
 
@@ -237,7 +403,7 @@ For the leaves or terminal nodes, the predictions will be the average estimate f
 
 We will now use linear regression and a regression tree to obtain predictions for the `glu` variable using the `Pima.tr` data.
 
-__Recall that we split our data. we can use the same split again__
+__Split the data__
 
 ```{r}
 library(rsample)
@@ -282,13 +448,12 @@ glu_res_test %>%
             cor = cor(glu, pred_glu))
 ```
 
-___Now fitting a regression tree___
+___Now fit a regression tree___
 
 ```{r}
 fit_reg_tree <- rpart(glu ~ ., data = train_pima_data)
 rpart.plot(fit_reg_tree)
 ```
-
 
 __Evaluate the performance on the test data:__
 
@@ -351,3 +516,5 @@ We expect the test error to be greater than the training error, after all the mo
 <!-- \includegraphics[width = .3\textwidth]{overfitting.jpg} -->
 <!-- \includegraphics[width = .5\textwidth]{overfitting2.png} -->
 <!-- \end{center} -->
+
+

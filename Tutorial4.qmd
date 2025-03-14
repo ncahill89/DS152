@@ -1,0 +1,95 @@
+---
+title: "DS152 Tutorial Sheet 4"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+## Exercise 
+
+```{r, echo = FALSE, eval = FALSE}
+set.seed(24)
+barley <- data.frame(dose = gl(3, 9, labels = c("10ppm","100ppm","1000ppm")),
+                     nutrient = gl(3, 3, labels = c("nitrogen","phosphate","potassium")),
+                     yield = rnorm(27, rep(c(4,5,6,7,8,9,10,8,7), each = 3), .5))
+barley <- as_tibble(barley)
+```
+
+The `barley` dataset contains data on an experiment set up in a completely randomised design with three replicates and two factors: `nutrient` (with three levels: nitrogen, phosphate and potassium) and `dose` (with three levels: 10ppm, 100ppm and 1000ppm), totaling nine treatments. The `yield` was measured in tonnes per hectare.
+
+You can run the code below to glimpse the dataset:
+
+```{r, include=TRUE, echo = TRUE, message=FALSE}
+barley <- read_csv("https://www.dropbox.com/s/4p6ziofmxe2bqcf/barley.csv?raw=1")
+glimpse(barley)
+```
+
+The table below displays means per each dose:nutrient combination:
+
+```{r, message = FALSE}
+barley_summarise <- barley %>%
+                      group_by(dose, nutrient) %>%
+                      summarise(mean_yield = mean(yield) %>% round(2),
+                                n = n()) 
+barley_summarise
+```
+
+
+**(a)** Use `pivot_wider` on this table to have separate columns for the nitrogen, phosphate and potassium means per dose group as shown below:
+
+```{r}
+barley_summ_wide <- barley_summarise %>%
+                      pivot_wider(names_from = "nutrient",
+                                  values_from = "mean_yield")
+
+barley_summ_wide
+```
+
+
+**(b)** Which treatment (dose:nutrient combination) seems to be associated with the largest yield?
+
+```{r, fig.height = .5}
+barley_summarise %>% 
+  arrange(desc(mean_yield))
+```
+
+
+
+**(c)** Which dose seems to be associated with the largest yield?
+
+```{r, fig.height = .5}
+barley_summarise %>% group_by(dose) %>% summarise(mean(mean_yield))
+## which is the same as...
+barley %>% group_by(dose) %>% summarise(mean(yield))
+```
+
+ 
+**(d)** Which nutrient seems to be associated with the largest yield?
+
+```{r, fig.height = .5}
+barley_summarise %>% group_by(nutrient) %>% summarise(mean(mean_yield))
+## which is the same as...
+barley %>% group_by(nutrient) %>% summarise(mean(yield))
+```
+
+
+**(e)** The figure below displays an 'interaction plot', as seen in class. Does there appear to be an interaction between the factors `dose` and `nutrient`? Why?
+
+```{r, fig.width = 5, fig.height = 3.5, fig.align = "center", message = FALSE}
+barley %>%
+  group_by(dose, nutrient) %>%
+  summarise(mean = mean(yield)) %>%
+  ggplot(aes(x = nutrient, y = mean, colour = dose, group = dose)) +
+  theme_bw() +
+  geom_point() +
+  geom_line()
+```
+

@@ -14,7 +14,7 @@ biopsy <- MASS::biopsy
 
 ```
 
-## Exercise 
+## Exercise
 
 A breast cancer study was conducted by Dr William Wolberg from the University of Wisconsin-Madison. He assessed biopsies of breast tumours for 699 patients up to 15 July 1992, and recorded nine different attributes, which are scores based on a scale from 1 to 10 on different features of the tumours. The response variable is whether the tumour was "benign" or "malignant". A `glimpse` of the data is shown below.
 
@@ -33,9 +33,7 @@ Answer the following questions.
 
 **(a)** Is this an *observational* study? Why or why not?
 
-
 **(b)** Is this a *retrospective* or *prospective* study? Or isn't there enough information to tell? Justify your answer.
-
 
 **(c)** Below is a function you have not met before called `summarise_if`. What do you think this function is doing when being used with `group_by` as shown below? Run this code. what do you learn from the output?
 
@@ -44,23 +42,16 @@ library(tidyverse)
 biopsy %>% group_by(class) %>% summarise_if(is.numeric, mean)
 ```
 
-
-
-**(d)** Note, when you run the code above, the summary for V6 has NAs. Try adding na.rm = TRUE to the `summarise_if` function and see what happens. What do you think this achieves? 
-
+**(d)** Note, when you run the code above, the summary for V6 has NAs. Try adding na.rm = TRUE to the `summarise_if` function and see what happens. What do you think this achieves?
 
 **(e)** Suppose you would like to predict, based on the attributes, whether the tumour was benign or malignant. Why would *linear* regression not be suitable in this case?
 
-
-**(f)** What is the code below doing and why? 
+**(f)** What is the code below doing and why?
 
 ```{r, message = FALSE}
 biopsy <- biopsy %>% mutate(malignant = as.numeric(class == "malignant"))
 ```
 
-
 **(g)** Carry out a multiple logistic regression with this data using the binary response variable called malignant and predictors V1 - V9. What are the values of the coefficients?
 
-
 **(h)** The predictor `V3` is a scale referring to the uniformity of cell shape. How would an increase of 1 unit in this scale affect the prediction of this model as to whether the tumour is malignant or benign?
-

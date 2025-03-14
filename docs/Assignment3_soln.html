@@ -4749,7 +4749,7 @@ vertical-align: -.125em;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#solutions-total-20-marks" id="toc-solutions-total-20-marks" class="nav-link active" data-scroll-target="#solutions-total-20-marks"><strong>Solutions</strong> <strong>[Total = 20 Marks]</strong></a></li>
   <li><a href="#question-1" id="toc-question-1" class="nav-link" data-scroll-target="#question-1">Question 1</a></li>
   <li><a href="#question-2" id="toc-question-2" class="nav-link" data-scroll-target="#question-2">Question 2</a></li>
   </ul>
@@ -4784,32 +4784,14 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<p>Answer all questions for continuous assessment. Due: <strong>4pm on Friday, 14th March 2025</strong>.</p>
+<section id="solutions-total-20-marks" class="level2">
+<h2 class="anchored" data-anchor-id="solutions-total-20-marks"><strong>Solutions</strong> <strong>[Total = 20 Marks]</strong></h2>
 </section>
 <section id="question-1" class="level2">
 <h2 class="anchored" data-anchor-id="question-1">Question 1</h2>
 <ol type="a">
-<li>An organization has 500 employees and the HR team decides to conduct a focus group to explore ideas for team building activities. From the list of employee emails they randomly sample 25 to take part in their focus group.</li>
-</ol>
-<p>This is an example of</p>
-<ol type="i">
-<li>Simple random sampling</li>
-<li>Cluster sampling</li>
-<li>Stratified sampling</li>
-<li>Systematic sampling</li>
-</ol>
-<!-- -->
-<ol start="2" type="a">
-<li>Suppose you are studying rural communities in Ireland. To survey residents of rural areas you pick a random sample of 10 rural communities and focus your efforts on surveying people within those randomly chosen communities.</li>
-</ol>
-<p>This is an example of</p>
-<ol type="i">
-<li>Simple random sampling</li>
-<li>Cluster sampling</li>
-<li>Stratified sampling</li>
-<li>Systematic sampling</li>
+<li><p>Ans: Simple random sampling <strong>[1 Marks]</strong></p></li>
+<li><p>Ans: Cluster sampling <strong>[1 Marks]</strong></p></li>
 </ol>
 </section>
 <section id="question-2" class="level2">
@@ -4835,7 +4817,7 @@ $ limit_bracket &lt;fct&gt; medium-low, high, high, high, medium-high, high, med
 </div>
 </div>
 <ol type="a">
-<li>The plot below shows the relationship between credit card debt (<code>Balance</code>) and <code>Income</code>. Briefly describe the relationship in your own words.</li>
+<li>The plot below shows the relationship between credit card debt (<code>Balance</code>) and <code>Income</code>. Briefly describe the relationship in your own words. <strong>[2 Marks]</strong></li>
 </ol>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
@@ -4846,15 +4828,16 @@ $ limit_bracket &lt;fct&gt; medium-low, high, high, high, medium-high, high, med
 </div>
 </div>
 </div>
+<ul>
+<li>It appears that as income increases the credit car debt increases but there is a large amount of variation around the fitted regression line.</li>
+</ul>
 <ol start="2" type="a">
-<li>Assume you now want to visualise the same information in <strong>(a)</strong> but also include the credit-limit variable (<code>limit_bracket</code>). Replace [A], [B], [C], [D], and [E] in the code below to produce the following plot:</li>
+<li>Assume you now want to visualise the same information in <strong>(a)</strong> but also include the credit-limit variable (<code>limit_bracket</code>). Replace [A], [B], [C], [D], and [E] in the code below to produce the following plot: <strong>[Marks = 5]</strong></li>
 </ol>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(credit_dat, <span class="fu">aes</span>(<span class="at">x =</span> [A], <span class="at">y =</span> [B], [C] <span class="ot">=</span> limit_bracket)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  geom_[D]() <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> [E])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 <div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(credit_dat, <span class="fu">aes</span>(<span class="at">x =</span> Income, <span class="at">y =</span> Balance, <span class="at">colour =</span> limit_bracket)) <span class="sc">+</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;lm&quot;</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -4863,16 +4846,19 @@ $ limit_bracket &lt;fct&gt; medium-low, high, high, high, medium-high, high, med
 </div>
 </div>
 </div>
-<p>[A] =</p>
-<p>[B] =</p>
-<p>[C] =</p>
-<p>[D] =</p>
-<p>[E] =</p>
+<p>A = Income</p>
+<p>B = Balance</p>
+<p>C = colour</p>
+<p>D = point</p>
+<p>E = “lm”</p>
 <ol start="3" type="a">
-<li>From looking at the plot in <strong>(b)</strong>, what impact does including information on credit limits have on how you interpret the relationship between credit-card debt and income? Does Simpson’s Paradox happen here?</li>
+<li>From looking at the plot in <strong>(b)</strong>, what impact does including information on credit limits have on how you interpret the relationship between credit-card debt and income? Does Simpson’s Paradox happen here? <strong>[3 Marks]</strong></li>
 </ol>
+<ul>
+<li>When the credit limit bracket information is included we see that the relationship between income and debt is different within the credit limit brackets than it is overall. There’s a negative association within the medium-low and medium-high groups, a slight positive association in the high group and hardly any association within the low group. This appears to be an example of Simpson’s Paradox (direction of association changes within groups compared to aggregate).</li>
+</ul>
 <ol start="4" type="a">
-<li>Assume you now want to calculate the average <code>Balance</code> and the average <code>Income</code> within each credit-limit bracket. Replace [A], [B], [C] and [D] in the code below to produce the following summary table:</li>
+<li>Assume you now want to calculate the average <code>Balance</code> and the average <code>Income</code> within each credit-limit bracket. Replace [A], [B], [C] and [D] in the code below to produce the following summary table: <strong>[4 Marks]</strong></li>
 </ol>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
@@ -4885,19 +4871,16 @@ $ limit_bracket &lt;fct&gt; medium-low, high, high, high, medium-high, high, med
 4 high                 88.0       1045. </code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>credit_dat <span class="sc">%&gt;%</span> </span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>([A]) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  [B](<span class="at">mean_income =</span> <span class="fu">mean</span>([C]),</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      [D] <span class="ot">=</span> <span class="fu">mean</span>(Balance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>A =</p>
-<p>B =</p>
-<p>C =</p>
-<p>D =</p>
+<p>A = limit_brackets</p>
+<p>B = summarise</p>
+<p>C = Income</p>
+<p>D = mean_balance</p>
 <ol start="5" type="a">
-<li>How does the summary in <strong>(d)</strong> help to explain why the credit limit variable (<code>limit_bracket</code>) is a confounding variable when looking at the relationship between credit-card debt and income?</li>
+<li>How does the summary in <strong>(d)</strong> help to explain why the credit limit variable (<code>limit_bracket</code>) is a confounding variable when looking at the relationship between credit-card debt and income? <strong>[4 Marks]</strong></li>
 </ol>
+<ul>
+<li>Debt appears to increase as you go from low to high credit limits, in addition people with higher incomes tend to be in higher credit limit brackets. Therefore, credit limit has a positive association with both Income and Debt and confounds the results if not accounted for (as in the plot from part b)</li>
+</ul>
 
 
 </section>

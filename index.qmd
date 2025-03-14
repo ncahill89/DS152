@@ -37,6 +37,8 @@ Tutorial Sheet 2: [Logistic Regression](https://ncahill89.github.io/DS152/Tutori
 
 Tutorial Sheet 3: [Observational Studies](https://ncahill89.github.io/DS152/Tutorial3.html)
 
+Tutorial Sheet 3: [Experimental Studies](https://ncahill89.github.io/DS152/Tutorial4.html)
+
 
 ## Assignments
 
