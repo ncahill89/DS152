@@ -4,7 +4,6 @@ format: html
 editor: visual
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -22,149 +21,146 @@ Pima.tr <- MASS::Pima.tr
 
 ```
 
+## Definition of predictive analytics
 
-# Definition of predictive analytics
+-   Analyzes historical and current data to make predictions about future events or behaviors
 
-  - Analyzes historical and current data to make predictions about future events or behaviors
-  
-  - Combines statistical techniques, machine learning algorithms, and data mining to identify patterns and trends
-  
-- Used in many areas, e.g. insurance companies, banks, stock market, medical research, ecological monitoring, etc
+-   Combines statistical techniques, machine learning algorithms, and data mining to identify patterns and trends
 
-## Key components
+-   Used in many areas, e.g. insurance companies, banks, stock market, medical research, ecological monitoring, etc
 
-  - Data collection gathers relevant information from various sources 
+### Key components
 
-  - Data preprocessing cleans and transforms raw data into a suitable format for analysis
-  
-  - Feature engineering creates new variables or selects relevant features to improve model performance
-  
-  - Model development builds and trains predictive algorithms using historical data
-  
-  - Model evaluation assesses the accuracy and reliability of predictions using various metrics 
+-   Data collection gathers relevant information from various sources
 
-## Types of data
+-   Data preprocessing cleans and transforms raw data into a suitable format for analysis
 
-  - Structured data organized in predefined formats (spreadsheets)
+-   Feature engineering creates new variables or selects relevant features to improve model performance
 
-  - Unstructured data lacks a predefined structure (text documents, images, videos)
+-   Model development builds and trains predictive algorithms using historical data
 
-  - Time series data represents observations collected at regular intervals over time (stock prices, weather data)
+-   Model evaluation assesses the accuracy and reliability of predictions using various metrics
 
-  - Cross-sectional data captures information from multiple subjects at a single point in time (survey responses)
+### Types of data
 
+-   Structured data organized in predefined formats (spreadsheets)
 
-# Predictive modeling process
+-   Unstructured data lacks a predefined structure (text documents, images, videos)
 
-## Problem definition
+-   Time series data represents observations collected at regular intervals over time (stock prices, weather data)
 
-  - Identifies the specific problem or question to be addressed 
+-   Cross-sectional data captures information from multiple subjects at a single point in time (survey responses)
 
-  - Determines the outcome to be predicted (e.g., customer churn, sales volume)
-  
-## Data preparation
+## Predictive modeling process
 
-  - Data cleaning removes or corrects errors, inconsistencies, and missing values in the dataset
+### 1. Problem definition
 
-  - Data integration combines data from multiple sources into a unified format for analysis
+-   Identifies the specific problem or question to be addressed
 
-  - Data transformation applies mathematical or logical operations to create new variables or modify existing ones
+-   Determines the outcome to be predicted (e.g., customer churn, sales volume)
 
-## Model training
+### 2. Data preparation
 
-  - Explores both traditional statistical methods and advanced machine learning algorithms
+-   Data cleaning removes or corrects errors, inconsistencies, and missing values in the dataset
 
-  - Splits the prepared data into training and testing sets to assess model performance
+-   Data integration combines data from multiple sources into a unified format for analysis
 
-  - Applies selected algorithms to the training data to learn patterns and relationships
+-   Data transformation applies mathematical or logical operations to create new variables or modify existing ones
 
+### 3. Model training
 
-## Model evaluation
+-   Explores both traditional statistical methods and machine learning algorithms
 
-  - Calculates relevant evaluation metrics to assesses model performance on the held-out test data to measure generalization
+-   Splits the prepared data into training and testing sets to assess model performance
 
-  - Evaluates different types of predictive models based on the problem and data characteristics
-  
-  - Considers factors such as interpretability, scalability, and computational requirements
+-   Applies selected algorithms to the training data to learn patterns and relationships
 
-  - Assesses the trade-offs between model complexity and performance
+### 4. Model evaluation
 
-## Model selection
+-   Calculates relevant evaluation metrics to assesses model performance on the held-out test data to measure generalization
 
-  - Selects an appropriate model for the specific predictive task
+-   Evaluates different types of predictive models based on the problem and data characteristics
 
+-   Considers factors such as interpretability, scalability, and computational requirements
 
-# Common predictive techniques
+-   Assesses the trade-offs between model complexity and performance
 
+### 5. Model selection
 
-## For regression problems
+-   Selects an appropriate model for the specific predictive task
 
-For regression problems, usual predictive analytics techniques include
+## Common predictive techniques
 
-- linear regression
-- regression trees
-- random forests
-- generalised additive models
+Depending on the type of the outcome variable (y) we may be facing two different types of prediction models. 
 
-We will study regression trees in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
-
-## For classification problems
+### For classification problems
 
 For classification problems, usual predictive analytics techniques include
 
-- logistic regression
-- classification trees
-- k-nearest neighbours
-- support vector machines
-- discriminant analysis
-- neural networks
+-   logistic regression
+-   classification trees
+-   k-nearest neighbours
+-   support vector machines
+-   discriminant analysis
+-   neural networks
 
 We will study classification trees and k-nearest neighbours in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
 
-# Evaluating Prediction Performance
+### For regression problems
+
+For regression problems, usual predictive analytics techniques include
+
+-   linear regression
+-   regression trees
+-   random forests
+-   generalised additive models
+
+We will study regression trees in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
+
+## Evaluating Prediction Performance
 
 The mechanics of prediction is easy:
 
-  - Plug in values of predictors to the model equation
-  - Calculate the predicted value of the response variable, 
+-   Plug in values of predictors to the model equation
+-   Calculate the predicted value of the response variable,
 
 Getting it right is hard!
 
-  - There is no guarantee the model estimates you have are correct
-  - Or that your model will perform as well with new data as it did with your sample data
-  
-__Spending our data__
+-   There is no guarantee the model estimates you have are correct
+-   Or that your model will perform as well with new data as it did with your sample data
 
-  - Several steps to create a useful model: parameter estimation,performance assessment,model selection etc.
+**Spending our data**
 
-  - Doing all of this on the entire data we have available can lead to overfitting
+-   Several steps are required to create a useful model: parameter estimation,performance assessment,model selection etc.
 
-  - Allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we've done so far)
-  
-__Splitting Data__
+-   Doing all of this on the entire data we have available can lead to overfitting i.e., the model doesn't generalise
+
+-   Instead we allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we've done so far).
+
+**Splitting Data**
 
 Training set:
 
-  - Sandbox for model building
-  - Spend most of your time using the training set to develop the model
-  - Majority of the data (usually 80%)
+-   Sandbox for model building
+-   Spend most of your time using the training set to develop the model
+-   Majority of the data (usually 80%)
 
 Testing set:
 
-  - Held in reserve to determine efficacy of one or two chosen models
-  - Critical to look at it once, otherwise it becomes part of the modeling process
-  - Remainder of the data (usually 20%)
-  
-## Performing the split 
+-   Held in reserve to determine efficacy of one or two chosen models
+-   Critical to look at it once, otherwise it becomes part of the modeling process
+-   Remainder of the data (usually 20%)
 
- Let's consider an example here. We have data on paintings from auction catalogs in paris. A glimpse of the data is shown below. 
+### Performing the split
+
+Let's consider an example here. We have data on paintings from auction catalogs in paris. A glimpse of the data is shown below.
 
 ```{r}
 glimpse(paris_paintings)
 ```
 
-We will split the data into training and testing datasets 
- 
+We will split the data into training and testing datasets
+
 ```{r}
 library(rsample)
 # Fix random numbers by setting the seed 
@@ -176,15 +172,14 @@ train_data <- training(price_split)
 test_data  <- testing(price_split)
 ```
 
-
-__Fit a model and "learn" from the training data:__
+**Fit a model and "learn" from the training data:**
 
 ```{r}
 lm_model_train <- lm(logprice ~ Height_in + Width_in + year + Surface_Rect + 
                        materialCat + landsALL, data = train_data)
 ```
 
-__Evaluate the performance on the test data:__
+**Evaluate the performance on the test data:**
 
 ```{r}
 
@@ -199,7 +194,7 @@ ggplot(price_res_test, aes(x = logprice, y = pred_price)) +
 
 ```
 
-__Summarise the model accuracy__
+**Summarise the model accuracy**
 
 ```{r}
 price_res_test %>% 
@@ -207,24 +202,21 @@ price_res_test %>%
             mean_abs_error = mean(abs(logprice - pred_price)))
 ```
 
+## Classification Problems
 
-# Classification Problems 
-
-## Classification trees
+### Classification trees
 
 Classification trees can be used to create predictions for a categorical variable.
 
 The basic idea is to split the predictors so as to minimise the classification error. There are many algorithms that can be used to produce a classification tree, and different criteria to be minimised so as to improve predictive power.
 
-Each split is \textit{binary}, i.e. two branches are generated. At the end of the tree we have the \textit{leaves} or \textit{terminal nodes}. In the case of a classification tree, the predictions will be the classes for the majority of observations belonging to that terminal node.
+Each split is *binary*, i.e. two branches are generated. At the end of the tree we have the *leaves* or *terminal nodes*. In the case of a classification tree, the predictions will be the classes for the majority of observations belonging to that terminal node.
 
-See below for an example of a classification tree --
+See below for an example of a classification tree:
 
+![](images/class_tree.jpg)
 
-<!-- ![](class_tree.jpg){width=70%} -->
-
-
-## K-nearest neighbours
+### K-nearest neighbours
 
 Imagine we want to predict whether a film is classified as action or romance, based on two variables: number of kisses or number of kicks that appear in the film. Suppose that we have a database of films and the data looks like this:
 
@@ -237,12 +229,11 @@ ggplot(film_dat, aes(x = kisses, y = kicks, col = genre)) +
   geom_point(data = film_unknown, aes(col = NULL), cex = 3)
 ```
 
-
-What genre is the film represented by a black dot? We could employ the $k$-nearest neighbours algorithm to classify it. If we choose, e.g. $k=5$, then we would have 4 out of the 5 nearest neighbours classified as an action film. Therefore, the algorithm would classify the film represented by the black dot as an action film as well. 
+What genre is the film represented by a black dot? We could employ the $k$-nearest neighbours algorithm to classify it. If we choose, e.g. $k=5$, then we would have 4 out of the 5 nearest neighbours classified as an action film. Therefore, the algorithm would classify the film represented by the black dot as an action film as well.
 
 This is an example with two predictors, but this can be easily extended to higher dimensions.
 
-## Example: Diabetes in Pima Indian Women data
+### Example: Diabetes in Pima Indian Women data
 
 We will now use logistic regression, a classification tree, and the k-nearest neighbours algorithm to predict whether a woman in the `Pima.tr` dataset has diabetes or not.
 
@@ -251,9 +242,11 @@ The `Pima.tr` dataset from package `MASS` has been used before during a lab. It 
 ```{r}
 Pima.tr <- MASS::Pima.tr
 glimpse(Pima.tr)
+
+Pima.tr <- Pima.tr %>% mutate(type = factor(type, labels = c("Neg","Pos")))
 ```
 
-__Let's split our data__
+**Let's split our data**
 
 ```{r}
 library(rsample)
@@ -266,7 +259,7 @@ train_pima_data <- training(pima_split)
 test_pima_data  <- testing(pima_split)
 ```
 
-___We will start with logistic regression___
+***We will start with logistic regression***
 
 Let's fit a multiple logistic regression model:
 
@@ -282,13 +275,26 @@ pima_res_test <- test_pima_data %>%
                   mutate(pred_p = 
                          predict(fit_logistic, 
                                      type = "response", newdata = test_pima_data)) %>% 
-   mutate(pred_type = ifelse(pred_p >=0.5,"yes","no"))
+   mutate(pred_type = ifelse(pred_p >=0.5,"Pos","Neg"))
 
 pima_res_test
 ```
 
+We set the threshold for prediction as `threshold = 0.50`. 
 
-We set the threshold for prediction as `threshold = 0.50`, now we can have a look at the accuracy of the method:
+
+Now we can have a look at the confusion matrix. Generally, this has the form
+
+
+\begin{array}{c|cc}
+    & \text{Predicted Negative} & \text{Predicted Positive} \\
+    \hline
+    \text{Actual Negative} & TN & FP \\
+    \text{Actual Positive} & FN & TP
+\end{array}
+
+
+For our example we have
 
 ```{r}
 N <- nrow(pima_res_test)
@@ -300,18 +306,21 @@ accuracy <- (confusion_mat %>% diag %>% sum)/N
 accuracy
 ```
 
-  - Overall accuracy $= (17+8)/(17+9+6+8) = 0.625$
-
-  - True positive rate (TPR)  = TP/(TP + FN) $= 8/(8+6) = 0.57$
-
-    - TPR is the probability that an actual positive will be classified as positive. This is also known as _sensitivity_.
-  
-  - True negative rate (TNR) = TN/(TN + FP) $= 17/(17+9) = 0.65$
-
-    - TNR is the probability that an actual negative will be classified as negative. This is also known as _specificity_.
 
 
-___Now we will fit a classification tree___
+
+
+-   Overall accuracy $= (17+8)/(17+9+6+8) = 0.625$
+
+-   True positive rate (TPR) = TP/(TP + FN) $= 8/(8+6) = 0.57$
+
+    -   TPR is the probability that an actual positive will be classified as positive. This is also known as *sensitivity*.
+
+-   True negative rate (TNR) = TN/(TN + FP) $= 17/(17+9) = 0.65$
+
+    -   TNR is the probability that an actual negative will be classified as negative. This is also known as *specificity*.
+
+***Now we will fit a classification tree***
 
 ```{r}
 fit_tree <- rpart(type ~ ., data = train_pima_data)
@@ -325,12 +334,11 @@ Let's check the predictions:
 pima_res_test2 <- test_pima_data %>%
                   mutate(pred_p = 
                          predict(fit_tree, 
-                                 newdata = test_pima_data) %>% as_tibble() %>% pull(Yes)) %>% 
-                  mutate(pred_type = ifelse(pred_p >=0.5,"yes","no"))
+                                 newdata = test_pima_data) %>% as_tibble() %>% pull(Pos)) %>% 
+                  mutate(pred_type = ifelse(pred_p >=0.5,"Pos","Neg"))
 
 pima_res_test2
 ```
-
 
 We set the threshold for prediction as `threshold = 0.50`, now we can have a look at the accuracy of the method:
 
@@ -344,15 +352,15 @@ accuracy2 <- (confusion_mat2 %>% diag %>% sum)/N
 accuracy2
 ```
 
-  - Overall accuracy $= (16+6)/(16+10+8+6) = 0.55$
+-   Overall accuracy $= (16+6)/(16+10+8+6) = 0.55$
 
-  - True positive rate $= 6/(6+8) = 0.43$
+-   True positive rate $= 6/(6+8) = 0.43$
 
-  - True negative rate $= 16/(16+10) = 0.62$
+-   True negative rate $= 16/(16+10) = 0.62$
 
-___Now we will use the k-nearest neighbours algorithm___
+***Now we will use the k-nearest neighbours algorithm***
 
-We'll use 10 nearest neighbours. 
+We'll use 10 nearest neighbours.
 
 ```{r}
 pred_type_knn <- knn(train_pima_data %>% select(-type), 
@@ -384,14 +392,11 @@ True positive rate $= 10/(4+10) = 0.71$
 
 True negative rate $= 21/(21+5) = 0.81$
 
-
 We can assess the overall accuracy, true positive and true negative rates for different values of $k$:
 
+## Regression Problems
 
-
-# Regression Problems
-
-## Regression Trees
+### Regression Trees
 
 Regression trees are similar to classification trees. The difference is that the response variable is continuous instead of categorical.
 
@@ -399,11 +404,11 @@ The same reasoning is employed when constructing a regression tree: the predicto
 
 For the leaves or terminal nodes, the predictions will be the average estimate for the observations that belong to that terminal node.
 
-## Example: Pima data
+### Example: Pima data
 
 We will now use linear regression and a regression tree to obtain predictions for the `glu` variable using the `Pima.tr` data.
 
-__Split the data__
+**Split the data**
 
 ```{r}
 library(rsample)
@@ -416,15 +421,14 @@ train_pima_data <- training(pima_split)
 test_pima_data  <- testing(pima_split)
 ```
 
-
-___Fitting a multiple linear regression model___
+***Fitting a multiple linear regression model***
 
 ```{r}
 fit_lm <- lm(glu ~ ., data = train_pima_data)
 fit_lm
 ```
 
-__Evaluate the performance on the test data:__
+**Evaluate the performance on the test data:**
 
 ```{r}
 glu_res_test <- test_pima_data %>% 
@@ -436,8 +440,7 @@ ggplot(glu_res_test, aes(x = glu, y = pred_glu)) +
 
 ```
 
-
-__Summarise the model accuracy__
+**Summarise the model accuracy**
 
 In addition to mean error and mean absolute error which we have used before, we can also have a look at the correlation between observed and predicted values to help us summarise how well our model performs:
 
@@ -448,14 +451,14 @@ glu_res_test %>%
             cor = cor(glu, pred_glu))
 ```
 
-___Now fit a regression tree___
+***Now fit a regression tree***
 
 ```{r}
 fit_reg_tree <- rpart(glu ~ ., data = train_pima_data)
 rpart.plot(fit_reg_tree)
 ```
 
-__Evaluate the performance on the test data:__
+**Evaluate the performance on the test data:**
 
 ```{r}
 glu_res_test2 <- test_pima_data %>% 
@@ -467,8 +470,7 @@ ggplot(glu_res_test2, aes(x = glu, y = pred_glu)) +
 
 ```
 
-__Summarise the model accuracy__
-
+**Summarise the model accuracy**
 
 ```{r}
 glu_res_test2 %>% 
@@ -477,44 +479,45 @@ glu_res_test2 %>%
             cor = cor(glu, pred_glu))
 ```
 
+## Summary of Training and testing
 
-# Summary of Training and testing
-
-__Splitting Data__
+**Splitting Data**
 
 Training set:
 
-  - Sandbox for model building
-  - Spend most of your time using the training set to develop the model
-  - Majority of the data (usually 80%)
+-   Sandbox for model building
+-   Spend most of your time using the training set to develop the model
+-   Majority of the data (usually 80%)
 
 Testing set:
 
-  - Held in reserve to determine efficacy of one or two chosen models
-  - Remainder of the data (usually 20%)
+-   Held in reserve to determine efficacy of one or two chosen models
+-   Remainder of the data (usually 20%)
 
-It is important to note that while we've only looked at training/test splits of the data, 3 splits are often used when there's multiple modelling options to choose from. In this case the procedure is broken down into three steps 
+It is important to note that while we've only looked at training/test splits of the data, 3 splits are often used when there's multiple modelling options to choose from. In this case the procedure is broken down into three steps
 
-1. Training - to train the various models
-2. Validation - do assess performance of models and choose the best one
-3. Test - to assess the performance of the chosen model
+1.  Training - to train the various models
+2.  Validation - do assess performance of models and choose the best one
+3.  Test - to assess the performance of the chosen model
 
 We won't go into these splits but it's important to be aware of this practice.
 
 <!-- ![](train_test.png){width=70%} -->
 
-## Training vs test accuracy/mean errors
+### Training vs test accuracy/mean errors
 
-We expect the test error to be greater than the training error, after all the model ``has not seen'' the test data before. This is essentialy what we want in real life, after all we will use our data to fit a machine learning model/algorithm, and we will use it to predict responses that are unknown.
+We expect the test error to be greater than the training error, after all the model ``has not seen'' the test data before. This is essentially what we want in real life, after all we will use our data to fit a predictiion model, and we will use it to predict responses that are unknown.
 
 <!-- \begin{center} -->
+
 <!-- \includegraphics[width = \textwidth]{bias_variance.png} -->
-<!-- \end{center} -->
 
+<!-- \end{center} -->
 
 <!-- \begin{center} -->
+
 <!-- \includegraphics[width = .3\textwidth]{overfitting.jpg} -->
+
 <!-- \includegraphics[width = .5\textwidth]{overfitting2.png} -->
+
 <!-- \end{center} -->
-
-

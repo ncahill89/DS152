@@ -7,13 +7,12 @@ format:
 editor: visual
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## Exercise 
+## Exercise
 
 ```{r, echo = FALSE, eval = FALSE}
 set.seed(24)
@@ -42,7 +41,6 @@ barley_summarise <- barley %>%
 barley_summarise
 ```
 
-
 **(a)** Use `pivot_wider` on this table to have separate columns for the nitrogen, phosphate and potassium means per dose group as shown below:
 
 ```{r}
@@ -53,15 +51,12 @@ barley_summ_wide <- barley_summarise %>%
 barley_summ_wide
 ```
 
-
 **(b)** Which treatment (dose:nutrient combination) seems to be associated with the largest yield?
 
 ```{r, fig.height = .5}
 barley_summarise %>% 
   arrange(desc(mean_yield))
 ```
-
-
 
 **(c)** Which dose seems to be associated with the largest yield?
 
@@ -71,7 +66,6 @@ barley_summarise %>% group_by(dose) %>% summarise(mean(mean_yield))
 barley %>% group_by(dose) %>% summarise(mean(yield))
 ```
 
- 
 **(d)** Which nutrient seems to be associated with the largest yield?
 
 ```{r, fig.height = .5}
@@ -79,7 +73,6 @@ barley_summarise %>% group_by(nutrient) %>% summarise(mean(mean_yield))
 ## which is the same as...
 barley %>% group_by(nutrient) %>% summarise(mean(yield))
 ```
-
 
 **(e)** The figure below displays an 'interaction plot', as seen in class. Does there appear to be an interaction between the factors `dose` and `nutrient`? Why?
 
@@ -92,4 +85,3 @@ barley %>%
   geom_point() +
   geom_line()
 ```
-

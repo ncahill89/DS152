@@ -1,0 +1,83 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 3: Experimental Studies"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(MASS)
+library(docxtools)
+library(rpart)
+
+UScereal <- UScereal[,-c(1,9,11)]
+cereal_names <- rownames(UScereal)
+```
+
+
+## Instructions
+
+Answer all questions for continuous assessment. Due: **4pm on Friday, 4th April 2025**.
+
+
+
+## Questions
+
+1. We would like to design an experiment to investigate whether students learn the R language better in a traditional lecture based course or using an interactive online learning platform. Two courses that teach the exact same material are designed and the only difference between these courses is the method of delivery: traditional lecture or interactive online.
+
+We sample a group of students for our study that we will randomly assign to these two courses.
+
+But before we do so, we need to consider any potential confounding variables. It is suspected that previous programming experience might have an effect on how students learn in these two settings and we know that some of the students in our study have previous programming experience and some don’t. Therefore we decide to block for having previous programming experience.
+
+To do so, we divide our sample into two, those with programming experience and those without.
+
+Then, we randomly assign individuals from each block into the two courses, ensuring that those with and without programming experience are equally represented in the two treatment groups.
+
+In this experiment
+
+a. What is the "treatment" variable and what are its levels? 
+
+b. What is the blocking variable? 
+
+2. A researcher designs a study to test the effect of light and noise levels on exam performance of students. The researcher also believes that light and noise levels might have different effects on males and females, so she wants to make sure both sexes are represented equally under different conditions.
+
+a. What are the "treatment" variables in this study? 
+
+b. What is the outcome variable? 
+
+c. Is there a blocking variable, if so, what it is? 
+
+
+3. Complete the sentence using a, b,,c or d
+
+In random sampling, we use ___ to control for a variable. In random assignment for an experiment, we use ___ to achieve the same goal.
+
+a. stratifying, blocking
+
+b. blocking, stratifying
+
+c. confounding, stratifying
+
+d. confounding, blocking
+
+
+
+3. A researcher is interested in studying the effects of a new iron supplement in female patients with anemia. Their plans are to select 40 female patients with a similar age and level of anemia from a GP clinic and give an approved iron supplement to a randomly selected subsample of 20, and the newly developed supplement to the other 20 patients. The researcher plans to use blood tests to calculate the difference in iron levels before they start taking the supplements and three months after. 
+
+
+a. What is the outcome variable? 
+
+b. What is the treatment and how many levels are there? 
+
+c. Is there a blocking variable, if so, what it is? 
+
+
+4. The results from the experiment were inconclusive. Therefore, the researcher decided to set up a bigger experiment with the hope to add more precision to their estimates. They now select 40 female patients, each from 5 different GP clinics (totalling 200 patients). Within each GP clinic, the set up is the same as before, 20 patients take an approved iron supplement and 20 the newly developed one, and have their iron levels checked before and three months after taking the supplements. What study design do you think would be approriate to use here? Give a reason for your answer. 
+
+

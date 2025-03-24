@@ -39,9 +39,8 @@ ii. Cluster sampling
 iii. Stratified sampling
 iv. Systematic sampling
 
-```{=html}
 <!-- -->
-```
+
 (b) Suppose you are studying rural communities in Ireland. To survey residents of rural areas you pick a random sample of 10 rural communities and focus your efforts on surveying people within those randomly chosen communities.
 
 This is an example of
