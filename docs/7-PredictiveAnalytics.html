@@ -376,7 +376,7 @@ $ landsALL     &lt;dbl&gt; 1, 0, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>price_res_test <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span> </span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">select</span>(logprice) <span class="sc">%&gt;%</span> </span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_price =</span> <span class="fu">predict</span>(lm_model_train, test_data))</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">pred_price =</span> <span class="fu">predict</span>(lm_model_train, <span class="at">newdata =</span> test_data))</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(price_res_test, <span class="fu">aes</span>(<span class="at">x =</span> logprice, <span class="at">y =</span> pred_price)) <span class="sc">+</span></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
@@ -670,7 +670,7 @@ type  Neg Pos
 <div class="cell">
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pred_type_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>                     test_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cl =</span>   train_pima_data<span class="sc">$</span>type, </span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cl =</span>   train_pima_data <span class="sc">%&gt;%</span> <span class="fu">pull</span>(type), </span>
 <span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">k =</span> <span class="dv">10</span>)</span>
 <span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>pima_res_test3 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>

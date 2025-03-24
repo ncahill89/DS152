@@ -15,7 +15,7 @@ library(rpart.plot)
 film_dat <- read_csv("film_dat.csv")
 
 paris_paintings <- read_csv("https://www.dropbox.com/s/dwr3z1ug26gnc34/paris-paintings.csv?raw=1")
-paris_paintings <- paris_paintings %>% select(name, sale, lot, year, logprice, price, subject, Height_in, Width_in, Surface_Rect, materialCat, landsALL) %>% drop_na() %>% filter(lot %in% c(15,16,4,20,7,10,40))
+paris_paintings <- paris_paintings %>% dplyr::select(name, sale, lot, year, logprice, price, subject, Height_in, Width_in, Surface_Rect, materialCat, landsALL) %>% drop_na() %>% filter(lot %in% c(15,16,4,20,7,10,40))
 
 Pima.tr <- MASS::Pima.tr
 
@@ -185,7 +185,7 @@ lm_model_train <- lm(logprice ~ Height_in + Width_in + year + Surface_Rect +
 
 price_res_test <- test_data %>% 
                     select(logprice) %>% 
-                    mutate(pred_price = predict(lm_model_train, test_data))
+                    mutate(pred_price = predict(lm_model_train, newdata = test_data))
 
 ggplot(price_res_test, aes(x = logprice, y = pred_price)) +
   geom_point() + 
@@ -365,7 +365,7 @@ We'll use 10 nearest neighbours.
 ```{r}
 pred_type_knn <- knn(train_pima_data %>% select(-type), 
                      test_pima_data %>% select(-type), 
-                     cl =   train_pima_data$type, 
+                     cl =   train_pima_data %>% pull(type), 
                      k = 10)
 
 pima_res_test3 <- test_pima_data %>%
