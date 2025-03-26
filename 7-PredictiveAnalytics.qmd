@@ -310,7 +310,7 @@ accuracy
 
 
 
--   Overall accuracy $= (17+8)/(17+9+6+8) = 0.625$
+-   Overall accuracy = (TN + TP)/(TN + FP + FN + TP) $= (17+8)/(17+9+6+8) = 0.625$
 
 -   True positive rate (TPR) = TP/(TP + FN) $= 8/(8+6) = 0.57$
 
