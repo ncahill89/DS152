@@ -91,7 +91,7 @@ Pima.tr <- MASS::Pima.tr
 
 ## Common predictive techniques
 
-Depending on the type of the outcome variable (y) we may be facing two different types of prediction models. 
+Depending on the type of the outcome variable (y) we may be facing two different types of prediction models.
 
 ### For classification problems
 
@@ -280,20 +280,18 @@ pima_res_test <- test_pima_data %>%
 pima_res_test
 ```
 
-We set the threshold for prediction as `threshold = 0.50`. 
-
+We set the threshold for prediction as `threshold = 0.50`.
 
 Now we can have a look at the confusion matrix. Generally, this has the form
 
-
+```{=tex}
 \begin{array}{c|cc}
     & \text{Predicted Negative} & \text{Predicted Positive} \\
     \hline
     \text{Actual Negative} & TN & FP \\
     \text{Actual Positive} & FN & TP
 \end{array}
-
-
+```
 For our example we have
 
 ```{r}
@@ -305,10 +303,6 @@ confusion_mat
 accuracy <- (confusion_mat %>% diag %>% sum)/N
 accuracy
 ```
-
-
-
-
 
 -   Overall accuracy = (TN + TP)/(TN + FP + FN + TP) $= (17+8)/(17+9+6+8) = 0.625$
 
@@ -506,7 +500,7 @@ We won't go into these splits but it's important to be aware of this practice.
 
 ### Training vs test accuracy/mean errors
 
-We expect the test error to be greater than the training error, after all the model ``has not seen'' the test data before. This is essentially what we want in real life, after all we will use our data to fit a predictiion model, and we will use it to predict responses that are unknown.
+We expect the test error to be greater than the training error, after all the model \`\`has not seen'' the test data before. This is essentially what we want in real life, after all we will use our data to fit a predictiion model, and we will use it to predict responses that are unknown.
 
 <!-- \begin{center} -->
 

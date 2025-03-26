@@ -1,0 +1,330 @@
+---
+title: "Supervised and Unsupervised Learning"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 7, fig.height = 4)
+library(tidyverse)
+
+sales <- c(651, 762, 856, 1063, 1190, 1298, 1421, 1440, 1518)
+advertising <- c(23,26,30,34,43,48,52,57,58)
+
+sales2 <- c("low", "low","low","low","high","high","high","high","high")
+sales_binary <- c(0, 0,0,0,1,1,1,1,1)
+
+sales_dat <- tibble(sales = sales, advertising = advertising)
+sales_dat2 <- tibble(sales = sales2, sales_binary = sales_binary, advertising = advertising)
+
+paris_paintings <- read_csv("https://www.dropbox.com/s/dwr3z1ug26gnc34/paris-paintings.csv?raw=1")
+paris_paintings <- paris_paintings %>% select(name, sale, lot, year, logprice, price, subject, Height_in, Width_in, Surface_Rect, materialCat, landsALL) %>% drop_na() %>% filter(lot %in% c(15,16,4,20,7,10,40))
+
+cryo_dat <- read_csv("https://www.dropbox.com/s/xeoaoihy98so7x3/Cryotherapy.csv?raw=1")
+
+old_faithful <- read_csv("https://www.dropbox.com/s/2e0f4l9nsk5yfkd/old_faithful.csv?raw=1")
+
+births14 <- openintro::births14
+
+```
+
+## Supervised Learning
+
+Machine learning is the act of discovering and patterns buried in large data sets.
+
+The majority of practical machine learning uses supervised learning.
+
+Supervised learning is where you have input variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.
+
+$$y = f(x)$$
+
+The goal is to approximate the mapping function so well that when you have new input data (x) that you can predict the output variables (y) for that data.
+
+It is called supervised learning because the process of an algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. We know the correct answers, the algorithm iteratively makes predictions on the "training" data and is corrected by the teacher. Learning stops when the algorithm achieves an acceptable level of performance.
+
+**Supervised learning problems can be further grouped into regression and classification problems:**
+
+**Regression:** A regression problem is when the output variable is a real value, such as "dollars" or "weight".
+
+**Classification:** A classification problem is when the output variable is a category, such as "red" or "blue" or "disease" and "no disease".
+
+We saw these supervised learning methods in the predictive analytics section.
+
+## Supervised Learning - Regression
+
+US Department of Health and Human Services, Centers for Disease Control and Prevention collect information on births recorded in the country. We have data which are a random sample of 1,000 births from 2014. Variables of interest include length of pregnancy in weeks (weeks), mother’s age in years (mage), the sex of the baby (sex), smoking status of the mother (habit), and the number of hospital (visits) visits during pregnancy.
+
+```{r}
+births14
+```
+
+### Split the data
+
+```{r}
+library(rsample)
+# Fix random numbers by setting the seed 
+set.seed(1116)
+# Put 80% of the data into the training set 
+births_split <- initial_split(births14, prop = 0.80)
+# Create data frames for the two sets:
+train_data <- training(births_split)
+test_data  <- testing(births_split)
+```
+
+### Fit the model and "learn" from the training data
+
+**Let's explore a multiple regression option**
+
+```{r}
+lm_model_train <- lm(weight ~ weeks + mage + sex + habit + visits, data = train_data)
+```
+
+### Evaluate the performance on the test data
+
+```{r}
+births_res_test <- test_data %>% 
+                    select(weight) %>% 
+                    mutate(pred_weight = predict(lm_model_train, test_data))
+
+ggplot(births_res_test, aes(x = weight, y = pred_weight)) +
+  geom_point() + 
+  geom_line(aes(x = weight, y = weight))
+
+```
+
+### Summarise the model accuracy
+
+```{r}
+births_res_test %>% 
+  summarise(mean_error = mean(weight - pred_weight),
+            mean_abs_error = mean(abs(weight - pred_weight)))
+```
+
+The model is trying to "learn" about the relationship between the price of a painting and other painting attributes. If the model does a good job at "learning" then knowing various painting attributes/features can predict what their price will be. This is a **supervised learning method** because the accuracy of the model's predictive performance can be evaluated.
+
+## Supervised Learning - Classification
+
+We saw examples of using logistic regression previously. Let's consider another example here. The 'Cryotherapy' dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.
+
+```{r}
+cryo_dat
+```
+
+**Let's look at the relationship the Time spent doing the procedure and the success:**
+
+```{r}
+ggplot(cryo_dat, aes(x = Time, y = Result)) +
+geom_point()
+```
+
+**Let's split the data**
+
+```{r}
+library(rsample)
+set.seed(1116)
+cryo_split <- initial_split(cryo_dat, prop = 0.80)
+
+train_data <- training(cryo_split)
+test_data  <- testing(cryo_split)
+```
+
+**Let's fit a logistic regression model using the Time spent doing the procedure to predict the success:**
+
+```{r}
+logistic_model <- glm(Result ~ Time, family = "binomial",  data = train_data)
+logistic_model
+```
+
+**Let's visualise the results of fitting the logistic regression:**
+
+```{r, fig.width=5, fig.height=3.5}
+ggplot(train_data, aes(x = Time, y = Result))+
+  geom_point() +
+  geom_smooth(method = "glm", 
+              method.args = list(family = "binomial"),
+              se = FALSE)
+```
+
+**Let's see if the model does a good job at predicting the success:**
+
+```{r}
+cryo_res <- test_data %>% 
+            select(Result) %>% 
+            mutate(pred_p = predict(logistic_model, 
+                                    type = "response", newdata = test_data)) %>% 
+            mutate(pred_result = ifelse(pred_p >=0.5,1,0)) 
+cryo_res
+
+
+```
+
+**Let's evaluate the accuracy.**
+
+We will create a table known as a confusion matrix:
+
+```{r}
+N <- nrow(cryo_res)
+
+confusion_mat <- table(cryo_res %>% select(Result, pred_result))
+confusion_mat
+
+accuracy <- (confusion_mat %>% diag %>% sum)/N
+accuracy
+```
+
+The model has "learned" about the relationship between time spend on the procedure and its success. As a result, the company can predict what their success will be for a given time. The company can provide recommendations for the length of time a patient should undergo the procedure, for example, if the produce takes 10 minutes it's more likely to be unsuccessful. This is a supervised learning method and therefore the company can also evaluate the accuracy of the model's predictive performance.
+
+## Unsupervised learning
+
+Unlike supervised learning, unsupervised learning develops insights with unlabeled data. As a result, there is no evaluation of the accuracy of the model.
+
+An unsupervised learning algorithm analyzes a set of data, groups data points based on perceived similarities and derives conclusions from these similarities.
+
+### Types of Unsupervised Learning:
+
+Unlike supervised learning which only had two main types, regression and classification, unsupervised learning has many methodologies and number of methods continues to grow with new discoveries. Below are some of the more common ones:
+
+**Clustering:** Cluster analysis or clustering is the task of grouping a set of objects in such a way that objects in the same group (called a cluster) are more similar (in some sense or another) to each other than to those in other groups (clusters).
+
+**Anomaly Detection:** Anomaly detection is the identification of items, events or observations which do not conform to an expected pattern or other items in a dataset.
+
+**Natural Language Processing:** Natural Language Processing is a way for computers to analyze, understand, and derive meaning from human language in a smart and useful way. NLP uses machine learning to automatically learn patterns by analyzing a set of examples (collection of articles), and make an inference.
+
+## Unsupervised Learning - Clustering
+
+We will introduce the concepts behind a popular clustering method called k-means clustering.
+
+**Goal:** group the input samples together based on similarity. The distance between the samples in a cluster should be much smaller than the distance between the clusters
+
+### Example: Simulated Data
+
+![](images/L3a_plot1.png)
+
+Can you see any possible clusters?
+
+### K-means clustering
+
+The algorithm works by:
+
+1.  Assigning each sample to the closest "cluster centroid"
+2.  Moving each cluster centroid to be the mean of points that are assigned to it
+3.  Repeat.
+
+### K-means clustering: iteration 0a
+
+Begin by randomly generating two centroids.
+
+![](images/L3a_plot2.png)
+
+### K-means clustering: iteration 0b
+
+Assign each point to the nearest centroid
+
+![](images/L3a_plot3.png)
+
+### K-means clustering: iteration 1a
+
+Update the centroids
+
+![](images/L3a_plot4.png)
+
+### K-means clustering: iteration 1b
+
+Assign each point to the nearest centroid
+
+![](images/L3a_plot4b.png)
+
+### K-means clustering: convergence
+
+Repeat the process until points are no longer moved between groups
+
+![](images/L3a_plot6.png)
+
+### K-means clustering: results
+
+![](images/L3a_plot7.png)
+
+### Example: Old Faitful
+
+The Old Faithful geyser is in Yellowstone National Park, Wyoming. - The geyser erupts frequently and it is a popular tourist destination.
+
+![](images/old-faithful.jpg)
+
+The old faithful dataset contains waiting times between eruptions and the duration of the eruption. Can you see an possible clusters in the data?
+
+```{r}
+old_faithful
+```
+
+```{r}
+ggplot(old_faithful, aes(x = waiting, y = eruptions)) +
+  geom_point()
+```
+
+**Lets apply the k-means algorithm:**
+
+```{r}
+kmean_res <- kmeans(old_faithful, centers = 2)
+
+old_faithful_res <- old_faithful %>%
+                      mutate(cluster = kmean_res$cluster)
+old_faithful_res
+```
+
+**Let's visualise the results:**
+
+```{r,fig.width=6, fig.height=3.5}
+library(factoextra)
+fviz_cluster(kmean_res , data = old_faithful %>% select(waiting, eruptions), geom = "point")
+```
+
+**alternatively**
+
+```{r, fig.width=6, fig.height=3.5}
+ggplot(old_faithful_res, aes(x = waiting, y = eruptions, colour = cluster)) +
+  geom_point()
+```
+
+**Evaluation Methods**
+
+-   Contrary to supervised learning where we have the ground truth to evaluate the model’s performance, clustering analysis doesn’t have a solid evaluation metric that we can use to evaluate the outcome of different clustering algorithms.
+
+-   Moreover, since kmeans requires k as an input and doesn’t learn it from data, there is no right answer in terms of the number of clusters that we should have in any problem.
+
+-   Sometimes domain knowledge and intuition may help but usually that is not the case.
+
+-   In the cluster-predict methodology, we can evaluate how well the models are performing based on different metrics that may give us some intuition about k:
+
+    -   Elbow method
+
+    -   Silhouette analysis
+
+**Elbow method**
+
+-   The basic idea behind cluster methods, such as k-means clustering, is to define clusters such that the within-cluster variation (known as total within-cluster sum of squares) is minimized.
+
+-   Thus, we can find the optimal clusters by visualising no. of clusters vs total within-cluster sum of squares
+
+-   We look for the "elbow" in the plot to choose the no. of clusters
+
+```{r}
+library(factoextra)
+fviz_nbclust(old_faithful, kmeans, method = "wss")
+```
+
+**Silhouette method**
+
+-   The silhouette approach measures the "quality" of a clustering, i.e., it determines how well each object lies within its cluster.
+
+-   The silhouette value is a measure of how similar an object is to its own cluster (cohesion) compared to other clusters (separation).
+
+-   The silhouette ranges from -1 to +1, where a high value indicates that the object is well matched to its own cluster and poorly matched to neighboring clusters
+
+-   The average silhouette method computes the average silhouette of observations for different values of k.
+
+-   The optimal number of clusters k is the one that maximizes the average silhouette over a range of possible values for k.
+
+```{r}
+library(factoextra)
+fviz_nbclust(old_faithful, kmeans, method = "silhouette")
+```
