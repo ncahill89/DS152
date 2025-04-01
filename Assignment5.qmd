@@ -1,0 +1,132 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 5: Predictive Analytics"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rpart)
+library(rpart.plot)
+library(class)
+library(AppliedPredictiveModeling)
+```
+
+## Instructions
+
+Answer all questions for continuous assessment. Due: **4pm on Friday, 11th April 2025**.
+
+
+## Background
+
+The `Boston` dataset contains housing values in the suburbs of Boston. It is a well known dataset used as an example for machine learning techniques. Usually the objective is to predict the median value of owner-occupied homes in thousands of dollars (`medv` in the dataset). There are 13 predictors, see below for a `glimpse` of the dataset.
+
+```{r}
+Boston <- MASS::Boston
+glimpse(Boston)
+```
+
+
+We will split the data into training (`boston_train`) and test (`boston_test`) sets, with 70\% of the observations in the training set and we will fit the following 2 models:
+
+```{r, echo = FALSE}
+library(rsample)
+set.seed(10202)
+bank_split <- initial_split(Boston, prop = 0.7)
+
+boston_train <- training(bank_split)
+boston_test <- testing(bank_split)
+```
+
+
+  - Model 1:  multiple linear regression model with predictors: `rm` (average number of rooms per dwelling),  `ptratio` (pupil-teacher ratio), `lstat` (lower status of the population %), `rad` (index of accessibility to radial highways), `crim` (per capita crime rate by town);
+
+  - Model 2:  regression tree with the same predictors as Model 1. 
+
+
+Below you see the code used for fitting the models.
+
+```{r}
+fit_model1 <- lm(medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
+fit_model2 <- rpart(medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
+```
+
+After fitting the models, we create plots of the observed vs predicted values for each model based on the test data. The identity line is overlayed on the plots. 
+
+```{r, echo = FALSE}
+medv_res_test <-    boston_test %>% 
+                    dplyr::select(medv) %>% 
+                    mutate(Model1 = predict(fit_model1, boston_test),
+                           Model2 = predict(fit_model2, boston_test))
+
+medv_res_test_long <- medv_res_test %>% pivot_longer(-medv, 
+                               names_to = "model",
+                               values_to = "pred")
+
+ggplot(medv_res_test_long, aes(x = medv, y = pred)) +
+  geom_point() + 
+  geom_line(aes(x = medv, y = medv)) +
+  facet_wrap(~ model)
+```
+
+
+```{r, include = FALSE}
+me_model1 <- mean(boston_test$medv - predict(fit_model1, boston_test))
+mae_model1 <- mean(abs(boston_test$medv - predict(fit_model1, boston_test)))
+
+me_model2 <- mean(boston_test$medv - predict(fit_model2, boston_test))
+mae_model2 <- mean(abs(boston_test$medv - predict(fit_model2, boston_test)))
+
+
+```
+
+
+## Questions
+
+**(a)** Replace [A], [B] and [C] in the code below which uses functions from the `rsample` package to create the training and test datasets.
+
+```{r, eval = FALSE}
+library(rsample)
+boston_split <- initial_split(Boston, prop = [A])
+
+boston_train <- [B](boston_split)
+boston_test  <- [C](boston_split)
+```
+
+**(b)** What are the dimensions (rows $\times$ columns) of the `boston_train` and `boston_test` datasets?
+
+**(c)** Below is the output from Model 1 and Model 2. Based on each model what is the predicted `medv` for a house with `lstat = 10`, `rm = 7.5`, `ptratio = 18.5`, `crim = 4`, `rad = 5`?
+
+### Model 1
+
+```{r,echo = FALSE}
+fit_model1
+```
+
+### Model 2
+
+```{r,echo = FALSE}
+rpart.plot(fit_model2)
+```
+
+**(d)** Based on the observed vs predicted plots, which model is better at predicting the `medv` variable? Why?
+
+**(e)** We obtained the mean error (ME) and the mean absolute error (MAE) for each model based on the test data. Below you can see a table containing these measurements, but the model is not identified. Which row (X or Y)  corresponds to Model 2? Give a reason for your answer. 
+
+```{r, echo = FALSE}
+ME <- c("X" = me_model1, "Y" = me_model2)
+MAE <- c("X" = mae_model1, "Y" = mae_model2)
+
+
+error_full <- data.frame(ME, MAE)
+error_full
+```
+
+
+
