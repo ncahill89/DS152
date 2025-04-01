@@ -110,11 +110,15 @@ We saw examples of using logistic regression previously. Let's consider another 
 cryo_dat
 ```
 
+```{r}
+cryo_dat <- cryo_dat %>% mutate(Result = factor(Result, labels = c("unsuccessful", "successful")))
+```
+
 **Let's look at the relationship the Time spent doing the procedure and the success:**
 
 ```{r}
 ggplot(cryo_dat, aes(x = Time, y = Result)) +
-geom_point()
+geom_boxplot()
 ```
 
 #### Split the data
@@ -130,16 +134,21 @@ test_data  <- testing(cryo_split)
 
 #### Fit the model and "learn" from the training data
 
-**Let's fit a logistic regression model using the Time spent doing the procedure to predict the success:**
+**Let's fit a classification tree model using the Time spent doing the procedure and some additional predictors to predict the success:**
 
 ```{r}
-logistic_model <- glm(Result ~ Time, family = "binomial",  data = train_data)
-logistic_model
+library(rpart)
+tree_model <- rpart(Result ~ Time + sex + age + Area,  data = train_data)
 ```
 
-**Let's visualise the results of fitting the logistic regression:**
+**Let's visualise the results of fitting the classification regression:**
 
-```{r, fig.width=5, fig.height=3.5}
+```{r}
+library(rpart.plot)
+rpart.plot(tree_model)
+```
+
+```{r, eval=FALSE}
 ggplot(train_data, aes(x = Time, y = Result))+
   geom_point() +
   geom_smooth(method = "glm", 
@@ -154,8 +163,8 @@ ggplot(train_data, aes(x = Time, y = Result))+
 ```{r}
 cryo_res <- test_data %>% 
             select(Result) %>% 
-            mutate(pred_p = predict(logistic_model, 
-                                    type = "response", newdata = test_data)) %>% 
+            mutate(pred_p = predict(tree_model, 
+                                    newdata = test_data) %>% as_tibble() %>% pull(successful)) %>% 
             mutate(pred_result = ifelse(pred_p >=0.5,1,0)) 
 cryo_res
 
