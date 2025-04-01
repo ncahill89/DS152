@@ -30,6 +30,9 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 7: [Predictive Analytics](https://ncahill89.github.io/DS152/7-PredictiveAnalytics.html)
 
+8: [(un)Supervised Learning](https://ncahill89.github.io/DS152/8-(un)supervisedLearning.html)
+
+
 ## Tutorial Sheets
 
 Tutorial Sheet 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Tutorial1.html)

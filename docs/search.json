@@ -74,7 +74,7 @@
     "href": "index.html#lecture-notes",
     "title": "Welcome to Introduction to Data Science (2)!",
     "section": "Lecture Notes",
-    "text": "Lecture Notes\n1: Tidyverse Recap\n2: Correlation (and Causation)\n3: Multiple Regression Models\n4: Sampling Principles and Strategies\n5: Observational Studies\n6: Experimental Studies\n7: Predictive Analytics"
+    "text": "Lecture Notes\n1: Tidyverse Recap\n2: Correlation (and Causation)\n3: Multiple Regression Models\n4: Sampling Principles and Strategies\n5: Observational Studies\n6: Experimental Studies\n7: Predictive Analytics\n8: (un)Supervised Learning"
   },
   {
     "objectID": "0-Information.html#course-organisation",
@@ -1699,5 +1699,26 @@
     "title": "DS152 Introduction to Data Science (2)",
     "section": "Questions",
     "text": "Questions\n(a) Replace [A], [B] and [C] in the code below which uses functions from the rsample package to create the training and test datasets.\n\nlibrary(rsample)\nboston_split &lt;- initial_split(Boston, prop = [A])\n\nboston_train &lt;- [B](boston_split)\nboston_test  &lt;- [C](boston_split)\n\n(b) What are the dimensions (rows \\(\\times\\) columns) of the boston_train and boston_test datasets?\n(c) Below is the output from Model 1 and Model 2. Based on each model what is the predicted medv for a house with lstat = 10, rm = 7.5, ptratio = 18.5, crim = 4, rad = 5?\n\nModel 1\n\n\n\nCall:\nlm(formula = medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)\n\nCoefficients:\n(Intercept)           rm      ptratio        lstat          rad         crim  \n   14.36556      4.88290     -0.86080     -0.54104      0.02868     -0.11700  \n\n\n\n\nModel 2\n\n\n\n\n\n\n\n\n\n(d) Based on the observed vs predicted plots, which model is better at predicting the medv variable? Why?\n(e) We obtained the mean error (ME) and the mean absolute error (MAE) for each model based on the test data. Below you can see a table containing these measurements, but the model is not identified. Which row (X or Y) corresponds to Model 2? Give a reason for your answer.\n\n\n        ME      MAE\nX 1.202534 3.971460\nY 0.457539 3.585161"
+  },
+  {
+    "objectID": "Assignment4.html",
+    "href": "Assignment4.html",
+    "title": "DS152 Introduction to Data Science (2)",
+    "section": "",
+    "text": "Answer all questions for continuous assessment. Due: 4pm on Friday, 4th April 2025."
+  },
+  {
+    "objectID": "Assignment4.html#instructions",
+    "href": "Assignment4.html#instructions",
+    "title": "DS152 Introduction to Data Science (2)",
+    "section": "",
+    "text": "Answer all questions for continuous assessment. Due: 4pm on Friday, 4th April 2025."
+  },
+  {
+    "objectID": "Assignment4.html#questions",
+    "href": "Assignment4.html#questions",
+    "title": "DS152 Introduction to Data Science (2)",
+    "section": "Questions",
+    "text": "Questions\n1. We would like to design an experiment to investigate whether students learn the R language better in a traditional lecture based course or using an interactive online learning platform. Two courses that teach the exact same material are designed and the only difference between these courses is the method of delivery: traditional lecture or interactive online.\n\nWe sample a group of students for our study that we will randomly assign to these two courses.\nBut before we do so, we need to consider any potential confounding variables. It is suspected that previous programming experience might have an effect on how students learn in these two settings and we know that some of the students in our study have previous programming experience and some don’t. Therefore we decide to account for having previous programming experience. To do so, we divide our sample into two, those with programming experience and those without. Then, we randomly assign individuals from each group into the two courses, ensuring that those with and without programming experience are equally represented in the two courses.\n\na. What is the “treatment” variable and what are its levels?\nb. Is there a blocking variable, if so, what it is?\n\n2. A researcher designs a study to test the effect of light and noise levels on exam performance of students. The researcher also believes that light and noise levels might have different effects on males and females, so she wants to make sure both sexes are represented equally under different conditions.\n\na. What are the “treatment” variables in this study?\nb. What is the outcome variable?\nc. Is there a blocking variable, if so, what it is?\n\n3. Complete the sentence below using i, ii, iii or iv.\nIn random sampling, we use ___ to control for a variable. In random assignment for an experiment, we use ___ to achieve the same goal.\ni. stratifying, blocking\nii. blocking, stratifying\niii confounding, stratifying\niv. confounding, blocking\n\n4. A researcher is interested in studying the effects of a new iron supplement in female patients with anemia. Their plans are to select 40 female patients with a similar age and level of anemia from a GP clinic and give an approved iron supplement to a randomly selected subsample of 20, and the newly developed supplement to the other 20 patients. The researcher plans to use blood tests to calculate the difference in iron levels before they start taking the supplements and three months after.\n\na. What is the outcome variable?\nb. What is the treatment and how many levels are there?\nc. Is there a blocking variable, if so, what it is?\n\n5. The results from the experiment in 4 were inconclusive. Therefore, the researcher decided to set up a bigger experiment with the hope to add more precision to their estimates. They now select 40 female patients, each from 5 different GP clinics (totalling 200 patients). Within each GP clinic, the set up is the same as before, 20 patients take an approved iron supplement and 20 the newly developed one, and have their iron levels checked before and three months after taking the supplements. What study design do you think would be appropriate to use here? Give a reason for your answer."
   }
 ]
