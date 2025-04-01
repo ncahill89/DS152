@@ -1,0 +1,202 @@
+---
+title: "DS152 Tutorial Sheet 5"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+
+## Exercise 
+
+We will work with the `biopsy` data (you've worked with this dataset before). It is a breast cancer database obtained from the University of Wisconsin-Madison Hospital. 699 biopsies of breast tumours were assessed and nine attributes (`V1` - `V9`) were scored on a scale of 1 to 10. The objective is to predict whether a tumour is `benign` (0) or `malignant` (1), based on 5 of the attributes.
+
+Below we have a glimpse of the dataset.
+
+```{r}
+biopsy <- MASS::biopsy
+glimpse(biopsy)
+```
+
+We're going to update the dataset to add a binary (0,1) version of the class variable. 
+
+```{r}
+biopsy <- biopsy %>% mutate(class_binary = as.numeric(class == "malignant"))
+```
+
+
+**(a)** Before we begin modelling the data, let's split the dataset in two: the training and the test set. We will fit the models using the training set, and then validate them using the test set. We will use 60\% of the data as the training set, and the remaining 40\% as the test set. Set the seed to 103 and replace [A], [B], [C] and [D] in the code below to create these training and test datasets. 
+
+
+```{r}
+library(rsample)
+library(rpart)
+set.seed(103)
+biopsy_split <- initial_split(biopsy, prop = 0.6)
+train_biopsy_data <- training(biopsy_split)
+test_biopsy_data  <- testing(biopsy_split)
+```
+
+**(b)** We will use 2 different machine learning algorithms, namely:
+
+- Method 1: multiple logistic regression
+- Method 2: classification tree
+
+We will fit them to the training set and then we will compare how well they perform on the test set.
+
+ Replace [A] and [B] in the code below to fit a logistic regression model to the training data using all variables (`V1` to `V5`) as predictors and `class_binary` as the outcome/response. Call the fitted model object `logistic_model`. 
+
+```{r}
+logistic_model  <- glm(class_binary ~ V1 + V2 + V3 + V4 + V5, family = binomial, data = train_biopsy_data)
+```
+
+**(c)** Now replace [A], [B] and [C] in the code below to fit a classification tree and call it `tree_model` and plot the classification tree.
+
+```{r}
+library(rpart)
+library(rpart.plot)
+
+tree_model <- rpart(class_binary ~ V1 + V2 + V3 + V4 + V5,data = train_biopsy_data)
+rpart.plot(tree_model)
+```
+
+
+**(d)** Now we will use the test set to evaluate the two different methods. Below are the confusion tables for each method, using the test set. 
+
+```{r, include = FALSE, echo= FALSE}
+biopsy_res <- test_biopsy_data %>%
+                mutate(pred_p1 = (predict(logistic_model, type = "response",
+                                          newdata = test_biopsy_data))) %>% 
+                mutate(pred_p2 = (predict(tree_model,
+                                          newdata = test_biopsy_data))) %>% as_tibble() %>%
+                mutate(pred_class1 = ifelse(pred_p1 >=0.5,"malignant","benign")) %>% 
+                mutate(pred_class2 = ifelse(pred_p2 >=0.5,"malignant","benign"))
+
+biopsy_res
+```
+
+
+#### Logistic regression model
+
+```{r, echo=FALSE}
+confusion_logistic <- biopsy_res %>%
+                        dplyr::select(class, pred_class1) %>%
+                        table
+confusion_logistic
+```
+
+
+#### Classification tree model 
+
+```{r, echo=FALSE}
+confusion_tree <- biopsy_res %>%
+                    dplyr::select(class, pred_class2) %>%
+                    table
+confusion_tree
+```
+
+Calculate the overall accuracy, true positive rate and true negative rate for each method you trained. We take positive to be `malignant`, and negative to be `benign`. 
+
+
+#### logistic model 
+
+```{r, echo=TRUE}
+## accuracy 
+sum(diag(confusion_logistic))/(sum(confusion_logistic))
+
+## TPR TP/(TP + FN)
+confusion_logistic[2,2]/(sum(confusion_logistic[2,]))
+
+## TNR TN/(TN + FP)
+confusion_logistic[1,1]/(sum(confusion_logistic[1,]))
+
+```
+
+#### tree model 
+
+```{r, echo=TRUE}
+## accuracy 
+sum(diag(confusion_tree))/(sum(confusion_tree))
+
+## TPR TP/(TP + FN)
+confusion_tree[2,2]/(sum(confusion_tree[2,]))
+
+## TNR TN/(TN + FP)
+confusion_tree[1,1]/(sum(confusion_tree[1,]))
+
+```
+
+
+__Note for tutors:__ You don't need to co through all the code for creating the predictions etc here just focus on how to do the calculations from the confusion tables. 
+
+(e) Now we will use the k-nearest neighbours algorithm on the biopsy data. We will use k = 3 and k = 6 and compare results. The code below fits the models and gives predictions. 
+
+
+```{r, echo = TRUE}
+library(class)
+pred_class_knn3 <- knn(train_biopsy_data %>% select(V1:V5), 
+                     test_biopsy_data %>% select(V1:V5), 
+                     cl =   train_biopsy_data %>% pull(class), 
+                     k = 3)
+
+pred_class_knn6 <- knn(train_biopsy_data %>% select(V1:V5), 
+                     test_biopsy_data %>% select(V1:V5), 
+                     cl =   train_biopsy_data %>% pull(class), 
+                     k = 6)
+
+
+biopsy_res_knn <- test_biopsy_data %>%
+                  mutate(pred_class3 = pred_class_knn3) %>% 
+                  mutate(pred_class6 = pred_class_knn6)
+
+```
+
+Now we can have a look at the confusion tables:
+
+```{r}
+N <- nrow(biopsy_res_knn)
+
+confusion_mat3 <- table(biopsy_res_knn  %>% select(class, pred_class3))
+confusion_mat3
+
+confusion_mat6 <- table(biopsy_res_knn  %>% select(class, pred_class6))
+confusion_mat6
+
+```
+
+__Note for tutors:__ Talk through the code here for part (e) as knn is a little different to the other methods in how the code is formatted. 
+
+Then calculate the overall accuracy, true positive rate and true negative rate for each method you trained. We take positive to be `malignant`, and negative to be `benign`. 
+
+#### for k = 3
+
+```{r, echo=TRUE}
+## accuracy 
+sum(diag(confusion_mat3))/(sum(confusion_mat3))
+
+## TPR TP/(TP + FN)
+confusion_mat3[2,2]/(sum(confusion_mat3[2,]))
+
+## TNR TN/(TN + FP)
+confusion_mat3[1,1]/(sum(confusion_mat3[1,]))
+
+```
+
+#### for k = 6
+
+```{r, echo=TRUE}
+## accuracy 
+sum(diag(confusion_mat6))/(sum(confusion_mat6))
+
+## TPR TP/(TP + FN)
+confusion_mat6[2,2]/(sum(confusion_mat6[2,]))
+
+## TNR TN/(TN + FP)
+confusion_mat6[1,1]/(sum(confusion_mat6[1,]))
+```

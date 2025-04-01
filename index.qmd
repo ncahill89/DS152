@@ -43,6 +43,7 @@ Tutorial Sheet 3: [Observational Studies](https://ncahill89.github.io/DS152/Tuto
 
 Tutorial Sheet 4: [Experimental Studies](https://ncahill89.github.io/DS152/Tutorial4.html)
 
+Tutorial Sheet 5: [Predictive Analytics](https://ncahill89.github.io/DS152/Tutorial6.html)
 
 ## Assignments
 

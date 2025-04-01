@@ -7,13 +7,12 @@ format:
 editor: visual
 ---
 
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## Exercise 
+## Exercise
 
 ```{r, echo = FALSE, eval = FALSE}
 set.seed(24)
@@ -42,7 +41,7 @@ barley_summarise <- barley %>%
 barley_summarise
 ```
 
-__Note for tutors:__ Please go through what this code is doing. 
+**Note for tutors:** Please go through what this code is doing.
 
 **(a)** Use `pivot_wider` on this table to have separate columns for the nitrogen, phosphate and potassium means per dose group as shown below:
 
@@ -54,7 +53,7 @@ barley_summ_wide <- barley_summarise %>%
 barley_summ_wide
 ```
 
-__Note for tutors:__ This is a recap of pivot_wider so please work through this slowly and maybe refer back to earlier notes. 
+**Note for tutors:** This is a recap of pivot_wider so please work through this slowly and maybe refer back to earlier notes.
 
 **(b)** Which treatment (dose:nutrient combination) seems to be associated with the largest yield?
 
@@ -63,10 +62,9 @@ barley_summarise %>%
   arrange(desc(mean_yield))
 ```
 
-  - nitrogen with a dose of 1000ppm is associated with the highest yield.
-  
-__Note for tutors:__ Mention that this is a factorial design as we're looking at 2 factors, nutrient and dose. 
+-   nitrogen with a dose of 1000ppm is associated with the highest yield.
 
+**Note for tutors:** Mention that this is a factorial design as we're looking at 2 factors, nutrient and dose.
 
 **(c)** Which dose seems to be associated with the largest yield?
 
@@ -76,8 +74,8 @@ barley_summarise %>% group_by(dose) %>% summarise(mean(mean_yield))
 barley %>% group_by(dose) %>% summarise(mean(yield))
 ```
 
- - Averaging over nutrient, 1000 pm seems to be associated with the largest yield.
- 
+-   Averaging over nutrient, 1000 pm seems to be associated with the largest yield.
+
 **(d)** Which nutrient seems to be associated with the largest yield?
 
 ```{r, fig.height = .5}
@@ -86,8 +84,7 @@ barley_summarise %>% group_by(nutrient) %>% summarise(mean(mean_yield))
 barley %>% group_by(nutrient) %>% summarise(mean(yield))
 ```
 
-  - Averaging over dose, potassium seems to be associated with the largest yield. 
-  
+-   Averaging over dose, potassium seems to be associated with the largest yield.
 
 **(e)** The figure below displays an 'interaction plot', as seen in class. Does there appear to be an interaction between the factors `dose` and `nutrient`? Why?
 
@@ -101,6 +98,6 @@ barley %>%
   geom_line()
 ```
 
-__Note for tutors:__ Talk through the code and the use of the grouping to create this plot. 
+**Note for tutors:** Talk through the code and the use of the grouping to create this plot.
 
-  - Yes there is an interaction because the lines are not parallel, i.e. the yield response to the nutrient changes depending on the levels of the dose. 
+-   Yes there is an interaction because the lines are not parallel, i.e. the yield response to the nutrient changes depending on the levels of the dose.
