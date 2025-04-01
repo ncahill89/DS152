@@ -1,0 +1,71 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 4: Experimental Studies"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(MASS)
+#library(docxtools)
+#library(ISLR)
+
+credit_dat <- read_csv("https://www.dropbox.com/s/u9937ip6dkm8vbw/credit_dat.csv?raw=1")
+
+credit_dat <- credit_dat %>% mutate(limit_bracket = factor(limit_bracket, levels = c("low", "medium-low","medium-high","high")))
+
+saveRDS(credit_dat, "credit_dat.rds")
+
+```
+
+## **Solutions** **\[Total = 20 Marks\]**
+
+## Questions
+
+**1.**  **\[4 Marks\]**
+
+  **a.**  The taught corse is the treatment, with 2 levels, traditional lecture and online lecture. 
+
+  **b.**  Yes, programming experience is being used as a  blocking variable. 
+
+```{=html}
+<!-- -->
+```
+
+**2.**  **\[6 Marks\]**
+
+  **a.**  The treatments are light and noise levels. 
+
+  **b.**  The outcome is exam performance. 
+
+  **c.**  Yes, gender, Male and Female. 
+
+
+
+**3.**  Complete the sentence below using i, ii, iii or iv. **\[2 Marks\]**
+
+
+In random sampling, we use blocking to control for a variable. In random assignment for an experiment, we use stratifying to achieve the same goal.
+
+  *ii.*  blocking, stratifying
+
+ 
+
+**4.**  **\[5 Marks\]**
+
+  **a.**  The outcome variable is the difference in iron levels
+
+  **b.**  The treatment is the iron supplement, there are 2 levels, approved and newly developed. 
+
+  **c.**  No blocking. 
+
+
+**5.** **\[3 Marks\]**
+
+A completely randomised block design would be appropriate. The GP clinic would be the blocking variable. 

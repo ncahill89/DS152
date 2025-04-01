@@ -28,13 +28,9 @@ saveRDS(credit_dat, "credit_dat.rds")
 
 ## Question 1
 
-(a)  Ans: Simple random sampling __[1 Marks]__
+(a) Ans: Simple random sampling **\[1 Marks\]**
 
-
-
-(b)  Ans: Cluster sampling __[1 Marks]__
-
-
+(b) Ans: Cluster sampling **\[1 Marks\]**
 
 ## Question 2
 
@@ -44,7 +40,7 @@ Data was collected on 400 individuals to examine the relationship between a pers
 glimpse(credit_dat)
 ```
 
-(a) The plot below shows the relationship between credit card debt (`Balance`) and `Income`. Briefly describe the relationship in your own words. __[2 Marks]__
+(a) The plot below shows the relationship between credit card debt (`Balance`) and `Income`. Briefly describe the relationship in your own words. **\[2 Marks\]**
 
 ```{r, echo = FALSE, fig.width = 5, fig.height = 3.5, fig.align = "center", message=FALSE}
 ggplot(credit_dat, aes(x = Income, y = Balance)) +
@@ -52,12 +48,9 @@ ggplot(credit_dat, aes(x = Income, y = Balance)) +
   geom_smooth(method = "lm")
 ```
 
- - It appears that as income increases the credit car debt increases but there is a large amount of variation around the fitted regression line. 
- 
- 
-(b) Assume you now want to visualise the same information in **(a)** but also include the credit-limit variable (`limit_bracket`). Replace \[A\], \[B\], \[C\], \[D\], and \[E\] in the code below to produce the following plot: 
-__[Marks = 5]__
+-   It appears that as income increases the credit car debt increases but there is a large amount of variation around the fitted regression line.
 
+(b) Assume you now want to visualise the same information in **(a)** but also include the credit-limit variable (`limit_bracket`). Replace \[A\], \[B\], \[C\], \[D\], and \[E\] in the code below to produce the following plot: **\[Marks = 5\]**
 
 ```{r, fig.width = 6, fig.height = 3, fig.align = "center", message = FALSE}
 ggplot(credit_dat, aes(x = Income, y = Balance, colour = limit_bracket)) +
@@ -75,12 +68,11 @@ D = point
 
 E = "lm"
 
-(c) From looking at the plot in **(b)**, what impact does including information on credit limits have on how you interpret the relationship between credit-card debt and income? Does Simpson's Paradox happen here? __[3 Marks]__
+(c) From looking at the plot in **(b)**, what impact does including information on credit limits have on how you interpret the relationship between credit-card debt and income? Does Simpson's Paradox happen here? **\[3 Marks\]**
 
- - When the credit limit bracket information is included we see that the relationship between income and debt is different within the credit limit brackets than it is overall. There's a negative association within the medium-low and medium-high groups, a slight positive association in the high group and hardly any association within the low group. This appears to be an example of Simpson's Paradox (direction of association changes within groups compared to aggregate). 
+-   When the credit limit bracket information is included we see that the relationship between income and debt is different within the credit limit brackets than it is overall. There's a negative association within the medium-low and medium-high groups, a slight positive association in the high group and hardly any association within the low group. This appears to be an example of Simpson's Paradox (direction of association changes within groups compared to aggregate).
 
-(d) Assume you now want to calculate the average `Balance` and the average `Income` within each credit-limit bracket. Replace \[A\], \[B\], \[C\] and \[D\] in the code below to produce the following summary table: __[4 Marks]__
-
+(d) Assume you now want to calculate the average `Balance` and the average `Income` within each credit-limit bracket. Replace \[A\], \[B\], \[C\] and \[D\] in the code below to produce the following summary table: **\[4 Marks\]**
 
 ```{r, echo = FALSE}
 credit_dat %>% 
@@ -97,7 +89,6 @@ C = Income
 
 D = mean_balance
 
-(e) How does the summary in **(d)** help to explain why the credit limit variable (`limit_bracket`) is a confounding variable when looking at the relationship between credit-card debt and income? __[4 Marks]__
+(e) How does the summary in **(d)** help to explain why the credit limit variable (`limit_bracket`) is a confounding variable when looking at the relationship between credit-card debt and income? **\[4 Marks\]**
 
-  - Debt appears to increase as you go from low to high credit limits, in addition people with higher incomes tend to be in higher credit limit brackets. Therefore, credit limit has a positive association with both Income and Debt and confounds the results if not accounted for (as in the plot from part b)
-
+-   Debt appears to increase as you go from low to high credit limits, in addition people with higher incomes tend to be in higher credit limit brackets. Therefore, credit limit has a positive association with both Income and Debt and confounds the results if not accounted for (as in the plot from part b)

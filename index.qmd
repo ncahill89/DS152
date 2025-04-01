@@ -47,4 +47,9 @@ Assignment 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Assignment1.ht
 
 Assignment 2: [Linear Regression](https://ncahill89.github.io/DS152/Assignment2.html)
 
-Assignment 3: [Sampling and Observational Studies](https://ncahill89.github.io/DS152/Assignment2.html)
+Assignment 3: [Sampling and Observational Studies](https://ncahill89.github.io/DS152/Assignment3.html)
+
+Assignment 4: [Experimental Studies](https://ncahill89.github.io/DS152/Assignment4.html)
+
+
+

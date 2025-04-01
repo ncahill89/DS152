@@ -24,7 +24,7 @@ cryo_dat <- read_csv("https://www.dropbox.com/s/xeoaoihy98so7x3/Cryotherapy.csv?
 
 old_faithful <- read_csv("https://www.dropbox.com/s/2e0f4l9nsk5yfkd/old_faithful.csv?raw=1")
 
-births14 <- openintro::births14
+births14 <- openintro::births14 %>% drop_na()
 
 ```
 
@@ -50,7 +50,7 @@ It is called supervised learning because the process of an algorithm learning fr
 
 We saw these supervised learning methods in the predictive analytics section.
 
-## Supervised Learning - Regression
+### Supervised Learning - Regression
 
 US Department of Health and Human Services, Centers for Disease Control and Prevention collect information on births recorded in the country. We have data which are a random sample of 1,000 births from 2014. Variables of interest include length of pregnancy in weeks (weeks), mother’s age in years (mage), the sex of the baby (sex), smoking status of the mother (habit), and the number of hospital (visits) visits during pregnancy.
 
@@ -58,7 +58,7 @@ US Department of Health and Human Services, Centers for Disease Control and Prev
 births14
 ```
 
-### Split the data
+#### Split the data
 
 ```{r}
 library(rsample)
@@ -71,7 +71,7 @@ train_data <- training(births_split)
 test_data  <- testing(births_split)
 ```
 
-### Fit the model and "learn" from the training data
+#### Fit the model and "learn" from the training data
 
 **Let's explore a multiple regression option**
 
@@ -79,7 +79,7 @@ test_data  <- testing(births_split)
 lm_model_train <- lm(weight ~ weeks + mage + sex + habit + visits, data = train_data)
 ```
 
-### Evaluate the performance on the test data
+#### Evaluate the performance on the test data
 
 ```{r}
 births_res_test <- test_data %>% 
@@ -92,7 +92,7 @@ ggplot(births_res_test, aes(x = weight, y = pred_weight)) +
 
 ```
 
-### Summarise the model accuracy
+#### Summarise the model accuracy
 
 ```{r}
 births_res_test %>% 
@@ -102,7 +102,7 @@ births_res_test %>%
 
 The model is trying to "learn" about the relationship between the price of a painting and other painting attributes. If the model does a good job at "learning" then knowing various painting attributes/features can predict what their price will be. This is a **supervised learning method** because the accuracy of the model's predictive performance can be evaluated.
 
-## Supervised Learning - Classification
+### Supervised Learning - Classification
 
 We saw examples of using logistic regression previously. Let's consider another example here. The 'Cryotherapy' dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.
 
@@ -117,7 +117,7 @@ ggplot(cryo_dat, aes(x = Time, y = Result)) +
 geom_point()
 ```
 
-**Let's split the data**
+#### Split the data
 
 ```{r}
 library(rsample)
@@ -127,6 +127,8 @@ cryo_split <- initial_split(cryo_dat, prop = 0.80)
 train_data <- training(cryo_split)
 test_data  <- testing(cryo_split)
 ```
+
+#### Fit the model and "learn" from the training data
 
 **Let's fit a logistic regression model using the Time spent doing the procedure to predict the success:**
 
@@ -144,6 +146,8 @@ ggplot(train_data, aes(x = Time, y = Result))+
               method.args = list(family = "binomial"),
               se = FALSE)
 ```
+
+#### Evaluate the performance on the test data
 
 **Let's see if the model does a good job at predicting the success:**
 
@@ -210,37 +214,37 @@ The algorithm works by:
 2.  Moving each cluster centroid to be the mean of points that are assigned to it
 3.  Repeat.
 
-### K-means clustering: iteration 0a
+#### K-means clustering: iteration 0a
 
 Begin by randomly generating two centroids.
 
 ![](images/L3a_plot2.png)
 
-### K-means clustering: iteration 0b
+#### K-means clustering: iteration 0b
 
 Assign each point to the nearest centroid
 
 ![](images/L3a_plot3.png)
 
-### K-means clustering: iteration 1a
+#### K-means clustering: iteration 1a
 
 Update the centroids
 
 ![](images/L3a_plot4.png)
 
-### K-means clustering: iteration 1b
+#### K-means clustering: iteration 1b
 
 Assign each point to the nearest centroid
 
 ![](images/L3a_plot4b.png)
 
-### K-means clustering: convergence
+#### K-means clustering: convergence
 
 Repeat the process until points are no longer moved between groups
 
 ![](images/L3a_plot6.png)
 
-### K-means clustering: results
+#### K-means clustering: results
 
 ![](images/L3a_plot7.png)
 
@@ -261,7 +265,7 @@ ggplot(old_faithful, aes(x = waiting, y = eruptions)) +
   geom_point()
 ```
 
-**Lets apply the k-means algorithm:**
+#### Lets apply the k-means algorithm:
 
 ```{r}
 kmean_res <- kmeans(old_faithful, centers = 2)
@@ -271,7 +275,7 @@ old_faithful_res <- old_faithful %>%
 old_faithful_res
 ```
 
-**Let's visualise the results:**
+#### Let's visualise the results:
 
 ```{r,fig.width=6, fig.height=3.5}
 library(factoextra)
@@ -285,7 +289,7 @@ ggplot(old_faithful_res, aes(x = waiting, y = eruptions, colour = cluster)) +
   geom_point()
 ```
 
-**Evaluation Methods**
+#### Evaluation Methods
 
 -   Contrary to supervised learning where we have the ground truth to evaluate the model’s performance, clustering analysis doesn’t have a solid evaluation metric that we can use to evaluate the outcome of different clustering algorithms.
 
