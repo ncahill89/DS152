@@ -30,11 +30,11 @@ births14 <- openintro::births14 %>% drop_na()
 
 ## Supervised Learning
 
-Machine learning is the act of discovering and patterns buried in large data sets.
+Machine learning is the act of discovering patterns buried in large data sets.
 
 The majority of practical machine learning uses supervised learning.
 
-Supervised learning is where you have input variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.
+Supervised learning is where you have input (predictor) variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.
 
 $$y = f(x)$$
 
@@ -50,7 +50,7 @@ It is called supervised learning because the process of an algorithm learning fr
 
 We saw these supervised learning methods in the predictive analytics section.
 
-### Supervised Learning - Regression
+### Supervised Learning - Regression Example
 
 US Department of Health and Human Services, Centers for Disease Control and Prevention collect information on births recorded in the country. We have data which are a random sample of 1,000 births from 2014. Variables of interest include length of pregnancy in weeks (weeks), mother’s age in years (mage), the sex of the baby (sex), smoking status of the mother (habit), and the number of hospital (visits) visits during pregnancy.
 
@@ -102,22 +102,22 @@ births_res_test %>%
 
 The model is trying to "learn" about the relationship between the price of a painting and other painting attributes. If the model does a good job at "learning" then knowing various painting attributes/features can predict what their price will be. This is a **supervised learning method** because the accuracy of the model's predictive performance can be evaluated.
 
-### Supervised Learning - Classification
+### Supervised Learning - Classification Example
 
-We saw examples of using logistic regression previously. Let's consider another example here. The 'Cryotherapy' dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.
+The 'Cryotherapy' dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.
 
 ```{r}
 cryo_dat
 ```
 
 ```{r}
-cryo_dat <- cryo_dat %>% mutate(Result = factor(Result, labels = c("unsuccessful", "successful")))
+cryo_dat <- cryo_dat %>% mutate(Result_label = factor(Result, labels = c("not successful", "successful")))
 ```
 
 **Let's look at the relationship the Time spent doing the procedure and the success:**
 
 ```{r}
-ggplot(cryo_dat, aes(x = Time, y = Result)) +
+ggplot(cryo_dat, aes(x = Time, y = Result_label)) +
 geom_boxplot()
 ```
 
@@ -125,8 +125,8 @@ geom_boxplot()
 
 ```{r}
 library(rsample)
-set.seed(1116)
-cryo_split <- initial_split(cryo_dat, prop = 0.80)
+set.seed(11)
+cryo_split <- initial_split(cryo_dat, prop = 0.70)
 
 train_data <- training(cryo_split)
 test_data  <- testing(cryo_split)
@@ -138,17 +138,17 @@ test_data  <- testing(cryo_split)
 
 ```{r}
 library(rpart)
-tree_model <- rpart(Result ~ Time + sex + age + Area,  data = train_data)
+tree_model <- rpart(Result_label ~ Time + sex + age + Area,  data = train_data)
 ```
 
-**Let's visualise the results of fitting the classification regression:**
+**Let's visualise the results of fitting the classification tree:**
 
 ```{r}
 library(rpart.plot)
 rpart.plot(tree_model)
 ```
 
-```{r, eval=FALSE}
+```{r, include = FALSE, eval=FALSE}
 ggplot(train_data, aes(x = Time, y = Result))+
   geom_point() +
   geom_smooth(method = "glm", 
@@ -162,10 +162,10 @@ ggplot(train_data, aes(x = Time, y = Result))+
 
 ```{r}
 cryo_res <- test_data %>% 
-            select(Result) %>% 
+            select(Result_label) %>% 
             mutate(pred_p = predict(tree_model, 
                                     newdata = test_data) %>% as_tibble() %>% pull(successful)) %>% 
-            mutate(pred_result = ifelse(pred_p >=0.5,1,0)) 
+            mutate(pred_result = ifelse(pred_p >= 0.5,"successful","not successful")) 
 cryo_res
 
 
@@ -178,7 +178,7 @@ We will create a table known as a confusion matrix:
 ```{r}
 N <- nrow(cryo_res)
 
-confusion_mat <- table(cryo_res %>% select(Result, pred_result))
+confusion_mat <- table(cryo_res %>% select(Result_label, pred_result))
 confusion_mat
 
 accuracy <- (confusion_mat %>% diag %>% sum)/N
@@ -186,6 +186,8 @@ accuracy
 ```
 
 The model has "learned" about the relationship between time spend on the procedure and its success. As a result, the company can predict what their success will be for a given time. The company can provide recommendations for the length of time a patient should undergo the procedure, for example, if the produce takes 10 minutes it's more likely to be unsuccessful. This is a supervised learning method and therefore the company can also evaluate the accuracy of the model's predictive performance.
+
+__Exercise:__ Try fitting a logistic regression model and a knn model to these data and compare the results. 
 
 ## Unsupervised learning
 

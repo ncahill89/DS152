@@ -147,8 +147,8 @@ window.Quarto = {
   <ul>
   <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link active" data-scroll-target="#supervised-learning">Supervised Learning</a>
   <ul class="collapse">
-  <li><a href="#supervised-learning---regression" id="toc-supervised-learning---regression" class="nav-link" data-scroll-target="#supervised-learning---regression">Supervised Learning - Regression</a></li>
-  <li><a href="#supervised-learning---classification" id="toc-supervised-learning---classification" class="nav-link" data-scroll-target="#supervised-learning---classification">Supervised Learning - Classification</a></li>
+  <li><a href="#supervised-learning---regression-example" id="toc-supervised-learning---regression-example" class="nav-link" data-scroll-target="#supervised-learning---regression-example">Supervised Learning - Regression Example</a></li>
+  <li><a href="#supervised-learning---classification-example" id="toc-supervised-learning---classification-example" class="nav-link" data-scroll-target="#supervised-learning---classification-example">Supervised Learning - Classification Example</a></li>
   </ul></li>
   <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning">Unsupervised learning</a>
   <ul class="collapse">
@@ -187,9 +187,9 @@ window.Quarto = {
 
 <section id="supervised-learning" class="level2">
 <h2 class="anchored" data-anchor-id="supervised-learning">Supervised Learning</h2>
-<p>Machine learning is the act of discovering and patterns buried in large data sets.</p>
+<p>Machine learning is the act of discovering patterns buried in large data sets.</p>
 <p>The majority of practical machine learning uses supervised learning.</p>
-<p>Supervised learning is where you have input variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.</p>
+<p>Supervised learning is where you have input (predictor) variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.</p>
 <p><span class="math display">\[y = f(x)\]</span></p>
 <p>The goal is to approximate the mapping function so well that when you have new input data (x) that you can predict the output variables (y) for that data.</p>
 <p>It is called supervised learning because the process of an algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. We know the correct answers, the algorithm iteratively makes predictions on the “training” data and is corrected by the teacher. Learning stops when the algorithm achieves an acceptable level of performance.</p>
@@ -197,8 +197,8 @@ window.Quarto = {
 <p><strong>Regression:</strong> A regression problem is when the output variable is a real value, such as “dollars” or “weight”.</p>
 <p><strong>Classification:</strong> A classification problem is when the output variable is a category, such as “red” or “blue” or “disease” and “no disease”.</p>
 <p>We saw these supervised learning methods in the predictive analytics section.</p>
-<section id="supervised-learning---regression" class="level3">
-<h3 class="anchored" data-anchor-id="supervised-learning---regression">Supervised Learning - Regression</h3>
+<section id="supervised-learning---regression-example" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-learning---regression-example">Supervised Learning - Regression Example</h3>
 <p>US Department of Health and Human Services, Centers for Disease Control and Prevention collect information on births recorded in the country. We have data which are a random sample of 1,000 births from 2014. Variables of interest include length of pregnancy in weeks (weeks), mother’s age in years (mage), the sex of the baby (sex), smoking status of the mother (habit), and the number of hospital (visits) visits during pregnancy.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>births14</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -275,9 +275,9 @@ window.Quarto = {
 <p>The model is trying to “learn” about the relationship between the price of a painting and other painting attributes. If the model does a good job at “learning” then knowing various painting attributes/features can predict what their price will be. This is a <strong>supervised learning method</strong> because the accuracy of the model’s predictive performance can be evaluated.</p>
 </section>
 </section>
-<section id="supervised-learning---classification" class="level3">
-<h3 class="anchored" data-anchor-id="supervised-learning---classification">Supervised Learning - Classification</h3>
-<p>We saw examples of using logistic regression previously. Let’s consider another example here. The ‘Cryotherapy’ dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.</p>
+<section id="supervised-learning---classification-example" class="level3">
+<h3 class="anchored" data-anchor-id="supervised-learning---classification-example">Supervised Learning - Classification Example</h3>
+<p>The ‘Cryotherapy’ dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cryo_dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -298,11 +298,11 @@ window.Quarto = {
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cryo_dat <span class="ot">&lt;-</span> cryo_dat <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Result =</span> <span class="fu">factor</span>(Result, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"unsuccessful"</span>, <span class="st">"successful"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>cryo_dat <span class="ot">&lt;-</span> cryo_dat <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">Result_label =</span> <span class="fu">factor</span>(Result, <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">"not successful"</span>, <span class="st">"successful"</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>Let’s look at the relationship the Time spent doing the procedure and the success:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cryo_dat, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Result)) <span class="sc">+</span></span>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(cryo_dat, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Result_label)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -316,8 +316,8 @@ window.Quarto = {
 <h4 class="anchored" data-anchor-id="split-the-data-1">Split the data</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1116</span>)</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cryo_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(cryo_dat, <span class="at">prop =</span> <span class="fl">0.80</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">11</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>cryo_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(cryo_dat, <span class="at">prop =</span> <span class="fl">0.70</span>)</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>train_data <span class="ot">&lt;-</span> <span class="fu">training</span>(cryo_split)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>test_data  <span class="ot">&lt;-</span> <span class="fu">testing</span>(cryo_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -328,9 +328,9 @@ window.Quarto = {
 <p><strong>Let’s fit a classification tree model using the Time spent doing the procedure and some additional predictors to predict the success:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Result <span class="sc">~</span> Time <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> Area,  <span class="at">data =</span> train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>tree_model <span class="ot">&lt;-</span> <span class="fu">rpart</span>(Result_label <span class="sc">~</span> Time <span class="sc">+</span> sex <span class="sc">+</span> age <span class="sc">+</span> Area,  <span class="at">data =</span> train_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><strong>Let’s visualise the results of fitting the classification regression:</strong></p>
+<p><strong>Let’s visualise the results of fitting the classification tree:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rpart.plot)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rpart.plot</span>(tree_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -342,68 +342,55 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(train_data, <span class="fu">aes</span>(<span class="at">x =</span> Time, <span class="at">y =</span> Result))<span class="sc">+</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"glm"</span>, </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>              <span class="at">method.args =</span> <span class="fu">list</span>(<span class="at">family =</span> <span class="st">"binomial"</span>),</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">se =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
 </section>
 <section id="evaluate-the-performance-on-the-test-data-1" class="level4">
 <h4 class="anchored" data-anchor-id="evaluate-the-performance-on-the-test-data-1">Evaluate the performance on the test data</h4>
 <p><strong>Let’s see if the model does a good job at predicting the success:</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cryo_res <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span> </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(Result) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred_p =</span> <span class="fu">predict</span>(tree_model, </span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">newdata =</span> test_data) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(successful)) <span class="sc">%&gt;%</span> </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred_result =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span><span class="fl">0.5</span>,<span class="dv">1</span>,<span class="dv">0</span>)) </span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>cryo_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cryo_res <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(Result_label) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred_p =</span> <span class="fu">predict</span>(tree_model, </span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">newdata =</span> test_data) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(successful)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred_result =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span> <span class="fl">0.5</span>,<span class="st">"successful"</span>,<span class="st">"not successful"</span>)) </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>cryo_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 18 × 3
-   Result       pred_p pred_result
-   &lt;fct&gt;         &lt;dbl&gt;       &lt;dbl&gt;
- 1 unsuccessful  0.189           0
- 2 successful    0.971           1
- 3 unsuccessful  0.189           0
- 4 successful    0.971           1
- 5 unsuccessful  0.189           0
- 6 successful    0.971           1
- 7 successful    0.971           1
- 8 successful    0.971           1
- 9 successful    0.189           0
-10 unsuccessful  0.189           0
-11 unsuccessful  0.189           0
-12 successful    0.971           1
-13 successful    0.971           1
-14 unsuccessful  0.189           0
-15 unsuccessful  0.189           0
-16 successful    0.971           1
-17 successful    0.189           0
-18 unsuccessful  0.189           0</code></pre>
+<pre><code># A tibble: 28 × 3
+   Result_label   pred_p pred_result   
+   &lt;fct&gt;           &lt;dbl&gt; &lt;chr&gt;         
+ 1 not successful 0.0357 not successful
+ 2 successful     0.963  successful    
+ 3 not successful 0.0357 not successful
+ 4 successful     0.963  successful    
+ 5 successful     0.963  successful    
+ 6 successful     0.963  successful    
+ 7 not successful 0.0357 not successful
+ 8 not successful 0.0357 not successful
+ 9 successful     0.963  successful    
+10 successful     0.0357 not successful
+# ℹ 18 more rows</code></pre>
 </div>
 </div>
 <p><strong>Let’s evaluate the accuracy.</strong></p>
 <p>We will create a table known as a confusion matrix:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cryo_res)</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="ot">&lt;-</span> <span class="fu">table</span>(cryo_res <span class="sc">%&gt;%</span> <span class="fu">select</span>(Result, pred_result))</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>confusion_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(cryo_res)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="ot">&lt;-</span> <span class="fu">table</span>(cryo_res <span class="sc">%&gt;%</span> <span class="fu">select</span>(Result_label, pred_result))</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>confusion_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>              pred_result
-Result         0 1
-  unsuccessful 8 0
-  successful   2 8</code></pre>
+<pre><code>                pred_result
+Result_label     not successful successful
+  not successful              8          0
+  successful                  3         17</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.8888889</code></pre>
+<pre><code>[1] 0.8928571</code></pre>
 </div>
 </div>
 <p>The model has “learned” about the relationship between time spend on the procedure and its success. As a result, the company can predict what their success will be for a given time. The company can provide recommendations for the length of time a patient should undergo the procedure, for example, if the produce takes 10 minutes it’s more likely to be unsuccessful. This is a supervised learning method and therefore the company can also evaluate the accuracy of the model’s predictive performance.</p>
+<p><strong>Exercise:</strong> Try fitting a logistic regression model and a knn model to these data and compare the results.</p>
 </section>
 </section>
 </section>
@@ -472,7 +459,7 @@ Result         0 1
 <p><img src="images/old-faithful.jpg" class="img-fluid"></p>
 <p>The old faithful dataset contains waiting times between eruptions and the duration of the eruption. Can you see an possible clusters in the data?</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>old_faithful</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>old_faithful</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 99 × 2
    eruptions waiting
@@ -491,8 +478,8 @@ Result         0 1
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(old_faithful, <span class="fu">aes</span>(<span class="at">x =</span> waiting, <span class="at">y =</span> eruptions)) <span class="sc">+</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(old_faithful, <span class="fu">aes</span>(<span class="at">x =</span> waiting, <span class="at">y =</span> eruptions)) <span class="sc">+</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -504,25 +491,25 @@ Result         0 1
 <section id="lets-apply-the-k-means-algorithm" class="level4">
 <h4 class="anchored" data-anchor-id="lets-apply-the-k-means-algorithm">Lets apply the k-means algorithm:</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>kmean_res <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(old_faithful, <span class="at">centers =</span> <span class="dv">2</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>old_faithful_res <span class="ot">&lt;-</span> old_faithful <span class="sc">%&gt;%</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">cluster =</span> kmean_res<span class="sc">$</span>cluster)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>old_faithful_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>kmean_res <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(old_faithful, <span class="at">centers =</span> <span class="dv">2</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>old_faithful_res <span class="ot">&lt;-</span> old_faithful <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>                      <span class="fu">mutate</span>(<span class="at">cluster =</span> kmean_res<span class="sc">$</span>cluster)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>old_faithful_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 99 × 3
    eruptions waiting cluster
        &lt;dbl&gt;   &lt;dbl&gt;   &lt;int&gt;
- 1      3.6       79       1
- 2      1.8       54       2
- 3      3.33      74       1
- 4      2.28      62       2
- 5      4.53      85       1
- 6      2.88      55       2
- 7      4.7       88       1
- 8      3.6       85       1
- 9      1.95      51       2
-10      4.35      85       1
+ 1      3.6       79       2
+ 2      1.8       54       1
+ 3      3.33      74       2
+ 4      2.28      62       1
+ 5      4.53      85       2
+ 6      2.88      55       1
+ 7      4.7       88       2
+ 8      3.6       85       2
+ 9      1.95      51       1
+10      4.35      85       2
 # ℹ 89 more rows</code></pre>
 </div>
 </div>
@@ -530,11 +517,11 @@ Result         0 1
 <section id="lets-visualise-the-results" class="level4">
 <h4 class="anchored" data-anchor-id="lets-visualise-the-results">Let’s visualise the results:</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Welcome! Want to learn more? See two factoextra-related books at https://goo.gl/ve3WBa</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(kmean_res , <span class="at">data =</span> old_faithful <span class="sc">%&gt;%</span> <span class="fu">select</span>(waiting, eruptions), <span class="at">geom =</span> <span class="st">"point"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_cluster</span>(kmean_res , <span class="at">data =</span> old_faithful <span class="sc">%&gt;%</span> <span class="fu">select</span>(waiting, eruptions), <span class="at">geom =</span> <span class="st">"point"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -545,8 +532,8 @@ Result         0 1
 </div>
 <p><strong>alternatively</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(old_faithful_res, <span class="fu">aes</span>(<span class="at">x =</span> waiting, <span class="at">y =</span> eruptions, <span class="at">colour =</span> cluster)) <span class="sc">+</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(old_faithful_res, <span class="fu">aes</span>(<span class="at">x =</span> waiting, <span class="at">y =</span> eruptions, <span class="at">colour =</span> cluster)) <span class="sc">+</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -575,8 +562,8 @@ Result         0 1
 <li><p>We look for the “elbow” in the plot to choose the no. of clusters</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(old_faithful, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(old_faithful, kmeans, <span class="at">method =</span> <span class="st">"wss"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -594,8 +581,8 @@ Result         0 1
 <li><p>The optimal number of clusters k is the one that maximizes the average silhouette over a range of possible values for k.</p></li>
 </ul>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(old_faithful, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">fviz_nbclust</span>(old_faithful, kmeans, <span class="at">method =</span> <span class="st">"silhouette"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
