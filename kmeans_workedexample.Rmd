@@ -1,0 +1,106 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+# Introduction to K-Means Clustering in R: Customer Segmentation
+
+## 1. Overview of K-Means Clustering
+
+### What is K-Means Clustering?
+
+K-Means is an unsupervised machine learning algorithm used for partitioning a dataset into **K clusters** based on similarity. It minimizes the within-cluster sum of squares (WCSS) by iteratively refining cluster centroids.
+
+### Why Use K-Means for Customer Segmentation?
+
+Customer segmentation helps businesses identify distinct customer groups based on behavior, spending patterns, or demographics. This allows for targeted marketing and personalized services.
+
+## 2. Dataset Description
+
+We will use a **synthetic dataset** resembling customer spending behavior. The dataset contains: - `CustomerID`: Unique customer identifier - `Annual_Income`: Yearly income (in \$1000s) - `Spending_Score`: A score from 0 to 100 representing spending habits (higher means more spending)
+
+## 3. Implementing K-Means in R
+
+### Step 1: Load Libraries
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(cluster)
+library(factoextra)
+```
+
+### Step 2: Load & Explore Data
+
+```{r}
+# Sample data: Simulated Customer Segmentation dataset
+data <- data.frame(
+  CustomerID = 1:200,
+  Annual_Income = round(runif(200, 15, 120), 1),  # Income in $1000s
+  Spending_Score = round(runif(200, 1, 100), 1)  # Spending Score (1-100)
+)
+
+# View first few rows
+head(data)
+```
+
+### Step 3: Data Preprocessing
+
+```{r}
+# Select relevant features (dropping CustomerID)
+data_scaled <- scale(data[, c("Annual_Income", "Spending_Score")])
+```
+
+### Step 4: Determine Optimal K (Elbow Method)
+
+```{r}
+set.seed(123) # For reproducibility
+wcss <- vector()
+for (k in 1:10) {
+  kmeans_result <- kmeans(data_scaled, centers = k, nstart = 25)
+  wcss[k] <- kmeans_result$tot.withinss
+}
+
+# Plot Elbow Method
+plot(1:10, wcss, type = "b", pch = 19, frame = FALSE,
+     xlab = "Number of Clusters (K)", ylab = "WCSS",
+     main = "Elbow Method for Optimal K")
+```
+
+### Step 5: Apply K-Means Clustering
+
+```{r}
+# Apply K-Means with optimal K (let's assume K=5 from the Elbow Method)
+kmeans_model <- kmeans(data_scaled, centers = 5, nstart = 25)
+data$Cluster <- as.factor(kmeans_model$cluster)
+```
+
+### Step 6: Visualize the Clusters
+
+```{r}
+# Scatter plot of clusters
+fviz_cluster(kmeans_model, data = data_scaled, geom = "point",
+             ellipse.type = "norm", palette = "jco", ggtheme = theme_minimal())
+```
+
+## 4. Interpretation of Results
+
+1.  **Identified Segments**: The customers are grouped into five distinct segments based on spending habits and income levels.
+2.  **Cluster Characteristics**:
+    -   High-income, high-spending customers (e.g., luxury spenders)
+    -   High-income, low-spending customers (e.g., frugal earners)
+    -   Low-income, high-spending customers (e.g., budget-conscious spenders)
+    -   Low-income, low-spending customers (e.g., cost-sensitive buyers)
+    -   Moderate-income, moderate-spending customers
+3.  **Business Applications**: The segmentation results can inform targeted marketing strategies, loyalty programs, and pricing models.
+
+## 5. Conclusion
+
+-   **K-Means clustering** is a powerful tool for customer segmentation.
+-   The **Elbow Method** helps select an appropriate number of clusters.
+-   Visualization provides valuable insights into customer behavior.
+
+------------------------------------------------------------------------
+
+This example demonstrates how to implement K-Means clustering in R, interpret the results, and apply them to business scenarios.

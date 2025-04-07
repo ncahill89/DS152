@@ -187,7 +187,7 @@ accuracy
 
 The model has "learned" about the relationship between time spend on the procedure and its success. As a result, the company can predict what their success will be for a given time. The company can provide recommendations for the length of time a patient should undergo the procedure, for example, if the produce takes 10 minutes it's more likely to be unsuccessful. This is a supervised learning method and therefore the company can also evaluate the accuracy of the model's predictive performance.
 
-__Exercise:__ Try fitting a logistic regression model and a knn model to these data and compare the results. 
+**Exercise:** Try fitting a logistic regression model and a knn model to these data and compare the results.
 
 ## Unsupervised learning
 
@@ -296,8 +296,9 @@ fviz_cluster(kmean_res , data = old_faithful %>% select(waiting, eruptions), geo
 **alternatively**
 
 ```{r, fig.width=6, fig.height=3.5}
-ggplot(old_faithful_res, aes(x = waiting, y = eruptions, colour = cluster)) +
-  geom_point()
+ggplot(old_faithful_res, aes(x = waiting, y = eruptions, colour = as.factor(cluster))) +
+  geom_point() +
+  labs(colour = "cluster")
 ```
 
 #### Evaluation Methods

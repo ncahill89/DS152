@@ -1,0 +1,254 @@
+---
+title: "Introduction to Text Analysis"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidytext)
+library(stopwords)
+library(class)
+
+text <- c("Take me out tonight",
+          "Where there's music and there's people",
+          "And they're young and alive",
+          "Driving in your car",
+          "I never never want to go home",
+          "Because I haven't got one",
+          "Anymore")
+text_df <- tibble(line = 1:7, text = text)
+lyrics <- 
+read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-12-14/lyrics.csv")
+
+spice_lyrics <- lyrics %>%
+                  filter(album_name == "Spice") 
+
+tidy_spice_lyrics <- spice_lyrics %>% 
+                      unnest_tokens(word,line) %>% 
+                      select(word, track_number, song_name)
+
+sentiment_spice_lyrics <- tidy_spice_lyrics %>%
+                            anti_join(get_stopwords(source = "smart")) %>%
+                            inner_join(get_sentiments("bing")) %>%
+                            count(sentiment, word) %>%
+                            arrange(desc(n))
+
+common_spice_lyrics <- tidy_spice_lyrics %>%
+                        anti_join(get_stopwords(source = "smart")) %>%
+                        count(word) %>%
+                        arrange(desc(n))
+
+
+
+
+```
+
+## Text Analysis
+
+-   **Text Analysis** or **Text Analytics** is the representation, processing and modelling of text data.
+
+-   **Text Mining** is the procedure used to transform text into data that can be used by a machine learning technique.
+
+### Example: SPAM filtering
+
+![](images/spam.png)
+
+### Example: Article Theme Classification
+
+![](images/New_Doc.jpg)
+
+### Example: Sentiment Analysis
+
+![](images/sentiment.jpeg)
+
+### Other Examples
+
+-   **Government**: spotting emerging trends and public concerns
+-   **Financial institutions**: detecting fraudulent activity (e.g. insurance)
+-   **Retail**: identifying potential customers; predict and avoid churning; improve the brand
+-   **Market**: identifying trends in different segments (e.g. using social network data)
+
+## Tidy Text
+
+Using tidy data principles can make many text mining tasks easier, more effective, and consistent with tools already in wide use.
+
+Learn more at https://www.tidytextmining.com/.
+
+### Packages
+
+```{r}
+library(tidyverse)
+library(tidytext)
+```
+
+### What is tidy text?
+
+We can define the tidy text format as being a table with one-token-per-row. A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+
+Tidy data sets allow manipulation with a standard set of “tidy” tools, including popular packages such as dplyr (Wickham and Francois 2016), tidyr (Wickham 2016) and ggplot2 (Wickham 2009). By keeping the input and output in tidy tables, users can transition fluidly between these packages. These tidy tools extend naturally to many text analyses and explorations.
+
+### Simple example
+
+```{r, ttt1, exercise = TRUE}
+text <- c("Take me out tonight",
+          "Where there's music and there's people",
+          "And they're young and alive",
+          "Driving in your car",
+          "I never never want to go home",
+          "Because I haven't got one",
+          "Anymore")
+text
+```
+
+```{r,ttt2, exercise = TRUE}
+text_df <- tibble(line = 1:7, text = text)
+text_df
+```
+
+```{r tt1, exercise = TRUE}
+text_df %>%
+  unnest_tokens(word, text)
+```
+
+## Sentiment Analysis with song lyrics
+
+Our modeling goal is to “discover” topics in the lyrics of Spice Girls songs. Instead of a supervised or predictive model where our observations have labels, this is an unsupervised approach.
+
+We can read in and `glimpse` the data as follows:
+
+```{r, eval = FALSE, message = FALSE}
+library(tidyverse)
+lyrics <- 
+read_csv("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-12-14/lyrics.csv")
+```
+
+```{r tt2, exercise = TRUE}
+glimpse(lyrics)
+```
+
+Let's just consider the album called "Spice" and look at the song names in that album. Note the use of the `distinct` function as each song name appears multiple times in the dataset.
+
+```{r tt3, exercise = TRUE}
+spice_lyrics <- lyrics %>%
+                  filter(album_name == "Spice") 
+
+spice_lyrics %>% distinct(song_name)
+```
+
+Let's get an idea of how long the songs are by looking at the number of lines in each song.
+
+```{r tt4, exercise = TRUE}
+spice_lyrics %>%
+    count(song_name) %>%
+    arrange(n)
+```
+
+**Tidy up your lyrics**
+
+```{r tt5, exercise = TRUE}
+tidy_spice_lyrics <- spice_lyrics %>% 
+                      unnest_tokens(word,line) %>% 
+                      select(word, track_number, song_name)
+tidy_spice_lyrics 
+```
+
+**What are the most common words?**
+
+```{r tt6, exercise = TRUE}
+tidy_spice_lyrics %>%
+  count(word) %>%
+  arrange(desc(n))
+```
+
+### Stop words
+
+In computing, stop words are words which are filtered out before or after processing of natural language data (text). They usually refer to the most common words in a language, but there is not a single list of stop words used by all natural language processing tools.
+
+```{r tt7, exercise = TRUE}
+library(stopwords)
+get_stopwords(language = "en", source = "snowball")
+```
+
+Note, the stopword lexicon is specified. The default is "snowball". Use `stopwords_getsources()` to see available sources.
+
+```{r}
+stopwords_getsources()
+```
+
+**What are the most common words when we exclude stop words?**
+
+```{r tt8, exercise = TRUE}
+common_spice_lyrics <- tidy_spice_lyrics %>%
+                        anti_join(get_stopwords(source = "smart")) %>%
+                        count(word) %>%
+                        arrange(desc(n))
+common_spice_lyrics
+```
+
+**Let's visualise the most common words**
+
+```{r tt9, exercise = TRUE, message = FALSE}
+ggplot(common_spice_lyrics %>% top_n(20), aes(x = fct_reorder(word,n), y = n)) +
+    geom_col() +
+    coord_flip() + 
+    theme_minimal() +
+    labs(title = "Frequency of Spice Girl's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "")
+```
+
+### Sentiment Analysis
+
+One way to analyze the sentiment of a text is to consider the text as a combination of its individual words and the sentiment content of the whole text as the sum of the sentiment content of the individual words.
+
+**Sentiment lexicons**
+
+```{r bing, exercise = TRUE}
+get_sentiments("bing")
+```
+
+You can get other lexicons with the `tidytext` package. The "afinn" lexicon returns a numeric value instead of a sentiment. The value is an integer between minus five (negative) and plus five (positive).
+
+```{r afinn, exercise = TRUE}
+get_sentiments("afinn")
+```
+
+**Sentiments in Spice Girls lyrics**
+
+We'll use the "bing" lexicon.
+
+```{r, tt10, exercise = TRUE, message = FALSE}
+sentiment_spice_lyrics <- tidy_spice_lyrics %>%
+                            anti_join(get_stopwords(source = "smart")) %>%
+                            inner_join(get_sentiments("bing")) %>%
+                            count(sentiment, word) %>%
+                            arrange(desc(n))
+sentiment_spice_lyrics
+```
+
+\newpage
+
+**Sentiments in Spice Girls lyrics**
+
+```{r tt11, exercise = TRUE}
+sentiment_spice_lyrics %>% 
+  group_by(sentiment) %>% 
+  summarise(n_sentiment = sum(n))
+```
+
+**Visualise the Sentiments in Spice Girls lyrics**
+
+```{r tt12, exercise = TRUE}
+ggplot(sentiment_spice_lyrics %>% top_n(20), aes(x = fct_reorder(word,n), y = n)) +
+    geom_col() +
+    coord_flip() + 
+    theme_minimal() +
+    labs(title = "Sentiment of Spice Girl's lyrics",
+         subtitle = "`Love` tops the chart",
+         y = "",
+         x = "") +
+    facet_wrap(~sentiment, scales  = "free")
+```

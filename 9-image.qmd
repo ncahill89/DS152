@@ -1,0 +1,162 @@
+---
+title: "Introduction to Image Analysis"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidytext)
+library(stopwords)
+library(class)
+
+mnist_train <- readRDS("data/dat_train.rds")
+mnist_train <- mnist_train %>% select(label,`pixel1`:`pixel764`)
+
+mnist_test <- readRDS("data/dat_test.rds")
+mnist_test <- mnist_test %>% select(label,`pixel1`:`pixel764`)
+melted <- readRDS("data/melted.rds")
+
+
+pred_label_knn <- knn(mnist_train %>% select(-label), 
+                      mnist_test %>% select(-label), 
+                      cl = mnist_train$label , 
+                      k = 5)
+
+
+mnist_res <- mnist_test %>%
+                select(label) %>% 
+                mutate(pred_label = pred_label_knn)
+
+
+
+```
+
+## Image Analysis
+
+### What is an Image?
+
+-   What is an image? What does a computer "see"?
+-   In essence, it is an array of numbers representing colour intensities called pixels.
+-   The pixel (a word invented from "picture element") is the basic unit of programmable color on a computer display or in a computer image.
+
+### Spot the snow leopard!
+
+![](images/find_leopard.jpg)
+
+### Spot the spider!
+
+![](images/aranha_thiago.jpg)
+
+### Image Analysis - Why?
+
+The application of image analysis can be expanded to different domains of science, such as:
+
+**Image detection on videos**
+
+![](images/video.jpg)
+
+**Autonomous cars**
+
+![](images/aut_car.jpeg)
+
+**Animals identification**
+
+![](images/camera.png)
+
+**Disease diagnosis**
+
+![](images/malario.png)
+
+**Measure Student Engagement**
+
+![](images/MoodRec.png)
+
+### Example: MNIST handwritten digit database
+
+http://yann.lecun.com/exdb/mnist/
+
+-   70,000 grayscale images of handwritten numbers at low resolution (28 by 28 pixels)
+-   Used 60,000 to train the algorithm and 10,000 to test
+
+#### Illustrative example of a single image
+
+![](images/eight.jpeg)
+
+### Example of numbers in the MNIST training dataset
+
+```{r, echo = FALSE}
+ggplot(melted, aes(x = x, y = y, fill = intensity)) +
+  geom_tile() +
+  scale_fill_continuous(name = "Pixel Intensity") +
+  scale_y_reverse() +
+  facet_wrap(~ image) +
+  theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    panel.spacing = unit(0, "lines"),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  labs(
+    title = "MNIST Image Data",
+    subtitle = "Visualization of a sample of images contained in MNIST data set.",
+    x = NULL,
+    y = NULL
+  )
+```
+
+### Image Classification Algorithms
+
+-   we can use virtually ANY supervised classification algorithm (each pixel is a "feature" or "predictor")
+-   e.g. k-nearest neighbours, trees/random forests, logistic/multinomial regression, support vector machines, neural networks
+-   you have already studied a few of these techniques
+-   We will use KNN to classify the images
+
+### Formatting data for analysis
+
+If we assume each pixel is a feature/predictor then we should format that data such that the columns are pixels and each row corresponds to an image.
+
+We'll work with a subset of the MNIST data and consider 1000 images int he training data and 100 images in the test data.
+
+```{r}
+mnist_train
+```
+
+```{r}
+mnist_test
+```
+
+### Applying KNN
+
+```{r image1, exercise = TRUE}
+library(class)
+pred_label_knn <- knn(mnist_train %>% select(-label), 
+                      mnist_test %>% select(-label), 
+                      cl = mnist_train$label , 
+                      k = 5)
+pred_label_knn
+```
+
+### Storing results
+
+```{r image2, exercise = TRUE}
+mnist_res <- mnist_test %>%
+                select(label) %>% 
+                mutate(pred_label = pred_label_knn)
+
+mnist_res
+```
+
+### Calculating accuracy
+
+```{r image3, exercise = TRUE}
+N <- nrow(mnist_res)
+
+confusion_mat <- table(mnist_res %>% select(label, pred_label))
+confusion_mat
+
+accuracy <- (confusion_mat %>% diag %>% sum)/N
+accuracy
+```

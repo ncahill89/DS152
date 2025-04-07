@@ -12,7 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 ```
 
-## Exercise 
+## Exercise
 
 We will work with the `biopsy` data (you've worked with this dataset before). It is a breast cancer database obtained from the University of Wisconsin-Madison Hospital. 699 biopsies of breast tumours were assessed and nine attributes (`V1` - `V9`) were scored on a scale of 1 to 10. The objective is to predict whether a tumour is `benign` (0) or `malignant` (1), based on 5 of the attributes.
 
@@ -23,12 +23,11 @@ biopsy <- MASS::biopsy
 glimpse(biopsy)
 ```
 
-We're going to update the dataset to add a binary (0,1) version of the class variable. 
+We're going to update the dataset to add a binary (0,1) version of the class variable.
 
 ```{r}
 biopsy <- biopsy %>% mutate(class_binary = as.numeric(class == "malignant"))
 ```
-
 
 **(a)** Before we begin modelling the data, let's split the dataset in two: the training and the test set. We will fit the models using the training set, and then validate them using the test set. We will use 60% of the data as the training set, and the remaining 40% as the test set. Set the seed to 103 and replace \[A\], \[B\], \[C\] and \[D\] in the code below to create these training and test datasets.
 
@@ -94,7 +93,6 @@ biopsy_res
 
 **(d)** Now we will use the test set to evaluate the two different methods. Below are the confusion tables for each method, using the test set. Calculate the overall accuracy, true positive rate and true negative rate for each method you trained. We take positive to be `malignant`, and negative to be `benign`.
 
-
 #### Logistic regression model
 
 ```{r, echo=FALSE}
@@ -113,9 +111,7 @@ confusion_tree <- biopsy_res %>%
 confusion_tree
 ```
 
-
-**(e)** Now we will use the k-nearest neighbours algorithm on the biopsy data. We will use k = 3 and k = 6 and compare results. The code below fits the models and gives predictions. 
-
+**(e)** Now we will use the k-nearest neighbours algorithm on the biopsy data. We will use k = 3 and k = 6 and compare results. The code below fits the models and gives predictions.
 
 ```{r, echo = TRUE}
 library(class)
@@ -136,8 +132,7 @@ biopsy_res_knn <- test_biopsy_data %>%
 
 ```
 
-From `biopsy_res_knn` we create the confusion tables for each knn method, shown below. Use these to calculate the overall accuracy, true positive rate and true negative rate for each knn method you trained. We take positive to be `malignant`, and negative to be `benign`. 
-
+From `biopsy_res_knn` we create the confusion tables for each knn method, shown below. Use these to calculate the overall accuracy, true positive rate and true negative rate for each knn method you trained. We take positive to be `malignant`, and negative to be `benign`.
 
 ```{r}
 N <- nrow(biopsy_res_knn)

@@ -1,0 +1,139 @@
+---
+title: "DS152 Tutorial Sheet 6"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Exercise 1
+
+We will work with the Swiss banknotes dataset and perform logistic regression to determine whether the status of a bank note is genuine or counterfeit, based on six predictors related to measurements made on the bills.
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(mclust)
+glimpse(banknote)
+```
+
+**(a)** Run the code below to add a binary (0,1) variable to the dataset called `status_binary` where the value is 0 when the Status is counterfeit and 1 when the Status is genuine. 
+
+```{r}
+banknote <- banknote %>% 
+              mutate(status_binary = as.numeric(Status == "genuine")) 
+glimpse(banknote) 
+```
+
+
+**(b)** Replace [A], [B] and [C] in the code below to create a scatter point plot showing `status_binary` as the response variable and  `Top` as a predictor. Do you think `Top` predictors for separating the counterfeit from the genuine notes? 
+
+```{r, eval = FALSE}
+ggplot(banknote, aes(x = [A], y = [B])) +
+  geom_[C]
+```
+
+**(c)** Split the data into 85% training and 15% test data by replacing [A], [B], [C], [D] and [E] in the following code. Set the seed to 10465. 
+
+```{r, eval = FALSE}
+library(rsample)
+set.seed([A])
+bank_split <- initial_split([B], prop = [C])
+
+train_bank_data <- [D](bank_split)
+test_bank_data  <- [E](bank_split)
+```
+
+**(d)** Replace [A], [B], [C] and [D] in the code below to fit a simple logistic regression model to the training data, using `status_binary` as the response variable and `Top` as a predictor. 
+
+```{r, eval = FALSE}
+logistic_model <- [A]([B] ~ [C],
+                    family = binomial,
+                    data = [D])
+logistic_model
+```
+
+**(e)** Set up a threshold of 0.50 for classifying banknotes as genuine based on the test data set by replacing [A] and [B] in the following code. 
+
+```{r, eval = FALSE}
+bank_res <- test_bank_data %>% 
+            select(Status, status_binary) %>% 
+            mutate(pred_p = predict(logistic_model, 
+                                    type = "response", newdata = [A])) %>% 
+            mutate(pred_status = ifelse(pred_p >= [B],"genuine","counterfeit")) 
+bank_res
+```
+
+**(f)** Create a confusion table by running the code below. What is the accuracy? 
+
+```{r, eval = FALSE}
+N <- nrow(bank_res)
+
+confusion_mat <- table(bank_res %>% select(status_binary, pred_result))
+confusion_mat
+
+accuracy <- (confusion_mat %>% diag %>% sum)/N
+accuracy
+```
+
+**(g)** Now rerun all of the above but instead use a multiple logistic regression model with `Top` and `Diagonal` as predictors. Which model indicates the best performance when it comes to distinguishing counterfeit notes from genuine ones? 
+
+
+## Exercise 2
+
+We will consider data on crime rates by US state. This data set contains arrests per 100,000 residents for assault and murder in each of the 50 US states in 1973. A glimpse of the dataset, called `arrests_dat`, is displayed below:
+
+```{r, message = FALSE}
+library(tidyverse)
+arrests_dat <- read_csv("https://www.dropbox.com/s/8dc41ynd12fwvhr/arrests_dat.csv?raw=1")
+glimpse(arrests_dat)
+```
+
+**(a)** To visualise the data, what would you replace [A], [B], [C] and [D] in the code below with to create this plot? 
+
+```{r, eval = FALSE}
+ggplot(arrests_dat, [A](x = [B], y = [C])) +
+  [D]() +
+  xlab("Murder arrests (per 100,000)") +
+  ylab("Assault arrests (per 100,000)")
+```
+
+```{r, echo = FALSE}
+ggplot(arrests_dat, aes(x = murder, y = assault)) +
+  geom_point() +
+  xlab("Murder arrests (per 100,000)") +
+  ylab("Assault arrests (per 100,000)")
+```
+
+**(b)** Now, let's perform k-means clustering.  Firstly, we will create a new dataset that contains only the `murder` and `assault` variables from the `arrests_dat` dataset. Then we will run the k-means algorithm with 2 clusters on this data. Replace [E],[F] and [G] in the code such that this objective can be achieved. 
+
+```{r, echo = FALSE, include = FALSE}
+arrests_dat2 <- arrests_dat %>% 
+                  dplyr::select(murder, assault)
+
+kmean_res <- kmeans(arrests_dat2, centers = 2)
+```
+
+```{r, eval = FALSE}
+arrests_dat2 <- arrests_dat %>% 
+              [E](murder, assault)
+
+kmean_res <- [F](arrests_dat2, centers = [G])
+```
+
+**(c)** Next we want to visualise the clustering results. What would you replace [H], [I], [J] in the code below to create this plot?
+
+```{r, eval = FALSE}
+library(factoextra)
+[H]([I] , data = arrests_dat2, [J] = "point")
+```
+
+```{r, echo = FALSE, message = FALSE, fig.width=4,fig.height=3}
+library(factoextra)
+fviz_cluster(kmean_res , data = arrests_dat2, geom = "point")
+```
+
+
