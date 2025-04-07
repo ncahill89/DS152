@@ -290,7 +290,10 @@ old_faithful_res
 
 ```{r,fig.width=6, fig.height=3.5}
 library(factoextra)
-fviz_cluster(kmean_res , data = old_faithful %>% select(waiting, eruptions), geom = "point")
+fviz_cluster(kmean_res , data = old_faithful %>% select(waiting, eruptions), 
+             geom = "point",
+             ylab = "waiting time (minutes)",
+             xlab = "eruption time (minutes)")
 ```
 
 **alternatively**
@@ -298,7 +301,9 @@ fviz_cluster(kmean_res , data = old_faithful %>% select(waiting, eruptions), geo
 ```{r, fig.width=6, fig.height=3.5}
 ggplot(old_faithful_res, aes(x = waiting, y = eruptions, colour = as.factor(cluster))) +
   geom_point() +
-  labs(colour = "cluster")
+  labs(colour = "cluster") +
+  ylab("waiting time (minutes)") +
+  xlab("eruption time (minutes)")
 ```
 
 #### Evaluation Methods
