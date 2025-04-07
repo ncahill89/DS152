@@ -349,3 +349,17 @@ fviz_nbclust(old_faithful, kmeans, method = "wss")
 library(factoextra)
 fviz_nbclust(old_faithful, kmeans, method = "silhouette")
 ```
+
+
+ - We can also look at a silhouette plot that shows values for each data point in the cluster
+ 
+```{r}
+# Load required libraries
+library(cluster)
+
+# Compute silhouette information
+sil <- silhouette(kmean_res$cluster, dist(old_faithful))
+# Plot silhouette
+fviz_silhouette(sil) 
+
+```
