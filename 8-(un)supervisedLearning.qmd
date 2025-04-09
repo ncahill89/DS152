@@ -361,5 +361,55 @@ library(cluster)
 sil <- silhouette(kmean_res$cluster, dist(old_faithful))
 # Plot silhouette
 fviz_silhouette(sil) 
+```
+
+### Customer Segmentation
+
+We will use a **synthetic dataset** resembling customer spending behavior. This dataset includes features commonly used in marketing and customer analytics: age, income, spending score, and online activity.
+
+```{r}
+customer_data <- readRDS("customer_data.rds")
+```
+
+
+#### Why Use K-Means for Customer Segmentation?
+
+Customer segmentation helps businesses identify distinct customer groups based on behavior, spending patterns, or demographics. This allows for targeted marketing and personalized services.
+
+
+
+```{r, include=FALSE, echo=FALSE}
+customer_scaled <- scale(customer_data)
+
+# Apply K-means
+kmeans_result <- kmeans(customer_scaled, centers = 3)
+
+# Add cluster assignments
+customer_data$Cluster <- as.factor(kmeans_result$cluster)
+
+# Elbow Method
+fviz_nbclust(customer_scaled, kmeans, method = "wss") +
+  labs(title = "Elbow Method")
+
+# Silhouette Method
+fviz_nbclust(customer_scaled, kmeans, method = "silhouette") +
+  labs(title = "Silhouette Analysis")
+
+# Visualization: Income vs Spending Score
+ggplot(customer_data, aes(x = Income, y = SpendingScore, color = Cluster)) +
+  geom_point(alpha = 0.7, size = 3) +
+  labs(title = "K-means Clustering: 5 Customer Segments",
+       x = "Annual Income",
+       y = "Spending Score") +
+  theme_minimal()
+
+# Visualization: Income vs Spending Score
+ggplot(customer_data, aes(x = Age, y = SpendingScore, color = Cluster)) +
+  geom_point(alpha = 0.7, size = 3) +
+  labs(title = "K-means Clustering: 5 Customer Segments",
+       x = "Age",
+       y = "Spending Score") +
+  theme_minimal()
+
 
 ```

@@ -204,16 +204,10 @@ ggplot(common_spice_lyrics %>% top_n(20), aes(x = fct_reorder(word,n), y = n)) +
 
 One way to analyze the sentiment of a text is to consider the text as a combination of its individual words and the sentiment content of the whole text as the sum of the sentiment content of the individual words.
 
-**Sentiment lexicons**
+**Sentiment lexicons - bing**
 
 ```{r bing, exercise = TRUE}
 get_sentiments("bing")
-```
-
-You can get other lexicons with the `tidytext` package. The "afinn" lexicon returns a numeric value instead of a sentiment. The value is an integer between minus five (negative) and plus five (positive).
-
-```{r afinn, exercise = TRUE}
-get_sentiments("afinn")
 ```
 
 **Sentiments in Spice Girls lyrics**
@@ -228,8 +222,6 @@ sentiment_spice_lyrics <- tidy_spice_lyrics %>%
                             arrange(desc(n))
 sentiment_spice_lyrics
 ```
-
-\newpage
 
 **Sentiments in Spice Girls lyrics**
 
@@ -251,4 +243,44 @@ ggplot(sentiment_spice_lyrics %>% top_n(20), aes(x = fct_reorder(word,n), y = n)
          y = "",
          x = "") +
     facet_wrap(~sentiment, scales  = "free")
+```
+
+
+**Sentiment lexicons - bing**
+
+You can get other lexicons with the `tidytext` package. The "afinn" lexicon returns a numeric value instead of a sentiment. The value is an integer between minus five (negative) and plus five (positive).
+
+```{r afinn, exercise = TRUE}
+get_sentiments("afinn")
+```
+
+**Sentiments in Spice Girls lyrics**
+
+We'll use the "afinn" lexicon.
+
+```{r, exercise = TRUE, message = FALSE}
+sentiment_spice_lyrics <- tidy_spice_lyrics %>%
+                            anti_join(get_stopwords(source = "smart")) %>%
+                            inner_join(get_sentiments("afinn")) 
+sentiment_spice_lyrics
+```
+
+**summarise the afinn scores**
+
+```{r}
+sentiment_spice_lyrics %>% group_by(song_name) %>% summarise(mean_afinn = mean(value))
+```
+**visualise the afinn scores**
+
+```{r}
+ggplot(sentiment_spice_lyrics, aes(y = value)) +
+  geom_boxplot() 
+```
+
+
+```{r}
+ggplot(sentiment_spice_lyrics, aes(x = song_name, y = value)) +
+  geom_boxplot() +
+  geom_point() +
+  coord_flip()
 ```

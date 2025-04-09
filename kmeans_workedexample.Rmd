@@ -3,7 +3,7 @@ title: "R Notebook"
 output: html_notebook
 ---
 
-# Introduction to K-Means Clustering in R: Customer Segmentation
+# Customer Segmentation
 
 ## 1. Overview of K-Means Clustering
 

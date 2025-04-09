@@ -32,6 +32,8 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 8: [(un)Supervised Learning](https://ncahill89.github.io/DS152/8-(un)supervisedLearning.html)
 
+9: [Text Analysis](https://ncahill89.github.io/DS152/9b-text.html)
+
 
 ## Tutorial Sheets
 
