@@ -273,14 +273,26 @@ sentiment_spice_lyrics %>% group_by(song_name) %>% summarise(mean_afinn = mean(v
 **visualise the afinn scores**
 
 ```{r}
+library(ggplot2)
+
 ggplot(sentiment_spice_lyrics, aes(y = value)) +
-  geom_boxplot() 
+  geom_boxplot(fill = "skyblue", color = "black") +
+  theme_minimal() +
+  theme(
+    axis.title.x = element_blank(),
+    axis.text.x = element_blank(),
+    axis.ticks.x = element_blank()
+  ) +
+  labs(y = "Afinn Value")
+
 ```
 
 
 ```{r}
 ggplot(sentiment_spice_lyrics, aes(x = song_name, y = value)) +
-  geom_boxplot() +
+  geom_boxplot(fill = "skyblue", color = "black") +
   geom_point() +
-  coord_flip()
+  coord_flip() +
+  theme_minimal() 
+
 ```
