@@ -4912,8 +4912,7 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
-  <li><a href="#background" id="toc-background" class="nav-link" data-scroll-target="#background">Background</a></li>
+  <li><a href="#solutions-total-20-marks" id="toc-solutions-total-20-marks" class="nav-link active" data-scroll-target="#solutions-total-20-marks"><strong>Solutions</strong> <strong>[Total = 20 Marks]</strong></a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a>
   <ul class="collapse">
   <li><a href="#model-1" id="toc-model-1" class="nav-link" data-scroll-target="#model-1">Model 1</a></li>
@@ -4951,13 +4950,8 @@ window.Quarto = {
 </header>
 
 
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<p>Answer all questions for continuous assessment. Due: <strong>4pm on Friday, 11th April 2025</strong>.</p>
-</section>
-<section id="background" class="level2">
-<h2 class="anchored" data-anchor-id="background">Background</h2>
-<p>The <code>Boston</code> dataset contains housing values in the suburbs of Boston. It is a well known dataset used as an example for machine learning techniques. Usually the objective is to predict the median value of owner-occupied homes in thousands of dollars (<code>medv</code> in the dataset). There are 13 predictors, see below for a <code>glimpse</code> of the dataset.</p>
+<section id="solutions-total-20-marks" class="level2">
+<h2 class="anchored" data-anchor-id="solutions-total-20-marks"><strong>Solutions</strong> <strong>[Total = 20 Marks]</strong></h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Boston <span class="ot">&lt;-</span> MASS<span class="sc">::</span>Boston</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(Boston)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -4980,36 +4974,33 @@ $ lstat   &lt;dbl&gt; 4.98, 9.14, 4.03, 2.94, 5.33, 5.21, 12.43, 19.15, 29.93, 1
 $ medv    &lt;dbl&gt; 24.0, 21.6, 34.7, 33.4, 36.2, 28.7, 22.9, 27.1, 16.5, 18.9, 15…</code></pre>
 </div>
 </div>
-<p>We will split the data into training (<code>boston_train</code>) and test (<code>boston_test</code>) sets, with 70% of the observations in the training set and we will fit the following 2 models:</p>
-<ul>
-<li><p>Model 1: multiple linear regression model with predictors: <code>rm</code> (average number of rooms per dwelling), <code>ptratio</code> (pupil-teacher ratio), <code>lstat</code> (lower status of the population %), <code>rad</code> (index of accessibility to radial highways), <code>crim</code> (per capita crime rate by town);</p></li>
-<li><p>Model 2: regression tree with the same predictors as Model 1.</p></li>
-</ul>
 </section>
 <section id="questions" class="level2">
 <h2 class="anchored" data-anchor-id="questions">Questions</h2>
 <p><strong>(a)</strong> Replace [A], [B] and [C] in the code below which uses functions from the <code>rsample</code> package to create the training and test datasets.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rsample)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>boston_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Boston, <span class="at">prop =</span> [A])</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>boston_train <span class="ot">&lt;-</span> [B](boston_split)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>boston_test  <span class="ot">&lt;-</span> [C](boston_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">10202</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>boston_split <span class="ot">&lt;-</span> <span class="fu">initial_split</span>(Boston, <span class="at">prop =</span> <span class="fl">0.7</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>boston_train <span class="ot">&lt;-</span> <span class="fu">training</span>(boston_split)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>boston_test  <span class="ot">&lt;-</span> <span class="fu">testing</span>(boston_split)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>[A] =</p>
-<p>[B] =</p>
-<p>[C] =</p>
+<p>[A] = 0.7</p>
+<p>[B] = training</p>
+<p>[C] = testing</p>
 <p><strong>(b)</strong> What are the dimensions (rows <span class="math inline">\(\times\)</span> columns) of the <code>boston_train</code> and <code>boston_test</code> datasets?</p>
+<ul>
+<li>345*14</li>
+</ul>
 <p><strong>(c)</strong> Replace [A] and [B] in the code below to fit the models.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit_model1 <span class="ot">&lt;-</span> [A](medv <span class="sc">~</span> rm <span class="sc">+</span> ptratio <span class="sc">+</span> lstat <span class="sc">+</span> rad <span class="sc">+</span> crim, <span class="at">data =</span> boston_train)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fit_model2 <span class="ot">&lt;-</span> [B](medv <span class="sc">~</span> rm <span class="sc">+</span> ptratio <span class="sc">+</span> lstat <span class="sc">+</span> rad <span class="sc">+</span> crim, <span class="at">data =</span> boston_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>fit_model1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(medv <span class="sc">~</span> rm <span class="sc">+</span> ptratio <span class="sc">+</span> lstat <span class="sc">+</span> rad <span class="sc">+</span> crim, <span class="at">data =</span> boston_train)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fit_model2 <span class="ot">&lt;-</span> <span class="fu">rpart</span>(medv <span class="sc">~</span> rm <span class="sc">+</span> ptratio <span class="sc">+</span> lstat <span class="sc">+</span> rad <span class="sc">+</span> crim, <span class="at">data =</span> boston_train)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>[A] =</p>
-<p>[B] =</p>
+<p>[A] = lm</p>
+<p>[B] = rpart</p>
 <p><strong>(d)</strong> Below is the output from Model 1 and Model 2. Based on each model, what is the predicted <code>medv</code> for a house with <code>lstat = 10</code>, <code>rm = 7.5</code>, <code>ptratio = 18.5</code>, <code>crim = 4</code>, <code>rad = 5</code>?</p>
-<section id="model-1" class="level3">
-<h3 class="anchored" data-anchor-id="model-1">Model 1</h3>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -5020,11 +5011,6 @@ Coefficients:
 (Intercept)           rm      ptratio        lstat          rad         crim  
    14.36556      4.88290     -0.86080     -0.54104      0.02868     -0.11700  </code></pre>
 </div>
-</div>
-</section>
-<section id="model-2" class="level3">
-<h3 class="anchored" data-anchor-id="model-2">Model 2</h3>
-<div class="cell">
 <div class="cell-output-display">
 <div>
 <figure class="figure">
@@ -5033,6 +5019,26 @@ Coefficients:
 </div>
 </div>
 </div>
+<section id="model-1" class="level3">
+<h3 class="anchored" data-anchor-id="model-1">Model 1</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit_model1, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">lstat =</span> <span class="dv">10</span>, <span class="at">rm =</span> <span class="fl">7.5</span>, <span class="at">ptratio =</span> <span class="fl">18.5</span>, <span class="at">crim =</span> <span class="dv">4</span>, <span class="at">rad =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+29.32751 </code></pre>
+</div>
+</div>
+</section>
+<section id="model-2" class="level3">
+<h3 class="anchored" data-anchor-id="model-2">Model 2</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">predict</span>(fit_model2, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">lstat =</span> <span class="dv">10</span>, <span class="at">rm =</span> <span class="fl">7.5</span>, <span class="at">ptratio =</span> <span class="fl">18.5</span>, <span class="at">crim =</span> <span class="dv">4</span>, <span class="at">rad =</span> <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       1 
+45.90588 </code></pre>
+</div>
+</div>
+<p><strong>Note for tutors:</strong> Students do not need to use the predicr function to do this, they can just do it by hand from the <code>lm</code> output and by eye from the regression tree plot.</p>
 <p><strong>(e)</strong> After fitting the models, we create plots of the observed vs predicted values for each model, based on the test data. The identity line is overlayed on the plots.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -5044,7 +5050,10 @@ Coefficients:
 </div>
 </div>
 <p>Based on the observed vs predicted plots, do the models tend to over predict or under predict when <code>medv</code> = 50. Give a reason for your answer.</p>
-<p><strong>(f)</strong> We obtained the mean error (ME) and the mean absolute error (MAE) for each model based on the test data. Below you can see a table containing these measurements, but the model is not identified. Assumming that Model 2 is the best model, which row (X or Y) corresponds to Model 2? Give a reason for your answer.</p>
+<ul>
+<li>They tend to underpredict, the points fall below the identity line suggesting that the prediction is lower than the observation.</li>
+</ul>
+<p><strong>(f)</strong> We obtained the mean error (ME) and the mean absolute error (MAE) for each model based on the test data. Below you can see a table containing these measurements, but the model is not identified. Assumming that that Model 2 is the best model, which row (X or Y) corresponds to Model 2? Give a reason for your answer.</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>        ME      MAE
@@ -5052,6 +5061,9 @@ X 1.202534 3.971460
 Y 0.457539 3.585161</code></pre>
 </div>
 </div>
+<ul>
+<li>Y corresponds to model 2, the mean error is closer to zero suggesting reduced bias and the mean absolute error is smaller suggesting the predictions are closer to the obs on average.</li>
+</ul>
 
 
 </section>

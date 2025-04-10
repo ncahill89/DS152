@@ -46,8 +46,6 @@ boston_test <- testing(bank_split)
 
 -   Model 2: regression tree with the same predictors as Model 1.
 
-
-
 ## Questions
 
 **(a)** Replace \[A\], \[B\] and \[C\] in the code below which uses functions from the `rsample` package to create the training and test datasets.
@@ -60,13 +58,11 @@ boston_train <- [B](boston_split)
 boston_test  <- [C](boston_split)
 ```
 
-
 \[A\] =
 
 \[B\] =
 
 \[C\] =
-
 
 **(b)** What are the dimensions (rows $\times$ columns) of the `boston_train` and `boston_test` datasets?
 
@@ -74,7 +70,7 @@ boston_test  <- [C](boston_split)
 
 ```{r, eval = FALSE}
 fit_model1 <- [A](medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
-fit_model2 <- [B]rpart(medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
+fit_model2 <- [B](medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
 ```
 
 ```{r, echo=FALSE}
@@ -85,8 +81,6 @@ fit_model2 <- rpart(medv ~ rm + ptratio + lstat + rad + crim, data = boston_trai
 \[A\] =
 
 \[B\] =
-
-
 
 **(d)** Below is the output from Model 1 and Model 2. Based on each model, what is the predicted `medv` for a house with `lstat = 10`, `rm = 7.5`, `ptratio = 18.5`, `crim = 4`, `rad = 5`?
 
@@ -122,8 +116,7 @@ ggplot(medv_res_test_long, aes(x = medv, y = pred)) +
 
 Based on the observed vs predicted plots, do the models tend to over predict or under predict when `medv` = 50. Give a reason for your answer.
 
-**(f)** We obtained the mean error (ME) and the mean absolute error (MAE) for each model based on the test data. Below you can see a table containing these measurements, but the model is not identified. Assumming that that Model 2 is the best model, which row (X or Y) corresponds to Model 2? Give a reason for your answer.
-
+**(f)** We obtained the mean error (ME) and the mean absolute error (MAE) for each model based on the test data. Below you can see a table containing these measurements, but the model is not identified. Assuming that Model 2 is the best model, which row (X or Y) corresponds to Model 2? Give a reason for your answer.
 
 ```{r, include = FALSE}
 me_model1 <- mean(boston_test$medv - predict(fit_model1, boston_test))
@@ -132,7 +125,6 @@ mae_model1 <- mean(abs(boston_test$medv - predict(fit_model1, boston_test)))
 me_model2 <- mean(boston_test$medv - predict(fit_model2, boston_test))
 mae_model2 <- mean(abs(boston_test$medv - predict(fit_model2, boston_test)))
 ```
-
 
 ```{r, echo = FALSE}
 ME <- c("X" = me_model1, "Y" = me_model2)

@@ -1,0 +1,126 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 5: Predictive Analytics"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rpart)
+library(rpart.plot)
+library(class)
+library(AppliedPredictiveModeling)
+```
+
+## **Solutions** **\[Total = 20 Marks\]**
+
+```{r}
+Boston <- MASS::Boston
+glimpse(Boston)
+```
+
+## Questions
+
+**(a)** Replace \[A\], \[B\] and \[C\] in the code below which uses functions from the `rsample` package to create the training and test datasets. **\[3 Marks\]**
+
+```{r}
+library(rsample)
+set.seed(10202)
+boston_split <- initial_split(Boston, prop = 0.7)
+
+boston_train <- training(boston_split)
+boston_test  <- testing(boston_split)
+```
+
+\[A\] = 0.7
+
+\[B\] = training
+
+\[C\] = testing
+
+**(b)** What are the dimensions (rows $\times$ columns) of the `boston_train` and `boston_test` datasets? **\[2 Marks\]**
+
+-   345\*14
+
+**(c)** Replace \[A\] and \[B\] in the code below to fit the models. **\[2 Marks\]**
+
+```{r}
+fit_model1 <- lm(medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
+fit_model2 <- rpart(medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
+```
+
+\[A\] = lm
+
+\[B\] = rpart
+
+**(d)** Below is the output from Model 1 and Model 2. Based on each model, what is the predicted `medv` for a house with `lstat = 10`, `rm = 7.5`, `ptratio = 18.5`, `crim = 4`, `rad = 5`? **\[6 Marks\]**
+
+```{r, echo=FALSE}
+fit_model1 <- lm(medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
+fit_model1
+fit_model2 <- rpart(medv ~ rm + ptratio + lstat + rad + crim, data = boston_train)
+rpart.plot(fit_model2)
+```
+
+### Model 1
+
+```{r}
+predict(fit_model1, newdata = data.frame(lstat = 10, rm = 7.5, ptratio = 18.5, crim = 4, rad = 5))
+```
+
+### Model 2
+
+```{r}
+predict(fit_model2, newdata = data.frame(lstat = 10, rm = 7.5, ptratio = 18.5, crim = 4, rad = 5))
+```
+
+**Note for tutors:** Students do not need to use the predicr function to do this, they can just do it by hand from the `lm` output and by eye from the regression tree plot.
+
+**(e)** After fitting the models, we create plots of the observed vs predicted values for each model, based on the test data. The identity line is overlayed on the plots.
+
+```{r, echo = FALSE}
+medv_res_test <-    boston_test %>% 
+                    dplyr::select(medv) %>% 
+                    mutate(Model1 = predict(fit_model1, boston_test),
+                           Model2 = predict(fit_model2, boston_test))
+
+medv_res_test_long <- medv_res_test %>% pivot_longer(-medv, 
+                               names_to = "model",
+                               values_to = "pred")
+
+ggplot(medv_res_test_long, aes(x = medv, y = pred)) +
+  geom_point() + 
+  geom_line(aes(x = medv, y = medv)) +
+  facet_wrap(~ model)
+```
+
+Based on the observed vs predicted plots, do the models tend to over predict or under predict when `medv` = 50. Give a reason for your answer. **\[3 Marks\]**
+
+-   They tend to under predict, the points fall below the identity line suggesting that the prediction is lower than the observation.
+
+**(f)** We obtained the mean error (ME) and the mean absolute error (MAE) for each model based on the test data. Below you can see a table containing these measurements, but the model is not identified. Assuming that Model 2 is the best model, which row (X or Y) corresponds to Model 2? Give a reason for your answer. **\[4 Marks\]**
+
+```{r, include = FALSE}
+me_model1 <- mean(boston_test$medv - predict(fit_model1, boston_test))
+mae_model1 <- mean(abs(boston_test$medv - predict(fit_model1, boston_test)))
+
+me_model2 <- mean(boston_test$medv - predict(fit_model2, boston_test))
+mae_model2 <- mean(abs(boston_test$medv - predict(fit_model2, boston_test)))
+```
+
+```{r, echo = FALSE}
+ME <- c("X" = me_model1, "Y" = me_model2)
+MAE <- c("X" = mae_model1, "Y" = mae_model2)
+
+
+error_full <- data.frame(ME, MAE)
+error_full
+```
+
+-   Y corresponds to model 2, the mean error is closer to zero suggesting reduced bias and the mean absolute error is smaller suggesting the predictions are closer to the obs on average.
