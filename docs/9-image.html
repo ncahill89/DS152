@@ -184,8 +184,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><img src="images/camera.png" class="img-fluid"></p>
 <p><strong>Disease diagnosis</strong></p>
 <p><img src="images/malario.png" class="img-fluid"></p>
-<p><strong>Measure Student Engagement</strong></p>
-<p><img src="images/MoodRec.png" class="img-fluid"></p>
+<!-- **Measure Student Engagement** -->
+<!-- ![](images/MoodRec.png) -->
 </section>
 <section id="example-mnist-handwritten-digit-database" class="level3">
 <h3 class="anchored" data-anchor-id="example-mnist-handwritten-digit-database">Example: MNIST handwritten digit database</h3>
@@ -223,7 +223,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="formatting-data-for-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="formatting-data-for-analysis">Formatting data for analysis</h3>
 <p>If we assume each pixel is a feature/predictor then we should format that data such that the columns are pixels and each row corresponds to an image.</p>
-<p>We’ll work with a subset of the MNIST data and consider 1000 images int he training data and 100 images in the test data.</p>
+<p>We’ll work with a subset of the MNIST data and consider 1000 images in the training data and 100 images in the test data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mnist_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -286,8 +286,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>pred_label_knn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  [1] 8 1 9 7 6 0 2 9 1 4 7 4 7 3 9 8 8 4 7 1 1 1 2 2 3 7 3 0 3 9 1 1 9 0 3 5 5
- [38] 5 6 5 0 6 7 6 6 3 2 7 8 1 1 7 7 6 9 9 6 1 3 3 9 1 8 7 1 1 0 9 1 4 4 5 4 0
- [75] 6 2 2 3 1 5 1 2 0 8 8 1 2 6 7 1 6 1 3 4 0 1 2 2 0 7
+ [38] 6 6 5 0 6 7 6 6 3 2 7 8 1 1 7 7 6 9 9 6 1 3 3 9 1 8 7 1 1 0 9 1 4 4 5 4 0
+ [75] 6 2 2 3 1 5 1 2 0 3 8 1 2 6 7 1 6 1 3 4 0 1 2 2 0 7
 Levels: 0 1 2 3 4 5 6 7 8 9</code></pre>
 </div>
 </div>
@@ -331,18 +331,18 @@ label  0  1  2  3  4  5  6  7  8  9
     0  6  0  0  0  0  0  0  0  0  0
     1  0 16  0  0  0  0  0  0  0  0
     2  2  2 10  0  0  0  0  1  0  0
-    3  0  0  0 10  0  1  0  0  1  0
+    3  0  0  0 11  0  1  0  0  0  0
     4  0  0  0  0  6  0  0  1  0  4
     5  0  0  0  0  0  4  1  1  0  0
     6  1  0  0  0  0  0  9  0  0  0
     7  0  2  0  0  0  0  0  7  0  0
-    8  0  0  0  0  0  1  0  1  6  0
+    8  0  0  0  0  0  0  1  1  6  0
     9  0  0  0  0  1  0  0  1  0  5</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.79</code></pre>
+<pre><code>[1] 0.8</code></pre>
 </div>
 </div>
 

@@ -69,9 +69,9 @@ The application of image analysis can be expanded to different domains of scienc
 
 ![](images/malario.png)
 
-**Measure Student Engagement**
+<!-- **Measure Student Engagement** -->
 
-![](images/MoodRec.png)
+<!-- ![](images/MoodRec.png) -->
 
 ### Example: MNIST handwritten digit database
 
@@ -118,7 +118,7 @@ ggplot(melted, aes(x = x, y = y, fill = intensity)) +
 
 If we assume each pixel is a feature/predictor then we should format that data such that the columns are pixels and each row corresponds to an image.
 
-We'll work with a subset of the MNIST data and consider 1000 images int he training data and 100 images in the test data.
+We'll work with a subset of the MNIST data and consider 1000 images in the training data and 100 images in the test data.
 
 ```{r}
 mnist_train

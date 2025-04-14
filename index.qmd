@@ -34,6 +34,7 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 9: [Text Analysis](https://ncahill89.github.io/DS152/9b-text.html)
 
+10: [Image Analysis](https://ncahill89.github.io/DS152/9-image.html)
 
 ## Tutorial Sheets
 
