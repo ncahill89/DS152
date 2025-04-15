@@ -1,0 +1,112 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 6: Unsupervised Learning"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(rpart)
+library(rpart.plot)
+library(class)
+library(AppliedPredictiveModeling)
+library(mclust)
+```
+
+## **Solutions** **\[Total = 20 Marks\]**
+
+
+## Exercise
+
+1.  Which of the following is not required for k-means clustering? 
+
+```{=html}
+<!-- -->
+```
+
+
+D)  All of the above are required. **\[2 Marks\]**
+
+```{=html}
+<!-- -->
+```
+
+2.  In k-means, k stands for 
+
+```{=html}
+<!-- -->
+```
+
+
+B)  Number of center points **\[2 Marks\]**
+
+
+```{=html}
+<!-- -->
+```
+
+3.  Which of the following can act as a possible termination condition for the k-means algorithm? 
+
+```{=html}
+<!-- -->
+```
+
+B)  When the assignment of observations to clusters does not change between iterations. **\[2 Marks\]**
+
+```{=html}
+<!-- -->
+```
+
+4.  For this analysis, we will work with the banknotes dataset to perform k-means clustering. First, we visualise the data by plotting Top vs Diagonal and colouring by Status (counterfeit, genuine) as shown below. Replace \[A\], \[B\], \[C\], \[D\] and \[E\] in the code below to create this plot. **\[5 Marks\]**
+
+
+```{r, echo = TRUE}
+  ggplot(banknote, aes(x = Top, y = Diagonal, colour = Status)) +
+  geom_point()
+```
+
+\[A\] = aes
+\[B\] = Top
+\[C\] = Diagonal
+\[D\] = Status
+\[E\] = geom_point
+
+
+5.  Now, let's perform k-means clustering. We will ignore the fact that the banknotes are classified as genuine or counterfeit, and work only with the variables `Top` and `Diagonal` to see if the k-means algorithm with k = 2 will cluster the genuine notes into a group and the counterfeit notes into a group. Firstly, we will create a new dataset that contains only the `Top` and `Diagonal` from the banknote dataset. Then we will run the kmeans algorithm with 2 clusters on this data. Replace \[A\],\[B\] and \[C\] in the code such that this objective can be achieved. **\[3 Marks\]**
+
+```{r, echo = TRUE, include = FALSE}
+banknote2 <- banknote %>% 
+              select(Top, Diagonal)
+
+kmean_res <- kmeans(banknote2, centers = 2)
+```
+
+\[A\] = select
+\[B\] = kmeans
+\[C\] = 2
+
+
+6.  Next we want to visualise the results in the following way:
+
+```{r, echo = TRUE,message=FALSE}
+library(factoextra)
+fviz_cluster(kmean_res , data = banknote2, geom = "point")
+```
+
+Replace \[A\], \[B\], \[C\] in the code below to create this plot. **\[3 Marks\]**
+
+\[A\] = fviz_cluster
+\[B\] = kmean_res
+\[C\] = geom
+
+
+7.  Based on comparing the plot in 3 with the plot in 1, did the k-means algorithm cluster all the genuine notes into the same cluster? Give a reason for your answer. **\[3 Marks\]**
+
+  - No. It appears to have clustered one of the genuine notes incorrectly. However, this data point is in the middle of all the counterfeit datapoints so that is not surprising. 
+

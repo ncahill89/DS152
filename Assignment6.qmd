@@ -23,33 +23,42 @@ library(mclust)
 
 Answer all questions for continuous assessment. Due: **4pm on Friday, 18th April 2025**.
 
-## Exercise 
+## Exercise
 
-1. Which of the following is not required for k-means clustering?
+1.  Which of the following is not required for k-means clustering?
 
-A) A distance metric
-A) Initial number of clusters
-A) Initial guess as to cluster centroids
-A) All of the above are required. 
+<!-- -->
 
+A)  A distance metric
+B)  Initial number of clusters
+C)  Initial guess as to cluster centroids
+D)  All of the above are required.
 
-2. In k-means, k stands for
+<!-- -->
 
-A) Number of data points
-A) Number of center points
-A) Number of iterations to run the algorithm for
-A) Number of variables
- 
-3. Which of the following can act as a possible termination condition for the k-means algorithm?
+2.  In k-means, k stands for
 
-A) Fixing the number of clusters
-A) When the assignment of observations to clusters does not change between iterations. 
-A) When each cluster has at least k data points
-A) When the algorithm has been run for k iterations
- 
+<!-- -->
 
+A)  Number of data points
+B)  Number of center points
+C)  Number of iterations to run the algorithm for
+D)  Number of variables
 
-4. For this analysis, we will work with the banknotes dataset to perform k-means clustering. First, we visualise the data by plotting Top vs Diagonal and colouring by Status (counterfeit, genuine) as shown below. 
+<!-- -->
+
+3.  Which of the following can act as a possible termination condition for the k-means algorithm?
+
+<!-- -->
+
+A)  Fixing the number of clusters
+B)  When the assignment of observations to clusters does not change between iterations.
+C)  When each cluster has at least k data points
+D)  When the algorithm has been run for k iterations
+
+<!-- -->
+
+4.  For this analysis, we will work with the banknotes dataset to perform k-means clustering. First, we visualise the data by plotting Top vs Diagonal and colouring by Status (counterfeit, genuine) as shown below.
 
 ```{r, echo = FALSE}
 banknote %>%
@@ -57,15 +66,14 @@ banknote %>%
   geom_point()
 ```
 
-Replace [A], [B], [C], [D] and [E] in the code below to create this plot. 
+Replace \[A\], \[B\], \[C\], \[D\] and \[E\] in the code below to create this plot.
 
 ```{r, eval = FALSE}
 ggplot(banknote, [A](x = [B], y = [C], colour = [D])) +
   [E]()
 ```
 
-
-5. Now, let's perform k-means clustering. We will ignore the fact that the banknotes are classified as genuine or counterfeit, and work only with the variables `Top` and `Diagonal` to see if the k-means algorithm with k = 2 will cluster the genuine notes into a group and the counterfeit notes into a group. Firstly, we will create a new dataset that contains only the `Top` and `Diagonal` from the banknote dataset. Then we will run the kmeans algorithm with 2 clusters on this data. Replace [A],[B] and [C] in the code such that this objective can be achieved. 
+5.  Now, let's perform k-means clustering. We will ignore the fact that the banknotes are classified as genuine or counterfeit, and work only with the variables `Top` and `Diagonal` to see if the k-means algorithm with k = 2 will cluster the genuine notes into a group and the counterfeit notes into a group. Firstly, we will create a new dataset that contains only the `Top` and `Diagonal` from the banknote dataset. Then we will run the kmeans algorithm with 2 clusters on this data. Replace \[A\],\[B\] and \[C\] in the code such that this objective can be achieved.
 
 ```{r, echo = FALSE, include = FALSE}
 banknote2 <- banknote %>% 
@@ -81,21 +89,18 @@ banknote2 <- banknote %>%
 kmean_res <- [B](banknote2, centers = [C])
 ```
 
-
-6. Next we want to visualise the results in the following way:
+6.  Next we want to visualise the results in the following way:
 
 ```{r, echo = FALSE,message=FALSE}
 library(factoextra)
 fviz_cluster(kmean_res , data = banknote2, geom = "point")
 ```
 
-Replace [A], [B], [C] in the code below to create this plot. 
+Replace \[A\], \[B\], \[C\] in the code below to create this plot.
 
 ```{r, eval = FALSE}
 library(factoextra)
 [A]([B] , data = banknote2, [C] = "point")
 ```
 
-7. Based on comparing the plot in 3 with the plot in 1, did the k-means algorithm cluster all the genuine notes into the same cluster? Give a reason for your answer. 
-
-
+7.  Based on comparing the plot in part 6 with the plot in part 4, did the k-means algorithm cluster all the genuine notes into the same cluster? Give a reason for your answer.

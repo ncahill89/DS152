@@ -36,10 +36,10 @@ We will split the data into training (`boston_train`) and test (`boston_test`) s
 ```{r, echo = FALSE}
 library(rsample)
 set.seed(10202)
-bank_split <- initial_split(Boston, prop = 0.7)
+boston_split <- initial_split(Boston, prop = 0.7)
 
-boston_train <- training(bank_split)
-boston_test <- testing(bank_split)
+boston_train <- training(boston_split)
+boston_test <- testing(boston_split)
 ```
 
 -   Model 1: multiple linear regression model with predictors: `rm` (average number of rooms per dwelling), `ptratio` (pupil-teacher ratio), `lstat` (lower status of the population %), `rad` (index of accessibility to radial highways), `crim` (per capita crime rate by town);

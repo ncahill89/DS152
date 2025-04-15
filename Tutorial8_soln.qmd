@@ -1,0 +1,102 @@
+---
+title: "DS152 Tutorial Sheet 7"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidytext)
+library(stopwords)
+library(class)
+
+```
+
+
+## Exercise 
+
+The objective of this exercise is to perform sentiment analysis using tidy text techniques in R. You are provided with a dataset containing tweets about Data Science. Your task is to perform sentiment analysis on these tweets using the tidy text approach in R. The data set is shown below:
+
+```{r}
+tweet_text <- c("Just started learning about machine learning algorithms. Excited to dive deeper into this fascinating field #machinelearning #datascience",
+"Attending a webinar on neural networks today. Looking forward to gaining new insights! #neuralnetworks #datascience",
+"Analyzing a dataset using Python's pandas library. Data wrangling can be challenging but rewarding! #pandas #datascience",
+"Experimenting with visualization techniques in R. Creating insightful plots to better understand the data. #rstats #dataviz",
+"Completed a project on natural language processing. It's incredible what we can accomplish with text data! #nlp #datascience",
+"Discussing the latest trends in AI and machine learning with colleagues. Continuous learning is key in this rapidly evolving field! #AI #datascience")
+
+
+tweet_df <- tibble(line = 1:6, tweet_text = tweet_text)
+tweet_df
+```
+
+**(a)** Replace [A] and [B] in the code below to create a tidy text dataset that has one word per row. 
+
+```{r,  message=FALSE}
+library(tidytext)
+tweet_words <-  tweet_df %>%
+                    unnest_tokens(word, tweet_text)
+tweet_words
+```
+
+  __Note for tutors:__ Talk about what `unnest_tokens` does i.e., separates the sentences based on spaces etc. 
+
+**(b)** We now want to remove "stop" words from the `tweet_words` dataset. Replace [A] and [B] in the code below to create the dataset with the stop words removed. Use the "snowball" lexicon. 
+
+
+```{r, message=FALSE}
+tweet_words_rm_stop  <-   tweet_words %>%
+                            anti_join(get_stopwords(source = "snowball")) 
+tweet_words_rm_stop 
+```
+
+  __Note for tutors:__ Talk about what `anti_join` does i.e., it will return everything from the `word` column in the `tweet_words` dataset that doesn't appear in the `word` column from the stopwords data, resulting in all of the stop words being removed. 
+
+
+**(c)** Now we're going to assign a sentiment to each word in the `tweet_words_rm_stop` dataset using the bing library.  Replace [A] and [B] in the code below to create the dataset with the sentiment added. 
+
+
+```{r, message=FALSE}
+tweet_sentiment <- tweet_words_rm_stop %>%
+                            inner_join(get_sentiments("bing")) 
+tweet_sentiment
+```
+
+  __Note for tutors:__ Talk about what `inner_join` does i.e., it will essentially match the words in the two datasets based on the `word` column and then add in the corresponding sentiment column to the `tweet_words_rm_stop` for the words it has a match for. 
+
+
+
+**(d)** 
+
+**i.** How many words are in the `tweet_sentiment` dataset compared to the `tweet_words` dataset? Why is the total number of words different? 
+
+  - stop words have been removed and not all remaining words can be found in the bing library so only words that have a match will end up in this final daatset. 
+
+**ii.**  What % of words have a positive sentiment? 
+
+  - 8/9  = 88.9%
+  
+**(e)**
+
+**i.** Repeat parts (b) and (c) but using the "smart" library and the "afinn" library. 
+
+```{r, message=FALSE}
+tweet_words_rm_stop  <-   tweet_words %>%
+                            anti_join(get_stopwords(source = "smart")) 
+tweet_words_rm_stop 
+
+tweet_sentiment <- tweet_words_rm_stop %>%
+                            inner_join(get_sentiments("afinn")) 
+tweet_sentiment
+```
+
+**ii.** What is the average sentiment score? 
+
+```{r, message=FALSE}
+tweet_sentiment %>% summarise(mean(value))
+```
+
