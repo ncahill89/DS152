@@ -1,0 +1,89 @@
+---
+title: "DS152 Introduction to Data Science (2)"
+subtitle: "Assignment 7: Text Analysis"
+author: "Prof. Niamh Cahill"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidytext)
+```
+
+## Instructions
+
+Answer all questions for continuous assessment. Due: **4pm on Friday, 2nd May 2025**.
+
+## Exercise
+
+You are provided with a dataset containing customer reviews of a restaurant. Your task is to perform sentiment analysis on these reviews using the tidy text approach in R. The dataset is shown below.
+
+```{r, echo = FALSE}
+review_text <- 
+c("This restaurant has amazing food and excellent service",
+"The food was terrible, but the service was great",
+"We had a wonderful experience dining here",
+"The atmosphere was cozy, but the food was just average",
+"The service was slow, and the food was cold",
+"We will definitely be coming back again",
+"The portions were small, but the flavors were outstanding")
+
+review_df <- tibble(line = 1:7, review_text = review_text)
+review_df
+```
+
+**(a)** Replace \[A\] and \[B\] in the code below to create a tidy text dataset that has one word per row.
+
+```{r, eval = FALSE}
+review_words  <- review_df %>%
+                    [A](word, [B])
+```
+
+```{r, echo = FALSE}
+review_words <-  review_df %>%
+                    unnest_tokens(word, review_text)
+review_words
+```
+
+**(b)** We now want to remove "stop" words from the `reviews_words` dataset. We use the following code to do this:
+
+```{r, message = FALSE}
+review_words_rm_stop <-   review_words %>%
+                            anti_join(get_stopwords(source = "smart")) 
+review_words_rm_stop
+```
+
+**i.** Explain in your own words what this code is doing.
+
+**ii.** How many stop words were removed from the dataset?
+
+**(c)** Now we're going to assign a sentiment to each word in the `review_words_rm_stop` dataset using the bing library. We use the following code to do this:
+
+```{r, message = FALSE}
+sentiment_review <- review_words_rm_stop %>%
+                            inner_join(get_sentiments("bing")) 
+sentiment_review
+```
+
+**i.** Explain in your own words what this code is doing.
+
+**ii.** Were all words in the `review_words_rm_stop` found in the bing library? Give a reason for your answer.
+
+**(d)**
+
+Now we're going to assign a sentiment to each word in the `review_words_rm_stop` dataset using the afinn library. We use the following code to do this:
+
+```{r, message = FALSE}
+sentiment_review_afinn <- review_words_rm_stop %>%
+                            inner_join(get_sentiments("afinn")) 
+sentiment_review_afinn
+```
+
+**i.** How do the afinn and bing lexicons differ in their treatment of sentiment?
+
+**ii.** Do the conclusions about the overall sentiment of the review agree when using the bing and afinn lexicons, give a reason for your answer.

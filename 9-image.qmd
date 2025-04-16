@@ -11,12 +11,9 @@ library(tidytext)
 library(stopwords)
 library(class)
 
-mnist_train <- readRDS("data/dat_train.rds")
-mnist_train <- mnist_train %>% select(label,`pixel1`:`pixel764`)
-
-mnist_test <- readRDS("data/dat_test.rds")
-mnist_test <- mnist_test %>% select(label,`pixel1`:`pixel764`)
-melted <- readRDS("data/melted.rds")
+mnist_train <- readRDS("data/mnist_train.rds")
+mnist_test <- readRDS("data/mnist_test.rds")
+mnist_melted <- readRDS("data/mnist_melted.rds")
 
 
 pred_label_knn <- knn(mnist_train %>% select(-label), 
@@ -80,14 +77,40 @@ http://yann.lecun.com/exdb/mnist/
 -   70,000 grayscale images of handwritten numbers at low resolution (28 by 28 pixels)
 -   Used 60,000 to train the algorithm and 10,000 to test
 
+#### Values in the Dataset
+
+1. Pixel Values
+
+  - Each pixel in an image is represented by a value from 0 to 255:
+
+    - 0: Black (no ink)
+  
+    - 255: White (maximum ink)
+
+    - Intermediate values: Shades of gray
+
+  - Most analysis will often normalize these values to a range of [0.0, 1.0] or [-1.0, 1.0] for training.
+
+2. Labels
+
+  - Each image is labeled with the digit it represents: 0, 1, 2, ..., 9 (so 10 classes total)
+
 #### Illustrative example of a single image
 
 ![](images/eight.jpeg)
 
-### Example of numbers in the MNIST training dataset
+### Visualising the numbers in the MNIST training dataset
 
-```{r, echo = FALSE}
-ggplot(melted, aes(x = x, y = y, fill = intensity)) +
+The data needs to be reformatted for plotting. For example
+
+```{r}
+as_tibble(mnist_melted)
+```
+
+Then we can plot using standard ggplot methods. For example 
+
+```{r}
+ggplot(mnist_melted, aes(x = x, y = y, fill = intensity)) +
   geom_tile() +
   scale_fill_continuous(name = "Pixel Intensity") +
   scale_y_reverse() +
@@ -130,7 +153,7 @@ mnist_test
 
 ### Applying KNN
 
-```{r image1, exercise = TRUE}
+```{r image1}
 library(class)
 pred_label_knn <- knn(mnist_train %>% select(-label), 
                       mnist_test %>% select(-label), 
@@ -141,7 +164,7 @@ pred_label_knn
 
 ### Storing results
 
-```{r image2, exercise = TRUE}
+```{r image2}
 mnist_res <- mnist_test %>%
                 select(label) %>% 
                 mutate(pred_label = pred_label_knn)
@@ -151,7 +174,7 @@ mnist_res
 
 ### Calculating accuracy
 
-```{r image3, exercise = TRUE}
+```{r image3}
 N <- nrow(mnist_res)
 
 confusion_mat <- table(mnist_res %>% select(label, pred_label))
