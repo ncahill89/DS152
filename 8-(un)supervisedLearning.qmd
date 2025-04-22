@@ -350,9 +350,8 @@ library(factoextra)
 fviz_nbclust(old_faithful, kmeans, method = "silhouette")
 ```
 
+-   We can also look at a silhouette plot that shows values for each data point in the cluster
 
- - We can also look at a silhouette plot that shows values for each data point in the cluster
- 
 ```{r}
 # Load required libraries
 library(cluster)
@@ -371,12 +370,9 @@ We will use a **synthetic dataset** resembling customer spending behavior. This 
 customer_data <- readRDS("customer_data.rds")
 ```
 
-
 #### Why Use K-Means for Customer Segmentation?
 
 Customer segmentation helps businesses identify distinct customer groups based on behavior, spending patterns, or demographics. This allows for targeted marketing and personalized services.
-
-
 
 ```{r, include=FALSE, echo=FALSE}
 customer_scaled <- scale(customer_data)

@@ -79,21 +79,21 @@ http://yann.lecun.com/exdb/mnist/
 
 #### Values in the Dataset
 
-1. Pixel Values
+1.  Pixel Values
 
-  - Each pixel in an image is represented by a value from 0 to 255:
+-   Each pixel in an image is represented by a value from 0 to 255:
 
-    - 0: Black (no ink)
-  
-    - 255: White (maximum ink)
+    -   0: Black (no ink)
 
-    - Intermediate values: Shades of gray
+    -   255: White (maximum ink)
 
-  - Most analysis will often normalize these values to a range of [0.0, 1.0] or [-1.0, 1.0] for training.
+    -   Intermediate values: Shades of gray
 
-2. Labels
+-   Most analysis will often normalize these values to a range of \[0.0, 1.0\] or \[-1.0, 1.0\] for training.
 
-  - Each image is labeled with the digit it represents: 0, 1, 2, ..., 9 (so 10 classes total)
+2.  Labels
+
+-   Each image is labeled with the digit it represents: 0, 1, 2, ..., 9 (so 10 classes total)
 
 #### Illustrative example of a single image
 
@@ -107,7 +107,7 @@ The data needs to be reformatted for plotting. For example
 as_tibble(mnist_melted)
 ```
 
-Then we can plot using standard ggplot methods. For example 
+Then we can plot using standard ggplot methods. For example
 
 ```{r}
 ggplot(mnist_melted, aes(x = x, y = y, fill = intensity)) +
