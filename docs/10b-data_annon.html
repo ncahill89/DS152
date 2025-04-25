@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to Introduction to Data Science (2)! – Introduction to Data Science (2)</title>
+<title>Introduction to Data Anonymisation – Introduction to Data Science (2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,6 +66,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -82,9 +111,39 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lecture-notes" id="toc-lecture-notes" class="nav-link active" data-scroll-target="#lecture-notes">Lecture Notes</a></li>
-  <li><a href="#tutorial-sheets" id="toc-tutorial-sheets" class="nav-link" data-scroll-target="#tutorial-sheets">Tutorial Sheets</a></li>
-  <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a></li>
+  <li><a href="#case-study-location-tracking-at-scale" id="toc-case-study-location-tracking-at-scale" class="nav-link active" data-scroll-target="#case-study-location-tracking-at-scale">🚨 Case Study: Location Tracking at Scale</a>
+  <ul class="collapse">
+  <li><a href="#why-its-hard-to-hide" id="toc-why-its-hard-to-hide" class="nav-link" data-scroll-target="#why-its-hard-to-hide">Why It’s Hard to Hide</a></li>
+  </ul></li>
+  <li><a href="#data-anonymisation-what-and-why" id="toc-data-anonymisation-what-and-why" class="nav-link" data-scroll-target="#data-anonymisation-what-and-why">🕵️‍♀️ Data Anonymisation: What and Why</a>
+  <ul class="collapse">
+  <li><a href="#key-privacy-goals" id="toc-key-privacy-goals" class="nav-link" data-scroll-target="#key-privacy-goals">🔑 Key Privacy Goals</a></li>
+  </ul></li>
+  <li><a href="#privacy-in-the-digital-age" id="toc-privacy-in-the-digital-age" class="nav-link" data-scroll-target="#privacy-in-the-digital-age">🔌 Privacy in the Digital Age</a></li>
+  <li><a href="#defining-privacy" id="toc-defining-privacy" class="nav-link" data-scroll-target="#defining-privacy">📐 Defining Privacy</a></li>
+  <li><a href="#what-makes-data-personal" id="toc-what-makes-data-personal" class="nav-link" data-scroll-target="#what-makes-data-personal">🧩 What Makes Data Personal?</a>
+  <ul class="collapse">
+  <li><a href="#attribute-types" id="toc-attribute-types" class="nav-link" data-scroll-target="#attribute-types">Attribute Types</a></li>
+  </ul></li>
+  <li><a href="#naive-anonymisation" id="toc-naive-anonymisation" class="nav-link" data-scroll-target="#naive-anonymisation">❌ Naive Anonymisation</a></li>
+  <li><a href="#k-anonymity" id="toc-k-anonymity" class="nav-link" data-scroll-target="#k-anonymity">🔢 K-Anonymity</a>
+  <ul class="collapse">
+  <li><a href="#techniques" id="toc-techniques" class="nav-link" data-scroll-target="#techniques">Techniques:</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  </ul></li>
+  <li><a href="#beyond-k-anonymity" id="toc-beyond-k-anonymity" class="nav-link" data-scroll-target="#beyond-k-anonymity">🧱 Beyond k-Anonymity</a>
+  <ul class="collapse">
+  <li><a href="#l-diversity" id="toc-l-diversity" class="nav-link" data-scroll-target="#l-diversity">🔀 l-Diversity</a></li>
+  <li><a href="#differential-privacy" id="toc-differential-privacy" class="nav-link" data-scroll-target="#differential-privacy">🌫️ Differential Privacy</a></li>
+  </ul></li>
+  <li><a href="#other-techniques" id="toc-other-techniques" class="nav-link" data-scroll-target="#other-techniques">🔧 Other Techniques</a>
+  <ul class="collapse">
+  <li><a href="#microaggregation" id="toc-microaggregation" class="nav-link" data-scroll-target="#microaggregation">Microaggregation</a></li>
+  <li><a href="#shuffling-reverse-mapping" id="toc-shuffling-reverse-mapping" class="nav-link" data-scroll-target="#shuffling-reverse-mapping">Shuffling (Reverse Mapping)</a></li>
+  <li><a href="#randomised-response-warner-1965" id="toc-randomised-response-warner-1965" class="nav-link" data-scroll-target="#randomised-response-warner-1965">Randomised Response (Warner, 1965)</a></li>
+  </ul></li>
+  <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">🤔 Final Thoughts</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading">📚 Further Reading</a></li>
   </ul>
 </nav>
     </div>
@@ -93,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to Introduction to Data Science (2)!</h1>
+<h1 class="title">Introduction to Data Anonymisation</h1>
 </div>
 
 
@@ -110,43 +169,213 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the course website for DS152 Introduction to Data Science (2).</p>
-<p><a href="https://ncahill89.github.io/DS152/0-Information.html">Module information</a></p>
-<p>Lecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.</p>
-<p>Contact: Niamh Cahill (niamh.cahill@mu.ie)</p>
-<section id="lecture-notes" class="level2">
-<h2 class="anchored" data-anchor-id="lecture-notes">Lecture Notes</h2>
-<p>1: <a href="https://ncahill89.github.io/DS152/1-TidyverseRecap.html">Tidyverse Recap</a></p>
-<p>2: <a href="https://ncahill89.github.io/DS152/2-Correlation.html">Correlation (and Causation)</a></p>
-<p>3: <a href="https://ncahill89.github.io/DS152/3-MultipleRegression.html">Multiple Regression Models</a></p>
-<p>4: <a href="https://ncahill89.github.io/DS152/4-sampling.html">Sampling Principles and Strategies</a></p>
-<p>5: <a href="https://ncahill89.github.io/DS152/5-ObservationalStudies.html">Observational Studies</a></p>
-<p>6: <a href="https://ncahill89.github.io/DS152/6-experiments.html">Experimental Studies</a></p>
-<p>7: <a href="https://ncahill89.github.io/DS152/7-PredictiveAnalytics.html">Predictive Analytics</a></p>
-<p>8: <a href="https://ncahill89.github.io/DS152/8-(un)supervisedLearning.html">(un)Supervised Learning</a></p>
-<p>9: <a href="https://ncahill89.github.io/DS152/9b-text.html">Text Analysis</a></p>
-<p>10: <a href="https://ncahill89.github.io/DS152/9-image.html">Image Analysis</a></p>
-<p>11: <a href="https://ncahill89.github.io/DS152/10b-data_annon.html">Data Anonymisation</a></p>
+<section id="case-study-location-tracking-at-scale" class="level2">
+<h2 class="anchored" data-anchor-id="case-study-location-tracking-at-scale">🚨 Case Study: Location Tracking at Scale</h2>
+<ul>
+<li>Companies track smartphone users constantly, storing <strong>billions</strong> of data points.</li>
+<li>The NY Times <a href="https://www.nytimes.com/series/new-york-times-privacy-project">Privacy Project</a> obtained one such file:
+<ul>
+<li>50 <strong>billion</strong> location pings</li>
+<li>From over <strong>12 million Americans</strong> across 2016–2017</li>
+</ul></li>
+</ul>
+<blockquote class="blockquote">
+<p><em>“You may think your location data is anonymous… it’s not.”</em></p>
+</blockquote>
+<section id="why-its-hard-to-hide" class="level3">
+<h3 class="anchored" data-anchor-id="why-its-hard-to-hide">Why It’s Hard to Hide</h3>
+<ul>
+<li>Imagine your <strong>daily commute</strong>: does anyone else’s phone follow your same path?</li>
+<li>High-resolution geolocation data is <em>virtually impossible</em> to anonymise.</li>
+<li>Paul Ohm:<br>
+&gt; <em>“DNA is probably the only thing that’s harder to anonymise than geolocation data.”</em></li>
+</ul>
+<p>📖 <a href="https://www.nytimes.com/wirecutter/blog/how-iphone-apps-track-you/">How iPhone apps track you</a></p>
+<hr>
 </section>
-<section id="tutorial-sheets" class="level2">
-<h2 class="anchored" data-anchor-id="tutorial-sheets">Tutorial Sheets</h2>
-<p>Tutorial Sheet 1: <a href="https://ncahill89.github.io/DS152/Tutorial1.html">Tidyverse Recap</a></p>
-<p>Tutorial Sheet 2: <a href="https://ncahill89.github.io/DS152/Tutorial2.html">Logistic Regression</a></p>
-<p>Tutorial Sheet 3: <a href="https://ncahill89.github.io/DS152/Tutorial3.html">Observational Studies</a></p>
-<p>Tutorial Sheet 4: <a href="https://ncahill89.github.io/DS152/Tutorial4.html">Experimental Studies</a></p>
-<p>Tutorial Sheet 5: <a href="https://ncahill89.github.io/DS152/Tutorial6.html">Predictive Analytics</a></p>
-<p>Tutorial Sheet 6: <a href="https://ncahill89.github.io/DS152/Tutorial7.html">(un)Supervised Learning</a></p>
-<p>Tutorial Sheet 7: <a href="https://ncahill89.github.io/DS152/Tutorial8.html">Text Analysis</a></p>
 </section>
-<section id="assignments" class="level2">
-<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
-<p>Assignment 1: <a href="https://ncahill89.github.io/DS152/Assignment1.html">Tidyverse Recap</a></p>
-<p>Assignment 2: <a href="https://ncahill89.github.io/DS152/Assignment2.html">Linear Regression</a></p>
-<p>Assignment 3: <a href="https://ncahill89.github.io/DS152/Assignment3.html">Sampling and Observational Studies</a></p>
-<p>Assignment 4: <a href="https://ncahill89.github.io/DS152/Assignment4.html">Experimental Studies</a></p>
-<p>Assignment 5: <a href="https://ncahill89.github.io/DS152/Assignment5.html">Predictive Analytics</a></p>
-<p>Assignment 6: <a href="https://ncahill89.github.io/DS152/Assignment6.html">Unsupervised Learning</a></p>
-<p>Assignment 7: <a href="https://ncahill89.github.io/DS152/Assignment7.html">Text Analysis</a></p>
+<section id="data-anonymisation-what-and-why" class="level2">
+<h2 class="anchored" data-anchor-id="data-anonymisation-what-and-why">🕵️‍♀️ Data Anonymisation: What and Why</h2>
+<section id="key-privacy-goals" class="level3">
+<h3 class="anchored" data-anchor-id="key-privacy-goals">🔑 Key Privacy Goals</h3>
+<p><strong>Disclosure Control</strong><br>
+- Protect <strong>individual identity</strong>, allow <strong>group-level insights</strong></p>
+<p><strong>Privacy–Utility Trade-off</strong><br>
+- Balance between <strong>data usefulness</strong> and <strong>privacy risk</strong></p>
+<hr>
+</section>
+</section>
+<section id="privacy-in-the-digital-age" class="level2">
+<h2 class="anchored" data-anchor-id="privacy-in-the-digital-age">🔌 Privacy in the Digital Age</h2>
+<p><img src="images/alexa.jpg" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p>“You have zero privacy anyway — get over it.”<br>
+— <em>Scott McNealy, Sun Microsystems CEO, 1999</em></p>
+</blockquote>
+<blockquote class="blockquote">
+<p>“If you have something to hide, maybe you shouldn’t be doing it.”<br>
+— <em>Eric Schmidt, former Google CEO, 2009</em></p>
+</blockquote>
+<hr>
+</section>
+<section id="defining-privacy" class="level2">
+<h2 class="anchored" data-anchor-id="defining-privacy">📐 Defining Privacy</h2>
+<p>Dalenius (1977) on statistical data:</p>
+<blockquote class="blockquote">
+<p><em>“Nothing can be learned about an individual from a released dataset that couldn’t be learned without it.”</em></p>
+</blockquote>
+<p>But…</p>
+<ul>
+<li>If Alice knows Bob is <strong>5cm shorter</strong> than average…</li>
+<li>And the <strong>average</strong> is published…</li>
+<li>She now knows Bob’s <strong>exact height</strong></li>
+</ul>
+<p>➡️ Highlights the power of <strong>side information</strong></p>
+<hr>
+</section>
+<section id="what-makes-data-personal" class="level2">
+<h2 class="anchored" data-anchor-id="what-makes-data-personal">🧩 What Makes Data Personal?</h2>
+<section id="attribute-types" class="level3">
+<h3 class="anchored" data-anchor-id="attribute-types">Attribute Types</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Identifiers</td>
+<td>Name, ID number, Email</td>
+</tr>
+<tr class="even">
+<td>Sensitive</td>
+<td>Health, Salary, Religion</td>
+</tr>
+<tr class="odd">
+<td>Non-sensitive</td>
+<td>Age, ZIP code, Education</td>
+</tr>
+</tbody>
+</table>
+<p>🚨 Quasi-identifiers: seemingly benign attributes that, in combination, reveal identity.</p>
+<hr>
+</section>
+</section>
+<section id="naive-anonymisation" class="level2">
+<h2 class="anchored" data-anchor-id="naive-anonymisation">❌ Naive Anonymisation</h2>
+<ul>
+<li>Just removing identifiers <strong>isn’t enough</strong></li>
+<li>Combinations like <strong>ZIP + Gender + DOB</strong> identify <strong>87%</strong> of the U.S. population (Sweeney, 2000)</li>
+</ul>
+<p><img src="images/qid.png" class="img-fluid"></p>
+<blockquote class="blockquote">
+<p>🏥 MA released “anonymous” health data.<br>
+📋 L. Sweeney used a copy of voter records containing names as well as ZIP, gender and DOB and by cross-referencing the two datasets, she identified the state governor’s records in the medical data!</p>
+</blockquote>
+<hr>
+</section>
+<section id="k-anonymity" class="level2">
+<h2 class="anchored" data-anchor-id="k-anonymity">🔢 K-Anonymity</h2>
+<blockquote class="blockquote">
+<p>Make each person <strong>indistinguishable</strong> from at least <span class="math inline">\(k-1\)</span> others in a dataset.</p>
+</blockquote>
+<p><img src="images/kanon.png" class="img-fluid"></p>
+<section id="techniques" class="level3">
+<h3 class="anchored" data-anchor-id="techniques">Techniques:</h3>
+<ol type="1">
+<li><strong>Suppression</strong> – remove or mask values</li>
+</ol>
+<p><img src="images/kanon2.png" class="img-fluid"></p>
+<ol start="2" type="1">
+<li><strong>Generalisation</strong> – make values less specific</li>
+</ol>
+<p><img src="images/kanon3.png" class="img-fluid"></p>
+</section>
+<section id="limitations" class="level3">
+<h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
+<!-- ![](images/kanon4.png) -->
+<ul>
+<li><p><strong>Homogeneity attack</strong>: if all <span class="math inline">\(k\)</span> rows have same sensitive value, identity is inferred.</p>
+<p><img src="images/kanon5.png" class="img-fluid"></p></li>
+<li><p>If we know John, who’s 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition</p></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="beyond-k-anonymity" class="level2">
+<h2 class="anchored" data-anchor-id="beyond-k-anonymity">🧱 Beyond k-Anonymity</h2>
+<section id="l-diversity" class="level3">
+<h3 class="anchored" data-anchor-id="l-diversity">🔀 l-Diversity</h3>
+<ul>
+<li>Requires <strong>diverse sensitive values</strong> among <span class="math inline">\(k\)</span>-group</li>
+</ul>
+</section>
+<section id="differential-privacy" class="level3">
+<h3 class="anchored" data-anchor-id="differential-privacy">🌫️ Differential Privacy</h3>
+<ul>
+<li>Add <strong>random noise</strong> to aggregate results</li>
+<li>Ensures <strong>individual contribution has minimal impact</strong></li>
+<li>Widely used by <strong>Apple</strong>, <strong>Google</strong>, <strong>US Census</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="other-techniques" class="level2">
+<h2 class="anchored" data-anchor-id="other-techniques">🔧 Other Techniques</h2>
+<section id="microaggregation" class="level3">
+<h3 class="anchored" data-anchor-id="microaggregation">Microaggregation</h3>
+<ul>
+<li>Group records, replace sensitive value with <strong>group average</strong></li>
+<li>Preserves structure while hiding individuals</li>
+</ul>
+</section>
+<section id="shuffling-reverse-mapping" class="level3">
+<h3 class="anchored" data-anchor-id="shuffling-reverse-mapping">Shuffling (Reverse Mapping)</h3>
+<ol type="1">
+<li>Model sensitive variable using public attributes<br>
+</li>
+<li>Predict &amp; rank values<br>
+</li>
+<li>Shuffle original data based on these ranks<br>
+</li>
+<li>Result: <strong>original values</strong>, but <strong>reordered</strong></li>
+</ol>
+</section>
+<section id="randomised-response-warner-1965" class="level3">
+<h3 class="anchored" data-anchor-id="randomised-response-warner-1965">Randomised Response (Warner, 1965)</h3>
+<ul>
+<li>Coin flip decides if respondent answers truthfully</li>
+<li>Provides <strong>individual deniability</strong>, preserves <strong>population estimates</strong></li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="final-thoughts" class="level2">
+<h2 class="anchored" data-anchor-id="final-thoughts">🤔 Final Thoughts</h2>
+<ul>
+<li><strong>Perfect anonymisation is extremely difficult</strong></li>
+<li>Privacy-preserving methods must consider:
+<ul>
+<li>Side info</li>
+<li>Utility of data</li>
+<li>Statistical inference risks</li>
+</ul></li>
+</ul>
+<blockquote class="blockquote">
+<p>Remember:<br>
+Data can be anonymous in theory, but not always in practice.</p>
+</blockquote>
+<hr>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">📚 Further Reading</h2>
+<ul>
+<li><a href="https://www.nytimes.com/series/new-york-times-privacy-project">NYT Privacy Project</a></li>
+<li>Sweeney, L. (2000). Simple Demographics Often Identify People Uniquely.</li>
+<li>Dwork, C. (2006). Differential Privacy.</li>
+</ul>
 
 
 </section>

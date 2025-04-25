@@ -36,6 +36,9 @@ Contact: Niamh Cahill (niamh.cahill\@mu.ie)
 
 10: [Image Analysis](https://ncahill89.github.io/DS152/9-image.html)
 
+11: [Data Anonymisation](https://ncahill89.github.io/DS152/10b-data_annon.html)
+
+
 ## Tutorial Sheets
 
 Tutorial Sheet 1: [Tidyverse Recap](https://ncahill89.github.io/DS152/Tutorial1.html)

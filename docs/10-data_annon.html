@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Welcome to Introduction to Data Science (2)! – Introduction to Data Science (2)</title>
+<title>Introduction to Data Annonymisation – Introduction to Data Science (2)</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -66,6 +66,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -82,9 +111,20 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lecture-notes" id="toc-lecture-notes" class="nav-link active" data-scroll-target="#lecture-notes">Lecture Notes</a></li>
-  <li><a href="#tutorial-sheets" id="toc-tutorial-sheets" class="nav-link" data-scroll-target="#tutorial-sheets">Tutorial Sheets</a></li>
-  <li><a href="#assignments" id="toc-assignments" class="nav-link" data-scroll-target="#assignments">Assignments</a></li>
+  <li><a href="#lets-start-with-a-case-study" id="toc-lets-start-with-a-case-study" class="nav-link active" data-scroll-target="#lets-start-with-a-case-study">Let’s start with a case study</a></li>
+  <li><a href="#data-anonymisation" id="toc-data-anonymisation" class="nav-link" data-scroll-target="#data-anonymisation">Data Anonymisation</a>
+  <ul class="collapse">
+  <li><a href="#tracking-is-hard-to-avoid" id="toc-tracking-is-hard-to-avoid" class="nav-link" data-scroll-target="#tracking-is-hard-to-avoid">Tracking is hard to avoid</a></li>
+  <li><a href="#key-privacy-questions" id="toc-key-privacy-questions" class="nav-link" data-scroll-target="#key-privacy-questions">Key privacy questions</a></li>
+  <li><a href="#privacy-and-modern-technology" id="toc-privacy-and-modern-technology" class="nav-link" data-scroll-target="#privacy-and-modern-technology">Privacy and modern technology</a></li>
+  <li><a href="#definitions-of-privacy" id="toc-definitions-of-privacy" class="nav-link" data-scroll-target="#definitions-of-privacy">Definitions of privacy</a></li>
+  <li><a href="#variables-attributes" id="toc-variables-attributes" class="nav-link" data-scroll-target="#variables-attributes">Variables / Attributes</a></li>
+  <li><a href="#what-is-anonymisation" id="toc-what-is-anonymisation" class="nav-link" data-scroll-target="#what-is-anonymisation">What is anonymisation?</a></li>
+  <li><a href="#k-anonymity" id="toc-k-anonymity" class="nav-link" data-scroll-target="#k-anonymity">k-anonymity</a></li>
+  <li><a href="#other-ideas" id="toc-other-ideas" class="nav-link" data-scroll-target="#other-ideas">Other ideas</a></li>
+  <li><a href="#some-more-anonymisation-methods" id="toc-some-more-anonymisation-methods" class="nav-link" data-scroll-target="#some-more-anonymisation-methods">Some More Anonymisation Methods</a></li>
+  <li><a href="#some-more-anonymisation-methods-1" id="toc-some-more-anonymisation-methods-1" class="nav-link" data-scroll-target="#some-more-anonymisation-methods-1">Some More Anonymisation Methods</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -93,7 +133,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Welcome to Introduction to Data Science (2)!</h1>
+<h1 class="title">Introduction to Data Annonymisation</h1>
 </div>
 
 
@@ -110,45 +150,237 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Welcome to the course website for DS152 Introduction to Data Science (2).</p>
-<p><a href="https://ncahill89.github.io/DS152/0-Information.html">Module information</a></p>
-<p>Lecture material (slides, notes, videos) are licensed under CC-BY-NC 4.0.</p>
-<p>Contact: Niamh Cahill (niamh.cahill@mu.ie)</p>
-<section id="lecture-notes" class="level2">
-<h2 class="anchored" data-anchor-id="lecture-notes">Lecture Notes</h2>
-<p>1: <a href="https://ncahill89.github.io/DS152/1-TidyverseRecap.html">Tidyverse Recap</a></p>
-<p>2: <a href="https://ncahill89.github.io/DS152/2-Correlation.html">Correlation (and Causation)</a></p>
-<p>3: <a href="https://ncahill89.github.io/DS152/3-MultipleRegression.html">Multiple Regression Models</a></p>
-<p>4: <a href="https://ncahill89.github.io/DS152/4-sampling.html">Sampling Principles and Strategies</a></p>
-<p>5: <a href="https://ncahill89.github.io/DS152/5-ObservationalStudies.html">Observational Studies</a></p>
-<p>6: <a href="https://ncahill89.github.io/DS152/6-experiments.html">Experimental Studies</a></p>
-<p>7: <a href="https://ncahill89.github.io/DS152/7-PredictiveAnalytics.html">Predictive Analytics</a></p>
-<p>8: <a href="https://ncahill89.github.io/DS152/8-(un)supervisedLearning.html">(un)Supervised Learning</a></p>
-<p>9: <a href="https://ncahill89.github.io/DS152/9b-text.html">Text Analysis</a></p>
-<p>10: <a href="https://ncahill89.github.io/DS152/9-image.html">Image Analysis</a></p>
-<p>11: <a href="https://ncahill89.github.io/DS152/10b-data_annon.html">Data Anonymisation</a></p>
+<section id="lets-start-with-a-case-study" class="level2">
+<h2 class="anchored" data-anchor-id="lets-start-with-a-case-study">Let’s start with a case study</h2>
+<ul>
+<li>Every minute of every day, dozens of companies are logging the locations of millions of people and storing it in gigantic datasets</li>
+<li>The NY Times <a href="https://www.nytimes.com/series/new-york-times-privacy-project">Privacy Project</a> obtained one such file</li>
+<li>It holds 50 billion location pings from the phones of over 12 million Americans in 2016 and 2017</li>
+</ul>
 </section>
-<section id="tutorial-sheets" class="level2">
-<h2 class="anchored" data-anchor-id="tutorial-sheets">Tutorial Sheets</h2>
-<p>Tutorial Sheet 1: <a href="https://ncahill89.github.io/DS152/Tutorial1.html">Tidyverse Recap</a></p>
-<p>Tutorial Sheet 2: <a href="https://ncahill89.github.io/DS152/Tutorial2.html">Logistic Regression</a></p>
-<p>Tutorial Sheet 3: <a href="https://ncahill89.github.io/DS152/Tutorial3.html">Observational Studies</a></p>
-<p>Tutorial Sheet 4: <a href="https://ncahill89.github.io/DS152/Tutorial4.html">Experimental Studies</a></p>
-<p>Tutorial Sheet 5: <a href="https://ncahill89.github.io/DS152/Tutorial6.html">Predictive Analytics</a></p>
-<p>Tutorial Sheet 6: <a href="https://ncahill89.github.io/DS152/Tutorial7.html">(un)Supervised Learning</a></p>
-<p>Tutorial Sheet 7: <a href="https://ncahill89.github.io/DS152/Tutorial8.html">Text Analysis</a></p>
+<section id="data-anonymisation" class="level2">
+<h2 class="anchored" data-anchor-id="data-anonymisation">Data Anonymisation</h2>
+<section id="tracking-is-hard-to-avoid" class="level3">
+<h3 class="anchored" data-anchor-id="tracking-is-hard-to-avoid">Tracking is hard to avoid</h3>
+<ul>
+<li><p>Consider your daily commute: Would any other smartphone travel directly between your house and your office every day?</p></li>
+<li><p>Describing location data as anonymous is a <strong>completely false claim</strong></p></li>
+<li><p>Really precise, longitudinal geolocation information is absolutely impossible to anonymise</p></li>
+<li><p>“DNA is probably the only thing that’s harder to anonymise than precise geolocation information” (Paul Ohm, law professor and privacy researcher)</p></li>
+<li><p>You can follow a few steps to make it harder for companies to track you</p>
+<ul>
+<li><p>such as disabling location access for particular apps</p></li>
+<li><p>and being informed about what tracking information apps are using</p></li>
+</ul></li>
+</ul>
+<p>https://www.nytimes.com/wirecutter/blog/how-iphone-apps-track-you/</p>
 </section>
-<section id="assignments" class="level2">
-<h2 class="anchored" data-anchor-id="assignments">Assignments</h2>
-<p>Assignment 1: <a href="https://ncahill89.github.io/DS152/Assignment1.html">Tidyverse Recap</a></p>
-<p>Assignment 2: <a href="https://ncahill89.github.io/DS152/Assignment2.html">Linear Regression</a></p>
-<p>Assignment 3: <a href="https://ncahill89.github.io/DS152/Assignment3.html">Sampling and Observational Studies</a></p>
-<p>Assignment 4: <a href="https://ncahill89.github.io/DS152/Assignment4.html">Experimental Studies</a></p>
-<p>Assignment 5: <a href="https://ncahill89.github.io/DS152/Assignment5.html">Predictive Analytics</a></p>
-<p>Assignment 6: <a href="https://ncahill89.github.io/DS152/Assignment6.html">Unsupervised Learning</a></p>
-<p>Assignment 7: <a href="https://ncahill89.github.io/DS152/Assignment7.html">Text Analysis</a></p>
+<section id="key-privacy-questions" class="level3">
+<h3 class="anchored" data-anchor-id="key-privacy-questions">Key privacy questions</h3>
+<p><strong>Disclosure Control:</strong></p>
+<ul>
+<li><p>Reveal no more than intended</p></li>
+<li><p>In particular, protect personal information while allowing inference at a population or aggregate level</p></li>
+</ul>
+<p><strong>Privacy-Utility Trade-off:</strong></p>
+<ul>
+<li><p>Data released should still be useful</p></li>
+<li><p>We can always protect privacy by releasing nothing at all!</p></li>
+</ul>
+<!-- ## Privacy and modern technology -->
+<!-- \footnotesize -->
+<!-- We now have a lot more invading recent inventions! -->
+<!--   - Smart Buildings: user location and activity -->
+<!--   - Intelligent transportation systems: location data -->
+<!--   - Recommender Systems: location data, web activity; purchasing history -->
+<!--   - Smart Meters: occupancy, activities, beliefs -->
+<!--   - Big Data: Many businesses and utilities make use of large datasets on customers -->
+<!--   - E-health -->
+</section>
+<section id="privacy-and-modern-technology" class="level3">
+<h3 class="anchored" data-anchor-id="privacy-and-modern-technology">Privacy and modern technology</h3>
+<p><img src="images/alexa.jpg" class="img-fluid"></p>
+<p>“You have zero privacy anyway, get over it”</p>
+<p>Sun Microsystems CEO Scott McNealy, 1999</p>
+<p>“If you have something that you don’t want anyone to know, maybe you shouldn’t be doing it in the first place”</p>
+<p>Google CEO (2001–2011) Eric Schmidt, 2009</p>
+</section>
+<section id="definitions-of-privacy" class="level3">
+<h3 class="anchored" data-anchor-id="definitions-of-privacy">Definitions of privacy</h3>
+<ul>
+<li><p>A general definition of privacy is difficult to formulate.</p></li>
+<li><p>For the release of statistical databases (summary statistics), the following definition was given by Dalenius (1977)</p></li>
+</ul>
+<p><em>“Nothing can be learned about any individual after the release that couldn’t have been known prior to its release.”</em></p>
+<ul>
+<li><p>At first glance, this seems reasonable.</p></li>
+<li><p>However:</p>
+<ul>
+<li><p>Alice knows Bob’s height is 5cm less than the national average</p></li>
+<li><p>The central statistics office releases a database containing the average height of the country</p></li>
+<li><p>Alice now knows Bob’s height</p></li>
+</ul></li>
+<li><p>Dalenius’ definition is too restrictive?</p>
+<ul>
+<li>Side information plays a key role.</li>
+</ul></li>
+</ul>
+<p><strong>Extreme approaches to privacy</strong></p>
+<ul>
+<li><p>Easiest way to protect privacy is to reveal nothing</p>
+<ul>
+<li><p>It certainly meets the requirement of disclosure control</p></li>
+<li><p>Not very useful or constructive, though!</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="variables-attributes" class="level3">
+<h3 class="anchored" data-anchor-id="variables-attributes">Variables / Attributes</h3>
+<ul>
+<li><p>In privacy research, the variables (or attributes) recorded for each individual are generally split into 3 categories</p>
+<ul>
+<li><p>Identifiers (name, PPS no., passport no.)</p></li>
+<li><p>Sensitive</p></li>
+<li><p>Non-sensitive</p></li>
+</ul></li>
+</ul>
+<p>Deciding which attributes belong to which class is not always straightforward!</p>
+</section>
+<section id="what-is-anonymisation" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-anonymisation">What is anonymisation?</h3>
+<p>“Anonymisation is the process of either encrypting or removing personally identifiable information from data sets, so that the people whom the data describe remain anonymous”</p>
+<section id="naive-anonymisation" class="level4">
+<h4 class="anchored" data-anchor-id="naive-anonymisation">Naive anonymisation</h4>
+<ul>
+<li><p>Everything should be OK if we remove the identifiers, right?</p>
+<p><img src="images/table.png" class="img-fluid"></p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>What could possibly go wrong?</p>
+<ul>
+<li>People know more than just what you tell them!</li>
+</ul></li>
+<li><p>Combinations of non-sensitive variables can identify individuals (Quasi-identifiers)</p></li>
+<li><p>Latanya Sweeney (2000) showed that a combination of ZIP code, Gender and Date of Birth uniquely identifies 87% of US population</p></li>
+<li><p>Massachusetts’ government released anonymised medical records for research purposes</p></li>
+<li><p>L. Sweeney used a copy of voter records containing names as well as ZIP, gender and DOB</p></li>
+<li><p>Cross-referencing the two datasets, she identified the state governor’s records in the medical data!</p>
+<p><img src="images/qid.png" class="img-fluid"></p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Netflix release anonymised movie recommendations to help develop better recommender systems</p>
+<ul>
+<li>Data was cross-referenced with IMDB database (which isn’t anonymised) to reveal preferences of individual users</li>
+</ul></li>
+<li><p>AOL released “anonymised” search logs in 2006</p>
+<ul>
+<li>… they forgot to factor in that sometimes people search their own names</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="k-anonymity" class="level3">
+<h3 class="anchored" data-anchor-id="k-anonymity">k-anonymity</h3>
+<ul>
+<li><p>Simple Idea: Release table so that everyone looks like at least <span class="math inline">\(k-1\)</span> others with respect to a QID</p></li>
+<li><p>A table satisfying this is said to be <strong>k-anonymous</strong></p>
+<p><img src="images/kanon.png" class="img-fluid"></p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Two broad approaches used to produce k-anonymous tables:</p>
+<ol type="1">
+<li><p>Suppresion</p></li>
+<li><p>Generalisation</p></li>
+</ol></li>
+<li><p>Want to suprpess/generalise as little as possible to maintain data utility!</p></li>
+</ul>
+<section id="k-anonymity-example" class="level4">
+<h4 class="anchored" data-anchor-id="k-anonymity-example">k-anonymity: example</h4>
+<p><img src="images/kanon1.png" class="img-fluid"></p>
+</section>
+<section id="k-anonymity-suppression" class="level4">
+<h4 class="anchored" data-anchor-id="k-anonymity-suppression">k-anonymity: Suppression</h4>
+<p><img src="images/kanon2.png" class="img-fluid"></p>
+</section>
+<section id="k-anonymity-generalisation" class="level4">
+<h4 class="anchored" data-anchor-id="k-anonymity-generalisation">k-anonymity: Generalisation</h4>
+<p><img src="images/kanon3.png" class="img-fluid"></p>
+<ul>
+<li><p>Problem of <strong>homogeneity</strong>: when all values of the sensitive variables for the <span class="math inline">\(k\)</span> individuals are the same, e.g.</p>
+<p><img src="images/kanon4.png" class="img-fluid"></p></li>
+</ul>
+<!-- -->
+<ul>
+<li><p>Problem of : when all values of the sensitive variables for the <span class="math inline">\(k\)</span> individuals are the same, e.g.</p>
+<p><img src="images/kanon5.png" class="img-fluid"></p></li>
+</ul>
+<!-- -->
+<ul>
+<li>If we know John, who’s 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition</li>
+</ul>
+</section>
+</section>
+<section id="other-ideas" class="level3">
+<h3 class="anchored" data-anchor-id="other-ideas">Other ideas</h3>
+<ul>
+<li><p><strong>l-diversity:</strong> An extension to k-anonymity</p>
+<ul>
+<li><p>Attempts to solve the problem that homogeneity causes</p></li>
+<li><p>The basic idea is to have individuals with distinct values for the sensitive variable, overcoming the problem presented in the previous example</p></li>
+</ul></li>
+<li><p><strong>Differential privacy:</strong></p>
+<ul>
+<li><p>Core idea: add random noise to the answer to a numerical variable</p></li>
+<li><p>If we choose the noise correctly, the answer doesn’t vary much if one person changes their entry</p></li>
+<li><p>Participation in the database carries little risk for an individual</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="some-more-anonymisation-methods" class="level3">
+<h3 class="anchored" data-anchor-id="some-more-anonymisation-methods">Some More Anonymisation Methods</h3>
+<p><strong>Microaggregation</strong></p>
+<ul>
+<li><p>A perturbative method that is typically applied to continuous variables.</p></li>
+<li><p>The idea is that records are partitioned into groups; within each group, the values of each variable are aggregated.</p></li>
+<li><p>Typically, the mean is used to aggregate the values, but other robust methods are also possible.</p></li>
+<li><p>Individual values of the records for each variable are replaced by the group aggregation value.</p></li>
+</ul>
+</section>
+<section id="some-more-anonymisation-methods-1" class="level3">
+<h3 class="anchored" data-anchor-id="some-more-anonymisation-methods-1">Some More Anonymisation Methods</h3>
+<p><strong>Shuffling</strong></p>
+<p>Shuffling simulates a synthetic value of the continuous key variables conditioned on independent, non-confidential variables. It works as follows:</p>
+<ul>
+<li><p>assume that we have two continuous variables containing sensitive information on income and savings.</p>
+<ul>
+<li><p>These variables are used as regressors in a regression model where suitable variables are taken as predictors, like age, occupation, race, education.</p></li>
+<li><p>Of course it is of crucial to find a good model having good predictive power.</p></li>
+</ul></li>
+<li><p>New values for the continuous key variables, income and savings, are simulated based on this model</p></li>
+<li><p>However, these expected values are not used to replace the original values, but a shuffling of the original values using the generated values is carried out.</p></li>
+<li><p>This approach (reverse mapping) is applied to each sensitive variable can be summarized in the following steps:</p>
+<ol type="1">
+<li><p>rank original variable</p></li>
+<li><p>rank generated variable</p></li>
+<li><p>for all observations, replace the value of the modified variable with rank i with the value of the original sensitive variable with rank i.</p></li>
+<li><p>once finished, the modified variable contains only original values and is finally used to replace the original sensitive variable.</p></li>
+</ol></li>
+<li><p>It can be shown that the structure of the data is preserved when the model fit is of good quality.</p></li>
+</ul>
+<p><strong>Randomised responses (Warner, 1965)</strong></p>
+<ul>
+<li><p>US military wanted to know whether soldiers were smoking marijuana during the Vietnam war</p></li>
+<li><p>Ask two questions, the first one harmless, e.g.&nbsp;‘Is the sky blue?’, and the second ‘Do you smoke marijuana?’</p></li>
+<li><p>Respondents toss a coin. If heads, answer question 1, if tails, answer question 2</p></li>
+<li><p>They now answer truthfully, since there is no way of knowing which question they were answering</p></li>
+<li><p>It is easy to estimate the true proportion of the population that smokes marijuana from the responses obtained</p></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

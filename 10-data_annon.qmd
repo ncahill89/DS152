@@ -30,13 +30,14 @@ yes/n # estimated
 sum(truth)/n # truth
 ```
 
-## Data Anonymisation
 
-### Let's start with a case study
+## Let's start with a case study
 
 -   Every minute of every day, dozens of companies are logging the locations of millions of people and storing it in gigantic datasets
 -   The NY Times [Privacy Project](https://www.nytimes.com/series/new-york-times-privacy-project) obtained one such file
 -   It holds 50 billion location pings from the phones of over 12 million Americans in 2016 and 2017
+
+## Data Anonymisation
 
 ### Tracking is hard to avoid
 
@@ -152,9 +153,8 @@ Deciding which attributes belong to which class is not always straightforward!
 
     ![](images/table.png)
 
-```{=html}
 <!-- -->
-```
+
 -   What could possibly go wrong?
 
     -   People know more than just what you tell them!
@@ -171,9 +171,8 @@ Deciding which attributes belong to which class is not always straightforward!
 
     ![](images/qid.png)
 
-```{=html}
 <!-- -->
-```
+
 -   Netflix release anonymised movie recommendations to help develop better recommender systems
 
     -   Data was cross-referenced with IMDB database (which isn't anonymised) to reveal preferences of individual users
@@ -190,9 +189,8 @@ Deciding which attributes belong to which class is not always straightforward!
 
     ![](images/kanon.png)
 
-```{=html}
 <!-- -->
-```
+
 -   Two broad approaches used to produce k-anonymous tables:
 
     1.  Suppresion
@@ -217,16 +215,14 @@ Deciding which attributes belong to which class is not always straightforward!
 
     ![](images/kanon4.png)
 
-```{=html}
 <!-- -->
-```
+
 -   Problem of \textbf{homogeneity}: when all values of the sensitive variables for the $k$ individuals are the same, e.g.
 
     ![](images/kanon5.png)
 
-```{=html}
 <!-- -->
-```
+
 -   If we know John, who's 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition
 
 ### Other ideas
