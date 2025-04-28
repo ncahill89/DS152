@@ -112,11 +112,11 @@ But…
 
 ## 🔢 K-Anonymity
 
-> Make each person **indistinguishable** from at least $k-1$ others in a dataset.
+> Based on quasi-identifiers, make each person **indistinguishable** from at least $k-1$ others in a dataset.
 
 ![](images/kanon.png)
 
-### Techniques:
+### Techniques to Achieve K-Anonymity:
 
 1. **Suppression** – remove or mask values  
 
@@ -130,7 +130,7 @@ But…
 
 <!-- ![](images/kanon4.png) -->
 
-- **Homogeneity attack**: if all $k$ rows have same sensitive value, identity is inferred.
+- **Homogeneity attack**: if all $k$ rows have same sensitive value, identity could be inferred.
 
     ![](images/kanon5.png)
     
@@ -146,7 +146,7 @@ But…
 
 ### 🌫️ Differential Privacy
 
-- Add **random noise** to aggregate results
+- Add **random noise** to numerical responses, but in such a way that aggregate results remain the same. 
 - Ensures **individual contribution has minimal impact**
 - Widely used by **Apple**, **Google**, **US Census**
 
@@ -171,6 +171,7 @@ But…
 - Coin flip decides if respondent answers truthfully
 - Provides **individual deniability**, preserves **population estimates**
 
+![An embarrassing survey](https://www.youtube.com/watch?v=nwJ0qY_rP0A)
 ---
 
 ## 🤔 Final Thoughts

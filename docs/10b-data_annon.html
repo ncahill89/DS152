@@ -128,7 +128,7 @@ window.Quarto = {
   <li><a href="#naive-anonymisation" id="toc-naive-anonymisation" class="nav-link" data-scroll-target="#naive-anonymisation">❌ Naive Anonymisation</a></li>
   <li><a href="#k-anonymity" id="toc-k-anonymity" class="nav-link" data-scroll-target="#k-anonymity">🔢 K-Anonymity</a>
   <ul class="collapse">
-  <li><a href="#techniques" id="toc-techniques" class="nav-link" data-scroll-target="#techniques">Techniques:</a></li>
+  <li><a href="#techniques-to-achieve-k-anonymity" id="toc-techniques-to-achieve-k-anonymity" class="nav-link" data-scroll-target="#techniques-to-achieve-k-anonymity">Techniques to Achieve K-Anonymity:</a></li>
   <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
   </ul></li>
   <li><a href="#beyond-k-anonymity" id="toc-beyond-k-anonymity" class="nav-link" data-scroll-target="#beyond-k-anonymity">🧱 Beyond k-Anonymity</a>
@@ -279,11 +279,11 @@ window.Quarto = {
 <section id="k-anonymity" class="level2">
 <h2 class="anchored" data-anchor-id="k-anonymity">🔢 K-Anonymity</h2>
 <blockquote class="blockquote">
-<p>Make each person <strong>indistinguishable</strong> from at least <span class="math inline">\(k-1\)</span> others in a dataset.</p>
+<p>Based on quasi-identifiers, make each person <strong>indistinguishable</strong> from at least <span class="math inline">\(k-1\)</span> others in a dataset.</p>
 </blockquote>
 <p><img src="images/kanon.png" class="img-fluid"></p>
-<section id="techniques" class="level3">
-<h3 class="anchored" data-anchor-id="techniques">Techniques:</h3>
+<section id="techniques-to-achieve-k-anonymity" class="level3">
+<h3 class="anchored" data-anchor-id="techniques-to-achieve-k-anonymity">Techniques to Achieve K-Anonymity:</h3>
 <ol type="1">
 <li><strong>Suppression</strong> – remove or mask values</li>
 </ol>
@@ -297,7 +297,7 @@ window.Quarto = {
 <h3 class="anchored" data-anchor-id="limitations">Limitations</h3>
 <!-- ![](images/kanon4.png) -->
 <ul>
-<li><p><strong>Homogeneity attack</strong>: if all <span class="math inline">\(k\)</span> rows have same sensitive value, identity is inferred.</p>
+<li><p><strong>Homogeneity attack</strong>: if all <span class="math inline">\(k\)</span> rows have same sensitive value, identity could be inferred.</p>
 <p><img src="images/kanon5.png" class="img-fluid"></p></li>
 <li><p>If we know John, who’s 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition</p></li>
 </ul>
@@ -315,7 +315,7 @@ window.Quarto = {
 <section id="differential-privacy" class="level3">
 <h3 class="anchored" data-anchor-id="differential-privacy">🌫️ Differential Privacy</h3>
 <ul>
-<li>Add <strong>random noise</strong> to aggregate results</li>
+<li>Add <strong>random noise</strong> to numerical responses, but in such a way that aggregate results remain the same.</li>
 <li>Ensures <strong>individual contribution has minimal impact</strong></li>
 <li>Widely used by <strong>Apple</strong>, <strong>Google</strong>, <strong>US Census</strong></li>
 </ul>
@@ -349,6 +349,12 @@ window.Quarto = {
 <li>Coin flip decides if respondent answers truthfully</li>
 <li>Provides <strong>individual deniability</strong>, preserves <strong>population estimates</strong></li>
 </ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://www.youtube.com/watch?v=nwJ0qY_rP0A.png" class="img-fluid figure-img"></p>
+<figcaption>An embarrassing survey</figcaption>
+</figure>
+</div>
 <hr>
 </section>
 </section>

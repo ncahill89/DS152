@@ -2118,21 +2118,21 @@
     "href": "10b-data_annon.html#k-anonymity",
     "title": "Introduction to Data Anonymisation",
     "section": "🔢 K-Anonymity",
-    "text": "🔢 K-Anonymity\n\nMake each person indistinguishable from at least \\(k-1\\) others in a dataset.\n\n\n\nTechniques:\n\nSuppression – remove or mask values\n\n\n\nGeneralisation – make values less specific\n\n\n\n\nLimitations\n\n\nHomogeneity attack: if all \\(k\\) rows have same sensitive value, identity is inferred.\n\nIf we know John, who’s 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition"
+    "text": "🔢 K-Anonymity\n\nBased on quasi-identifiers, make each person indistinguishable from at least \\(k-1\\) others in a dataset.\n\n\n\nTechniques to Achieve K-Anonymity:\n\nSuppression – remove or mask values\n\n\n\nGeneralisation – make values less specific\n\n\n\n\nLimitations\n\n\nHomogeneity attack: if all \\(k\\) rows have same sensitive value, identity could be inferred.\n\nIf we know John, who’s 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition"
   },
   {
     "objectID": "10b-data_annon.html#beyond-k-anonymity",
     "href": "10b-data_annon.html#beyond-k-anonymity",
     "title": "Introduction to Data Anonymisation",
     "section": "🧱 Beyond k-Anonymity",
-    "text": "🧱 Beyond k-Anonymity\n\n🔀 l-Diversity\n\nRequires diverse sensitive values among \\(k\\)-group\n\n\n\n🌫️ Differential Privacy\n\nAdd random noise to aggregate results\nEnsures individual contribution has minimal impact\nWidely used by Apple, Google, US Census"
+    "text": "🧱 Beyond k-Anonymity\n\n🔀 l-Diversity\n\nRequires diverse sensitive values among \\(k\\)-group\n\n\n\n🌫️ Differential Privacy\n\nAdd random noise to numerical responses, but in such a way that aggregate results remain the same.\nEnsures individual contribution has minimal impact\nWidely used by Apple, Google, US Census"
   },
   {
     "objectID": "10b-data_annon.html#other-techniques",
     "href": "10b-data_annon.html#other-techniques",
     "title": "Introduction to Data Anonymisation",
     "section": "🔧 Other Techniques",
-    "text": "🔧 Other Techniques\n\nMicroaggregation\n\nGroup records, replace sensitive value with group average\nPreserves structure while hiding individuals\n\n\n\nShuffling (Reverse Mapping)\n\nModel sensitive variable using public attributes\n\nPredict & rank values\n\nShuffle original data based on these ranks\n\nResult: original values, but reordered\n\n\n\nRandomised Response (Warner, 1965)\n\nCoin flip decides if respondent answers truthfully\nProvides individual deniability, preserves population estimates"
+    "text": "🔧 Other Techniques\n\nMicroaggregation\n\nGroup records, replace sensitive value with group average\nPreserves structure while hiding individuals\n\n\n\nShuffling (Reverse Mapping)\n\nModel sensitive variable using public attributes\n\nPredict & rank values\n\nShuffle original data based on these ranks\n\nResult: original values, but reordered\n\n\n\nRandomised Response (Warner, 1965)\n\nCoin flip decides if respondent answers truthfully\nProvides individual deniability, preserves population estimates\n\n\n\n\nAn embarrassing survey"
   },
   {
     "objectID": "10b-data_annon.html#final-thoughts",
