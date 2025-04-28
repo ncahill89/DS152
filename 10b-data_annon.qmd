@@ -187,9 +187,9 @@ But…
 
 ---
 
-## 📚 Further Reading
+<!-- ## 📚 Further Reading -->
 
-- [NYT Privacy Project](https://www.nytimes.com/series/new-york-times-privacy-project)
-- Sweeney, L. (2000). Simple Demographics Often Identify People Uniquely.
-- Dwork, C. (2006). Differential Privacy.
+<!-- - [NYT Privacy Project](https://www.nytimes.com/series/new-york-times-privacy-project) -->
+<!-- - Sweeney, L. (2000). Simple Demographics Often Identify People Uniquely. -->
+<!-- - Dwork, C. (2006). Differential Privacy. -->
 
