@@ -171,7 +171,7 @@ But…
 - Coin flip decides if respondent answers truthfully
 - Provides **individual deniability**, preserves **population estimates**
 
-![An embarrassing survey](https://www.youtube.com/watch?v=nwJ0qY_rP0A)
+[An embarrassing survey](https://www.youtube.com/watch?v=nwJ0qY_rP0A)
 ---
 
 ## 🤔 Final Thoughts

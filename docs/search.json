@@ -2132,7 +2132,7 @@
     "href": "10b-data_annon.html#other-techniques",
     "title": "Introduction to Data Anonymisation",
     "section": "🔧 Other Techniques",
-    "text": "🔧 Other Techniques\n\nMicroaggregation\n\nGroup records, replace sensitive value with group average\nPreserves structure while hiding individuals\n\n\n\nShuffling (Reverse Mapping)\n\nModel sensitive variable using public attributes\n\nPredict & rank values\n\nShuffle original data based on these ranks\n\nResult: original values, but reordered\n\n\n\nRandomised Response (Warner, 1965)\n\nCoin flip decides if respondent answers truthfully\nProvides individual deniability, preserves population estimates\n\n\n\n\nAn embarrassing survey"
+    "text": "🔧 Other Techniques\n\nMicroaggregation\n\nGroup records, replace sensitive value with group average\nPreserves structure while hiding individuals\n\n\n\nShuffling (Reverse Mapping)\n\nModel sensitive variable using public attributes\n\nPredict & rank values\n\nShuffle original data based on these ranks\n\nResult: original values, but reordered\n\n\n\nRandomised Response (Warner, 1965)\n\nCoin flip decides if respondent answers truthfully\nProvides individual deniability, preserves population estimates\n\nAn embarrassing survey"
   },
   {
     "objectID": "10b-data_annon.html#final-thoughts",
