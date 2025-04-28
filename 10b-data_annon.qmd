@@ -27,7 +27,7 @@ sum(truth) / n # actual
 ## 🚨 Case Study: Location Tracking at Scale
 
 - Companies track smartphone users constantly, storing **billions** of data points.
-- The NY Times [Privacy Project](https://www.nytimes.com/series/new-york-times-privacy-project) obtained one such file:
+- The NY Times [Privacy Project](https://www.nytimes.com/interactive/2019/12/19/opinion/location-tracking-cell-phone.html) obtained one such file:
   - 50 **billion** location pings
   - From over **12 million Americans** across 2016–2017
 
