@@ -15,9 +15,7 @@ library(tidyverse)
 library(tidytext)
 ```
 
-## Instructions
-
-Answer all questions for continuous assessment. Due: **4pm on Friday, 2nd May 2025**.
+## **Solutions** **\[Total = 20 Marks\]**
 
 ## Exercise
 
@@ -37,19 +35,25 @@ review_df <- tibble(line = 1:7, review_text = review_text)
 review_df
 ```
 
-**(a)** Replace \[A\] and \[B\] in the code below to create a tidy text dataset that has one word per row.
+**(a)** Replace \[A\] and \[B\] in the code below to create a tidy text dataset that has one word per row. 
 
 ```{r, eval = FALSE}
 review_words  <- review_df %>%
                     [A](word, [B])
 ```
 
-```{r, echo = FALSE}
+```{r, echo = TRUE}
 review_words <-  review_df %>%
                     unnest_tokens(word, review_text)
 review_words
 ```
 
+  - [A] = unnest_tokens
+  
+  - [B] = review_text 
+  
+  __[4 Marks]__
+  
 **(b)** We now want to remove "stop" words from the `reviews_words` dataset. We use the following code to do this:
 
 ```{r, message = FALSE}
@@ -60,7 +64,13 @@ review_words_rm_stop
 
 **i.** Explain in your own words what this code is doing.
 
+ - `anti_join` will match datasets based on a column name, in this case the word column. It will return all of the rows in the `review_words` dataset that don't have a match in the get_stopwords(source = "smart") dataset. __[4 Marks]__
+
+
 **ii.** How many stop words were removed from the dataset?
+
+  - 33 words were removed. There's 59 rows in the `review_words` data and only 26 in the `review_words_rm_stop` data.  __[2 Marks]__
+
 
 **(c)** Now we're going to assign a sentiment to each word in the `review_words_rm_stop` dataset using the bing library. We use the following code to do this:
 
@@ -72,7 +82,12 @@ sentiment_review
 
 **i.** Explain in your own words what this code is doing.
 
+  - `inner_join` will match and merge datasets based on a column name, in this case the word column. For rows  in `review_words_rm_stop` where the word has a match in `get_sentiments("bing")` the corresponding sentiment will be added to the `review_words_rm_stop` data.  __[2 Marks]__
+
+
 **ii.** Were all words in the `review_words_rm_stop` found in the bing library? Give a reason for your answer.
+
+ - No. Only 9 of the words were found in the `bing` library as there's only 9 rows in the `sentiment_review` data. __[2 Marks]__
 
 **(d)**
 
@@ -86,4 +101,8 @@ sentiment_review_afinn
 
 **i.** How do the afinn and bing lexicons differ in their treatment of sentiment?
 
-**ii.** Do the conclusions about the overall sentiment of the review agree when using the bing and afinn lexicons, give a reason for your answer.
+  - The afinn lexicons has a numerical scale for sentiment from -5 to 5 ranging from negative to neutral (0) to positive. __[2 Marks]__
+
+**ii.** Do the conclusions about the overall sentiment of the review agree when using the bing and afinn lexicons, give a reason for your answer. __[4 Marks]__
+
+Yes, 69% of the words are assigned a positive sentiment when using the bing lexicon and the sentiment score when using the afinn lexicon is 2.7, which is also indicative of an overall positive sentiment. 

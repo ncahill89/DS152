@@ -4749,7 +4749,7 @@ vertical-align: -.125em;
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#solutions-total-20-marks" id="toc-solutions-total-20-marks" class="nav-link active" data-scroll-target="#solutions-total-20-marks"><strong>Solutions</strong> <strong>[Total = 20 Marks]</strong></a></li>
   <li><a href="#exercise" id="toc-exercise" class="nav-link" data-scroll-target="#exercise">Exercise</a></li>
   </ul>
 </nav>
@@ -4783,9 +4783,8 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="instructions" class="level2">
-<h2 class="anchored" data-anchor-id="instructions">Instructions</h2>
-<p>Answer all questions for continuous assessment. Due: <strong>4pm on Friday, 2nd May 2025</strong>.</p>
+<section id="solutions-total-20-marks" class="level2">
+<h2 class="anchored" data-anchor-id="solutions-total-20-marks"><strong>Solutions</strong> <strong>[Total = 20 Marks]</strong></h2>
 </section>
 <section id="exercise" class="level2">
 <h2 class="anchored" data-anchor-id="exercise">Exercise</h2>
@@ -4810,6 +4809,9 @@ vertical-align: -.125em;
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                    [A](word, [B])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>review_words <span class="ot">&lt;-</span>  review_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">unnest_tokens</span>(word, review_text)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>review_words</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 59 × 2
     line word      
@@ -4827,11 +4829,16 @@ vertical-align: -.125em;
 # ℹ 49 more rows</code></pre>
 </div>
 </div>
+<ul>
+<li><p>[A] = unnest_tokens</p></li>
+<li><p>[B] = review_text</p></li>
+</ul>
+<p><strong>[4 Marks]</strong></p>
 <p><strong>(b)</strong> We now want to remove “stop” words from the <code>reviews_words</code> dataset. We use the following code to do this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>review_words_rm_stop <span class="ot">&lt;-</span>   review_words <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>(<span class="at">source =</span> <span class="st">&quot;smart&quot;</span>)) </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>review_words_rm_stop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>review_words_rm_stop <span class="ot">&lt;-</span>   review_words <span class="sc">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">anti_join</span>(<span class="fu">get_stopwords</span>(<span class="at">source =</span> <span class="st">&quot;smart&quot;</span>)) </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>review_words_rm_stop</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 26 × 2
     line word      
@@ -4850,12 +4857,18 @@ vertical-align: -.125em;
 </div>
 </div>
 <p><strong>i.</strong> Explain in your own words what this code is doing.</p>
+<ul>
+<li><code>anti_join</code> will match datasets based on a column name, in this case the word column. It will return all of the rows in the <code>review_words</code> dataset that don’t have a match in the get_stopwords(source = “smart”) dataset. <strong>[4 Marks]</strong></li>
+</ul>
 <p><strong>ii.</strong> How many stop words were removed from the dataset?</p>
+<ul>
+<li>33 words were removed. There’s 59 rows in the <code>review_words</code> data and only 26 in the <code>review_words_rm_stop</code> data. <strong>[2 Marks]</strong></li>
+</ul>
 <p><strong>(c)</strong> Now we’re going to assign a sentiment to each word in the <code>review_words_rm_stop</code> dataset using the bing library. We use the following code to do this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sentiment_review <span class="ot">&lt;-</span> review_words_rm_stop <span class="sc">%&gt;%</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) </span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>sentiment_review</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>sentiment_review <span class="ot">&lt;-</span> review_words_rm_stop <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;bing&quot;</span>)) </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>sentiment_review</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 9 × 3
    line word        sentiment
@@ -4872,13 +4885,19 @@ vertical-align: -.125em;
 </div>
 </div>
 <p><strong>i.</strong> Explain in your own words what this code is doing.</p>
+<ul>
+<li><code>inner_join</code> will match and merge datasets based on a column name, in this case the word column. For rows in <code>review_words_rm_stop</code> where the word has a match in <code>get_sentiments(&quot;bing&quot;)</code> the corresponding sentiment will be added to the <code>review_words_rm_stop</code> data. <strong>[2 Marks]</strong></li>
+</ul>
 <p><strong>ii.</strong> Were all words in the <code>review_words_rm_stop</code> found in the bing library? Give a reason for your answer.</p>
+<ul>
+<li>No. Only 9 of the words were found in the <code>bing</code> library as there’s only 9 rows in the <code>sentiment_review</code> data. <strong>[2 Marks]</strong></li>
+</ul>
 <p><strong>(d)</strong></p>
 <p>Now we’re going to assign a sentiment to each word in the <code>review_words_rm_stop</code> dataset using the afinn library. We use the following code to do this:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sentiment_review_afinn <span class="ot">&lt;-</span> review_words_rm_stop <span class="sc">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>)) </span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>sentiment_review_afinn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>sentiment_review_afinn <span class="ot">&lt;-</span> review_words_rm_stop <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>                            <span class="fu">inner_join</span>(<span class="fu">get_sentiments</span>(<span class="st">&quot;afinn&quot;</span>)) </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sentiment_review_afinn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 3
    line word        value
@@ -4892,7 +4911,11 @@ vertical-align: -.125em;
 </div>
 </div>
 <p><strong>i.</strong> How do the afinn and bing lexicons differ in their treatment of sentiment?</p>
-<p><strong>ii.</strong> Do the conclusions about the overall sentiment of the review agree when using the bing and afinn lexicons, give a reason for your answer.</p>
+<ul>
+<li>The afinn lexicons has a numerical scale for sentiment from -5 to 5 ranging from negative to neutral (0) to positive. <strong>[2 Marks]</strong></li>
+</ul>
+<p><strong>ii.</strong> Do the conclusions about the overall sentiment of the review agree when using the bing and afinn lexicons, give a reason for your answer. <strong>[4 Marks]</strong></p>
+<p>Yes, 69% of the words are assigned a positive sentiment when using the bing lexicon and the sentiment score when using the afinn lexicon is 2.7, which is also indicative of an overall positive sentiment.</p>
 
 
 </section>

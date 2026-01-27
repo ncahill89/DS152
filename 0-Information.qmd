@@ -18,8 +18,8 @@ editor: visual
 
 **Tutorials**
 
--   Tuesdays \@ 9am, 10am, 2pm, 3pm, 5pm,  Wednesdays \@ 12pm, 1pm
--   Tutorials -- starting week 4 (24/02/2025)
+-   Tuesdays \@ 9am, 10am, 2pm, 3pm, 5pm, Wednesdays \@ 12pm, 1pm
+-   Tutorials -- starting week 4 (23/02/2026)
 
 **Office hours**
 
@@ -27,27 +27,25 @@ editor: visual
 
 ## Materials and Assessments
 
-
 **Notes**
 
 -   Notes will be a combination of links posted on Moodle and notes taken down in class
 
 **Tutorial Questions**
 
-- Practice tutorial questions will be posted to Moodle. 
+-   Practice tutorial questions will be posted to Moodle.
 
 **Assignments**
 
--  Assignment questions will be posted to Moodle and answers should be uploaded as PDFs. 
+-   Assignment questions will be posted to Moodle and answers should be uploaded as PDFs.
 
 **Lab Quizzes**
 
--   Each lab will have an associated quiz that will be a Moodle Quiz format with multiple attempts allowed until the end of the semester. 
+-   Each lab will have an associated quiz that will be a Moodle Quiz format with multiple attempts allowed until the end of the semester.
 
 **Midterm Exam**
 
-- The midterm exam will be a Moodle Quiz MCQ.
-
+-   The midterm exam will be a Moodle Quiz MCQ.
 
 **Marks**
 
@@ -55,11 +53,9 @@ editor: visual
 
 -   10% -- quizzes
 
--   15% -- mid-term exam (March 28th, MCQ)
+-   15% -- mid-term exam (March 27th, Moodle Quiz MCQ)
 
 -   65% -- final exam (date TBC)
-
-
 
 **Recommended reading**
 
@@ -67,27 +63,23 @@ editor: visual
 
 ## Topics Covered
 
--   [ ] **Tidyverse Recap** 
+-   [ ] **Tidyverse Recap**
 
--   [ ] **Correlation (and Causation)** 
+-   [ ] **Correlation (and Causation)**
 
--   [ ] **Observational Studies** 
+-   [ ] **Observational Studies**
 
--   [ ] **Controlled Experiments** 
+-   [ ] **Controlled Experiments**
 
--   [ ] **Surveys** 
+-   [ ] **Surveys**
 
--   [ ] **Data Privacy and Anonymisation** 
+-   [ ] **Supervised and Unsupervised Learning**
 
--   [ ] **Supervised and Unsupervised Learning** 
+-   [ ] **Predictive Analytics**
 
--   [ ] **Predictive Analytics** 
+-   [ ] **Image and Text Analysis**
 
--   [ ] **Image and Text Analysis** 
-
-
-
-
+-   [ ] **Data Privacy and Anonymisation**
 
 
 ## Diversity & inclusion
