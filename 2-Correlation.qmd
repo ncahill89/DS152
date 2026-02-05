@@ -14,7 +14,6 @@ library(gridExtra)
 
 ```
 
-
 When we see a pattern, we don't just say "how extraordinary!" and move on; instead, we try and attribute a cause!
 
 -   We all draw conclusions on the basis of what we see
@@ -32,7 +31,6 @@ When we see a pattern, we don't just say "how extraordinary!" and move on; inste
 -   These variables are correlated, but one does not *cause* the other!
 
 <https://www.tylervigen.com/spurious-correlations>
-
 
 ```{=html}
 <!--
@@ -63,10 +61,9 @@ Correlation (r) quantifies the linear association between two quantitative varia
 -   $r$ = 0 indicates no linear association between $x$ and $y$.
 -   The value of $r$ is a measure of the extent to which $x$ and $y$ are linearly related.
 
-
 ## What are the correlation values here?
 
-Task: Match the plot panel number to the letter with the correct correlation value. 
+Task: Match the plot panel number to the letter with the correct correlation value.
 
 ```{r, echo = FALSE}
 
@@ -129,32 +126,24 @@ grid.arrange(grobs = plots, ncol = 4)
 
 # Output correlation values
 vec <- (unlist(sample(cor_values,8, replace = FALSE)))
-names(vec)  <-LETTERS[1:8]
+names(vec)  <- LETTERS[1:8]
 vec
 
 ```
 
-
 <!-- ![](images/S6_Corr_graph1.png) -->
-
 
 <!-- ![](images/S6_Corr_graph2.png) -->
 
-
 <!-- ![](images/S6_Corr_graph3.png) -->
-
 
 <!-- ![](images/S6_Corr_graph4.png) -->
 
-
 <!-- ![](images/S6_Corr_graph5.png) -->
-
 
 <!-- ![](images/S6_Corr_graph6.png) -->
 
-
 <!-- ![](images/S6_Corr_graph7.png) -->
-
 
 <!-- ![](images/S6_Corr_graph8.png) -->
 
@@ -191,8 +180,6 @@ knitr::kable(t(dat))
 &r = \frac{Sxy}{\sqrt{SxxSyy}} = \frac{34}{\sqrt{26 \times 47.2}} = 0.97        
 \end{align*}
 ```
-
-
 ### Example: Change of scale and the correlation coefficient
 
 The distance of the race and the time it took to complete was recorded for five races in kilometres and seconds respectively. The correlation was calculated between the two variables. The data set was also converted into miles ($\times$ 0.621371192) and minutes (/60) and the correlation was re-calculated.
@@ -208,8 +195,7 @@ knitr::kable(km_dat)
 
 ```
 
-::: {.callout-note}
-
+::: callout-note
 ## Notes
 
 -   If $x$ and $y$ measurement units are changed, correlation does not change.
@@ -221,7 +207,6 @@ knitr::kable(km_dat)
 -   Two variables, x and y, could be highly correlated because there is another variable, z, having an impact on both x and y.
 :::
 
-
 ## Spurious Correlations
 
 A **spurious correlation** is a statistical relationship between two variables that appears to be meaningful but is actually caused by coincidence or the influence of a third (confounding) variable. This misleading association can arise due to random chance, indirect causation, or omitted variables.
@@ -232,11 +217,9 @@ Spurious correlations can often be identified through deeper statistical analysi
 
 **Task:** Find two correlated variables from: <https://www.tylervigen.com/spurious-correlations>. Create a scatter plot and find the correlation.
 
-
-
 ## Example Data (1): What is the association between PGA golfer's accuracy and driving distance?
 
-The data set \`golf' was taken from PGA Tour Recordsof 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores.
+The data set \`golf' was taken from PGA Tour Records of 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores.
 
 ```{r, echo=FALSE}
 golf <- readRDS("~/Dropbox/LecturingMaynooth/DS152/2_causation_correlation/golf.rds")
@@ -268,11 +251,9 @@ base1 +
   )
 ```
 
-
 ## Example Data (2): What is the relationship between cars' weights and their mileage?
 
 The data `mtcars` was extracted from the 1974 Motor Trend US magazine, and comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973–74 models).
-
 
 ```{r}
 #| echo: false
@@ -298,4 +279,3 @@ base2 +
     color = "#E34A6F", size = 5, hjust = 0
   )
 ```
-

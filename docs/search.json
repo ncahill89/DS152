@@ -305,7 +305,7 @@
     "href": "2-Correlation.html#example-data-1-what-is-the-association-between-pga-golfers-accuracy-and-driving-distance",
     "title": "Correlation (and Causation)",
     "section": "Example Data (1): What is the association between PGA golfer’s accuracy and driving distance?",
-    "text": "Example Data (1): What is the association between PGA golfer’s accuracy and driving distance?\nThe data set `golf’ was taken from PGA Tour Recordsof 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores."
+    "text": "Example Data (1): What is the association between PGA golfer’s accuracy and driving distance?\nThe data set `golf’ was taken from PGA Tour Records of 195 golf rounds by PGA players in an attempt to explain what golf attributes contribute the most to low scores."
   },
   {
     "objectID": "2-Correlation.html#example-data-2-what-is-the-relationship-between-cars-weights-and-their-mileage",
