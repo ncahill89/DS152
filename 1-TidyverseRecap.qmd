@@ -33,7 +33,6 @@ knitr::opts_chunk$set(echo = TRUE)
 -   `tidyr` provides a set of functions that help to tidy data.
 -   Tidy data is data where every column is a variable, every row is an observation, and every cell is a single value.
 
-
 ### tidyr: pivot
 
 ```{r}
@@ -67,8 +66,6 @@ print(data_wide)
 
 In this example, `pivot_longer` is used to convert the wide format data to long format, where each row is a single observation associated with the variables `ID1`, `ID2`, `Variable` (containing the original column names 'x' and 'y'), and `Value` (containing the values from 'x' and 'y' columns). We can then also convert back to wide format using `pivot_wider`.
 
-
-
 ### tidyr: separate
 
 ```{r}
@@ -94,8 +91,6 @@ print(data_sep)
 library(dplyr)
 data_sep %>% mutate_at(vars(hour, min, second), as.numeric)
 ```
-
-
 
 ## Transforming Data with dplyr
 
@@ -143,8 +138,6 @@ grouped_data
 
 In these examples, `select` is used to choose specific columns, `filter` is used to select rows based on a condition, `mutate` is used to create a new column, `arrange` is used to sort data, `summarise` is used to calculate summary statistics, and `group_by` is used to perform operations on groups of data.
 
-
-
 ## Visualizing Data with ggplot2
 
 -   `ggplot2` is a system for declaratively creating graphics, based on "The Grammar of Graphics".
@@ -153,8 +146,6 @@ In these examples, `select` is used to choose specific columns, `filter` is used
 <!-- ### Conclusion -->
 
 <!-- Remember, the tidyverse is a powerful tool for data science in R, but it's not the only way to do things. Some R users prefer base R functions, or other packages. It's all about finding the tools and methods that work best for your needs and style of coding. -->
-
-
 
 ### Example: ggplot
 
@@ -170,8 +161,6 @@ p1 <- ggplot(mtcars, aes(x = mpg, y = hp)) +
 p1
 ```
 
-
-
 **Histogram**
 
 ```{r}
@@ -183,8 +172,6 @@ p2 <- ggplot(mtcars, aes(x = mpg)) +
 p2
 ```
 
-
-
 **Boxplot**
 
 ```{r}
@@ -195,8 +182,6 @@ p3 <- ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
   geom_boxplot(fill = "orange", color = "darkred")
 p3
 ```
-
-
 
 **Bar chart**
 
@@ -211,8 +196,6 @@ p4
 ```
 
 In these examples, `geom_point` is used to create a scatter plot, `geom_smooth` with `method = "lm"` is used to add a linear regression line, `geom_histogram` is used to create a histogram, `geom_boxplot` is used to create a boxplot, and `geom_bar` is used to create a bar chart.
-
-
 
 ## Class Exercise
 
@@ -235,6 +218,6 @@ summarise(
   
 # e
 mutate(
-  mass_flipper_ratio = body_mass_g/flipper_length_mm
+  mass_flipper_ratio = body_mass/flipper_len
 ) %>% 
 ```

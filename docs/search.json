@@ -151,7 +151,7 @@
     "href": "1-TidyverseRecap.html#class-exercise",
     "title": "Tidyverse Recap",
     "section": "Class Exercise",
-    "text": "Class Exercise\nSuppose we have a dataset called penguins and suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species in the dataset. Rearrange the following steps in the pipeline into an order that accomplishes this goal.\n\n# a\narrange(avg_mass_flipper_ratio)\n\n# b\ngroup_by(species) %&gt;% \n\n# c\npenguins %&gt;% \n  \n# d\nsummarise(\n  avg_mass_flipper_ratio = median(mass_flipper_ratio, na.rm = TRUE)\n) %&gt;% \n  \n# e\nmutate(\n  mass_flipper_ratio = body_mass_g/flipper_length_mm\n) %&gt;%"
+    "text": "Class Exercise\nSuppose we have a dataset called penguins and suppose we would like to study how the ratio of penguin body mass to flipper size differs across the species in the dataset. Rearrange the following steps in the pipeline into an order that accomplishes this goal.\n\n# a\narrange(avg_mass_flipper_ratio)\n\n# b\ngroup_by(species) %&gt;% \n\n# c\npenguins %&gt;% \n  \n# d\nsummarise(\n  avg_mass_flipper_ratio = median(mass_flipper_ratio, na.rm = TRUE)\n) %&gt;% \n  \n# e\nmutate(\n  mass_flipper_ratio = body_mass/flipper_len\n) %&gt;%"
   },
   {
     "objectID": "2-Correlation.html",
