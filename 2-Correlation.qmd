@@ -30,7 +30,6 @@ When we see a pattern, we don't just say "how extraordinary!" and move on; inste
 
 -   These variables are correlated, but one does not *cause* the other!
 
-<https://www.tylervigen.com/spurious-correlations>
 
 ```{=html}
 <!--
