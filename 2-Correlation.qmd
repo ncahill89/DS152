@@ -241,7 +241,7 @@ r <- golf |>
   pull()
 
 base1 +
-  stat_ellipse(geom = "polygon", color = "#E34A6F", fill = "#E34A6F30") +
+  # stat_ellipse(geom = "polygon", color = "#E34A6F", fill = "#E34A6F30") +
   annotate(
     geom = "text",
     x = 250, y = 70, 
@@ -270,7 +270,7 @@ r <- mtcars |>
   pull()
 
 base2 +
-  stat_ellipse(geom = "polygon", color = "#E34A6F", fill = "#E34A6F30") +
+  # stat_ellipse(geom = "polygon", color = "#E34A6F", fill = "#E34A6F30") +
   annotate(
     geom = "text",
     x = 3.5, y = 27.5, 
