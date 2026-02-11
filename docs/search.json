@@ -2147,5 +2147,19 @@
     "title": "Introduction to Data Anonymisation",
     "section": "📚 Further Reading",
     "text": "📚 Further Reading\n\nNYT Privacy Project\nSweeney, L. (2000). Simple Demographics Often Identify People Uniquely.\nDwork, C. (2006). Differential Privacy."
+  },
+  {
+    "objectID": "3-MultipleRegression.html#recap-simple-linear-regression",
+    "href": "3-MultipleRegression.html#recap-simple-linear-regression",
+    "title": "Multiple Regression",
+    "section": "",
+    "text": "We have seen last semester, in DS151, how to study the relationship between two variables using linear regression.\nWe can create a linear regression model that includes a predictor, such that \\[\\hat{\\mbox{y}}=\\beta_0+\\beta_1\\mbox{x}\\]"
+  },
+  {
+    "objectID": "3-MultipleRegression.html#recap-simple-logistic-regression",
+    "href": "3-MultipleRegression.html#recap-simple-logistic-regression",
+    "title": "Multiple Regression",
+    "section": "Recap: Simple Logistic Regression",
+    "text": "Recap: Simple Logistic Regression\nLogistic regression is a generalized regression model where the outcome is a two-level categorical variable. The outcome, takes the value 1 or 0 with probability. Ultimately, it is the probability of the outcome taking the value 1 (i.e., being a “success”) that we model in relation to the predictor variables. For this to work, we transform the expected outcome in such a way that it will be bounded between 0 and 1, and hence our estimates will be sensical. The transformation we use is called the logit, and is the natural logarithm of the odds of success.\n\nModelling binary outcomes\n\n\\(y\\) takes on values 0 (failure) or 1 (success)\n\\(p\\): probability of success\n\\(1-p\\): probability of failure\nWe can’t model \\(y\\) directly, so instead we model \\(p\\)\n\nLinear model\n\\[\n\\hat{p}_i = \\beta_o + \\beta_1 \\times x\n\\]\n\nBut remember that \\(p\\) must be between 0 and 1\nWe need a link function that transforms the linear model to have an appropriate range\n\nLogit link function\nThe logit function takes values between 0 and 1 (probabilities) and maps them to values in the range negative infinity to positive infinity:\n\\[\nlogit(p) = log \\bigg( \\frac{p}{1 - p} \\bigg)\n\\]\nGeneralized linear model\n\nWe model the logit (log-odds) of \\(p\\) :\n\n\\[\nlogit(\\hat{p}) = log \\bigg( \\frac{\\hat{p}}{1 - \\hat{p}} \\bigg) = \\beta_o + \\beta_1 \\times x\n\\]\n\nThen take the inverse to obtain the predicted \\(p\\):\n\n\\[\n\\hat{p} = \\frac{e^{\\beta_o + \\beta_1 \\times x }}{1 + e^{\\beta_o + \\beta_1 \\times x }}\n\\]\nA logistic model visualized"
   }
 ]
