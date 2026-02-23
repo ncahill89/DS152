@@ -246,18 +246,11 @@ To illustrate the idea, let’s take a 1-in-4 systematic sample from our FakeSch
 ### Systematic Sampling in R
 
 ```{r}
-# randomly selecting our starting element.
-start=sample(1:4,1)
-start
+k <- 4
+start <- sample(1:k, 1)
 
-# Now find every 4th row index starting with start
-sample_rows <- seq(start, nrow(FakeSchool), by = 4)
-sample_rows
-
-# Now choose the data corresponding to the row indexes
-sys_samp <- FakeSchool %>% 
-        filter(row_number() %in% sample_rows)
-
+sys_samp <- FakeSchool %>%
+  slice(seq(start, n(), by = k))
 
 ```
 
