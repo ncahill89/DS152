@@ -433,13 +433,13 @@ expert_survey_dat <- readRDS("data/expert_survey_dat.rds")
 glimpse(expert_survey_dat)
 
 expert_survey_dat_long <- expert_survey_dat %>% 
-                            pivot_longer(Blue_95_2100:Red_5_2300,
-                                         names_to = "scenario",
-                                         values_to = "prediction") %>% 
-  separate(col = scenario, into = c("Scenario","Percentile","Year")) 
+  pivot_longer(Blue_95_2100:Red_5_2300,
+               names_to = "scenario",
+               values_to = "prediction") %>% 
+  separate(col = scenario, into = c("Scenario","Percentile","Year")) %>% 
+  mutate(Percentile = factor(Percentile, levels = c("5","17","50","83","95")))
 
-  
-  
+
 expert_survey_dat_long %>% filter(Scenario == "Red",Year == 2100) %>% 
   ggplot(aes(x=Percentile,y=prediction)) +
   geom_boxplot(fill="firebrick")+
