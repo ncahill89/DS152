@@ -79,13 +79,11 @@ library(tidyverse)
 
 ![](images/Screenshot%202025-03-03%20at%2010.12.32.png)
 
-
 In **observational studies**, researchers examine the relationship between exposure and outcome without intervening, aiming to identify associations while controlling for confounders (more on this later).
 
 -   An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.
 
--   An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. “It ain’t what you don’t know that gets you into trouble. It’s what you know for sure that just ain’t so.” - Mark Twain
-
+-   An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. 
 
 ## Example 1: Student Happiness
 
@@ -247,7 +245,7 @@ Once the confounding variable, smoking is taken into account the correlation bet
 
 ### Reducing confounding: Matching
 
-Matching is a technique used in observational studies to reduce confounding by ensuring that compared groups have similar distributions of key variables. Since observational studies lack randomization of the exposure, confounders—variables that are related to both the exposure and the outcome—can introduce bias. Matching helps control for these confounders by pairing or grouping subjects with similar characteristics across different exposure levels. 
+Matching is a technique used in observational studies to reduce confounding by ensuring that compared groups have similar distributions of key variables. Since observational studies lack randomization of the exposure, confounders—variables that are related to both the exposure and the outcome—can introduce bias. Matching helps control for these confounders by pairing or grouping subjects with similar characteristics across different exposure levels.
 
 ### Reducing confounding: Multiple Regression
 
