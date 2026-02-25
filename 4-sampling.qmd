@@ -485,8 +485,6 @@ ggplot(sl_planning_dat, aes(x = fct_rev(Continent),y = relative, fill = group)) 
             colour = 'white', position=position_stack(vjust=0.5), size = 3) +
   ggtitle('')+
   coord_flip() +
-  ylab("Percentage (Count)")+
-  xlab("")+
   labs(fill = "Structure") +
   scale_y_reverse() +
   theme_classic() +
@@ -494,7 +492,7 @@ ggplot(sl_planning_dat, aes(x = fct_rev(Continent),y = relative, fill = group)) 
         plot.title = element_text(size=12),
         axis.text.x=element_blank(),
         axis.ticks.x=element_blank()) +
-  scale_fill_manual(values=cbPalette) 
-
-
+  scale_fill_manual(values=cbPalette) +
+  ylab("")+
+  xlab("")
 ```
