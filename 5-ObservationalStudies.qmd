@@ -149,7 +149,6 @@ We can visualise conditional distributions, for example, given the student is an
 
 ```{r}
 gcfeeling %>%
-  select(athlete, happier) %>% 
   count(athlete, happier) %>% 
   ggplot(aes(x = athlete, fill = happier, weight = n)) +
   geom_bar(position = "fill") 
@@ -160,8 +159,8 @@ gcfeeling %>%
 As we've seen before, correlation measures the strength and direction of the relationship between two variables, indicating how changes in one variable are associated with changes in another.
 
 ```{r}
-# Compute correlation matrix
-cor(gcfeeling$rating.fresh, gcfeeling$rating.diff)
+gcfeeling %>% 
+  summarise(corr= cor(rating.fresh, rating.diff))
 ```
 
 #### **Scatterplots (For Numeric Variables)**
@@ -179,8 +178,7 @@ We can visualise the relationship between a categorical and a numerical variable
 
 ```{r}
 # Boxplots grouped by a categorical variable
-gcfeeling %>%
-  ggplot(aes(x = athlete, y = rating.diff)) +
+  ggplot(gcfeeling, aes(x = athlete, y = rating.diff)) +
   geom_boxplot() +
   theme_minimal()
 ```
