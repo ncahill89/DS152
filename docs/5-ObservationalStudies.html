@@ -352,6 +352,21 @@ athlete NO YES
 </div>
 </div>
 </section>
+<section id="scatter-plots-of-numerical-variables-by-categories" class="level4">
+<h4 class="anchored" data-anchor-id="scatter-plots-of-numerical-variables-by-categories"><strong>Scatter Plots of Numerical Variables by Categories</strong></h4>
+<p>We can visualise the relationship between two numerical variables and a categorical variable, for example, freshman happiness, happiness difference and athlete categories.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gcfeeling, <span class="fu">aes</span>(<span class="at">x =</span> rating.fresh, <span class="at">y =</span> rating.diff, <span class="at">colour =</span> athlete)) <span class="sc">+</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
 </section>
 <section id="modelling" class="level3">
 <h3 class="anchored" data-anchor-id="modelling"><strong>4. Modelling</strong></h3>
@@ -359,35 +374,36 @@ athlete NO YES
 <h4 class="anchored" data-anchor-id="numerical-outcome"><strong>Numerical outcome</strong></h4>
 <p>We can use multiple linear regression to model student happiness.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(rating.diff <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete <span class="sc">+</span> greek, <span class="at">data =</span> gcfeeling)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(gcfeeling, <span class="fu">aes</span>(<span class="at">x =</span> rating.fresh, <span class="at">y =</span> rating.diff, <span class="at">colour =</span> athlete)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="ot">&lt;-</span> <span class="fu">lm</span>(rating.diff <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete, <span class="at">data =</span> gcfeeling)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>mod_lm <span class="sc">%&gt;%</span> <span class="fu">coef</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:
-lm(formula = rating.diff ~ rating.fresh + athlete + greek, data = gcfeeling)
-
-Coefficients:
- (Intercept)  rating.fresh      athletey        greeky  
-      5.0287       -0.6723        0.7594        0.8272  </code></pre>
+<pre><code> (Intercept) rating.fresh     athletey 
+   5.1590183   -0.6411335    0.8480660 </code></pre>
 </div>
 </div>
 </section>
 <section id="binary-outcome" class="level4">
 <h4 class="anchored" data-anchor-id="binary-outcome"><strong>Binary outcome</strong></h4>
-<p>We can use multiple logisitc regression to model student happiness.</p>
+<p>We can use multiple logistic regression to model student happiness when using a binary outcome.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glm</span>(happier <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete <span class="sc">+</span> greek, <span class="at">data =</span> gcfeeling, <span class="at">family =</span> <span class="st">"binomial"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>mod_glm <span class="ot">&lt;-</span> <span class="fu">glm</span>(happier <span class="sc">~</span> rating.fresh <span class="sc">+</span> athlete, <span class="at">data =</span> gcfeeling, <span class="at">family =</span> <span class="st">"binomial"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>mod_glm <span class="sc">%&gt;%</span> <span class="fu">coef</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Call:  glm(formula = happier ~ rating.fresh + athlete + greek, family = "binomial", 
-    data = gcfeeling)
-
-Coefficients:
- (Intercept)  rating.fresh      athletey        greeky  
-      4.6555       -0.4595        1.7066       -0.5962  
-
-Degrees of Freedom: 46 Total (i.e. Null);  43 Residual
-Null Deviance:      51.15 
-Residual Deviance: 43.37    AIC: 51.37</code></pre>
+<pre><code> (Intercept) rating.fresh     athletey 
+   4.4513928   -0.4670324    1.4858749 </code></pre>
 </div>
 </div>
 </section>
@@ -478,7 +494,7 @@ Residual Deviance: 43.37    AIC: 51.37</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -488,7 +504,7 @@ Residual Deviance: 43.37    AIC: 51.37</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="576"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="576"></p>
 </figure>
 </div>
 </div>
@@ -502,7 +518,7 @@ Residual Deviance: 43.37    AIC: 51.37</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="384"></p>
 </figure>
 </div>
 </div>
@@ -512,7 +528,7 @@ Residual Deviance: 43.37    AIC: 51.37</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="384"></p>
+<p><img src="5-ObservationalStudies_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="384"></p>
 </figure>
 </div>
 </div>

@@ -172,6 +172,7 @@ ggplot(gcfeeling, aes(x = rating.fresh, y = rating.diff)) +
   geom_point()
 ```
 
+
 #### **Boxplots of Numerical Variables by Categories**
 
 We can visualise the relationship between a categorical and a numerical variable, for example, current happiness level broken down by athlete categories.
@@ -183,22 +184,41 @@ We can visualise the relationship between a categorical and a numerical variable
   theme_minimal()
 ```
 
+
+#### **Scatter Plots of Numerical Variables by Categories**
+
+We can visualise the relationship between two numerical variables and a categorical variable, for example, freshman happiness, happiness difference and athlete categories.
+
+```{r}
+ggplot(gcfeeling, aes(x = rating.fresh, y = rating.diff, colour = athlete)) +
+  geom_point()
+```
+
 ### **4. Modelling**
 
 #### **Numerical outcome**
 
 We can use multiple linear regression to model student happiness.
 
+```{r, message = FALSE}
+ggplot(gcfeeling, aes(x = rating.fresh, y = rating.diff, colour = athlete)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
 ```{r}
-lm(rating.diff ~ rating.fresh + athlete + greek, data = gcfeeling)
+mod_lm <- lm(rating.diff ~ rating.fresh + athlete, data = gcfeeling)
+mod_lm %>% coef()
 ```
 
 #### **Binary outcome**
 
-We can use multiple logisitc regression to model student happiness.
+We can use multiple logistic regression to model student happiness when using a binary outcome.
 
 ```{r}
-glm(happier ~ rating.fresh + athlete + greek, data = gcfeeling, family = "binomial")
+mod_glm <- glm(happier ~ rating.fresh + athlete, data = gcfeeling, family = "binomial")
+
+mod_glm %>% coef()
 ```
 
 ## Example 2: Does working out increase energy levels?
