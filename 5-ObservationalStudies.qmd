@@ -83,11 +83,11 @@ In **observational studies**, researchers examine the relationship between expos
 
 -   An observational study on individuals from a random sample allows one to generalize conclusions about the sample to the population.
 
--   An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present. 
+-   An observational study cannot show cause-and-effect relationships because there is the possibility that the response is affected by some variable(s) other than the ones being measured. That is, confounding variables may be present.
 
 ## Example 1: Student Happiness
 
-The `gcfeeling` data contains results of a survey conducted by Georgetown College students on 47 Georgetown College students in relation to feelings about Georgetown College.
+The `gcfeeling` data contains results of a survey conducted by Georgetown College on 47  students in relation to feelings about the college.
 
 ```{r, message=FALSE, warning=FALSE}
 # Load necessary packages

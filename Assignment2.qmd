@@ -18,7 +18,7 @@ Cars93 <- MASS::Cars93
 
 ## Instructions
 
-Answer all questions for continuous assessment. Due: **4pm on Friday, 7th March 2025**.
+Answer all questions for continuous assessment. Due: **4pm on Friday, 6th March 2026**.
 
 ## Exercise
 
