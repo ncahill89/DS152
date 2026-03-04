@@ -14,21 +14,21 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 ## Establishing Causality
 
--   A treatment (exposure variable) will often be a binary variable that is either 0 or 1. It is 0 if the person is not treated, which is to say they are in the control group, and 1 if they are treated.
+-  A treatment (or exposure) is often represented as a binary variable, typically coded as 1 if an individual receives the treatment and 0 if they do not (the control condition). Treatments can also be multi-valued or continuous, but the binary case is the simplest and most common starting point.
 
--   We will typically have some outcome of interest, Y, for each person or observational unit, and that could be categorical or continuous.
+-   For each individual or observational unit, we measure an outcome Y, which may be continuous (e.g., income, blood pressure) or categorical (e.g., disease status, vote choice).
 
--   A treatment is causal if the outcome for a person, given they were not treated, is different to their outcome given they were treated.
+- A treatment has a causal effect for an individual if their outcome under treatment differs from their outcome under control. 
 
--   If we could both treat and control the one individual at the one time, then we would know that it was only the treatment that had caused any change. However, the fundamental problem of causal inference is that we cannot both treat and control the same individual at the same time.
+- The key challenge, often called the fundamental problem of causal inference, is that for any individual, we can observe only one of these potential outcomes, the other potential outcome is the counterfactual. 
 
-    -   we instead compare the average of two groups — all those treated and all those not.
+- Because we cannot observe individual-level causal effects directly, we instead estimate average treatment effects (ATE) by comparing groups. 
 
-    -   we estimate the counterfactual at a group level because of the impossibility of doing it at an individual level.
-
-    -   this trade-off allows us to move forward but comes at the cost of certainty.
-
-    -   we must instead rely on randomization, probabilities, and expectations.
+  -   We estimate the counterfactual at a group level because of the impossibility of doing it at an individual level.
+  
+  -   This trade-off allows us to move forward but comes at the cost of certainty.
+  
+  -   The group comparison is only valid if treatment assignment is independent of potential outcomes, for this to work we must rely on randomization.
 
 ## Controlled Experiments
 
@@ -47,7 +47,7 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 <!-- **Control.** Need to control for effects due to factors other than the ones of primary interest. -->
 
-**Randomization.** Subjects should be randomly selected from the population (where possible) and randomly divided into treatment groups to avoid unintentional selection bias in the groups and to account for variables that cannot be controlled. For example, some patients may be more susceptible to a disease than others due to their dietary habits. In this example dietary habit is a *confounding variable*, which is defined as a variable that is associated with both the exposure and outcome variables. Randomizing patients into the treatment or control group helps even out such differences.
+**Randomization.** Subjects should be randomly selected from the population (where possible) and randomly divided into treatment groups to avoid unintentional selection bias in the groups and to account for variables that cannot be controlled. For example, some patients may be inherently more susceptible to a disease than others and we wouldn't want all of those patients to end up in the same group. 
 
 <!-- #### Confounding variables -->
 
