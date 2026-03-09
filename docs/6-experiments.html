@@ -453,7 +453,7 @@ window.Quarto = {
 <section id="replication" class="level4">
 <h4 class="anchored" data-anchor-id="replication">Replication</h4>
 <p>Replication means you need to conduct an experiment with an adequate number of subjects to achieve an acceptable statistical power.</p>
-<p>Let’s examine the ToothGrowth dataset to make sure they followed the principle of replication. We’ll use a <code>dplyr</code> function called <code>count</code> to help us.</p>
+<p>Let’s examine the ToothGrowth dataset to make sure they followed the principle of replication.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ToothGrowth <span class="sc">%&gt;%</span> <span class="fu">count</span>(supp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -472,7 +472,7 @@ window.Quarto = {
 <pre><code>[1] 18.81333</code></pre>
 </div>
 </div>
-<p>It’s natural to wonder if there is a difference in tooth length by supplement type. Use <code>group_by</code> and <code>summarise</code> to explore this and create an appropriate visualization using <code>ggplot</code>.</p>
+<p><strong>Exercise</strong> It’s natural to wonder if there is a difference in tooth length by supplement type. Use <code>group_by</code> and <code>summarise</code> to explore this and create an appropriate visualization using <code>ggplot</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>ToothGrowth <span class="sc">%&gt;%</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -482,9 +482,6 @@ window.Quarto = {
 <section id="more-on-blocking" class="level2">
 <h2 class="anchored" data-anchor-id="more-on-blocking">More on Blocking</h2>
 <p>Often there are covariates in the experimental units that are known to affect the response variable and must be taken into account. Ideally an experimenter can group the experimental units into blocks where the within block variance is small, but the block to block variability is large.</p>
-<ul>
-<li>For example, in testing a drug to prevent heart disease, we know that gender and age also impact the outcome. We may want to partition our study participants into gender and age groups and then randomly assign the treatment (placebo vs drug) within the group.</li>
-</ul>
 <p>Often blocking variables are not the variables that we are primarily interested in, but must nevertheless be considered.</p>
 <section id="randomized-complete-block-design-rcbd" class="level3">
 <h3 class="anchored" data-anchor-id="randomized-complete-block-design-rcbd">Randomized Complete Block Design (RCBD)</h3>
@@ -520,15 +517,13 @@ window.Quarto = {
 <li>Laboratory chamber with a humidity gradient inside</li>
 </ol>
 <p><img src="images/bod1.png" class="img-fluid" width="500"></p>
+<!-- 2.  Laboratory chambers with homogeneous temperature and humidity inside -->
+<!-- ![](images/bod2.png){width="500"} -->
 <ol start="2" type="1">
-<li>Laboratory chambers with homogeneous temperature and humidity inside</li>
-</ol>
-<p><img src="images/bod2.png" class="img-fluid" width="500"></p>
-<ol start="3" type="1">
 <li>A field with a fertility gradient</li>
 </ol>
 <p><img src="images/field1.png" class="img-fluid" width="400"></p>
-<ol start="4" type="1">
+<ol start="3" type="1">
 <li>A greenhouse with a temperature gradient during the day</li>
 </ol>
 <p><img src="images/greenhouse1.png" class="img-fluid" width="500"></p>
@@ -556,11 +551,11 @@ window.Quarto = {
 </div>
 </div>
 </div>
-<p>Use <code>group_by</code> and <code>summarise</code> to look at the average yield within each variety.</p>
+<p><strong>Exercise</strong> Use <code>group_by</code> and <code>summarise</code> to look at the average yield within each variety.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>oatvar <span class="sc">%&gt;%</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Look at the results of using <code>lm</code> with variety and block as predictors.</p>
+<p><strong>Exercise</strong> Look at the results of using <code>lm</code> with variety and block as predictors.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(....)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>

@@ -227,7 +227,7 @@ data("ToothGrowth")
 
 Replication means you need to conduct an experiment with an adequate number of subjects to achieve an acceptable statistical power.
 
-Let’s examine the ToothGrowth dataset to make sure they followed the principle of replication. We’ll use a `dplyr` function called `count` to help us.
+Let’s examine the ToothGrowth dataset to make sure they followed the principle of replication. 
 
 ```{r}
 ToothGrowth %>% count(supp)
@@ -241,7 +241,7 @@ Suppose you know from previous studies that the average length of a guinea pigs 
 ToothGrowth %>% pull(len) %>% mean
 ```
 
-It’s natural to wonder if there is a difference in tooth length by supplement type. Use `group_by` and `summarise` to explore this and create an appropriate visualization using `ggplot`.
+**Exercise** It’s natural to wonder if there is a difference in tooth length by supplement type. Use `group_by` and `summarise` to explore this and create an appropriate visualization using `ggplot`.
 
 ```{r, eval = FALSE}
 ToothGrowth %>% 
@@ -253,7 +253,6 @@ ToothGrowth %>%
 
 Often there are covariates in the experimental units that are known to affect the response variable and must be taken into account. Ideally an experimenter can group the experimental units into blocks where the within block variance is small, but the block to block variability is large.
 
--   For example, in testing a drug to prevent heart disease, we know that gender and age also impact the outcome. We may want to partition our study participants into gender and age groups and then randomly assign the treatment (placebo vs drug) within the group.
 
 Often blocking variables are not the variables that we are primarily interested in, but must nevertheless be considered.
 
@@ -285,15 +284,15 @@ Often blocking variables are not the variables that we are primarily interested 
 
 ![](images/bod1.png){width="500"}
 
-2.  Laboratory chambers with homogeneous temperature and humidity inside
+<!-- 2.  Laboratory chambers with homogeneous temperature and humidity inside -->
 
-![](images/bod2.png){width="500"}
+<!-- ![](images/bod2.png){width="500"} -->
 
-3.  A field with a fertility gradient
+2.  A field with a fertility gradient
 
 ![](images/field1.png){width="400"}
 
-4.  A greenhouse with a temperature gradient during the day
+3.  A greenhouse with a temperature gradient during the day
 
 ![](images/greenhouse1.png){width="500"}
 
@@ -315,13 +314,13 @@ ggplot(oatvar, aes(y=yield, x=block, colour = variety, group = variety)) +
   geom_line()
 ```
 
-Use `group_by` and `summarise` to look at the average yield within each variety.
+**Exercise** Use `group_by` and `summarise` to look at the average yield within each variety.
 
 ```{r, eval = FALSE}
 oatvar %>% 
 ```
 
-Look at the results of using `lm` with variety and block as predictors.
+**Exercise** Look at the results of using `lm` with variety and block as predictors.
 
 ```{r, eval = FALSE}
 lm(....)
