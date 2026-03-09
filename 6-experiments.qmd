@@ -16,7 +16,7 @@ Studies where the researchers assign treatments to cases are called experiments.
 
 -  A treatment (or exposure) is often represented as a binary variable, typically coded as 1 if an individual receives the treatment and 0 if they do not (the control condition). Treatments can also be multi-valued or continuous, but the binary case is the simplest and most common starting point.
 
--   For each individual or observational unit, we measure an outcome Y, which may be continuous (e.g., income, blood pressure) or categorical (e.g., disease status, vote choice).
+-   For each individual or observational unit, we measure an outcome Y, which may be continuous (e.g.,  blood pressure) or categorical (e.g., disease status).
 
 - A treatment has a causal effect for an individual if their outcome under treatment differs from their outcome under control. 
 
