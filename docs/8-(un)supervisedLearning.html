@@ -145,7 +145,8 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link active" data-scroll-target="#supervised-learning">Supervised Learning</a>
+  <li><a href="#supervised-learning" id="toc-supervised-learning" class="nav-link active" data-scroll-target="#supervised-learning">Supervised Learning</a></li>
+  <li><a href="#evaluating-predictive-performance" id="toc-evaluating-predictive-performance" class="nav-link" data-scroll-target="#evaluating-predictive-performance">Evaluating Predictive Performance</a>
   <ul class="collapse">
   <li><a href="#supervised-learning---regression-example" id="toc-supervised-learning---regression-example" class="nav-link" data-scroll-target="#supervised-learning---regression-example">Supervised Learning - Regression Example</a></li>
   <li><a href="#supervised-learning---classification-example" id="toc-supervised-learning---classification-example" class="nav-link" data-scroll-target="#supervised-learning---classification-example">Supervised Learning - Classification Example</a></li>
@@ -190,14 +191,81 @@ window.Quarto = {
 <h2 class="anchored" data-anchor-id="supervised-learning">Supervised Learning</h2>
 <p>Machine learning is the act of discovering patterns buried in large data sets.</p>
 <p>The majority of practical machine learning uses supervised learning.</p>
-<p>Supervised learning is where you have input (predictor) variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.</p>
+<p>Supervised learning is a category of machine learning that uses labeled datasets to train algorithms to predict outcomes and recognize patterns. Generally, you have input (predictor) variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.</p>
 <p><span class="math display">\[y = f(x)\]</span></p>
 <p>The goal is to approximate the mapping function so well that when you have new input data (x) that you can predict the output variables (y) for that data.</p>
-<p>It is called supervised learning because the process of an algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. We know the correct answers, the algorithm iteratively makes predictions on the “training” data and is corrected by the teacher. Learning stops when the algorithm achieves an acceptable level of performance.</p>
+<p>It is called supervised learning because the process of an algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. We know the correct answers (labels). The algorithm iteratively makes predictions on the “training” data and is corrected by the teacher. Learning stops when the algorithm achieves an acceptable level of performance.</p>
 <p><strong>Supervised learning problems can be further grouped into regression and classification problems:</strong></p>
 <p><strong>Regression:</strong> A regression problem is when the output variable is a real value, such as “dollars” or “weight”.</p>
 <p><strong>Classification:</strong> A classification problem is when the output variable is a category, such as “red” or “blue” or “disease” and “no disease”.</p>
-<p>We saw these supervised learning methods in the predictive analytics section.</p>
+</section>
+<section id="evaluating-predictive-performance" class="level2">
+<h2 class="anchored" data-anchor-id="evaluating-predictive-performance">Evaluating Predictive Performance</h2>
+<p>The mechanics of prediction is easy:</p>
+<ul>
+<li>Plug in values of predictors to the model equation</li>
+<li>Calculate the predicted value of the response variable,</li>
+</ul>
+<p>Getting it right is hard!</p>
+<ul>
+<li>There is no guarantee the model estimates you have are correct</li>
+<li>Or that your model will perform as well with new data as it did with your sample data</li>
+</ul>
+<p><strong>Spending our data</strong></p>
+<ul>
+<li><p>Several steps are required to create a useful model: parameter estimation,performance assessment,model selection etc.</p></li>
+<li><p>Doing all of this on the entire data we have available can lead to overfitting i.e., the model doesn’t generalise</p></li>
+<li><p>Instead we allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we’ve done so far).</p></li>
+</ul>
+<p><strong>Splitting Data</strong></p>
+<p>Training set:</p>
+<ul>
+<li>Sandbox for model building</li>
+<li>Spend most of your time using the training set to develop the model</li>
+<li>Majority of the data (usually 80%)</li>
+</ul>
+<p>Testing set:</p>
+<ul>
+<li>Held in reserve to determine efficacy of one or two chosen models</li>
+<li>Critical to look at it once, otherwise it becomes part of the modeling process</li>
+<li>Remainder of the data (usually 20%)</li>
+</ul>
+<!-- ### Performing the split -->
+<!-- Let's consider an example here. We have data on paintings from auction catalogs in paris. A glimpse of the data is shown below. -->
+<!-- ```{r} -->
+<!-- glimpse(paris_paintings) -->
+<!-- ``` -->
+<!-- We will split the data into training and testing datasets -->
+<!-- ```{r} -->
+<!-- library(rsample) -->
+<!-- # Fix random numbers by setting the seed  -->
+<!-- set.seed(1116) -->
+<!-- # Put 80% of the data into the training set  -->
+<!-- price_split <- initial_split(paris_paintings, prop = 0.80) -->
+<!-- # Create data frames for the two sets: -->
+<!-- train_data <- training(price_split) -->
+<!-- test_data  <- testing(price_split) -->
+<!-- ``` -->
+<!-- **Fit a model and "learn" from the training data:** -->
+<!-- ```{r} -->
+<!-- lm_model_train <- lm(logprice ~ Height_in + Width_in + year + Surface_Rect +  -->
+<!--                        materialCat + landsALL, data = train_data) -->
+<!-- ``` -->
+<!-- **Evaluate the performance on the test data:** -->
+<!-- ```{r} -->
+<!-- price_res_test <- test_data %>%  -->
+<!--                     select(logprice) %>%  -->
+<!--                     mutate(pred_price = predict(lm_model_train, newdata = test_data)) -->
+<!-- ggplot(price_res_test, aes(x = logprice, y = pred_price)) + -->
+<!--   geom_point() +  -->
+<!--   geom_line(aes(x = logprice, y = logprice)) -->
+<!-- ``` -->
+<!-- **Summarise the model accuracy** -->
+<!-- ```{r} -->
+<!-- price_res_test %>%  -->
+<!--   summarise(mean_error = mean(logprice - pred_price), -->
+<!--             mean_abs_error = mean(abs(logprice - pred_price))) -->
+<!-- ``` -->
 <section id="supervised-learning---regression-example" class="level3">
 <h3 class="anchored" data-anchor-id="supervised-learning---regression-example">Supervised Learning - Regression Example</h3>
 <p>US Department of Health and Human Services, Centers for Disease Control and Prevention collect information on births recorded in the country. We have data which are a random sample of 1,000 births from 2014. Variables of interest include length of pregnancy in weeks (weeks), mother’s age in years (mage), the sex of the baby (sex), smoking status of the mother (habit), and the number of hospital (visits) visits during pregnancy.</p>

@@ -34,13 +34,13 @@ Machine learning is the act of discovering patterns buried in large data sets.
 
 The majority of practical machine learning uses supervised learning.
 
-Supervised learning is where you have input (predictor) variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.
+Supervised learning is a category of machine learning that uses labeled datasets to train algorithms to predict outcomes and recognize patterns. Generally, you have input (predictor) variables (x) and an output variable (y) and you use an algorithm to learn how the input relates to the output.
 
 $$y = f(x)$$
 
 The goal is to approximate the mapping function so well that when you have new input data (x) that you can predict the output variables (y) for that data.
 
-It is called supervised learning because the process of an algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. We know the correct answers, the algorithm iteratively makes predictions on the "training" data and is corrected by the teacher. Learning stops when the algorithm achieves an acceptable level of performance.
+It is called supervised learning because the process of an algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. We know the correct answers (labels). The algorithm iteratively makes predictions on the "training" data and is corrected by the teacher. Learning stops when the algorithm achieves an acceptable level of performance.
 
 **Supervised learning problems can be further grouped into regression and classification problems:**
 
@@ -48,7 +48,92 @@ It is called supervised learning because the process of an algorithm learning fr
 
 **Classification:** A classification problem is when the output variable is a category, such as "red" or "blue" or "disease" and "no disease".
 
-We saw these supervised learning methods in the predictive analytics section.
+
+## Evaluating Predictive Performance
+
+The mechanics of prediction is easy:
+
+-   Plug in values of predictors to the model equation
+-   Calculate the predicted value of the response variable,
+
+Getting it right is hard!
+
+-   There is no guarantee the model estimates you have are correct
+-   Or that your model will perform as well with new data as it did with your sample data
+
+**Spending our data**
+
+-   Several steps are required to create a useful model: parameter estimation,performance assessment,model selection etc.
+
+-   Doing all of this on the entire data we have available can lead to overfitting i.e., the model doesn't generalise
+
+-   Instead we allocate specific subsets of data for different tasks, as opposed to allocating the largest possible amount to the model parameter estimation only (which is what we've done so far).
+
+**Splitting Data**
+
+Training set:
+
+-   Sandbox for model building
+-   Spend most of your time using the training set to develop the model
+-   Majority of the data (usually 80%)
+
+Testing set:
+
+-   Held in reserve to determine efficacy of one or two chosen models
+-   Critical to look at it once, otherwise it becomes part of the modeling process
+-   Remainder of the data (usually 20%)
+
+<!-- ### Performing the split -->
+
+<!-- Let's consider an example here. We have data on paintings from auction catalogs in paris. A glimpse of the data is shown below. -->
+
+<!-- ```{r} -->
+<!-- glimpse(paris_paintings) -->
+<!-- ``` -->
+
+<!-- We will split the data into training and testing datasets -->
+
+<!-- ```{r} -->
+<!-- library(rsample) -->
+<!-- # Fix random numbers by setting the seed  -->
+<!-- set.seed(1116) -->
+<!-- # Put 80% of the data into the training set  -->
+<!-- price_split <- initial_split(paris_paintings, prop = 0.80) -->
+<!-- # Create data frames for the two sets: -->
+<!-- train_data <- training(price_split) -->
+<!-- test_data  <- testing(price_split) -->
+<!-- ``` -->
+
+<!-- **Fit a model and "learn" from the training data:** -->
+
+<!-- ```{r} -->
+<!-- lm_model_train <- lm(logprice ~ Height_in + Width_in + year + Surface_Rect +  -->
+<!--                        materialCat + landsALL, data = train_data) -->
+<!-- ``` -->
+
+<!-- **Evaluate the performance on the test data:** -->
+
+<!-- ```{r} -->
+
+<!-- price_res_test <- test_data %>%  -->
+<!--                     select(logprice) %>%  -->
+<!--                     mutate(pred_price = predict(lm_model_train, newdata = test_data)) -->
+
+<!-- ggplot(price_res_test, aes(x = logprice, y = pred_price)) + -->
+<!--   geom_point() +  -->
+<!--   geom_line(aes(x = logprice, y = logprice)) -->
+
+
+<!-- ``` -->
+
+<!-- **Summarise the model accuracy** -->
+
+<!-- ```{r} -->
+<!-- price_res_test %>%  -->
+<!--   summarise(mean_error = mean(logprice - pred_price), -->
+<!--             mean_abs_error = mean(abs(logprice - pred_price))) -->
+<!-- ``` -->
+
 
 ### Supervised Learning - Regression Example
 

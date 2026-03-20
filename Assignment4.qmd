@@ -21,7 +21,7 @@ cereal_names <- rownames(UScereal)
 
 ## Instructions
 
-Answer all questions for continuous assessment. Due: **4pm on Friday, 4th April 2025**.
+Answer all questions for continuous assessment. Due: **4pm on Friday, 27th March 2026**.
 
 ## Questions
 
