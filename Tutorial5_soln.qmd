@@ -1,15 +1,15 @@
 ---
-title: "DS152 Tutorial Sheet 6"
+title: "DS152 Tutorial Sheet 5"
 format: 
   html:
     embed-resources: true
     self-contained-math: true
 editor: visual
 ---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-
 
 ## Exercise 1
 
@@ -21,7 +21,7 @@ library(mclust)
 glimpse(banknote)
 ```
 
-**(a)** Run the code below to add a binary (0,1) variable to the dataset called `status_binary` where the value is 0 when the Status is counterfeit and 1 when the Status is genuine. 
+**(a)** Run the code below to add a binary (0,1) variable to the dataset called `status_binary` where the value is 0 when the Status is counterfeit and 1 when the Status is genuine.
 
 ```{r}
 banknote <- banknote %>% 
@@ -29,17 +29,16 @@ banknote <- banknote %>%
 glimpse(banknote) 
 ```
 
-
-**(b)** Replace [A], [B] and [C] in the code below to create a scatter point plot showing `status_binary` as the response variable and  `Top` as a predictor. Do you think `Top` predictors for separating the counterfeit from the genuine notes? 
+**(b)** Replace \[A\], \[B\] and \[C\] in the code below to create a scatter point plot showing `status_binary` as the response variable and `Top` as a predictor. Do you think `Top` predictors for separating the counterfeit from the genuine notes?
 
 ```{r, eval = TRUE}
 ggplot(banknote, aes(x = Top, y = status_binary)) +
   geom_point()
 ```
 
-"Genuine" is the reference group here. From the graph, it appears that as Top increases the chance of being a genuine note decreases. 
+"Genuine" is the reference group here. From the graph, it appears that as Top increases the chance of being a genuine note decreases.
 
-**(c)** Split the data into 85% training and 15% test data by replacing [A], [B], [C], [D] and [E] in the following code. Set the seed to 10465. 
+**(c)** Split the data into 85% training and 15% test data by replacing \[A\], \[B\], \[C\], \[D\] and \[E\] in the following code. Set the seed to 10465.
 
 ```{r, eval = TRUE}
 library(rsample)
@@ -50,7 +49,7 @@ train_bank_data <- training(bank_split)
 test_bank_data  <- testing(bank_split)
 ```
 
-**(d)** Replace [A], [B], [C] and [D] in the code below to fit a simple logistic regression model to the training data, using `status_binary` as the response variable and `Top` as a predictor. 
+**(d)** Replace \[A\], \[B\], \[C\] and \[D\] in the code below to fit a simple logistic regression model to the training data, using `status_binary` as the response variable and `Top` as a predictor.
 
 ```{r, eval = TRUE}
 logistic_model <- glm(status_binary ~ Top,
@@ -59,11 +58,9 @@ logistic_model <- glm(status_binary ~ Top,
 logistic_model
 ```
 
+**Note for tutors:** Remind students that we use `glm` for logistic regression rather than `lm`. Highlight the use of the training data for fitting the model rather than the full dataset.
 
-__Note for tutors:__ Remind students that we use `glm` for logistic regression rather than `lm`. Highlight the use of the training data for fitting the model rather than the full dataset. 
-
-
-**(e)** Set up a threshold of 0.50 for classifying banknotes as genuine based on the test data set by replacing [A] and [B] in the following code. 
+**(e)** Set up a threshold of 0.50 for classifying banknotes as genuine based on the test data set by replacing \[A\] and \[B\] in the following code.
 
 ```{r, eval = TRUE}
 bank_res <- test_bank_data %>% 
@@ -74,9 +71,9 @@ bank_res <- test_bank_data %>%
 bank_res
 ```
 
-__Note for tutors:__ Highlight the use of the test data for getting predictions from the model rather than the full dataset. 
+**Note for tutors:** Highlight the use of the test data for getting predictions from the model rather than the full dataset.
 
-**(f)** Create a confusion table by running the code below. What is the accuracy? 
+**(f)** Create a confusion table by running the code below. What is the accuracy?
 
 ```{r, eval = TRUE}
 N <- nrow(bank_res)
@@ -88,7 +85,7 @@ accuracy <- (confusion_mat %>% diag %>% sum)/N
 accuracy
 ```
 
-**(g)** Now rerun all of the above but instead use a multiple logistic regression model with `Top` and `Diagonal` as predictors. Which model indicates the best performance when it comes to distinguishing counterfeit notes from genuine ones? 
+**(g)** Now rerun all of the above but instead use a multiple logistic regression model with `Top` and `Diagonal` as predictors. Which model indicates the best performance when it comes to distinguishing counterfeit notes from genuine ones?
 
 ```{r}
 logistic_model2 <- glm(status_binary ~ Top + Diagonal,
@@ -121,7 +118,7 @@ arrests_dat <- read_csv("https://www.dropbox.com/s/8dc41ynd12fwvhr/arrests_dat.c
 glimpse(arrests_dat)
 ```
 
-**(a)** To visualise the data, what would you replace [A], [B], [C] and [D] in the code below with to create this plot? 
+**(a)** To visualise the data, what would you replace \[A\], \[B\], \[C\] and \[D\] in the code below with to create this plot?
 
 ```{r}
 ggplot(arrests_dat, aes(x = murder, y = assault)) +
@@ -130,7 +127,7 @@ ggplot(arrests_dat, aes(x = murder, y = assault)) +
   ylab("Assault arrests (per 100,000)")
 ```
 
-**(b)** Now, let's perform k-means clustering.  Firstly, we will create a new dataset that contains only the `murder` and `assault` variables from the `arrests_dat` dataset. Then we will run the k-means algorithm with 2 clusters on this data. Replace [E],[F] and [G] in the code such that this objective can be achieved. 
+**(b)** Now, let's perform k-means clustering. Firstly, we will create a new dataset that contains only the `murder` and `assault` variables from the `arrests_dat` dataset. Then we will run the k-means algorithm with 2 clusters on this data. Replace \[E\],\[F\] and \[G\] in the code such that this objective can be achieved.
 
 ```{r}
 arrests_dat2 <- arrests_dat %>% 
@@ -139,10 +136,9 @@ arrests_dat2 <- arrests_dat %>%
 kmean_res <- kmeans(arrests_dat2, centers = 2)
 ```
 
-**(c)** Next we want to visualise the clustering results. What would you replace [H], [I], [J] in the code below to create this plot?
+**(c)** Next we want to visualise the clustering results. What would you replace \[H\], \[I\], \[J\] in the code below to create this plot?
 
 ```{r}
 library(factoextra)
 fviz_cluster(kmean_res , data = arrests_dat2, geom = "point")
 ```
-
