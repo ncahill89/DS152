@@ -169,7 +169,7 @@ lm_model_train <- lm(weight ~ weeks + mage + sex + habit + visits, data = train_
 ```{r}
 births_res_test <- test_data %>% 
                     select(weight) %>% 
-                    mutate(pred_weight = predict(lm_model_train, test_data))
+                    mutate(pred_weight = predict(lm_model_train, newdata = test_data))
 
 ggplot(births_res_test, aes(x = weight, y = pred_weight)) +
   geom_point() + 
@@ -185,7 +185,7 @@ births_res_test %>%
             mean_abs_error = mean(abs(weight - pred_weight)))
 ```
 
-The model is trying to "learn" about the relationship between the price of a painting and other painting attributes. If the model does a good job at "learning" then knowing various painting attributes/features can predict what their price will be. This is a **supervised learning method** because the accuracy of the model's predictive performance can be evaluated.
+This is a **supervised learning method** because the accuracy of the model's predictive performance can be evaluated.
 
 ### Supervised Learning - Classification Example
 
