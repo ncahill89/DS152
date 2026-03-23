@@ -288,7 +288,7 @@ accuracy
 
 The model has "learned" about the relationship between time spend on the procedure and its success. As a result, the company can predict what their success will be for a given time. The company can provide recommendations for the length of time a patient should undergo the procedure, for example, if the produce takes 10 minutes it's more likely to be unsuccessful. This is a supervised learning method and therefore the company can also evaluate the accuracy of the model's predictive performance.
 
-**Exercise:** Try fitting a logistic regression model and a knn model to these data and compare the results.
+**Exercise:** Try fitting a logistic regression model to these data and compare the results.
 
 ## Unsupervised learning
 
