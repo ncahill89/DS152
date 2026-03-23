@@ -150,6 +150,7 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#supervised-learning---regression-example" id="toc-supervised-learning---regression-example" class="nav-link" data-scroll-target="#supervised-learning---regression-example">Supervised Learning - Regression Example</a></li>
   <li><a href="#supervised-learning---classification-example" id="toc-supervised-learning---classification-example" class="nav-link" data-scroll-target="#supervised-learning---classification-example">Supervised Learning - Classification Example</a></li>
+  <li><a href="#classification-trees" id="toc-classification-trees" class="nav-link" data-scroll-target="#classification-trees">Classification trees</a></li>
   </ul></li>
   <li><a href="#unsupervised-learning" id="toc-unsupervised-learning" class="nav-link" data-scroll-target="#unsupervised-learning">Unsupervised learning</a>
   <ul class="collapse">
@@ -346,6 +347,15 @@ window.Quarto = {
 </section>
 <section id="supervised-learning---classification-example" class="level3">
 <h3 class="anchored" data-anchor-id="supervised-learning---classification-example">Supervised Learning - Classification Example</h3>
+</section>
+<section id="classification-trees" class="level3">
+<h3 class="anchored" data-anchor-id="classification-trees">Classification trees</h3>
+<p>Classification trees can be used to create predictions for a categorical variable.</p>
+<p>The basic idea is to split the predictors so as to minimise the classification error. There are many algorithms that can be used to produce a classification tree, and different criteria to be minimised so as to improve predictive power.</p>
+<p>Each split is <em>binary</em>, i.e.&nbsp;two branches are generated. At the end of the tree we have the <em>leaves</em> or <em>terminal nodes</em>. In the case of a classification tree, the predictions will be the classes for the majority of observations belonging to that terminal node.</p>
+<p>See below for an example of a classification tree:</p>
+<p><img src="images/class_tree.jpg" class="img-fluid"></p>
+<p><strong>Classification Tree Example</strong></p>
 <p>The ‘Cryotherapy’ dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cryo_dat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -419,9 +429,11 @@ window.Quarto = {
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cryo_res <span class="ot">&lt;-</span> test_data <span class="sc">%&gt;%</span> </span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>            <span class="fu">select</span>(Result_label) <span class="sc">%&gt;%</span> </span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred_p =</span> <span class="fu">predict</span>(tree_model, </span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">newdata =</span> test_data) <span class="sc">%&gt;%</span> <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> <span class="fu">pull</span>(successful)) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred_result =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span> <span class="fl">0.5</span>,<span class="st">"successful"</span>,<span class="st">"not successful"</span>)) </span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>cryo_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>                                    <span class="at">newdata =</span> test_data) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>                     <span class="fu">pull</span>(successful)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mutate</span>(<span class="at">pred_result =</span> <span class="fu">ifelse</span>(pred_p <span class="sc">&gt;=</span> <span class="fl">0.5</span>,<span class="st">"successful"</span>,<span class="st">"not successful"</span>)) </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>cryo_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 28 × 3
    Result_label   pred_p pred_result   

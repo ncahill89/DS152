@@ -189,6 +189,20 @@ This is a **supervised learning method** because the accuracy of the model's pre
 
 ### Supervised Learning - Classification Example
 
+### Classification trees
+
+Classification trees can be used to create predictions for a categorical variable.
+
+The basic idea is to split the predictors so as to minimise the classification error. There are many algorithms that can be used to produce a classification tree, and different criteria to be minimised so as to improve predictive power.
+
+Each split is *binary*, i.e. two branches are generated. At the end of the tree we have the *leaves* or *terminal nodes*. In the case of a classification tree, the predictions will be the classes for the majority of observations belonging to that terminal node.
+
+See below for an example of a classification tree:
+
+![](images/class_tree.jpg)
+
+**Classification Tree Example**
+
 The 'Cryotherapy' dataset gives the results of a cryotherapy procedure (1 = successful, 0 = unsuccesful). In this case, our outcome of interest is the success category — it is what we want to predict.
 
 ```{r}
@@ -249,7 +263,9 @@ ggplot(train_data, aes(x = Time, y = Result))+
 cryo_res <- test_data %>% 
             select(Result_label) %>% 
             mutate(pred_p = predict(tree_model, 
-                                    newdata = test_data) %>% as_tibble() %>% pull(successful)) %>% 
+                                    newdata = test_data) %>% 
+                     as_tibble() %>% 
+                     pull(successful)) %>% 
             mutate(pred_result = ifelse(pred_p >= 0.5,"successful","not successful")) 
 cryo_res
 
