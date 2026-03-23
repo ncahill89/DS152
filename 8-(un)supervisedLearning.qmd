@@ -40,7 +40,7 @@ $$y = f(x)$$
 
 The goal is to approximate the mapping function so well that when you have new input data (x) that you can predict the output variables (y) for that data.
 
-It is called supervised learning because the process of an algorithm learning from the training dataset can be thought of as a teacher supervising the learning process. We know the correct answers (labels). The algorithm iteratively makes predictions on the "training" data and is corrected by the teacher. Learning stops when the algorithm achieves an acceptable level of performance.
+It is called supervised learning because the process of an algorithm learning from a "training" dataset can be thought of as a teacher supervising the learning process. We know the correct answers (labels)     and learning stops when the algorithm achieves an acceptable level of performance.
 
 **Supervised learning problems can be further grouped into regression and classification problems:**
 
