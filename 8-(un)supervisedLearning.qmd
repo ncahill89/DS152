@@ -463,9 +463,9 @@ sil <- silhouette(kmean_res$cluster, dist(old_faithful))
 fviz_silhouette(sil) 
 ```
 
-### Customer Segmentation
+### Class Example: Customer Segmentation
 
-We will use a **synthetic dataset** resembling customer spending behavior. This dataset includes features commonly used in marketing and customer analytics: age, income, spending score, and online activity.
+Apply k-means to this **synthetic dataset** resembling customer spending behavior. This dataset includes features commonly used in marketing and customer analytics: age, income, spending score, and online activity.
 
 ```{r}
 customer_data <- readRDS("customer_data.rds")
