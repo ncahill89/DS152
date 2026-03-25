@@ -455,7 +455,7 @@ fviz_nbclust(old_faithful, kmeans, method = "silhouette")
 
 ```{r}
 # Load required libraries
-library(cluster)
+library(factoextra)
 
 # Compute silhouette information
 sil <- silhouette(kmean_res$cluster, dist(old_faithful))
