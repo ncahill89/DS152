@@ -500,7 +500,7 @@ ggplot(customer_data, aes(x = Income, y = SpendingScore, color = Cluster)) +
        y = "Spending Score") +
   theme_minimal()
 
-# Visualization: Income vs Spending Score
+# Visualization: Age vs Spending Score
 ggplot(customer_data, aes(x = Age, y = SpendingScore, color = Cluster)) +
   geom_point(alpha = 0.7, size = 3) +
   labs(title = "K-means Clustering: 5 Customer Segments",
