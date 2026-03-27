@@ -1,6 +1,6 @@
 ---
 title: "DS152 Introduction to Data Science (2)"
-subtitle: "Assignment 5: Predictive Analytics"
+subtitle: "Assignment 6: Predictive Analytics"
 author: "Prof. Niamh Cahill"
 format: 
   html:
