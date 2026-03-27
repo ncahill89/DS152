@@ -1,6 +1,6 @@
 ---
 title: "DS152 Introduction to Data Science (2)"
-subtitle: "Assignment 6: Unsupervised Learning"
+subtitle: "Assignment 5: Unsupervised Learning"
 author: "Prof. Niamh Cahill"
 format: 
   html:
