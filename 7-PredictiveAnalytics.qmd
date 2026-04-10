@@ -117,9 +117,7 @@ For regression problems, usual predictive analytics techniques include
 
 We will study regression trees in this lecture. We will not look at the mathematics in detail, the objectives are to understand how they work and be able to interpret the results.
 
-
 ## Classification Problems
-
 
 ### K-nearest neighbours
 
@@ -262,6 +260,7 @@ accuracy2
 We'll use 10 nearest neighbours.
 
 ```{r}
+library(class)
 pred_type_knn <- knn(train_pima_data %>% select(-type), 
                      test_pima_data %>% select(-type), 
                      cl =   train_pima_data %>% pull(type), 

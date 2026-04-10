@@ -72,7 +72,6 @@ Assignment 5: [Unsupervised Learning](https://ncahill89.github.io/DS152/Assignme
 
 Assignment 6: [Predictive Analytics](https://ncahill89.github.io/DS152/Assignment6.html)
 
-
 Assignment 7: [Text Analysis](https://ncahill89.github.io/DS152/Assignment7.html)
 
 

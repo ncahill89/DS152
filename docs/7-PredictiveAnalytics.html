@@ -555,15 +555,16 @@ type  Neg Pos
 <p><strong><em>Now we will use the k-nearest neighbours algorithm</em></strong></p>
 <p>We’ll use 10 nearest neighbours.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>pred_type_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>                     test_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cl =</span>   train_pima_data <span class="sc">%&gt;%</span> <span class="fu">pull</span>(type), </span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">k =</span> <span class="dv">10</span>)</span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>pima_res_test3 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> pred_type_knn)</span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>pima_res_test3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(class)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>pred_type_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(train_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>                     test_pima_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>type), </span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>                     <span class="at">cl =</span>   train_pima_data <span class="sc">%&gt;%</span> <span class="fu">pull</span>(type), </span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>                     <span class="at">k =</span> <span class="dv">10</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>pima_res_test3 <span class="ot">&lt;-</span> test_pima_data <span class="sc">%&gt;%</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>                  <span class="fu">mutate</span>(<span class="at">pred_type =</span> pred_type_knn)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>pima_res_test3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>   npreg glu  bp skin  bmi   ped age type pred_type
 1      7 195  70   33 25.1 0.163  55  Pos       Pos
