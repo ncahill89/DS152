@@ -17,7 +17,7 @@ library(tidytext)
 
 ## Instructions
 
-Answer all questions for continuous assessment. Due: **4pm on Friday, 2nd May 2025**.
+Answer all questions for continuous assessment. Due: **4pm on Friday, 24th April 2026**.
 
 ## Exercise
 
