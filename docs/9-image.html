@@ -122,14 +122,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#spot-the-snow-leopard" id="toc-spot-the-snow-leopard" class="nav-link" data-scroll-target="#spot-the-snow-leopard">Spot the snow leopard!</a></li>
   <li><a href="#spot-the-spider" id="toc-spot-the-spider" class="nav-link" data-scroll-target="#spot-the-spider">Spot the spider!</a></li>
   <li><a href="#image-analysis---why" id="toc-image-analysis---why" class="nav-link" data-scroll-target="#image-analysis---why">Image Analysis - Why?</a></li>
-  <li><a href="#example-mnist-handwritten-digit-database" id="toc-example-mnist-handwritten-digit-database" class="nav-link" data-scroll-target="#example-mnist-handwritten-digit-database">Example: MNIST handwritten digit database</a></li>
-  <li><a href="#visualising-the-numbers-in-the-mnist-training-dataset" id="toc-visualising-the-numbers-in-the-mnist-training-dataset" class="nav-link" data-scroll-target="#visualising-the-numbers-in-the-mnist-training-dataset">Visualising the numbers in the MNIST training dataset</a></li>
-  <li><a href="#image-classification-algorithms" id="toc-image-classification-algorithms" class="nav-link" data-scroll-target="#image-classification-algorithms">Image Classification Algorithms</a></li>
-  <li><a href="#formatting-data-for-analysis" id="toc-formatting-data-for-analysis" class="nav-link" data-scroll-target="#formatting-data-for-analysis">Formatting data for analysis</a></li>
-  <li><a href="#applying-knn" id="toc-applying-knn" class="nav-link" data-scroll-target="#applying-knn">Applying KNN</a></li>
-  <li><a href="#storing-results" id="toc-storing-results" class="nav-link" data-scroll-target="#storing-results">Storing results</a></li>
-  <li><a href="#calculating-accuracy" id="toc-calculating-accuracy" class="nav-link" data-scroll-target="#calculating-accuracy">Calculating accuracy</a></li>
   </ul></li>
+  <li><a href="#example-mnist-handwritten-digit-database" id="toc-example-mnist-handwritten-digit-database" class="nav-link" data-scroll-target="#example-mnist-handwritten-digit-database">Example: MNIST handwritten digit database</a></li>
+  <li><a href="#example-image-clasification" id="toc-example-image-clasification" class="nav-link" data-scroll-target="#example-image-clasification">Example: Image Clasification</a></li>
   </ul>
 </nav>
     </div>
@@ -187,15 +182,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- **Measure Student Engagement** -->
 <!-- ![](images/MoodRec.png) -->
 </section>
-<section id="example-mnist-handwritten-digit-database" class="level3">
-<h3 class="anchored" data-anchor-id="example-mnist-handwritten-digit-database">Example: MNIST handwritten digit database</h3>
-<p>http://yann.lecun.com/exdb/mnist/</p>
-<ul>
-<li>70,000 grayscale images of handwritten numbers at low resolution (28 by 28 pixels)</li>
-<li>Used 60,000 to train the algorithm and 10,000 to test</li>
-</ul>
-<section id="values-in-the-dataset" class="level4">
-<h4 class="anchored" data-anchor-id="values-in-the-dataset">Values in the Dataset</h4>
+</section>
+<section id="example-mnist-handwritten-digit-database" class="level2">
+<h2 class="anchored" data-anchor-id="example-mnist-handwritten-digit-database">Example: MNIST handwritten digit database</h2>
+<p>The dataset contains grayscale images of handwritten numbers at low resolution.</p>
+<!-- http://yann.lecun.com/exdb/mnist/ -->
+<!-- -   70,000 grayscale images of handwritten numbers at low resolution (28 by 28 pixels) -->
+<!-- -   Used 60,000 to train the algorithm and 10,000 to test -->
+<section id="values-in-the-mnist-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="values-in-the-mnist-dataset">Values in the MNIST Dataset</h4>
 <ol type="1">
 <li>Pixel Values</li>
 </ol>
@@ -206,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>255: White (maximum ink)</p></li>
 <li><p>Intermediate values: Shades of gray</p></li>
 </ul></li>
-<li><p>Most analysis will often normalize these values to a range of [0.0, 1.0] or [-1.0, 1.0] for training.</p></li>
+<li><p>Sometimes we normalize these values to a range of [0.0, 1.0] or [-1.0, 1.0].</p></li>
 </ul>
 <ol start="2" type="1">
 <li>Labels</li>
@@ -219,9 +214,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="illustrative-example-of-a-single-image">Illustrative example of a single image</h4>
 <p><img src="images/eight.jpeg" class="img-fluid"></p>
 </section>
-</section>
-<section id="visualising-the-numbers-in-the-mnist-training-dataset" class="level3">
-<h3 class="anchored" data-anchor-id="visualising-the-numbers-in-the-mnist-training-dataset">Visualising the numbers in the MNIST training dataset</h3>
+<section id="visualising-the-numbers-in-the-mnist-training-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="visualising-the-numbers-in-the-mnist-training-dataset">Visualising the numbers in the MNIST training dataset</h4>
 <p>The data needs to be reformatted for plotting. For example</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mnist_melted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -271,17 +265,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="image-classification-algorithms" class="level3">
-<h3 class="anchored" data-anchor-id="image-classification-algorithms">Image Classification Algorithms</h3>
-<ul>
-<li>we can use virtually ANY supervised classification algorithm (each pixel is a “feature” or “predictor”)</li>
-<li>e.g.&nbsp;k-nearest neighbours, trees/random forests, logistic/multinomial regression, support vector machines, neural networks</li>
-<li>you have already studied a few of these techniques</li>
-<li>We will use KNN to classify the images</li>
-</ul>
-</section>
-<section id="formatting-data-for-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="formatting-data-for-analysis">Formatting data for analysis</h3>
+<section id="formatting-data-for-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="formatting-data-for-analysis">Formatting data for analysis</h4>
 <p>If we assume each pixel is a feature/predictor then we should format that data such that the columns are pixels and each row corresponds to an image.</p>
 <p>We’ll work with a subset of the MNIST data and consider 1000 images in the training data and 100 images in the test data.</p>
 <div class="cell">
@@ -335,8 +320,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="applying-knn" class="level3">
-<h3 class="anchored" data-anchor-id="applying-knn">Applying KNN</h3>
+<section id="image-classification-algorithms" class="level4">
+<h4 class="anchored" data-anchor-id="image-classification-algorithms">Image Classification Algorithms</h4>
+<ul>
+<li>Once we have a dataset we can use supervised classification algorithm (each pixel is a “feature” or “predictor”)</li>
+<li>e.g.&nbsp;k-nearest neighbours, classification trees/random forests, logistic regression, support vector machines, neural networks</li>
+<li>You have already studied a few of these techniques</li>
+<li>We will use KNN for this analysis</li>
+</ul>
+</section>
+<section id="applying-knn" class="level4">
+<h4 class="anchored" data-anchor-id="applying-knn">Applying KNN</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(class)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>pred_label_knn <span class="ot">&lt;-</span> <span class="fu">knn</span>(mnist_train <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>label), </span>
@@ -345,15 +339,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">k =</span> <span class="dv">5</span>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>pred_label_knn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 8 1 9 4 6 0 2 4 1 4 7 4 7 3 9 8 8 4 7 1 1 1 2 2 3 7 3 0 3 9 1 1 9 0 3 5 5
- [38] 5 6 5 0 6 7 6 6 3 2 7 9 1 1 7 4 6 9 9 6 1 3 3 9 1 8 7 1 1 0 9 1 4 4 5 4 0
- [75] 6 2 2 3 1 5 1 2 0 8 8 1 2 6 7 1 6 1 3 4 0 1 2 2 0 7
+<pre><code>  [1] 8 1 9 7 6 0 2 4 1 4 7 4 7 3 9 8 8 4 7 1 1 1 2 2 3 7 3 0 3 9 1 1 9 0 3 5 5
+ [38] 5 6 5 0 6 7 6 6 3 2 7 9 1 1 7 7 6 9 9 6 1 3 3 9 1 8 7 1 1 0 9 1 4 4 5 4 0
+ [75] 6 2 2 3 1 5 1 2 0 8 8 1 2 6 7 1 6 1 3 4 0 1 2 2 0 9
 Levels: 0 1 2 3 4 5 6 7 8 9</code></pre>
 </div>
 </div>
 </section>
-<section id="storing-results" class="level3">
-<h3 class="anchored" data-anchor-id="storing-results">Storing results</h3>
+<section id="storing-results" class="level4">
+<h4 class="anchored" data-anchor-id="storing-results">Storing results</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mnist_res <span class="ot">&lt;-</span> mnist_test <span class="sc">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>                <span class="fu">select</span>(label) <span class="sc">%&gt;%</span> </span>
@@ -367,7 +361,7 @@ Levels: 0 1 2 3 4 5 6 7 8 9</code></pre>
  1 8     8         
  2 1     1         
  3 4     9         
- 4 4     4         
+ 4 4     7         
  5 6     6         
  6 0     0         
  7 2     2         
@@ -378,8 +372,8 @@ Levels: 0 1 2 3 4 5 6 7 8 9</code></pre>
 </div>
 </div>
 </section>
-<section id="calculating-accuracy" class="level3">
-<h3 class="anchored" data-anchor-id="calculating-accuracy">Calculating accuracy</h3>
+<section id="calculating-accuracy" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-accuracy">Calculating accuracy</h4>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(mnist_res)</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -392,19 +386,198 @@ label  0  1  2  3  4  5  6  7  8  9
     1  0 16  0  0  0  0  0  0  0  0
     2  2  2 10  0  0  0  0  1  0  0
     3  0  0  0 10  0  1  0  0  1  0
-    4  0  0  0  0  7  0  0  0  0  4
-    5  0  0  0  0  1  4  1  0  0  0
+    4  0  0  0  0  6  0  0  1  0  4
+    5  0  0  0  0  0  4  1  1  0  0
     6  1  0  0  0  0  0  9  0  0  0
     7  0  2  0  0  0  0  0  7  0  0
-    8  0  0  0  0  0  1  0  1  5  1
+    8  0  0  0  0  0  1  0  0  5  2
     9  0  0  0  0  2  0  0  1  0  4</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.78</code></pre>
+<pre><code>[1] 0.77</code></pre>
 </div>
 </div>
+</section>
+</section>
+<section id="example-image-clasification" class="level2">
+<h2 class="anchored" data-anchor-id="example-image-clasification">Example: Image Clasification</h2>
+<p>Suppose we want to classify images into 3 categories:</p>
+<ul>
+<li>Plane ✈️</li>
+<li>Cat 🐱</li>
+<li>German Shepherd 🐕</li>
+</ul>
+<p><img src="images/Screenshot 2026-04-17 at 14.56.31.png" class="img-fluid"></p>
+<section id="loading-images-in-r" class="level4">
+<h4 class="anchored" data-anchor-id="loading-images-in-r">Loading Images in R</h4>
+<p><strong>How does a computer see these images?</strong></p>
+<ul>
+<li>An image is made of <strong>pixels</strong></li>
+<li>Each pixel contains 3 values:
+<ul>
+<li>Red (R)</li>
+<li>Green (G)</li>
+<li>Blue (B)</li>
+</ul></li>
+<li>Each pixel is a combination of these three values</li>
+<li>Values typically range from 0 to 255</li>
+</ul>
+<p>Examples:</p>
+<ul>
+<li>(255, 0, 0) → Red</li>
+<li>(0, 255, 0) → Green</li>
+<li>(0, 0, 255) → Blue</li>
+</ul>
+<p><strong>R code</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(magick)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Linking to ImageMagick 6.9.12.93
+Enabled features: cairo, fontconfig, freetype, heic, lcms, pango, raw, rsvg, webp
+Disabled features: fftw, ghostscript, x11</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>img <span class="ot">&lt;-</span> <span class="fu">image_read</span>(<span class="st">"images/plane.png"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(img)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="9-image_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ul>
+<li><code>image_read()</code> loads images into R</li>
+<li>Images are stored as special objects (not numeric yet)</li>
+</ul>
+</section>
+<section id="resizing-images" class="level4">
+<h4 class="anchored" data-anchor-id="resizing-images">Resizing Images</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>img_scale <span class="ot">&lt;-</span> <span class="fu">image_scale</span>(img, <span class="st">"100x100!"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(img_scale)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="9-image_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Why resize?</p>
+<ul>
+<li>Ensures all images have same dimensions</li>
+<li>Makes pixel vectors consistent length</li>
+<li>Required for machine learning models</li>
+</ul>
+</section>
+<section id="extracting-rgb-values" class="level4">
+<h4 class="anchored" data-anchor-id="extracting-rgb-values">Extracting RGB Values</h4>
+<p>Images are converted into numbers for machine learning</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>arr <span class="ot">&lt;-</span> <span class="fu">image_data</span>(img, <span class="at">channels =</span> <span class="st">"rgb"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(arr[<span class="dv">1</span>,,])</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(arr[<span class="dv">2</span>,,])</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.integer</span>(arr[<span class="dv">3</span>,,])</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>r[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 246 215 215 245 245 245 245 245 245 245</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>g[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 247 218 218 248 248 248 248 248 248 248</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>b[<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 249 220 220 249 249 249 249 249 249 249</code></pre>
+</div>
+</div>
+</section>
+<section id="building-the-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="building-the-dataset">Building the Dataset</h4>
+<p>Now we need to build a dataset for image analysis</p>
+<ul>
+<li>Combine RGB values into one long numeric vector per image</li>
+<li>Each row in the dataset = one image</li>
+<li>Each column = pixel intensity value</li>
+<li>Row labels are the correct categories for the images</li>
+<li>We will use:
+<ul>
+<li>24 training images (stored in images_train)</li>
+<li>6 test images (stored in images_test)</li>
+</ul></li>
+</ul>
+</section>
+<section id="k-nearest-neighbours-knn" class="level4">
+<h4 class="anchored" data-anchor-id="k-nearest-neighbours-knn">K-Nearest Neighbours (KNN)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(class)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>pred_label <span class="ot">&lt;-</span> <span class="fu">knn</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">train =</span> images_train <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>label),</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">test  =</span> images_test <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>label),</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cl    =</span> images_train <span class="sc">%&gt;%</span> <span class="fu">pull</span>(label),</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">k     =</span> <span class="dv">6</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="storing-results-1" class="level4">
+<h4 class="anchored" data-anchor-id="storing-results-1">Storing results</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>image_res <span class="ot">&lt;-</span> images_test <span class="sc">%&gt;%</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(label) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred_label =</span> pred_label)</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>image_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  label           pred_label     
+  &lt;chr&gt;           &lt;fct&gt;          
+1 plane           plane          
+2 cat             plane          
+3 german_shepherd cat            
+4 plane           plane          
+5 cat             german_shepherd
+6 german_shepherd german_shepherd</code></pre>
+</div>
+</div>
+</section>
+<section id="calculating-accuracy-1" class="level4">
+<h4 class="anchored" data-anchor-id="calculating-accuracy-1">Calculating accuracy</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>N <span class="ot">&lt;-</span> <span class="fu">nrow</span>(image_res)</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>confusion_mat <span class="ot">&lt;-</span> <span class="fu">table</span>(image_res  <span class="sc">%&gt;%</span> <span class="fu">select</span>(label, pred_label))</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>confusion_mat</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 pred_label
+label             cat german_shepherd plane
+  cat               0               1     1
+  german_shepherd   1               1     0
+  plane             0               0     2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5</code></pre>
+</div>
+</div>
+</section>
+<section id="summary" class="level4">
+<h4 class="anchored" data-anchor-id="summary">Summary</h4>
+<ol type="1">
+<li>Load images (magick)</li>
+<li>Resize images</li>
+<li>Extract RGB values</li>
+<li>Convert to vectors</li>
+<li>Train KNN model</li>
+<li>Predict new images</li>
+</ol>
+<p><strong>See image_analysis.R on the Rstudio server for the R code to run this analysis</strong></p>
 
 
 </section>

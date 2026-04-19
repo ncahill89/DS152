@@ -15,17 +15,19 @@ mnist_train <- readRDS("data/mnist_train.rds")
 mnist_test <- readRDS("data/mnist_test.rds")
 mnist_melted <- readRDS("data/mnist_melted.rds")
 
+images_train <- readRDS("data/images_train.rds")
+images_test <- readRDS("data/images_test.rds")
 
-pred_label_knn <- knn(mnist_train %>% select(-label), 
-                      mnist_test %>% select(-label), 
-                      cl = mnist_train$label , 
-                      k = 5)
-
-
-mnist_res <- mnist_test %>%
-                select(label) %>% 
-                mutate(pred_label = pred_label_knn)
-
+# pred_label_knn <- knn(mnist_train %>% select(-label), 
+#                       mnist_test %>% select(-label), 
+#                       cl = mnist_train$label , 
+#                       k = 5)
+# 
+# 
+# mnist_res <- mnist_test %>%
+#                 select(label) %>% 
+#                 mutate(pred_label = pred_label_knn)
+# 
 
 
 ```
@@ -70,14 +72,18 @@ The application of image analysis can be expanded to different domains of scienc
 
 <!-- ![](images/MoodRec.png) -->
 
-### Example: MNIST handwritten digit database
 
-http://yann.lecun.com/exdb/mnist/
 
--   70,000 grayscale images of handwritten numbers at low resolution (28 by 28 pixels)
--   Used 60,000 to train the algorithm and 10,000 to test
+## Example: MNIST handwritten digit database
 
-#### Values in the Dataset
+The dataset contains grayscale images of handwritten numbers at low resolution.
+
+<!-- http://yann.lecun.com/exdb/mnist/ -->
+
+<!-- -   70,000 grayscale images of handwritten numbers at low resolution (28 by 28 pixels) -->
+<!-- -   Used 60,000 to train the algorithm and 10,000 to test -->
+
+#### Values in the  MNIST Dataset
 
 1.  Pixel Values
 
@@ -89,7 +95,7 @@ http://yann.lecun.com/exdb/mnist/
 
     -   Intermediate values: Shades of gray
 
--   Most analysis will often normalize these values to a range of \[0.0, 1.0\] or \[-1.0, 1.0\] for training.
+-   Sometimes we normalize these values to a range of \[0.0, 1.0\] or \[-1.0, 1.0\].
 
 2.  Labels
 
@@ -99,7 +105,7 @@ http://yann.lecun.com/exdb/mnist/
 
 ![](images/eight.jpeg)
 
-### Visualising the numbers in the MNIST training dataset
+#### Visualising the numbers in the MNIST training dataset
 
 The data needs to be reformatted for plotting. For example
 
@@ -130,14 +136,8 @@ ggplot(mnist_melted, aes(x = x, y = y, fill = intensity)) +
   )
 ```
 
-### Image Classification Algorithms
 
--   we can use virtually ANY supervised classification algorithm (each pixel is a "feature" or "predictor")
--   e.g. k-nearest neighbours, trees/random forests, logistic/multinomial regression, support vector machines, neural networks
--   you have already studied a few of these techniques
--   We will use KNN to classify the images
-
-### Formatting data for analysis
+#### Formatting data for analysis
 
 If we assume each pixel is a feature/predictor then we should format that data such that the columns are pixels and each row corresponds to an image.
 
@@ -151,7 +151,14 @@ mnist_train
 mnist_test
 ```
 
-### Applying KNN
+#### Image Classification Algorithms
+
+-   Once we have a dataset we can use \textit{virtually ANY} supervised classification algorithm (each pixel is a "feature" or "predictor")
+-   e.g. k-nearest neighbours, classification trees/random forests, logistic regression, support vector machines, neural networks
+-   You have already studied a few of these techniques
+-   We will use KNN for this analysis
+
+#### Applying KNN
 
 ```{r image1}
 library(class)
@@ -162,7 +169,7 @@ pred_label_knn <- knn(mnist_train %>% select(-label),
 pred_label_knn
 ```
 
-### Storing results
+#### Storing results
 
 ```{r image2}
 mnist_res <- mnist_test %>%
@@ -172,7 +179,7 @@ mnist_res <- mnist_test %>%
 mnist_res
 ```
 
-### Calculating accuracy
+#### Calculating accuracy
 
 ```{r image3}
 N <- nrow(mnist_res)
@@ -183,3 +190,133 @@ confusion_mat
 accuracy <- (confusion_mat %>% diag %>% sum)/N
 accuracy
 ```
+
+## Example: Image Clasification
+
+Suppose we want to classify images into 3 categories: 
+
+- Plane ✈️ 
+- Cat 🐱 
+- German Shepherd 🐕
+
+![](images/Screenshot%202026-04-17%20at%2014.56.31.png)
+
+#### Loading Images in R
+
+**How does a computer see these images?**
+
+-   An image is made of **pixels**
+-   Each pixel contains 3 values:
+    -   Red (R)
+    -   Green (G)
+    -   Blue (B)
+-   Each pixel is a combination of these three values
+-   Values typically range from 0 to 255
+
+Examples:
+
+-   (255, 0, 0) → Red
+-   (0, 255, 0) → Green
+-   (0, 0, 255) → Blue
+
+**R code**
+
+```{r, eval = TRUE}
+library(magick)
+
+img <- image_read("images/plane.png")
+plot(img)
+```
+
+-   `image_read()` loads images into R
+-   Images are stored as special objects (not numeric yet)
+
+#### Resizing Images
+
+```{r, eval = TRUE}
+img_scale <- image_scale(img, "100x100!")
+plot(img_scale)
+```
+
+Why resize?
+
+-   Ensures all images have same dimensions
+-   Makes pixel vectors consistent length
+-   Required for machine learning models
+
+#### Extracting RGB Values
+
+Images are converted into numbers for machine learning
+
+```{r, eval = TRUE}
+arr <- image_data(img, channels = "rgb")
+
+r <- as.integer(arr[1,,])
+g <- as.integer(arr[2,,])
+b <- as.integer(arr[3,,])
+
+r[1:10]
+g[1:10]
+b[1:10]
+```
+
+#### Building the Dataset
+
+Now we need to build a dataset for image analysis
+
+-   Combine RGB values into one long numeric vector per image
+-   Each row in the dataset = one image
+-   Each column = pixel intensity value
+-   Row labels are the correct categories for the images
+-   We will use:
+    -   24 training images (stored in images_train)
+    -   6 test images (stored in images_test)
+
+#### K-Nearest Neighbours (KNN)
+
+```{r}
+library(class)
+
+pred_label <- knn(
+  train = images_train %>% select(-label),
+  test  = images_test %>% select(-label),
+  cl    = images_train %>% pull(label),
+  k     = 6
+)
+
+```
+
+#### Storing results
+
+```{r}
+image_res <- images_test %>%
+  select(label) %>% 
+  mutate(pred_label = pred_label)
+
+image_res
+```
+
+#### Calculating accuracy
+
+```{r}
+N <- nrow(image_res)
+
+confusion_mat <- table(image_res  %>% select(label, pred_label))
+confusion_mat
+
+accuracy <- (confusion_mat %>% diag %>% sum)/N
+accuracy
+
+```
+
+
+#### Summary
+
+1.  Load images (magick)
+2.  Resize images
+3.  Extract RGB values
+4.  Convert to vectors
+5.  Train KNN model
+6.  Predict new images
+
+**See image_analysis.R on the Rstudio server for the R code to run this analysis**
