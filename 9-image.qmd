@@ -13,7 +13,7 @@ library(class)
 
 mnist_train <- readRDS("data/mnist_train.rds")
 mnist_test <- readRDS("data/mnist_test.rds")
-mnist_melted <- readRDS("data/mnist_melted.rds")
+mnist_for_plotting <- readRDS("data/mnist_for_plotting.rds")
 
 images_train <- readRDS("data/images_train.rds")
 images_test <- readRDS("data/images_test.rds")
@@ -104,36 +104,6 @@ The dataset contains grayscale images of handwritten numbers at low resolution.
 
 ![](images/eight.jpeg)
 
-#### Visualising the numbers in the MNIST training dataset
-
-The data needs to be reformatted for plotting. For example
-
-```{r}
-as_tibble(mnist_melted)
-```
-
-Then we can plot using standard ggplot methods. For example
-
-```{r}
-ggplot(mnist_melted, aes(x = x, y = y, fill = intensity)) +
-  geom_tile() +
-  scale_fill_continuous(name = "Pixel Intensity") +
-  scale_y_reverse() +
-  facet_wrap(~ image) +
-  theme(
-    strip.background = element_blank(),
-    strip.text.x = element_blank(),
-    panel.spacing = unit(0, "lines"),
-    axis.text = element_blank(),
-    axis.ticks = element_blank()
-  ) +
-  labs(
-    title = "MNIST Image Data",
-    subtitle = "Visualization of a sample of images contained in MNIST data set.",
-    x = NULL,
-    y = NULL
-  )
-```
 
 
 #### Formatting data for analysis
@@ -148,6 +118,37 @@ mnist_train
 
 ```{r}
 mnist_test
+```
+
+#### Visualising the numbers in the MNIST training dataset
+
+The data needs to be reformatted for plotting. For example
+
+```{r}
+as_tibble(mnist_for_plotting)
+```
+
+Then we can plot using standard ggplot methods. For example
+
+```{r}
+ggplot(mnist_for_plotting, aes(x = x, y = y, fill = pixel_intensity)) +
+  geom_tile() +
+  scale_fill_continuous(name = "Pixel Intensity") +
+  scale_y_reverse() +
+  facet_wrap(~ label) +
+  theme(
+    strip.background = element_blank(),
+    strip.text.x = element_blank(),
+    panel.spacing = unit(0, "lines"),
+    axis.text = element_blank(),
+    axis.ticks = element_blank()
+  ) +
+  labs(
+    title = "MNIST Image Data",
+    subtitle = "Visualization of a sample of images contained in MNIST data set.",
+    x = NULL,
+    y = NULL
+  )
 ```
 
 #### Image Classification Algorithms

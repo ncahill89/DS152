@@ -212,65 +212,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h4 class="anchored" data-anchor-id="illustrative-example-of-a-single-image">Illustrative example of a single image</h4>
 <p><img src="images/eight.jpeg" class="img-fluid"></p>
 </section>
-<section id="visualising-the-numbers-in-the-mnist-training-dataset" class="level4">
-<h4 class="anchored" data-anchor-id="visualising-the-numbers-in-the-mnist-training-dataset">Visualising the numbers in the MNIST training dataset</h4>
-<p>The data needs to be reformatted for plotting. For example</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mnist_melted)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 7,840 × 4
-   image     x     y intensity
-   &lt;fct&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt;
- 1 1         1     1         0
- 2 2         1     1         0
- 3 3         1     1         0
- 4 4         1     1         0
- 5 5         1     1         0
- 6 6         1     1         0
- 7 7         1     1         0
- 8 8         1     1         0
- 9 9         1     1         0
-10 10        1     1         0
-# ℹ 7,830 more rows</code></pre>
-</div>
-</div>
-<p>Then we can plot using standard ggplot methods. For example</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mnist_melted, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> intensity)) <span class="sc">+</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">name =</span> <span class="st">"Pixel Intensity"</span>) <span class="sc">+</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> image) <span class="sc">+</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"lines"</span>),</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"MNIST Image Data"</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Visualization of a sample of images contained in MNIST data set."</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="9-image_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</section>
 <section id="formatting-data-for-analysis" class="level4">
 <h4 class="anchored" data-anchor-id="formatting-data-for-analysis">Formatting data for analysis</h4>
 <p>If we assume each pixel is a feature/predictor then we should format that data such that the columns are pixels and each row corresponds to an image.</p>
 <p>We’ll work with a subset of the MNIST data and consider 1000 images in the training data and 100 images in the test data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mnist_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mnist_train</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1,000 × 765
+<pre><code># A tibble: 1,000 × 785
    label pixel1 pixel2 pixel3 pixel4 pixel5 pixel6 pixel7 pixel8 pixel9 pixel10
    &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
  1 2          0      0      0      0      0      0      0      0      0       0
@@ -284,7 +233,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  9 0          0      0      0      0      0      0      0      0      0       0
 10 9          0      0      0      0      0      0      0      0      0       0
 # ℹ 990 more rows
-# ℹ 754 more variables: pixel11 &lt;dbl&gt;, pixel12 &lt;dbl&gt;, pixel13 &lt;dbl&gt;,
+# ℹ 774 more variables: pixel11 &lt;dbl&gt;, pixel12 &lt;dbl&gt;, pixel13 &lt;dbl&gt;,
 #   pixel14 &lt;dbl&gt;, pixel15 &lt;dbl&gt;, pixel16 &lt;dbl&gt;, pixel17 &lt;dbl&gt;, pixel18 &lt;dbl&gt;,
 #   pixel19 &lt;dbl&gt;, pixel20 &lt;dbl&gt;, pixel21 &lt;dbl&gt;, pixel22 &lt;dbl&gt;, pixel23 &lt;dbl&gt;,
 #   pixel24 &lt;dbl&gt;, pixel25 &lt;dbl&gt;, pixel26 &lt;dbl&gt;, pixel27 &lt;dbl&gt;, pixel28 &lt;dbl&gt;,
@@ -293,9 +242,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>mnist_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>mnist_test</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 100 × 765
+<pre><code># A tibble: 100 × 785
    label pixel1 pixel2 pixel3 pixel4 pixel5 pixel6 pixel7 pixel8 pixel9 pixel10
    &lt;fct&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
  1 8          0      0      0      0      0      0      0      0      0       0
@@ -309,12 +258,63 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  9 1          0      0      0      0      0      0      0      0      0       0
 10 4          0      0      0      0      0      0      0      0      0       0
 # ℹ 90 more rows
-# ℹ 754 more variables: pixel11 &lt;dbl&gt;, pixel12 &lt;dbl&gt;, pixel13 &lt;dbl&gt;,
+# ℹ 774 more variables: pixel11 &lt;dbl&gt;, pixel12 &lt;dbl&gt;, pixel13 &lt;dbl&gt;,
 #   pixel14 &lt;dbl&gt;, pixel15 &lt;dbl&gt;, pixel16 &lt;dbl&gt;, pixel17 &lt;dbl&gt;, pixel18 &lt;dbl&gt;,
 #   pixel19 &lt;dbl&gt;, pixel20 &lt;dbl&gt;, pixel21 &lt;dbl&gt;, pixel22 &lt;dbl&gt;, pixel23 &lt;dbl&gt;,
 #   pixel24 &lt;dbl&gt;, pixel25 &lt;dbl&gt;, pixel26 &lt;dbl&gt;, pixel27 &lt;dbl&gt;, pixel28 &lt;dbl&gt;,
 #   pixel29 &lt;dbl&gt;, pixel30 &lt;dbl&gt;, pixel31 &lt;dbl&gt;, pixel32 &lt;dbl&gt;, pixel33 &lt;dbl&gt;,
 #   pixel34 &lt;dbl&gt;, pixel35 &lt;dbl&gt;, pixel36 &lt;dbl&gt;, pixel37 &lt;dbl&gt;, …</code></pre>
+</div>
+</div>
+</section>
+<section id="visualising-the-numbers-in-the-mnist-training-dataset" class="level4">
+<h4 class="anchored" data-anchor-id="visualising-the-numbers-in-the-mnist-training-dataset">Visualising the numbers in the MNIST training dataset</h4>
+<p>The data needs to be reformatted for plotting. For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">as_tibble</span>(mnist_for_plotting)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 15,680 × 4
+   label     x     y pixel_intensity
+   &lt;fct&gt; &lt;int&gt; &lt;int&gt;           &lt;dbl&gt;
+ 1 1         1     1               0
+ 2 2         1     1               0
+ 3 3         1     1               0
+ 4 4         1     1               0
+ 5 5         1     1               0
+ 6 6         1     1               0
+ 7 7         1     1               0
+ 8 8         1     1               0
+ 9 9         1     1               0
+10 10        1     1               0
+# ℹ 15,670 more rows</code></pre>
+</div>
+</div>
+<p>Then we can plot using standard ggplot methods. For example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(mnist_for_plotting, <span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">fill =</span> pixel_intensity)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>() <span class="sc">+</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_continuous</span>(<span class="at">name =</span> <span class="st">"Pixel Intensity"</span>) <span class="sc">+</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_reverse</span>() <span class="sc">+</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> label) <span class="sc">+</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.background =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">strip.text.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">panel.spacing =</span> <span class="fu">unit</span>(<span class="dv">0</span>, <span class="st">"lines"</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.text =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.ticks =</span> <span class="fu">element_blank</span>()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"MNIST Image Data"</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">subtitle =</span> <span class="st">"Visualization of a sample of images contained in MNIST data set."</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="cn">NULL</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="cn">NULL</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="9-image_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -337,9 +337,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                      <span class="at">k =</span> <span class="dv">5</span>)</span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>pred_label_knn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>  [1] 8 1 9 4 6 0 2 4 1 4 7 4 7 3 9 8 8 4 7 1 1 1 2 2 3 7 3 0 3 9 1 1 9 0 3 5 5
+<pre><code>  [1] 8 1 9 4 6 0 2 9 1 4 7 4 7 3 9 8 8 4 7 1 1 1 2 2 3 7 3 0 3 9 1 1 9 0 3 5 5
  [38] 6 6 5 0 6 7 6 6 3 2 7 9 1 1 7 4 6 9 9 6 1 3 3 9 9 8 7 1 1 0 9 1 4 4 5 4 0
- [75] 6 2 2 3 1 5 1 2 0 8 8 1 2 6 7 1 6 1 3 4 0 1 2 2 0 7
+ [75] 6 2 2 3 1 5 1 2 0 3 8 1 2 6 7 1 6 1 3 4 0 1 2 2 0 9
 Levels: 0 1 2 3 4 5 6 7 8 9</code></pre>
 </div>
 </div>
@@ -363,7 +363,7 @@ Levels: 0 1 2 3 4 5 6 7 8 9</code></pre>
  5 6     6         
  6 0     0         
  7 2     2         
- 8 9     4         
+ 8 9     9         
  9 1     1         
 10 4     4         
 # ℹ 90 more rows</code></pre>
@@ -383,18 +383,18 @@ label  0  1  2  3  4  5  6  7  8  9
     0  6  0  0  0  0  0  0  0  0  0
     1  0 16  0  0  0  0  0  0  0  0
     2  2  2 10  0  0  0  0  1  0  0
-    3  0  0  0 10  0  1  0  0  1  0
+    3  0  0  0 11  0  1  0  0  0  0
     4  0  0  0  0  7  0  0  0  0  4
     5  0  0  0  0  1  4  1  0  0  0
     6  1  0  0  0  0  0  9  0  0  0
     7  0  1  0  0  0  0  0  7  0  1
-    8  0  0  0  0  0  0  1  1  5  1
-    9  0  0  0  0  2  0  0  1  0  4</code></pre>
+    8  0  0  0  0  0  0  1  0  5  2
+    9  0  0  0  0  1  0  0  1  0  5</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>accuracy <span class="ot">&lt;-</span> (confusion_mat <span class="sc">%&gt;%</span> diag <span class="sc">%&gt;%</span> sum)<span class="sc">/</span>N</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>accuracy</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.78</code></pre>
+<pre><code>[1] 0.8</code></pre>
 </div>
 </div>
 </section>
