@@ -55,7 +55,7 @@ Tutorial Sheet 5: [(un)Supervised Learning](https://ncahill89.github.io/DS152/Tu
 Tutorial Sheet 6: [Predictive Analytics](https://ncahill89.github.io/DS152/Tutorial6.html)
 
 
-Tutorial Sheet 7: [Text Analysis](https://ncahill89.github.io/DS152/Tutorial.html)
+Tutorial Sheet 7: [Text Analysis](https://ncahill89.github.io/DS152/Tutorial7.html)
 
 
 ## Assignments
