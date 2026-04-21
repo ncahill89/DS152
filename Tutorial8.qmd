@@ -1,0 +1,188 @@
+---
+title: "DS152 Tutorial Sheet 8"
+format: 
+  html:
+    embed-resources: true
+    self-contained-math: true
+editor: visual
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(magick)
+library(class)
+library(rpart)
+library(rpart.plot)
+
+flowers_train <- readRDS("flowers_train.rds")
+flowers_test  <- readRDS("flowers_test.rds")
+```
+
+## Exercise: Image Classification
+
+We will classify images into three categories:
+
+* Rose
+* Sunflower
+* Tulip
+
+The raw images are in folders on the Rstudio server. The images are already preprocessed into datasets (also available on the Rstudio server) where:
+
+* Each row represents one image
+* Each column represents a pixel intensity
+* The `label` column contains the correct class
+* Training set: 24 images (`flowers_train`)
+* Test set: 6 images (`flowers_test`)
+
+We will compare two machine learning methods:
+
+1. K-Nearest Neighbours (KNN)
+2. Classification Tree
+
+Both models will be trained on the training set and evaluated on the test set.
+
+
+
+**(a)** Replace `[A]` and `[B]` in the code below to load and display the image `rose_1.png`.
+
+```{r, eval = FALSE}
+library(magick)
+
+img <- image_[A]("flower_image_train/rose_1.png")
+plot([B])
+```
+
+```{r, echo = FALSE}
+library(magick)
+
+img <- image_read("flower_image_train/rose_1.png")
+plot(img)
+```
+
+
+**(b)** We now resize the image to 25 × 25 pixels. Replace `[A]` and `[B]` in the code below.
+
+```{r, eval = FALSE}
+img_scale <- image_[A]([B], "25x25!")
+plot(img_scale)
+```
+
+```{r, echo = FALSE}
+img_scale <- image_scale(img, "25x25!")
+plot(img_scale)
+```
+
+
+**(c)** We now fit a KNN model using the training data and predict the test set labels.
+Replace `[A]`, `[B]`, and `[C]` below.
+
+```{r, eval = FALSE}
+pred_knn <- [A](
+  train = flowers_train %>% select(-[B]),
+  test  = flowers_test %>% select(-[B]),
+  cl    = flowers_train %>% pull([B]),
+  k     = [C]
+)
+```
+
+```{r, echo = FALSE}
+pred_knn <- knn(
+  train = flowers_train %>% select(-label),
+  test  = flowers_test %>% select(-label),
+  cl    = flowers_train %>% pull(label),
+  k     = 5
+)
+```
+
+Then the following code will produce the results data. 
+
+```{r}
+knn_res <- flowers_test %>%
+  select(label) %>%
+  mutate(pred_label = pred_knn)
+
+knn_res
+```
+
+
+
+**(d)** We now fit a classification tree and visualise it. Replace `[A]` and `[B]` below.
+
+```{r, eval = FALSE}
+tree_model <- [A](label ~ ., 
+                  data = flowers_train,
+                  control = rpart.control(minsplit = 2))
+
+rpart.plot([B])
+```
+
+```{r, echo = FALSE}
+tree_model <- rpart(label ~ ., 
+                    data = flowers_train,
+                    control = rpart.control(minsplit = 2))
+
+rpart.plot(tree_model)
+```
+
+Then the following code will produce the results data. 
+
+```{r}
+pred_tree <- predict(tree_model, newdata = flowers_test)
+
+tree_res <- flowers_test %>%
+  select(label) %>%
+  mutate(pred_label = colnames(pred_tree)[max.col(pred_tree)])
+```
+
+**Notes**
+
+  - The tree splits on individual pixel values.
+  - This differs from KNN:
+    - KNN uses similarity across all pixels
+    - Trees use threshold rules on individual pixels
+
+
+
+
+**(e)** We now compute confusion tables for both models. Calculate the accuracy in each case. 
+
+```{r}
+conf_knn <- table(knn_res)
+conf_knn
+```
+
+```{r}
+conf_tree <- table(tree_res)
+conf_tree
+```
+
+
+```{r, include = FALSE, echo=FALSE}
+N <- nrow(flowers_test)
+
+acc_knn  <- sum(diag(conf_knn)) / N
+acc_tree <- sum(diag(conf_tree)) / N
+
+acc_knn
+acc_tree
+```
+
+
+## Summary
+
+**KNN**
+
+  - Uses all pixel values
+  - Measures overall similarity between images
+  - Typically performs well on image data
+
+**Classification Tree**
+
+  - Uses only a small number of pixel-based rules
+  - Easier to interpret
+  - Often performs worse on raw image data because:
+    - It does not capture relationships between pixels
+    - Image data is high-dimensional and structured
+

@@ -57,6 +57,8 @@ Tutorial Sheet 6: [Predictive Analytics](https://ncahill89.github.io/DS152/Tutor
 
 Tutorial Sheet 7: [Text Analysis](https://ncahill89.github.io/DS152/Tutorial7.html)
 
+Tutorial Sheet 8: [Image Analysis](https://ncahill89.github.io/DS152/Tutorial8.html)
+
 
 ## Assignments
 

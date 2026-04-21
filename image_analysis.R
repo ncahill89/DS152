@@ -61,10 +61,10 @@ par(mfrow = c(1,1))
 
 # Resize all images to 100x100 pixels (force exact size with "!")
 for (i in 1:24) {
-  train[[i]] <- image_scale(train[[i]], "100x100!")
+  train[[i]] <- image_scale(train[[i]], "20x20!")
 }
 for (i in 1:6) {
-  test[[i]] <- image_scale(test[[i]], "100x100!")
+  test[[i]] <- image_scale(test[[i]], "20x20!")
 }
 
 # Check resized images
@@ -137,3 +137,10 @@ confusion_mat
 # Accuracy = correct predictions / total
 accuracy <- (confusion_mat %>% diag %>% sum) / N
 accuracy
+
+##### classification tree
+library(rpart)
+rpart_fit <- rpart(label ~ ., data = images_train)
+
+library(rpart.plot)
+rpart.plot(rpart_fit)
