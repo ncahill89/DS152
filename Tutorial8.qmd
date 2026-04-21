@@ -75,8 +75,7 @@ plot(img_scale)
 ```
 
 
-**(c)** We now fit a KNN model using the training data and predict the test set labels.
-Replace `[A]`, `[B]`, and `[C]` below.
+**(c)** We now fit a KNN model with 5 nearest neighbours using the training data and predict the test set labels. Replace `[A]`, `[B]`, and `[C]` below.
 
 ```{r, eval = FALSE}
 pred_knn <- [A](
@@ -134,16 +133,8 @@ pred_tree <- predict(tree_model, newdata = flowers_test)
 tree_res <- flowers_test %>%
   select(label) %>%
   mutate(pred_label = colnames(pred_tree)[max.col(pred_tree)])
+tree_res
 ```
-
-**Notes**
-
-  - The tree splits on individual pixel values.
-  - This differs from KNN:
-    - KNN uses similarity across all pixels
-    - Trees use threshold rules on individual pixels
-
-
 
 
 **(e)** We now compute confusion tables for both models. Calculate the accuracy in each case. 

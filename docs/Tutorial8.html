@@ -4827,7 +4827,7 @@ vertical-align: -.125em;
 </div>
 </div>
 </div>
-<p><strong>(c)</strong> We now fit a KNN model using the training data and predict the test set labels. Replace <code>[A]</code>, <code>[B]</code>, and <code>[C]</code> below.</p>
+<p><strong>(c)</strong> We now fit a KNN model with 5 nearest neighbours using the training data and predict the test set labels. Replace <code>[A]</code>, <code>[B]</code>, and <code>[C]</code> below.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pred_knn <span class="ot">&lt;-</span> [A](</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">train =</span> flowers_train <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>[B]),</span>
@@ -4878,21 +4878,24 @@ vertical-align: -.125em;
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tree_res <span class="ot">&lt;-</span> flowers_test <span class="sc">%&gt;%</span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(label) <span class="sc">%&gt;%</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred_label =</span> <span class="fu">colnames</span>(pred_tree)[<span class="fu">max.col</span>(pred_tree)])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pred_label =</span> <span class="fu">colnames</span>(pred_tree)[<span class="fu">max.col</span>(pred_tree)])</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>tree_res</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 2
+  label     pred_label
+  &lt;chr&gt;     &lt;chr&gt;     
+1 rose      rose      
+2 rose      tulip     
+3 sunflower sunflower 
+4 sunflower sunflower 
+5 tulip     sunflower 
+6 tulip     tulip     </code></pre>
 </div>
-<p><strong>Notes</strong></p>
-<ul>
-<li>The tree splits on individual pixel values.</li>
-<li>This differs from KNN:
-<ul>
-<li>KNN uses similarity across all pixels</li>
-<li>Trees use threshold rules on individual pixels</li>
-</ul></li>
-</ul>
+</div>
 <p><strong>(e)</strong> We now compute confusion tables for both models. Calculate the accuracy in each case.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>conf_knn <span class="ot">&lt;-</span> <span class="fu">table</span>(knn_res)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>conf_knn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>conf_knn <span class="ot">&lt;-</span> <span class="fu">table</span>(knn_res)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>conf_knn</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           pred_label
 label       rose sunflower tulip
@@ -4902,8 +4905,8 @@ label       rose sunflower tulip
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>conf_tree <span class="ot">&lt;-</span> <span class="fu">table</span>(tree_res)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>conf_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>conf_tree <span class="ot">&lt;-</span> <span class="fu">table</span>(tree_res)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>conf_tree</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           pred_label
 label       rose sunflower tulip
