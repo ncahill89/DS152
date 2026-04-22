@@ -2082,64 +2082,64 @@
     "objectID": "10b-data_annon.html#data-anonymisation-what-and-why",
     "href": "10b-data_annon.html#data-anonymisation-what-and-why",
     "title": "Introduction to Data Anonymisation",
-    "section": "🕵️‍♀️ Data Anonymisation: What and Why",
-    "text": "🕵️‍♀️ Data Anonymisation: What and Why\n\n🔑 Key Privacy Goals\nDisclosure Control\n- Protect individual identity, allow group-level insights\nPrivacy–Utility Trade-off\n- Balance between data usefulness and privacy risk"
+    "section": "Data Anonymisation: What and Why",
+    "text": "Data Anonymisation: What and Why\n\nKey Privacy Goals\nDisclosure Control\n- Protect individual identity, allow group-level insights\nPrivacy–Utility Trade-off\n- Balance between data usefulness and privacy risk"
   },
   {
     "objectID": "10b-data_annon.html#privacy-in-the-digital-age",
     "href": "10b-data_annon.html#privacy-in-the-digital-age",
     "title": "Introduction to Data Anonymisation",
-    "section": "🔌 Privacy in the Digital Age",
-    "text": "🔌 Privacy in the Digital Age\n\n\n“You have zero privacy anyway — get over it.”\n— Scott McNealy, Sun Microsystems CEO, 1999\n\n\n“If you have something to hide, maybe you shouldn’t be doing it.”\n— Eric Schmidt, former Google CEO, 2009"
+    "section": "Privacy in the Digital Age",
+    "text": "Privacy in the Digital Age\n\n\n“You have zero privacy anyway — get over it.”\n— Scott McNealy, Sun Microsystems CEO, 1999\n\n\n“If you have something to hide, maybe you shouldn’t be doing it.”\n— Eric Schmidt, former Google CEO, 2009"
   },
   {
     "objectID": "10b-data_annon.html#defining-privacy",
     "href": "10b-data_annon.html#defining-privacy",
     "title": "Introduction to Data Anonymisation",
-    "section": "📐 Defining Privacy",
-    "text": "📐 Defining Privacy\nDalenius (1977) on statistical data:\n\n“Nothing can be learned about an individual from a released dataset that couldn’t be learned without it.”\n\nBut…\n\nIf Alice knows Bob is 5cm shorter than average…\nAnd the average is published…\nShe now knows Bob’s exact height\n\n➡️ Highlights the power of side information"
+    "section": "Defining Privacy",
+    "text": "Defining Privacy\nDalenius (1977) on statistical data:\n\n“Nothing can be learned about an individual from a released dataset that couldn’t be learned without it.”\n\nBut…\n\nIf Alice knows Bob is 5cm shorter than average…\nAnd the average is published…\nShe now knows Bob’s exact height\n\n➡️ Highlights the power of side information"
   },
   {
     "objectID": "10b-data_annon.html#what-makes-data-personal",
     "href": "10b-data_annon.html#what-makes-data-personal",
     "title": "Introduction to Data Anonymisation",
-    "section": "🧩 What Makes Data Personal?",
-    "text": "🧩 What Makes Data Personal?\n\nAttribute Types\n\n\n\nType\nExamples\n\n\n\n\nIdentifiers\nName, ID number, Email\n\n\nSensitive\nHealth, Salary, Religion\n\n\nNon-sensitive\nAge, ZIP code, Education\n\n\n\n🚨 Quasi-identifiers: seemingly benign attributes that, in combination, reveal identity."
+    "section": "What Makes Data Personal?",
+    "text": "What Makes Data Personal?\n\nAttribute Types\n\n\n\nType\nExamples\n\n\n\n\nIdentifiers\nName, ID number, Email\n\n\nSensitive\nHealth, Salary, Religion\n\n\nNon-sensitive\nAge, ZIP code, Education\n\n\n\n🚨 Quasi-identifiers: seemingly benign attributes that, in combination, reveal identity."
   },
   {
     "objectID": "10b-data_annon.html#naive-anonymisation",
     "href": "10b-data_annon.html#naive-anonymisation",
     "title": "Introduction to Data Anonymisation",
-    "section": "❌ Naive Anonymisation",
-    "text": "❌ Naive Anonymisation\n\nJust removing identifiers isn’t enough\nCombinations like ZIP + Gender + DOB identify 87% of the U.S. population (Sweeney, 2000)\n\n\n\n🏥 MA released “anonymous” health data.\n📋 L. Sweeney used a copy of voter records containing names as well as ZIP, gender and DOB and by cross-referencing the two datasets, she identified the state governor’s records in the medical data!"
+    "section": "Naive Anonymisation",
+    "text": "Naive Anonymisation\n\nJust removing identifiers isn’t enough\nCombinations like ZIP + Gender + DOB identify 87% of the U.S. population (Sweeney, 2000)\n\n\n\n🏥 MA released “anonymous” health data.\n📋 L. Sweeney used a copy of voter records containing names as well as ZIP, gender and DOB and by cross-referencing the two datasets, she identified the state governor’s records in the medical data!"
   },
   {
     "objectID": "10b-data_annon.html#k-anonymity",
     "href": "10b-data_annon.html#k-anonymity",
     "title": "Introduction to Data Anonymisation",
-    "section": "🔢 K-Anonymity",
-    "text": "🔢 K-Anonymity\n\nBased on quasi-identifiers, make each person indistinguishable from at least \\(k-1\\) others in a dataset.\n\n\n\nTechniques to Achieve K-Anonymity:\n\nSuppression – remove or mask values\n\n\n\nGeneralisation – make values less specific\n\n\n\n\nLimitations\n\n\nHomogeneity attack: if all \\(k\\) rows have same sensitive value, identity could be inferred.\n\nIf we know John, who’s 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition"
+    "section": "K-Anonymity",
+    "text": "K-Anonymity\n\nBased on quasi-identifiers, make each person indistinguishable from at least \\(k-1\\) others in a dataset.\n\n\n\nTechniques to Achieve K-Anonymity:\n\nSuppression – remove or mask values\n\n\n\nGeneralisation – make values less specific\n\n\n\n\nLimitations\n\n\nHomogeneity attack: if all \\(k\\) rows have same sensitive value, identity could be inferred.\n\nIf we know John, who’s 19 years old and from Meath, is on the database, we can correctly infer he has a heart-related condition"
   },
   {
     "objectID": "10b-data_annon.html#beyond-k-anonymity",
     "href": "10b-data_annon.html#beyond-k-anonymity",
     "title": "Introduction to Data Anonymisation",
-    "section": "🧱 Beyond k-Anonymity",
-    "text": "🧱 Beyond k-Anonymity\n\n🔀 l-Diversity\n\nRequires diverse sensitive values among \\(k\\)-group\n\n\n\n🌫️ Differential Privacy\n\nAdd random noise to numerical responses, but in such a way that aggregate results remain the same.\nEnsures individual contribution has minimal impact\nWidely used by Apple, Google, US Census"
+    "section": "Beyond k-Anonymity",
+    "text": "Beyond k-Anonymity\n\nl-Diversity\n\nRequires diverse sensitive values among \\(k\\)-group\n\n\n\n️ Differential Privacy\n\nAdd random noise to numerical responses, but in such a way that aggregate results remain the same.\nEnsures individual contribution has minimal impact\nWidely used by Apple, Google, US Census"
   },
   {
     "objectID": "10b-data_annon.html#other-techniques",
     "href": "10b-data_annon.html#other-techniques",
     "title": "Introduction to Data Anonymisation",
-    "section": "🔧 Other Techniques",
-    "text": "🔧 Other Techniques\n\nMicroaggregation\n\nGroup records, replace sensitive value with group average\nPreserves structure while hiding individuals\n\n\n\nShuffling (Reverse Mapping)\n\nModel sensitive variable using public attributes\n\nPredict & rank values\n\nShuffle original data based on these ranks\n\nResult: original values, but reordered\n\n\n\nRandomised Response (Warner, 1965)\n\nCoin flip decides if respondent answers truthfully\nProvides individual deniability, preserves population estimates\n\nAn embarrassing survey"
+    "section": "Other Techniques",
+    "text": "Other Techniques\n\nMicroaggregation\n\nGroup records, replace sensitive value with group average\nPreserves structure while hiding individuals\n\n\n\nShuffling (Reverse Mapping)\n\nModel sensitive variable using public attributes\n\nPredict & rank values\n\nShuffle original data based on these ranks\n\nResult: original values, but reordered\n\n\n\nRandomised Response (Warner, 1965)\n\nCoin flip decides if respondent answers truthfully\nProvides individual deniability, preserves population estimates"
   },
   {
     "objectID": "10b-data_annon.html#final-thoughts",
     "href": "10b-data_annon.html#final-thoughts",
     "title": "Introduction to Data Anonymisation",
-    "section": "🤔 Final Thoughts",
-    "text": "🤔 Final Thoughts\n\nPerfect anonymisation is extremely difficult\nPrivacy-preserving methods must consider:\n\nSide info\nUtility of data\nStatistical inference risks\n\n\n\nRemember:\nData can be anonymous in theory, but not always in practice."
+    "section": "Final Thoughts",
+    "text": "Final Thoughts\n\nPerfect anonymisation is extremely difficult\nPrivacy-preserving methods must consider:\n\nSide info\nUtility of data\nStatistical inference risks\n\n\n\nRemember:\nData can be anonymous in theory, but not always in practice."
   },
   {
     "objectID": "10b-data_annon.html#further-reading",
@@ -2406,5 +2406,12 @@
     "title": "DS152 Tutorial Sheet 8",
     "section": "",
     "text": "We classify images into:\n\nRose 🌹\nSunflower 🌻\nTulip 🌷\n\n(a) Replace [A] and [B] in the code below to load the image called r1.png into R and view it.\n\nlibrary(magick)\n\nimg &lt;- image_[A](\"flower_image_train/rose_1.png\")\nplot([B])\n\n\n\n\n\n\n\n\n\n\n[A] =\n[B] =\n(b) We now want to resize the image. Replace [A] and [B] in the code below to achieve this.\n\nimg_scale &lt;- image_[A]([B], \"25x25!\")\nplot(img_scale)\n\n[A] =\n[B] =\nAssume the images have been formatted into datatsets as follows:\n\nEach row in the dataset = one image\nEach column = pixel intensity value\nRow labels are the correct categories for the images\nWe will use:\n\n24 training images (stored in flowers_train)\n6 test images (stored in flowers_test)\n\n\nNow we will use 2 different machine learning algorithms to classify flowers, namely:\n\nMethod 1: KNN\nMethod 2: Classification tree\n\nWe will these models to the training dataset (flowers_train), and then we will compare how well they perform on the test set (flowers_test). You will find the datasets on the Rstudio server.\n(c) Replace [A], [B] and [C] in the code below to fit a KNN model with 5 nearest neighbours to the training data and predice for the test data.\n\npred_knn &lt;- [A](\n  train = flowers_train %&gt;% select(-[B]),\n  test  = flowers_test %&gt;% select(-[B]),\n  cl    = flowers_train %&gt;% pull([B]),\n  k     = [C]\n)\n\nLook at the results.\n\nknn_res &lt;- flowers_test %&gt;%\n  select(label) %&gt;% \n  mutate(pred_label = pred_knn)\n\nknn_res\n\n# A tibble: 6 × 2\n  label     pred_label\n  &lt;chr&gt;     &lt;fct&gt;     \n1 rose      rose      \n2 rose      rose      \n3 sunflower sunflower \n4 sunflower sunflower \n5 tulip     tulip     \n6 tulip     tulip     \n\n\n(d) Replace [A] and [B] in the code below to fit a classification tree model to the training data and visualise the tree.\n\ntree_model &lt;- [A}(label ~ ., data = flowers_train, \n                    control = rpart.control(minsplit = 2)) \nrpart.plot([B])\n\n\n\n\n\n\n\n\n\n\n💡 Note:\n\nThe tree will split on specific pixel values\nThis is very different from KNN:\n\nKNN uses distance across all pixels\nTrees use rules on individual pixels\n\n\nPredict with the tree and get the results\n\npred_tree &lt;- predict(tree_model, flowers_test)\n\ntree_res &lt;- flowers_test %&gt;%\n  select(label) %&gt;% \n  mutate(pred_label = colnames(pred_tree)[max.col(pred_tree)])\n\nBelow are the confusion tables for each method, using the test set. Calculate the overall accuracy for each method you trained.\n\nconf_knn &lt;- table(knn_res)\nconf_knn\n\n           pred_label\nlabel       rose sunflower tulip\n  rose         2         0     0\n  sunflower    0         2     0\n  tulip        0         0     2\n\n\n\nconf_tree &lt;- table(tree_res)\nconf_tree\n\n           pred_label\nlabel       rose sunflower tulip\n  rose         1         0     1\n  sunflower    0         2     0\n  tulip        0         1     1"
+  },
+  {
+    "objectID": "10b-data_annon.html#an-embarrassing-survey",
+    "href": "10b-data_annon.html#an-embarrassing-survey",
+    "title": "Introduction to Data Anonymisation",
+    "section": "An embarrassing survey",
+    "text": "An embarrassing survey"
   }
 ]
