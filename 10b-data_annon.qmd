@@ -92,7 +92,7 @@ But…
 |---------------|--------------------------|
 | Identifiers   | Name, ID number, Email   |
 | Sensitive     | Health, Salary, Religion |
-| Non-sensitive | Age, ZIP code, Education |
+| Non-sensitive | Age, Education |
 
 🚨 Quasi-identifiers: seemingly benign attributes that, in combination, reveal identity.
 

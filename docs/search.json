@@ -2104,7 +2104,7 @@
     "href": "10b-data_annon.html#what-makes-data-personal",
     "title": "Introduction to Data Anonymisation",
     "section": "What Makes Data Personal?",
-    "text": "What Makes Data Personal?\n\nAttribute Types\n\n\n\nType\nExamples\n\n\n\n\nIdentifiers\nName, ID number, Email\n\n\nSensitive\nHealth, Salary, Religion\n\n\nNon-sensitive\nAge, ZIP code, Education\n\n\n\n🚨 Quasi-identifiers: seemingly benign attributes that, in combination, reveal identity."
+    "text": "What Makes Data Personal?\n\nAttribute Types\n\n\n\nType\nExamples\n\n\n\n\nIdentifiers\nName, ID number, Email\n\n\nSensitive\nHealth, Salary, Religion\n\n\nNon-sensitive\nAge, Education\n\n\n\n🚨 Quasi-identifiers: seemingly benign attributes that, in combination, reveal identity."
   },
   {
     "objectID": "10b-data_annon.html#naive-anonymisation",
